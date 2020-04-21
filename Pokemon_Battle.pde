@@ -60,6 +60,8 @@ void setup() {
   Move stunSpore = new Move("Stun Spore", 30, 0, 0.75, "Grass", "Status", 0, "Parlysis", 1);
   Move sleepPowder = new Move("Sleep Powder", 30, 0, 0.75, "Grass", "Status", 0, "Sleep", 1);
   Move cottonSpore = new Move("Cotton Spore", 40, 0, 1, "Grass", "Status", 0, "Speed--", 1);
+  Move bulletSeed = new Move("Bullet Seed", 30, 62, 1, "Grass", "Physical", 0, "none", 0);
+  Move leechSeed = new Move("Leech Seed", 10, 0, 0.9, "Grass", "Status", 0, "Poison/Heal", 0);
 
   //WATER
   Move waterGun = new Move("Water Gun", 25, 40, 1, "Water", "Special", 0, "none", 0);
@@ -79,6 +81,7 @@ void setup() {
   Move acid = new Move("Acid", 30, 40, 1, "Poison", "Special", 0, "none", 0);  
   Move poisonSting = new Move("Poison Sting", 35, 15, 1, "Poison", "Physical", 0, "Poison", 0.3);
   Move toxic = new Move("Toxic", 10, 0, 0.9, "Poison", "Status", 0, "Badly Poisoned", 1);
+  Move poisonPowder = new Move("Poison Powder", 35, 0, 0.75, "Poison", "Status", 0, "Poison", 1);
 
   //DRAGON
   Move dragonRage = new Move("Dragon Rage", 10, 40, 1, "Dragon", "Special", 0, "none", 0);
@@ -266,7 +269,7 @@ void setup() {
   
   //Level 21 Exeggcute
   Pokemon exeggcute = new Pokemon("Exeggcute", "Grass/Psychic", 21, 60, 40, 80, 60, 45, 40);
-  exeggcute.moveSet(pound, none, none, none);
+  exeggcute.moveSet(bulletSeed, uproar, poisonPowder, stunSpore);
 
 
   //Level 9 Litten
@@ -473,10 +476,7 @@ void setup() {
   printPokemon();
   printCharizard();
   
-  //lapras.moveSet(waterPulse, sing, iceShard, bodySlam);
-  
   Battle battle = new Battle(zofia, ashley);
-  
 }
 
 void catchPokemon(Pokemon p, String pokeball, int catchRate) {

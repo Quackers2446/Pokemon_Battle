@@ -177,7 +177,7 @@ class Move {
           println();
           println(target.name, "fell asleep!");
           
-          target.sleepCounter = int(random(1,3));
+          target.sleepCounter = int(random(0,2));
           target.sleep = true;
         }
       } else if (firstStatus.equals("Flinch") && !target.flinch) {
@@ -452,7 +452,7 @@ class Move {
           println();
           println(target.name, "fell asleep!");
           
-          target.sleepCounter = int(random(1,3));
+          target.sleepCounter = int(random(0,2));
           target.sleep = true;
         }
       } else if (status2.equals("Flinch") && !target.flinch) {

@@ -244,7 +244,7 @@ class Battle {
   }
   
   void checkBerry(Pokemon oneP) {
-    if (oneP.berry == "Sitrus" && oneP.currHealth <= (oneP.health/2) && oneP.currHealth > 0) {
+    if (oneP.berry == "Sitrus Berry" && oneP.currHealth <= (oneP.health/2) && oneP.currHealth > 0) {
       oneP.currHealth += int(float(oneP.health)/4);
       if (oneP.currHealth > oneP.health)
         oneP.currHealth = oneP.health;
@@ -254,7 +254,7 @@ class Battle {
       oneP.berry = "none";
     }
     
-    if (oneP.berry == "Oran" && oneP.currHealth <= (oneP.health/2) && oneP.currHealth > 0) {
+    if (oneP.berry == "Oran Berry" && oneP.currHealth <= (oneP.health/2) && oneP.currHealth > 0) {
       oneP.currHealth += 10;
       if (oneP.currHealth > oneP.health)
         oneP.currHealth = oneP.health;

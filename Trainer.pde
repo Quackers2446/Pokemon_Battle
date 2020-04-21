@@ -38,7 +38,7 @@ class Trainer {
   
   void giveBerry(String b, Pokemon p) {
     p.berry = b;
-    println(this.name, "gave", p.name, "a", b, "berry!");
+    println(this.name, "gave", p.name, "a", b + "!");
     println();
   }
   
