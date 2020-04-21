@@ -471,7 +471,6 @@ void setup() {
   //lapras.moveSet(waterPulse, sing, iceShard, bodySlam);
   
   Battle battle = new Battle(zofia, ashley);
-  battle.start1v1(lapras, 1, gyarados, 2);
   
 }
 
