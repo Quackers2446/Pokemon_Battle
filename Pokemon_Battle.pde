@@ -4,7 +4,7 @@ void setup() {
   //Move example = new Move("Name", Power Points, Power, Accuracy, "Type", "Damage Catagory");
 
   //Set up moves
-
+   //Set up Test
   Move none = new Move("None", 0, 0, 0, "Normal", "Status", 0, "none", 0);
 
   //NORMAL type moves
