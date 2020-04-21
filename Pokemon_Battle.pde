@@ -439,7 +439,7 @@ void setup() {
   Trainer stella = new Trainer("Stella");
   Trainer nina = new Trainer("Nina");
 
-  Trainer theGuy = new Trainer("Quackers");
+  Trainer theGuy = new Trainer("The Guy");
   Trainer cassie = new Trainer("Cassie");
   Trainer ashley = new Trainer("Zofia's Mom");
 
