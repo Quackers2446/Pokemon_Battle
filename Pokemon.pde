@@ -8,7 +8,7 @@ class Pokemon {
   int[] stats;
   int[] battleStats;
   Move[] moveSet;
-  Boolean burn, freeze, paralysis, poison, sleep, flinch, badlyPoisoned, bound, cantEscape, confusion, curse, drain, heal, recoil;
+  Boolean burn, freeze, paralysis, poison, sleep, flinch, badlyPoisoned, bound, cantEscape, confusion, curse, drain, heal, recoil, leech;
   int attackSM, defenseSM, spAttackSM, spDefenseSM, speedSM, accuracySM, evasionSM;
   String berry;
   String trainer;
@@ -45,7 +45,7 @@ class Pokemon {
       this.type2 = "";
       
     this.burn = this.freeze = this.paralysis = this.poison = this.sleep = this.flinch = this.badlyPoisoned
-    = this.bound = this.cantEscape = this.confusion = this.curse = this.heal = this.drain = this.recoil = false;
+    = this.bound = this.cantEscape = this.confusion = this.curse = this.heal = this.drain = this.recoil = this.leech = false;
     
     this.attackSM = this.defenseSM = this.spAttackSM = this.spDefenseSM = this.speedSM = 2;
     this.accuracySM = this.evasionSM = 3;
@@ -71,7 +71,7 @@ class Pokemon {
     }
     
     this.burn = this.freeze = this.paralysis = this.poison = this.sleep = this.flinch = this.badlyPoisoned
-    = this.bound = this.cantEscape = this.confusion = this.curse = this.heal = this.drain = this.recoil = false;
+    = this.bound = this.cantEscape = this.confusion = this.curse = this.heal = this.drain = this.recoil = this.leech = false;
   }
   
   //assuming perfect ivs and evs, calculate stats
@@ -288,6 +288,19 @@ class Pokemon {
         target.currHealth -= int(float(target.health)/16);
         println();
         println(target.name, "is hurt by poison, and takes", str(int(float(target.health)/16)), "damage! (" + int((float(target.currHealth)/target.health)*100) + "%)");
+      }
+      
+      if (target.leech && (!target.type.equals("Grass") || !target.type2.equals("Grass"))) {
+        target.currHealth -= int(float(target.health)/8);
+        this.currHealth += int(float(target.health)/8);
+        
+        if (this.currHealth > this.health)
+          this.currHealth = this.health;
+        
+        println();
+        println(target.name, "is sapped by leech seed, and takes", str(int(float(target.health)/8)), "damage! (" + int((float(target.currHealth)/target.health)*100) + "%)");
+        println();
+        println(this.name, "gains", str(int(float(target.health)/8)), "health! (" + int((float(this.currHealth)/this.health)*100) + "%)");   
       }
       
       if (target.badlyPoisoned && (!target.type.equals("Poison") || !target.type.equals("Steel") || !target.type2.equals("Poison") || !target.type2.equals("Steel"))) {

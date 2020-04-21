@@ -180,6 +180,15 @@ class Move {
           target.sleepCounter = int(random(0,2));
           target.sleep = true;
         }
+      } else if (firstStatus.equals("Leech") && !target.leech) {
+        chance = random(0, 1);
+
+        if (chance <= this.statusProb) {
+          println();
+          println(target.name, "was seeded!");
+          
+          target.leech = true;
+        }
       } else if (firstStatus.equals("Flinch") && !target.flinch) {
         chance = random(0, 1);
 
@@ -479,6 +488,15 @@ class Move {
 
         if (chance <= this.statusProb) {
           target.recoil = true;
+        }
+      } else if (status2.equals("Leech") && !target.leech) {
+        chance = random(0, 1);
+
+        if (chance <= this.statusProb) {
+          println();
+          println(target.name, "was seeded!");
+          
+          target.leech = true;
         }
       } else if (status2.equals("Attack-")) {
         chance = random(0, 1);
