@@ -400,7 +400,7 @@ void setup() {
   vaporeon.moveSet(waterPulse, auroraBeam, quickAttack, aquaRing);
   
   
-  //QUACKERS
+  //THE GUY
 
   //Level 26 Psyduck
   Pokemon psyduck = new Pokemon("Psyduck", "Water", 26, 50, 52, 48, 65, 50, 55);
@@ -452,7 +452,7 @@ void setup() {
   stella.addPokemon(dartrix);
   nina.addPokemon(popplio);
 
-  quackers.addPokemon(psyduck);
+  theGuy.addPokemon(psyduck);
   cassie.addPokemon(shelgon, alolanSandslash, arbok, vaporeon);
   nate.addPokemon(ponyta, dugtrio);
   calem.addPokemon(raichu, geodude);
