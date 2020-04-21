@@ -461,7 +461,7 @@ void setup() {
   cassie.addPokemon(shelgon, alolanSandslash, arbok, vaporeon);
   nate.addPokemon(ponyta, dugtrio);
   calem.addPokemon(raichu, geodude);
-  ashley.addPokemon(gyarados);
+  ashley.addPokemon(gyarados, lucario, ampharos);
 
   ltSurge.addPokemon(voltorb, ltPikachu, raichu);
   randomTrainer.addPokemon(pikachu);
