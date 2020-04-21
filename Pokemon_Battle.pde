@@ -38,6 +38,9 @@ void setup() {
   Move swordsDance = new Move("Swords Dance", 20, 0, 0, "Normal", "Status", 0, "Attack++", 1);
   Move takeDown = new Move("Take Down", 20, 90, 0.85, "Normal", "Physical", 0, "Recoil/0.25", 1);
   Move doubleTeam = new Move("Double Team", 15, 0, 0, "Normal", "Status", 0, "Evasion+", 1);
+  Move hornAttack = new Move("Horn Attack", 25, 65, 1, "Normal", "Physical", 0, "none", 0);
+  Move scaryFace = new Move("Scary Face", 10, 0, 1, "Normal", "Status", 0, "Speed--", 1);
+  Move uproar = new Move("Uproar", 10, 90, 1, "Normal", "Special", 0, "none", 0);
 
   //FIRE
   Move ember = new Move("Ember", 25, 40, 1, "Fire", "Special", 0, "Burn", 0.1);
@@ -230,7 +233,7 @@ void setup() {
   
   //Level 14 Rhydon
   Pokemon rhydon = new Pokemon("Rhydon", "Rock/Ground", 14, 80, 85, 95, 30, 30, 25);
-  rhydon.moveSet(rockThrow, none, none, none);
+  rhydon.moveSet(hornAttack, scaryFace, tailWhip, none);
 
 
   //Level 21 Dratini
@@ -363,6 +366,8 @@ void setup() {
   chansey.moveSet(pound, defenseCurl, tailWhip, none);
   
   //Level 21 Tauros
+  Pokemon tauros = new Pokemon("Tauros", "Normal", 21, 75, 100, 95, 40, 70, 110);
+  tauros.moveSet(hornAttack, pursuit, scaryFace, tailWhip);
   
   
   //GENERATION 8
@@ -463,7 +468,7 @@ void setup() {
   wild.addPokemon(exeggcute);
   
   //PLS UPDATE.
-  //randomSeed(3);
+  randomSeed(4);
 
   printPokemon();
   printCharizard();
