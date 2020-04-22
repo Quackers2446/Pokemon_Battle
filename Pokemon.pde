@@ -7,6 +7,7 @@ class Pokemon {
   int currHealth;
   int[] stats;
   int[] battleStats;
+  String ability;
   Move[] moveSet;
   Boolean burn, freeze, paralysis, poison, sleep, flinch, badlyPoisoned, bound, cantEscape, confusion, curse, drain, heal, recoil, leech;
   int attackSM, defenseSM, spAttackSM, spDefenseSM, speedSM, accuracySM, evasionSM;
@@ -37,6 +38,8 @@ class Pokemon {
     
     this.health = calculateHealth();
     this.currHealth = this.health;
+    
+    this.ability = calculateAbility();
     
     if (this.type.indexOf("/") != -1)
       this.type2 = this.type.substring(this.type.indexOf("/")+1, this.type.length());
@@ -99,6 +102,25 @@ class Pokemon {
       this.battleStats[i] = this.stats[i];
     }
   }
+  
+  String calculateAbility() {
+    String a = "none";
+    
+    if (this.name.equals("Charmander") || this.name.equals("Charmeleon") || this.name.equals("Charizard")
+    || this.name.equals("Fennekin") || this.name.equals("Braxien") || this.name.equals("Delphox") || 
+    this.name.equals("Litten") || this.name.equals("Torracat") || this.name.equals("Incineroar"))
+      a = "Blaze";
+      
+    else if (this.name.equals("Squirtle") || this.name.equals("Wartortle") || this.name.equals("Blastoise")
+    || this.name.equals("Mudkip") || this.name.equals("Marshtomp") || this.name.equals("Swampert") || 
+    this.name.equals("Popplio") || this.name.equals("Brionne") || this.name.equals("Primarina"))
+      a = "Torrent";
+      
+    else if (this.name.equals("Lapras") || this.name.equals("Krabby") || this.name.equals("Kingler"))
+      a = "Shell Armor";
+      
+    return a;
+  }
     
   void describe() {
     println("* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *");
@@ -107,6 +129,9 @@ class Pokemon {
     println("Type:\t", this.type);
     println("Level:\t", this.level);
     println("Health:\t", this.currHealth+"/"+this.health);
+    println();
+    println("Ability:\t", this.ability);
+    println("Berry:\t", this.berry);
     
     println();
     
@@ -176,25 +201,10 @@ class Pokemon {
             
             else
               damage = int(((((((2*this.level)/5)+2) * mv.power * (float(this.battleStats[1]) / target.battleStats[2]))/50)+2) * modifier);
-            
-            if (criticalRandom <= 4.17)
-              damage *= 1.5;
-            target.currHealth -= damage;
-            
-            if (mv.name.equals("False Swipe")) {
-              if (target.currHealth < 1) {
-                target.currHealth = 1;
-              }
-            }
           }
   
           else if (mv.damageCatagory.equals("Special")) {
             damage = int(((((((2*this.level)/5)+2)* mv.power * (float(this.battleStats[3]) /target.battleStats[4]))/50)+2) * modifier);
-            
-            if (criticalRandom <= 4.17)
-              damage *= 1.5;
-              
-            target.currHealth -= damage;
           }
           
           else {
@@ -212,10 +222,20 @@ class Pokemon {
             println(mv.name, "is ineffective.");
           }
           
-          if (criticalRandom <= 4.17) {
+          if ((criticalRandom <= 4.17) && !target.ability.equals("Shell Armor")) {
             println("Critical Hit!");
             println();
+            damage *= 1.5;
           }
+          
+          
+          if (this.ability.equals("Blaze") && (this.currHealth <= (this.health/3)) && mv.type.equals("Fire"))
+            damage *= 1.5;
+            
+          else if (this.ability.equals("Torrent") && (this.currHealth <= (this.health/3)) && mv.type.equals("Water"))
+            damage *= 1.5;
+            
+          target.currHealth -= damage;
           
           println(this.name, "uses", mv.name, "and hits", target.name, "for", str(damage), "damage!", target.name, "now has", target.currHealth, "health! ("
           + int((float(target.currHealth)/target.health)*100) + "%)");
