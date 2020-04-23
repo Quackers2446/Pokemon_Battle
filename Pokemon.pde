@@ -116,6 +116,23 @@ class Pokemon {
     this.name.equals("Popplio") || this.name.equals("Brionne") || this.name.equals("Primarina"))
       a = "Torrent";
       
+    else if (this.name.equals("Bulbasaur") || this.name.equals("Ivysaur") || this.name.equals("Venusaur")
+    || this.name.equals("Snivy") || this.name.equals("Servine") || this.name.equals("Serperior") || 
+    this.name.equals("Grookey") || this.name.equals("Thwackey") || this.name.equals("Rillaboom"))
+      a = "Overgrowth";
+      
+    else if (this.name.equals("Scyther") || this.name.equals("Scizor") || this.name.equals("Beedrill")
+    || this.name.equals("Heracross") || this.name.equals("Blipbug") || this.name.equals("Dottler") || 
+    this.name.equals("Orbeet,e") || this.name.equals("Grubbin") || this.name.equals("Volcarona"))
+      a = "Swarm";
+      
+    else if (this.name.equals("Mimikyu"))
+      a = "Disguise";
+      
+    else if (this.name.equals("Dratini") || this.name.equals("Ekans") || this.name.equals("Arbok") || 
+    this.name.equals("Dragonair") || this.name.equals("Silicobra") || this.name.equals("Sandaconda"))
+      a = "Shed Skin";
+      
     else if (this.name.equals("Lapras") || this.name.equals("Krabby") || this.name.equals("Kingler"))
       a = "Shell Armor";
       
@@ -229,18 +246,34 @@ class Pokemon {
           }
           
           
-          if (this.ability.equals("Blaze") && (this.currHealth <= (this.health/3)) && mv.type.equals("Fire"))
+          if (((this.ability.equals("Blaze") && mv.type.equals("Fire")) || (this.ability.equals("Torrent") && mv.type.equals("Water")) 
+          || (this.ability.equals("Overgrowth") && mv.type.equals("Grass"))  || (this.ability.equals("Swarm") && mv.type.equals("Bug"))) 
+          && (this.currHealth <= (this.health/3)))
             damage *= 1.5;
             
-          else if (this.ability.equals("Torrent") && (this.currHealth <= (this.health/3)) && mv.type.equals("Water"))
-            damage *= 1.5;
-            
+          if (target.ability.equals("Disguise") && (target.currHealth == target.health)) {
+            damage = 0;
+            println(target.name + "'s disguise was busted!");
+            println();
+          }
+          
           target.currHealth -= damage;
           
           println(this.name, "uses", mv.name, "and hits", target.name, "for", str(damage), "damage!", target.name, "now has", target.currHealth, "health! ("
           + int((float(target.currHealth)/target.health)*100) + "%)");
           
           mv.condition(this, target);
+          
+          float r = random(0,1);
+          if (this.ability.equals("Shed Skin") && (r <= 0.33)) {
+            if (!(this.burn || this.freeze || this.paralysis || this.poison || this.sleep || this.badlyPoisoned || this.confusion || this.drain || this.leech)) {
+              this.burn = this.freeze = this.paralysis = this.poison = this.sleep = this.badlyPoisoned
+              = this.confusion = this.drain = this.leech = false;
+              
+              println();
+              println(this.name, "shed it's skin and was cured of all non-volatile conditions!");
+            }
+          }
           
           if (target.drain) {
             this.currHealth += int(damage/2);
@@ -256,7 +289,7 @@ class Pokemon {
           }
         }
         
-        else {
+        else { 
           if (this.flinch) {
             this.flinch = false;
             println(this.name, "cannot move!");

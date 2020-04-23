@@ -337,12 +337,12 @@ class Move {
         chance = random(0, 1);
 
         if (chance <= this.statusProb) {
-          if (user.speedSM < 6) {
+          if (target.speedSM < 6) {
             println();
-            println(user.name + "'s speed fell!");
+            println(target.name + "'s speed fell!");
 
-            user.speedSM += 1;
-            user.battleStats[5] = (2/user.speedSM)*user.stats[5];
+            target.speedSM += 1;
+            target.battleStats[5] = (2/target.speedSM)*target.stats[5];
           }
         }
       } else if (firstStatus.equals("Speed--")) {

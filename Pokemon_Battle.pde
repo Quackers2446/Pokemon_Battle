@@ -40,6 +40,7 @@ void setup() {
   Move hornAttack = new Move("Horn Attack", 25, 65, 1, "Normal", "Physical", 0, "none", 0);
   Move scaryFace = new Move("Scary Face", 10, 0, 1, "Normal", "Status", 0, "Speed--", 1);
   Move uproar = new Move("Uproar", 10, 90, 1, "Normal", "Special", 0, "none", 0);
+  Move splash = new Move("Splash", 40, 0, 0, "Normal", "Status", 0, "none", 0);
 
   //FIRE
   Move ember = new Move("Ember", 25, 40, 1, "Fire", "Special", 0, "Burn", 0.1);
@@ -87,6 +88,7 @@ void setup() {
   Move twister = new Move("Twister", 20, 40, 1, "Dragon", "Special", 0, "Flinch", 0.2);
   Move dragonBreath = new Move("Dragon Breath", 20, 60, 1, "Dragon", "Physical", 0, "Paralysis", 0.3);
   Move dragonPulse = new Move("Dragon Pulse", 10, 85, 1, "Dragon", "Special", 0, "none", 0);
+  Move dragonDance = new Move("Dragon Dance", 20, 0, 0, "Dragon", "Status", 0, "Attack+/Speed+", 1);
 
   //FIGHTING
   Move vacuumWave = new Move("Vacuum Wave", 30, 40, 1, "Fighting", "Special", 1, "none", 0);
@@ -137,6 +139,7 @@ void setup() {
   Move peck = new Move("Peck", 35, 40, 1, "Flying", "Physical", 0, "none", 0);
   Move pluck = new Move("Pluck", 60, 20, 1, "Flying", "Physical", 0, "none", 0);
   Move hurricane = new Move("Hurricane", 10, 110, 0.7, "Ice", "Special", 0, "Confusion", 0.3);
+  Move featherDance = new Move("Feather Dance", 15, 0, 1, "Flying", "Status", 0, "Attack--", 1);
 
   //GROUND
   Move boneClub = new Move("Bone Club", 20, 65, 0.85, "Ground", "Physical", 0, "none", 0);
@@ -193,17 +196,17 @@ void setup() {
   mimikyu.moveSet(woodHammer, shadowSneak, doubleTeam, scratch);
 
 
-  //Level 28 Pidgeotto
+  //Level 30 Pidgeotto
   Pokemon pidgeotto = new Pokemon("Pidgeotto", "Normal/Flying", 28, 63, 60, 55, 50, 50, 71);
-  pidgeotto.moveSet(gust, quickAttack, whirlwind, twister);
+  pidgeotto.moveSet(gust, quickAttack, featherDance, twister);
 
-  //Level 15 Arcanine
-  Pokemon growlithe = new Pokemon("Growlithe", "Fire", 15, 90, 110, 80, 100, 80, 95);
-  growlithe.moveSet(bite, thunderFang, fireFang, none);
+  //Level 18 Arcanine
+  Pokemon arcanine = new Pokemon("Arcanine", "Fire", 18, 90, 110, 80, 100, 80, 95);
+  arcanine.moveSet(bite, thunderFang, fireFang, none);
 
-  //Level 19 Braxien
-  Pokemon braxien = new Pokemon("Braixen", "Fire", 19, 59, 59, 58, 90, 70, 73);
-  braxien.moveSet(ember, scratch, flameCharge, tailWhip);
+  //Level 23 Braixen
+  Pokemon braixen = new Pokemon("Braixen", "Fire", 19, 59, 59, 58, 90, 70, 73);
+  braixen.moveSet(ember, scratch, flameCharge, tailWhip);
 
   //Level 12 Cubone
   Pokemon cubone = new Pokemon("Cubone", "Ground", 12, 50, 50, 95, 40, 50, 35);
@@ -213,7 +216,7 @@ void setup() {
   Pokemon espeon = new Pokemon("Espeon", "Psychic", 18, 65, 65, 60, 130, 95, 110);
   espeon.moveSet(confusion, quickAttack, sandAttack, babyDollEyes);
 
-  //Level 18 Seel
+  //Level 20 Seel
   Pokemon seel = new Pokemon("Seel", "Water", 18, 65, 45, 55, 45, 70, 45);
   seel.moveSet(headbutt, icyWind, none, none);
 
@@ -233,8 +236,8 @@ void setup() {
   //Level 8 Mankey
   Pokemon mankey = new Pokemon("Mankey", "Fighting", 8, 40, 80, 35, 35, 45, 70);
   mankey.moveSet(covet, scratch, karateChop, none);
-
-  //Level 14 Rhydon
+  
+  //Level 13 Rhydon
   Pokemon rhydon = new Pokemon("Rhydon", "Rock/Ground", 14, 80, 85, 95, 30, 30, 25);
   rhydon.moveSet(hornAttack, scaryFace, tailWhip, none);
 
@@ -375,6 +378,10 @@ void setup() {
   //Level 26 Noivern
   Pokemon noivern = new Pokemon("Noivern", "Flying/Dragon", 26, 85, 70, 80, 97, 80, 123);
   noivern.moveSet(dragonPulse, hurricane, supersonic, bite);
+  
+  //Level 9 Magikarp
+  Pokemon magikarp = new Pokemon("Magikarp", "Water", 9, 20, 10, 55, 15, 20, 80);
+  magikarp.moveSet(splash, none, none, none);
 
   //GENERATION 8
 
@@ -439,7 +446,7 @@ void setup() {
 
   //Level 26 Altaria
   Pokemon altaria = new Pokemon("Altaria", "Dragon/Flying", 26, 75, 70, 90, 70, 105, 80);
-  altaria.moveSet(dragonBreath, sing, disarmingVoice, pluck);
+  altaria.moveSet(dragonBreath, sing, disarmingVoice, dragonDance);
 
 
   // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // 
@@ -464,8 +471,8 @@ void setup() {
   Trainer wild = new Trainer("Wild");
 
   zofia.addPokemon(charmeleon, scyther, lapras, magnemite, krabby, mimikyu);
-  jasmine.addPokemon(pidgeotto, growlithe, braxien, cubone, espeon, seel);
-  barnabas.addPokemon(diglett, spearow, weepinbell, mankey);
+  jasmine.addPokemon(pidgeotto, arcanine, braixen, cubone, espeon, seel);
+  barnabas.addPokemon(diglett, spearow, weepinbell, mankey, magikarp, rhydon);
   nicholas.addPokemon(dratini, vileplume, ponyta, marshtomp, snorlax, abra);
   joanna.addPokemon(litten, gastly, pikachu, vulpix);
   stella.addPokemon(dartrix);
@@ -478,10 +485,10 @@ void setup() {
 
   ltSurge.addPokemon(voltorb, ltPikachu, raichu);
   randomTrainer.addPokemon(pikachu);
-  wild.addPokemon(vulpix);
+  wild.addPokemon(magikarp);
 
   //PLS UPDATE.
-  randomSeed(8);
+  //randomSeed(10);
 
   printPokemon();
   printCharizard();
@@ -491,51 +498,33 @@ void setup() {
   //ampharos.moveSet(dragonPulse, firePunch, thunderPunch, takeDown);
   //tyranitar.moveSet(thrash, bite, thunderFang, iceFang);
   //noivern.moveSet(dragonPulse, hurricane, supersonic, bite);
-  //altaria.moveSet(dragonBreath, sing, disarmingVoice, pluck);
+  //altaria.moveSet(dragonBreath, sing, disarmingVoice, dragonDance);
 
-  Battle battle = new Battle(ashley, nicholas);
+  Battle battle = new Battle(ashley, zofia);
   
-  battle.move(lapras, 0, snorlax, 0);
-  battle.move(lapras, 0, snorlax, 0);
-  battle.move(lapras, 0, snorlax, 0);
-  battle.move(lapras, 0, snorlax, 0);
-  battle.move(lapras, 0, snorlax, 0);
-  
-  //battle.move(lucario, 3, braxien, 0);
+  battle.move(dratini, 3, dratini, 1);
+  battle.move(dratini, 0, dratini, 1);
+  battle.move(dratini, 0, dratini, 1);
+  //randomSeed(7);
   //battle.move(tyranitar, 1, scyther, 2);
-
+  
   //tyranitar.useMove(thunderFang, lapras);
-  //battle.move(lucario, 3, braxien, 0);
-  //battle.move(snorlax, 1, noivern, 1);
   
   //zofia.useItem("Fresh Water", lapras);
-  //battle.move(lucario, 1, braxien, 0);
   
   //tyranitar.useMove(bite, lapras);
-  //battle.move(snorlax, 1, noivern, 1);
-
-  //battle.move(lucario, 1, braxien, 0);
+  
   //battle.move(tyranitar, 2, lapras, 1);
-  //battle.move(noivern, 0, snorlax, 0);
-
-  //braxien.useMove(flameCharge, gyarados);
+  
   //battle.move(tyranitar, 2, lapras, 1);
-  //battle.move(noivern, 0, snorlax, 0);
-
-  //battle.move(gyarados, 1, pidgeotto, 3);
+  
   //battle.move(tyranitar, 3, charmeleon, 1);
-  //battle.move(noivern, 0, vileplume, 3);
-
-  //battle.move(gyarados, 3, pidgeotto, 1);
+  
   //battle.move(tyranitar, 3, charmeleon, 2);
-  //battle.move(noivern, 3, vileplume, 0);
-
-  //battle.move(gyarados, 3, espeon, 0);
+  
   //battle.move(tyranitar, 0, charmeleon, 2);
-  //battle.move(noivern, 1, vileplume, 1);
-
-  //jasmine.useItem("Fresh Water", espeon);
-
+  
+  
   //charmeleon.moveSet(dragonRage, flameBurst, fireFang, smokescreen);
 
   //scyther.moveSet(pursuit, vacuumWave, quickAttack, falseSwipe);
@@ -551,7 +540,7 @@ void setup() {
 
   //pidgeotto.moveSet(gust, quickAttack, whirlwind, twister);
 
-  //growlithe.moveSet(bite, thunderFang, fireFang, none);
+  //arcanine.moveSet(bite, thunderFang, fireFang, none);
 
   //braxien.moveSet(ember, scratch, flameCharge, tailWhip);
 
@@ -577,6 +566,8 @@ void setup() {
   //ponyta.moveSet(flameWheel, stomp, ember, tailWhip);
 
   //exeggcute.moveSet(bulletSeed, uproar, leechSeed, stunSpore);
+  
+  //alolanGeodude.moveSet(rollout, tackle, none, none);
 }
 
 void catchPokemon(Pokemon p, String pokeball, int catchRate) {
