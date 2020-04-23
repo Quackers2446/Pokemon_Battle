@@ -24,6 +24,7 @@ class Battle {
       println("*   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *");
       println("A BATTLE BETWEEN", this.one.name.toUpperCase(), "AND", this.two.name.toUpperCase(), "HAS BEGUN! Lv.", str(oneP.level), oneP.name, "| Lv.", str(twoP.level), twoP.name);   
       println("*   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *");
+      enterBattleEffects(oneP, twoP);
     }
     
     println("Turn #" + str(this.turn));
@@ -111,7 +112,8 @@ class Battle {
     println("*   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *");
     println("A BATTLE BETWEEN", this.one.name.toUpperCase(), "AND", this.two.name.toUpperCase(), "HAS BEGUN! Lv.", str(oneP.level), oneP.name, "| Lv.", str(twoP.level), twoP.name);   
     println("*   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *");
-      
+    enterBattleEffects(oneP, twoP);
+ 
     while (oneP.currHealth > 0 && twoP.currHealth > 0) {
       println();
       println("Turn #" + str(turn));
@@ -174,6 +176,23 @@ class Battle {
     for (int i = 0; i < 6; i++) {
       oneP.battleStats[i] = oneP.stats[i];
       twoP.battleStats[i] = twoP.stats[i];
+    }
+  }
+  
+  void enterBattleEffects(Pokemon oneP, Pokemon twoP) {
+    if (oneP.ability.equals("Intimidate")) {
+      println();
+      println(twoP.name + "'was intimidated. Their attack fell!");
+            
+      twoP.attackSM += 1;
+      twoP.battleStats[1] = (2/twoP.attackSM)*twoP.stats[1];
+    }
+    if (twoP.ability.equals("Intimidate")) {
+      println();
+      println(oneP.name + "'was intimidated. Their attack fell!");
+            
+      oneP.attackSM += 1;
+      oneP.battleStats[1] = (2/oneP.attackSM)*oneP.stats[1];
     }
   }
   

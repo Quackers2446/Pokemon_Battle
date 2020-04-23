@@ -141,7 +141,7 @@ class Move {
           
           target.freeze = true;
         }
-      } else if ((firstStatus.equals("Paralysis") && (randomP <= 0.25)) && !(target.type.equals("Electric") || target.type2.equals("Electric"))) {
+      } else if (firstStatus.equals("Paralysis") && !(target.type.equals("Electric") || target.type2.equals("Electric"))) {
         chance = random(0, 1);
 
         if (chance <= this.statusProb && !target.paralysis) {
@@ -189,7 +189,7 @@ class Move {
           
           target.leech = true;
         }
-      } else if (firstStatus.equals("Flinch") && !target.flinch) {
+      } else if (firstStatus.equals("Flinch") && !target.flinch && !target.ability.equals("Inner Focus")) {
         chance = random(0, 1);
 
         if (chance <= this.statusProb) {
@@ -357,7 +357,7 @@ class Move {
             user.battleStats[5] = (2/user.speedSM)*user.stats[5];
           }
         }
-      } else if (firstStatus.equals("Accuracy-")) {
+      } else if (firstStatus.equals("Accuracy-") && !target.ability.equals("Keen Eye")) {
         chance = random(0, 1);
 
         if (chance <= this.statusProb) {
@@ -641,7 +641,7 @@ class Move {
             user.battleStats[5] = (2/user.speedSM)*user.stats[5];
           }
         }
-      } else if (status2.equals("Accuracy-")) {
+      } else if (status2.equals("Accuracy-") && !target.ability.equals("Keen Eye")) {
         chance = random(0, 1);
 
         if (chance <= this.statusProb) {

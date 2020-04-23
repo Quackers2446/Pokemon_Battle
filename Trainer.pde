@@ -67,6 +67,10 @@ class Trainer {
       p.currHealth += 60;
     }
     
+    else if (item.equals("Revive")) {
+      p.currHealth += p.health/2;
+    }
+    
     else if (item.equals("Cheri Berry")) {
       p.paralysis = false;
       println(p.name, "is no longer paralyzed!");

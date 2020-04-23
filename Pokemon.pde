@@ -123,7 +123,7 @@ class Pokemon {
       
     else if (this.name.equals("Scyther") || this.name.equals("Scizor") || this.name.equals("Beedrill")
     || this.name.equals("Heracross") || this.name.equals("Blipbug") || this.name.equals("Dottler") || 
-    this.name.equals("Orbeet,e") || this.name.equals("Grubbin") || this.name.equals("Volcarona"))
+    this.name.equals("Orbeetle") || this.name.equals("Grubbin") || this.name.equals("Volcarona"))
       a = "Swarm";
       
     else if (this.name.equals("Mimikyu"))
@@ -133,6 +133,26 @@ class Pokemon {
     this.name.equals("Dragonair") || this.name.equals("Silicobra") || this.name.equals("Sandaconda"))
       a = "Shed Skin";
       
+    else if (this.name.equals("Munchlax") || this.name.equals("Snorlax") || this.name.equals("Seel") || 
+    this.name.equals("Dewgong") || this.name.equals("Alolan Rattata") || this.name.equals("Appletun"))
+      a = "Thick Fat";
+      
+    else if (this.name.equals("Abra") || this.name.equals("Kadabra") || this.name.equals("Alakazam")
+    || this.name.equals("Farfetch'd") || this.name.equals("Drowzee") || this.name.equals("Hypno") || 
+    this.name.equals("Hitmonchan") || this.name.equals("Kangaskhan") || this.name.equals("Dragonite")
+    || this.name.equals("Zubat") || this.name.equals("Golbat") || this.name.equals("Crobat"))
+      a = "Inner Focus";
+    
+    else if (this.name.equals("Pidgey") || this.name.equals("Pidgeotto") || this.name.equals("Pidgeot")
+    || this.name.equals("Spearow") || this.name.equals("Fearow") || this.name.equals("Rookidee") || 
+    this.name.equals("Corvisquire") || this.name.equals("Sentret") || this.name.equals("Furret"))
+      a = "Keen Eye";
+    
+    else if (this.name.equals("Ekans") || this.name.equals("Arbok") || this.name.equals("Growlithe")
+    || this.name.equals("Arcanine") || this.name.equals("Tauros") || this.name.equals("Gyarados") || 
+    this.name.equals("Litten") || this.name.equals("Torracat") || this.name.equals("Incineroar"))
+      a = "Intimidate";
+    
     else if (this.name.equals("Lapras") || this.name.equals("Krabby") || this.name.equals("Kingler"))
       a = "Shell Armor";
       
@@ -209,7 +229,7 @@ class Pokemon {
     
     if (mv.currPowerPoints >= 0) {
       if ((chanceToHit <= ((mv.accuracy*100)*(this.adjustedStages))) || mv.accuracy == 0) {   
-        if (!this.flinch && !this.sleep && (!(this.paralysis && (randomP <= 0.25)) || (this.type.equals("Electric") || this.type2.equals("Electric"))) 
+        if (!(this.flinch && !this.ability.equals("Inner Focus")) && !this.sleep && (!(this.paralysis && (randomP <= 0.25)) || (this.type.equals("Electric") || this.type2.equals("Electric"))) 
         && (!(this.confusion && (randomC <= 0.33)) && (!(this.freeze && (randomF <= 0.2)) || (this.type.equals("Ice") || this.type2.equals("Ice"))))) {
           if (mv.damageCatagory.equals("Physical")) {
             if (this.burn && (!this.type.equals("Fire") || !this.type2.equals("Fire"))) {
@@ -250,6 +270,9 @@ class Pokemon {
           || (this.ability.equals("Overgrowth") && mv.type.equals("Grass"))  || (this.ability.equals("Swarm") && mv.type.equals("Bug"))) 
           && (this.currHealth <= (this.health/3)))
             damage *= 1.5;
+          
+          if (target.ability.equals("Thick Fat") && (mv.type.equals("Ice")) || (mv.type.equals("Fire")))
+            damage /= 2;
             
           if (target.ability.equals("Disguise") && (target.currHealth == target.health)) {
             damage = 0;
@@ -266,7 +289,7 @@ class Pokemon {
           
           float r = random(0,1);
           if (this.ability.equals("Shed Skin") && (r <= 0.33)) {
-            if (!(this.burn || this.freeze || this.paralysis || this.poison || this.sleep || this.badlyPoisoned || this.confusion || this.drain || this.leech)) {
+            if ((this.burn || this.freeze || this.paralysis || this.poison || this.sleep || this.badlyPoisoned || this.confusion || this.drain || this.leech)) {
               this.burn = this.freeze = this.paralysis = this.poison = this.sleep = this.badlyPoisoned
               = this.confusion = this.drain = this.leech = false;
               

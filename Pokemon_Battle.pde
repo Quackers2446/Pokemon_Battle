@@ -488,7 +488,8 @@ void setup() {
   wild.addPokemon(magikarp);
 
   //PLS UPDATE.
-  //randomSeed(10);
+//  randomSeed(10);
+  randomSeed(7);
 
   printPokemon();
   printCharizard();
@@ -501,29 +502,31 @@ void setup() {
   //altaria.moveSet(dragonBreath, sing, disarmingVoice, dragonDance);
 
   Battle battle = new Battle(ashley, zofia);
+    
   
-  battle.move(dratini, 3, dratini, 1);
-  battle.move(dratini, 0, dratini, 1);
-  battle.move(dratini, 0, dratini, 1);
-  //randomSeed(7);
-  //battle.move(tyranitar, 1, scyther, 2);
+  battle.move(tyranitar, 1, scyther, 2);
   
-  //tyranitar.useMove(thunderFang, lapras);
+  tyranitar.useMove(thunderFang, lapras);
   
-  //zofia.useItem("Fresh Water", lapras);
+  zofia.useItem("Fresh Water", lapras);
   
-  //tyranitar.useMove(bite, lapras);
+  tyranitar.useMove(bite, lapras);
   
-  //battle.move(tyranitar, 2, lapras, 1);
+  battle.move(tyranitar, 2, lapras, 1);
   
-  //battle.move(tyranitar, 2, lapras, 1);
+  battle.move(tyranitar, 2, lapras, 1);
   
-  //battle.move(tyranitar, 3, charmeleon, 1);
+  battle.move(tyranitar, 3, charmeleon, 1);
   
-  //battle.move(tyranitar, 3, charmeleon, 2);
+  battle.move(tyranitar, 3, charmeleon, 2);
   
-  //battle.move(tyranitar, 0, charmeleon, 2);
+  battle.move(tyranitar, 0, charmeleon, 2);
   
+  battle.move(tyranitar, 0, charmeleon, 3);
+  
+  battle.move(tyranitar, 0, charmeleon, 2);
+  
+  battle.move(tyranitar, 0, krabby, 0);
   
   //charmeleon.moveSet(dragonRage, flameBurst, fireFang, smokescreen);
 
