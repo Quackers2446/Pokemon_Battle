@@ -222,8 +222,18 @@ class Move {
             println();
             println(target.name + "'s attack fell!");
             
-            target.attackSM += 1;
-            target.battleStats[1] = (2/target.attackSM)*target.stats[1];
+            target.battleStats[1] = int(float(2*target.stats[1])/(target.attackSM+1));
+          }
+        }
+      } else if (firstStatus.equals("Attack--")) {
+        chance = random(0, 1);
+
+        if (chance <= this.statusProb) {
+          if (target.attackSM < 6) {
+            println();
+            println(target.name + "'s attack greatly fell!");
+            
+            target.battleStats[1] = int(float(2*target.stats[1])/(target.attackSM+2));
           }
         }
       } else if (firstStatus.equals("Attack+")) {
@@ -234,8 +244,7 @@ class Move {
             println();
             println(user.name + "'s attack rose!");
 
-            user.attackSM += 1;
-            user.battleStats[1] = (user.attackSM/2)*user.stats[1];
+            user.battleStats[1] = int(float((user.attackSM+1)*user.stats[1])/2);
           }
         }
       } else if (firstStatus.equals("Attack++")) {
@@ -245,8 +254,52 @@ class Move {
           if (user.attackSM < 6) {
             println();
             println(user.name + "'s attack greatly rose!");
-            user.attackSM += 2;
-            user.battleStats[1] = (user.attackSM/2)*user.stats[1];
+
+            user.battleStats[1] = int(float((user.attackSM+2)*user.stats[1])/2);
+          }
+        }
+      } else if (firstStatus.equals("Sp.Attack+")) {
+        chance = random(0, 1);
+
+        if (chance <= this.statusProb) {
+          if (user.spAttackSM < 6) {
+            println();
+            println(user.name + "'s special attack rose!");
+
+            user.battleStats[3] = int(float((user.spAttackSM+1)*user.stats[3])/2);
+          }
+        }
+      } else if (firstStatus.equals("Sp.Attack++")) {
+        chance = random(0, 1);
+
+        if (chance <= this.statusProb) {
+          if (user.spAttackSM < 6) {
+            println();
+            println(user.name + "'s special attack greatly rose!");
+
+            user.battleStats[3] = int(float((user.spAttackSM+2)*user.stats[3])/2);
+          }
+        }
+      } else if (firstStatus.equals("Sp.Attack-")) {
+        chance = random(0, 1);
+
+        if (chance <= this.statusProb) {
+          if (target.spAttackSM < 6) {
+            println();
+            println(target.name + "'s special attack fell!");
+            
+            target.battleStats[3] = int((2*target.stats[3])/float(target.spAttackSM+1));
+          }
+        }
+      } else if (firstStatus.equals("Sp.Attack--")) {
+        chance = random(0, 1);
+
+        if (chance <= this.statusProb) {
+          if (target.spAttackSM < 6) {
+            println();
+            println(target.name + "'s special attack greatly fell!");
+            
+            target.battleStats[3] = int((2*target.stats[3])/float(target.spAttackSM+2));
           }
         }
       } else if (firstStatus.equals("Defense-")) {
@@ -257,8 +310,18 @@ class Move {
             println();
             println(target.name + "'s defense fell!");
             
-            target.defenseSM += 1;
-            target.battleStats[2] = (2/target.defenseSM)*target.stats[2];
+            target.battleStats[2] = int((2*target.stats[2])/float(target.defenseSM+1));
+          }
+        }
+      } else if (firstStatus.equals("Defense--")) {
+        chance = random(0, 1);
+
+        if (chance <= this.statusProb) {
+          if (target.defenseSM < 6) {
+            println();
+            println(target.name + "'s defense greatly fell!");
+            
+            target.battleStats[2] = int((2*target.stats[2])/float(target.defenseSM+2));
           }
         }
       } else if (firstStatus.equals("Defense+")) {
@@ -269,8 +332,7 @@ class Move {
             println();
             println(user.name + "'s defense rose!");
 
-            user.defenseSM += 1;
-            user.battleStats[2] = (user.defenseSM/2)*user.stats[2];
+            user.battleStats[2] = int(float((user.defenseSM+1)*user.stats[2])/2);
           }
         }
       } else if (firstStatus.equals("Sp.Defense-")) {
@@ -281,8 +343,7 @@ class Move {
             println();
             println(target.name + "'s special defense fell!");
             
-            target.spDefenseSM += 1;
-            target.battleStats[4] = int((2.0/float(target.spDefenseSM))*target.stats[4]);
+            target.battleStats[4] = int((2.0*target.stats[4])/float(target.spDefenseSM+1));
           }
         }
       } else if (firstStatus.equals("Sp.Defense+")) {
@@ -293,8 +354,7 @@ class Move {
             println();
             println(user.name + "'s special defense rose!");
 
-            user.spDefenseSM += 1;
-            user.battleStats[4] = (user.spDefenseSM/2)*user.stats[4];
+            user.battleStats[4] = int(float((user.spDefenseSM+1)*user.stats[4])/2);
           }
         }
       } else if (firstStatus.equals("Sp.Defense++")) {
@@ -305,8 +365,7 @@ class Move {
             println();
             println(user.name + "'s special defense greatly rose!");
 
-            user.spDefenseSM += 2;
-            user.battleStats[4] = (user.spDefenseSM/2)*user.stats[4];
+            user.battleStats[4] = int(float((user.spDefenseSM+2)*user.stats[4])/2);
           }
         }
       } else if (firstStatus.equals("Speed+")) {
@@ -317,8 +376,7 @@ class Move {
             println();
             println(user.name + "'s speed rose!");
 
-            user.speedSM += 1;
-            user.battleStats[5] = (user.speedSM/2)*user.stats[5];
+            user.battleStats[5] = int(float((user.speedSM+1)*user.stats[5])/2);
           }
         }
       } else if (firstStatus.equals("Speed++")) {
@@ -329,8 +387,7 @@ class Move {
             println();
             println(user.name + "'s speed greatly rose!");
 
-            user.speedSM += 2;
-            user.battleStats[5] = (user.speedSM/2)*user.stats[5];
+            user.battleStats[5] = int(float((user.speedSM+2)*user.stats[5])/2);
           }
         }
       } else if (firstStatus.equals("Speed-")) {
@@ -341,20 +398,18 @@ class Move {
             println();
             println(target.name + "'s speed fell!");
 
-            target.speedSM += 1;
-            target.battleStats[5] = (2/target.speedSM)*target.stats[5];
+            target.battleStats[5] = int((2*target.stats[5])/float(target.speedSM+1));
           }
         }
       } else if (firstStatus.equals("Speed--")) {
         chance = random(0, 1);
 
         if (chance <= this.statusProb) {
-          if (user.speedSM < 6) {
+          if (target.speedSM < 6) {
             println();
-            println(user.name + "'s speed greatly fell!");
+            println(target.name + "'s speed greatly fell!");
 
-            user.speedSM += 2;
-            user.battleStats[5] = (2/user.speedSM)*user.stats[5];
+            target.battleStats[5] = int((2*target.stats[5])/float(target.speedSM+2));
           }
         }
       } else if (firstStatus.equals("Accuracy-") && !target.ability.equals("Keen Eye")) {
@@ -425,7 +480,7 @@ class Move {
           
           target.freeze = true;
         }
-      } else if ((status2.equals("Paralysis") && (randomP <= 0.25)) && !(target.type.equals("Electric") || target.type2.equals("Electric"))) {
+      } else if (status2.equals("Paralysis") && !(target.type.equals("Electric") || target.type2.equals("Electric"))) {
         chance = random(0, 1);
 
         if (chance <= this.statusProb && !target.paralysis) {
@@ -464,7 +519,16 @@ class Move {
           target.sleepCounter = int(random(0,2));
           target.sleep = true;
         }
-      } else if (status2.equals("Flinch") && !target.flinch) {
+      } else if (status2.equals("Leech") && !target.leech) {
+        chance = random(0, 1);
+
+        if (chance <= this.statusProb) {
+          println();
+          println(target.name, "was seeded!");
+          
+          target.leech = true;
+        }
+      } else if (status2.equals("Flinch") && !target.flinch && !target.ability.equals("Inner Focus")) {
         chance = random(0, 1);
 
         if (chance <= this.statusProb) {
@@ -489,15 +553,6 @@ class Move {
         if (chance <= this.statusProb) {
           target.recoil = true;
         }
-      } else if (status2.equals("Leech") && !target.leech) {
-        chance = random(0, 1);
-
-        if (chance <= this.statusProb) {
-          println();
-          println(target.name, "was seeded!");
-          
-          target.leech = true;
-        }
       } else if (status2.equals("Attack-")) {
         chance = random(0, 1);
 
@@ -506,8 +561,18 @@ class Move {
             println();
             println(target.name + "'s attack fell!");
             
-            target.attackSM += 1;
-            target.battleStats[1] = (2/target.attackSM)*target.stats[1];
+            target.battleStats[1] = int(float(2*target.stats[1])/(target.attackSM+1));
+          }
+        }
+      } else if (status2.equals("Attack--")) {
+        chance = random(0, 1);
+
+        if (chance <= this.statusProb) {
+          if (target.attackSM < 6) {
+            println();
+            println(target.name + "'s attack greatly fell!");
+            
+            target.battleStats[1] = int(float(2*target.stats[1])/(target.attackSM+2));
           }
         }
       } else if (status2.equals("Attack+")) {
@@ -518,8 +583,7 @@ class Move {
             println();
             println(user.name + "'s attack rose!");
 
-            user.attackSM += 1;
-            user.battleStats[1] = (user.attackSM/2)*user.stats[1];
+            user.battleStats[1] = int(float((user.attackSM+1)*user.stats[1])/2);
           }
         }
       } else if (status2.equals("Attack++")) {
@@ -529,8 +593,52 @@ class Move {
           if (user.attackSM < 6) {
             println();
             println(user.name + "'s attack greatly rose!");
-            user.attackSM += 2;
-            user.battleStats[1] = (user.attackSM/2)*user.stats[1];
+
+            user.battleStats[1] = int(float((user.attackSM+2)*user.stats[1])/2);
+          }
+        }
+      } else if (status2.equals("Sp.Attack+")) {
+        chance = random(0, 1);
+
+        if (chance <= this.statusProb) {
+          if (user.spAttackSM < 6) {
+            println();
+            println(user.name + "'s special attack rose!");
+
+            user.battleStats[3] = int(float((user.spAttackSM+1)*user.stats[3])/2);
+          }
+        }
+      } else if (status2.equals("Sp.Attack++")) {
+        chance = random(0, 1);
+
+        if (chance <= this.statusProb) {
+          if (user.spAttackSM < 6) {
+            println();
+            println(user.name + "'s special attack greatly rose!");
+
+            user.battleStats[3] = int(float((user.spAttackSM+2)*user.stats[3])/2);
+          }
+        }
+      } else if (status2.equals("Sp.Attack-")) {
+        chance = random(0, 1);
+
+        if (chance <= this.statusProb) {
+          if (target.spAttackSM < 6) {
+            println();
+            println(target.name + "'s special attack fell!");
+            
+            target.battleStats[3] = int((2*target.stats[3])/float(target.spAttackSM+1));
+          }
+        }
+      } else if (status2.equals("Sp.Attack--")) {
+        chance = random(0, 1);
+
+        if (chance <= this.statusProb) {
+          if (target.spAttackSM < 6) {
+            println();
+            println(target.name + "'s special attack greatly fell!");
+            
+            target.battleStats[3] = int((2*target.stats[3])/float(target.spAttackSM+2));
           }
         }
       } else if (status2.equals("Defense-")) {
@@ -541,8 +649,18 @@ class Move {
             println();
             println(target.name + "'s defense fell!");
             
-            target.defenseSM += 1;
-            target.battleStats[2] = (2/target.defenseSM)*target.stats[2];
+            target.battleStats[2] = int((2*target.stats[2])/float(target.defenseSM+1));
+          }
+        }
+      } else if (status2.equals("Defense--")) {
+        chance = random(0, 1);
+
+        if (chance <= this.statusProb) {
+          if (target.defenseSM < 6) {
+            println();
+            println(target.name + "'s defense greatly fell!");
+            
+            target.battleStats[2] = int((2*target.stats[2])/float(target.defenseSM+2));
           }
         }
       } else if (status2.equals("Defense+")) {
@@ -553,8 +671,7 @@ class Move {
             println();
             println(user.name + "'s defense rose!");
 
-            user.defenseSM += 1;
-            user.battleStats[2] = (user.defenseSM/2)*user.stats[2];
+            user.battleStats[2] = int(float((user.defenseSM+1)*user.stats[2])/2);
           }
         }
       } else if (status2.equals("Sp.Defense-")) {
@@ -565,8 +682,7 @@ class Move {
             println();
             println(target.name + "'s special defense fell!");
             
-            target.spDefenseSM += 1;
-            target.battleStats[4] = int((2.0/float(target.spDefenseSM))*target.stats[4]);
+            target.battleStats[4] = int((2.0*target.stats[4])/float(target.spDefenseSM+1));
           }
         }
       } else if (status2.equals("Sp.Defense+")) {
@@ -577,8 +693,7 @@ class Move {
             println();
             println(user.name + "'s special defense rose!");
 
-            user.spDefenseSM += 1;
-            user.battleStats[4] = (user.spDefenseSM/2)*user.stats[4];
+            user.battleStats[4] = int(float((user.spDefenseSM+1)*user.stats[4])/2);
           }
         }
       } else if (status2.equals("Sp.Defense++")) {
@@ -589,8 +704,7 @@ class Move {
             println();
             println(user.name + "'s special defense greatly rose!");
 
-            user.spDefenseSM += 2;
-            user.battleStats[4] = (user.spDefenseSM/2)*user.stats[4];
+            user.battleStats[4] = int(float((user.spDefenseSM+2)*user.stats[4])/2);
           }
         }
       } else if (status2.equals("Speed+")) {
@@ -601,8 +715,7 @@ class Move {
             println();
             println(user.name + "'s speed rose!");
 
-            user.speedSM += 1;
-            user.battleStats[5] = (user.speedSM/2)*user.stats[5];
+            user.battleStats[5] = int(float((user.speedSM+1)*user.stats[5])/2);
           }
         }
       } else if (status2.equals("Speed++")) {
@@ -613,32 +726,29 @@ class Move {
             println();
             println(user.name + "'s speed greatly rose!");
 
-            user.speedSM += 2;
-            user.battleStats[5] = (user.speedSM/2)*user.stats[5];
+            user.battleStats[5] = int(float((user.speedSM+2)*user.stats[5])/2);
           }
         }
       } else if (status2.equals("Speed-")) {
         chance = random(0, 1);
 
         if (chance <= this.statusProb) {
-          if (user.speedSM < 6) {
+          if (target.speedSM < 6) {
             println();
-            println(user.name + "'s speed fell!");
+            println(target.name + "'s speed fell!");
 
-            user.speedSM += 1;
-            user.battleStats[5] = (2/user.speedSM)*user.stats[5];
+            target.battleStats[5] = int((2*target.stats[5])/float(target.speedSM+1));
           }
         }
       } else if (status2.equals("Speed--")) {
         chance = random(0, 1);
 
         if (chance <= this.statusProb) {
-          if (user.speedSM < 6) {
+          if (target.speedSM < 6) {
             println();
-            println(user.name + "'s speed greatly fell!");
+            println(target.name + "'s speed greatly fell!");
 
-            user.speedSM += 2;
-            user.battleStats[5] = (2/user.speedSM)*user.stats[5];
+            target.battleStats[5] = int((2*target.stats[5])/float(target.speedSM+2));
           }
         }
       } else if (status2.equals("Accuracy-") && !target.ability.equals("Keen Eye")) {
@@ -663,6 +773,17 @@ class Move {
             user.adjustedStages = float(user.accuracySM)/float(user.evasionSM);
           }
         }
+      } else if (status2.equals("Evasion+")) {
+        chance = random(0, 1);
+
+        if (chance <= this.statusProb) {
+          if (user.evasionSM < 6) {
+            println();
+            println(user.name + "'s evasion rose!");
+            user.evasionSM += 1;
+            user.adjustedStages = float(user.evasionSM)/float(user.accuracySM);
+          }
+        }
       } else if (status2.equals("Drain")) {
         chance = random(0, 1);
 
@@ -678,7 +799,7 @@ class Move {
       }
     }
   }
-
+  
   float typeEffectiveness(Pokemon target) {
     int first2 = 0;
     int second2 = 0;

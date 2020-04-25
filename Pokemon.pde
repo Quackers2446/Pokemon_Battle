@@ -17,6 +17,10 @@ class Pokemon {
   int confusionCounter;
   int poisonCounter;
   float adjustedStages;
+  boolean raidPokemon;
+  boolean raidShield;
+  int shieldHealth;
+  boolean facedRaidShield;
   
   Pokemon (String n, String t, int l, int hp,
     int att, int def, int satt, int sdef, int spd) {
@@ -62,6 +66,29 @@ class Pokemon {
     this.poisonCounter = 1;
     
     this.adjustedStages = 1;
+    
+    this.raidPokemon = false;
+    this.raidShield = false;
+    this.shieldHealth = 0;
+    this.facedRaidShield = false;
+  }
+  
+  void raidStats() {
+    this.raidPokemon = true;
+    
+    int h = int(((((((this.stats[0] + 31)*2 + int(sqrt(252)/4))*this.level)/100)) + this.level + 10)*2.5);
+    this.stats[0] = h;
+    this.health = h;
+    this.currHealth = h;
+    this.battleStats[0] = h;
+  
+    for (int i = 1; i < 6; i++) {
+      int stat = int(((((this.stats[i] + 31)*2 + int(sqrt(252)/4))*this.level)/100)) + 5;
+      if (!((i == 1) || (i == 3))) {
+        this.stats[i] = int(stat*1.5);
+        this.battleStats[i] = int(stat*1.5);
+      }
+    }
   }
   
   void rest() {
@@ -128,6 +155,11 @@ class Pokemon {
       
     else if (this.name.equals("Mimikyu"))
       a = "Disguise";
+      
+    else if (this.name.equals("Gastly") || this.name.equals("Haunter") || this.name.equals("Gengar") || 
+    this.name.equals("Koffing") || this.name.equals("Weezing") || this.name.equals("Vibrava") || 
+    this.name.equals("Flygon") || this.name.equals("Galarian Weezing"))
+      a = "Levitate";
       
     else if (this.name.equals("Dratini") || this.name.equals("Ekans") || this.name.equals("Arbok") || 
     this.name.equals("Dragonair") || this.name.equals("Silicobra") || this.name.equals("Sandaconda"))
@@ -224,8 +256,20 @@ class Pokemon {
     float randomC = random(0,1);
     float randomF = random(0,1);
     float criticalRandom = random(0,100);
+    boolean condition = true;
+    int shieldDamage = 0;
     
     mv.currPowerPoints -= 1;
+    
+    if (target.raidPokemon && !target.raidShield && !target.facedRaidShield) {
+      if ((target.currHealth < int((float(target.health)*2)/3)) && !target.raidShield) {
+        println(target.name, "has set up a barrier!");
+        println();
+        target.raidShield = true;
+        target.shieldHealth = 6;
+        target.facedRaidShield = true;
+      }
+    }
     
     if (mv.currPowerPoints >= 0) {
       if ((chanceToHit <= ((mv.accuracy*100)*(this.adjustedStages))) || mv.accuracy == 0) {   
@@ -280,12 +324,49 @@ class Pokemon {
             println();
           }
           
+          if (target.ability.equals("Levitate") && mv.type.equals("Ground")) {
+            damage = 0;
+            condition = false;
+            println(target.name, "is levitating!");
+            println();
+          }
+          
+          if (target.raidShield && target.raidPokemon) {
+            if (target.shieldHealth > 0) {
+              if (damage > 0) {
+                target.shieldHealth -= 1;
+                shieldDamage += damage;
+                println(this.name, "hit", target.name + "'s shield and depleted one bar of it's strength!");
+                println();
+                println("The barrier now has", target.shieldHealth, "bars!");
+                println();
+                condition = false;
+                damage = 0;
+              }
+              else {
+                println(mv.name, "had no effect.");
+                println();
+              }
+            }
+            else {
+              println("The barrier has broken!");
+              println(shieldDamage);
+              target.currHealth -= float(shieldDamage)/3.0;
+              println(target.name, "took", (float(shieldDamage)/3.0), "damage!");
+              println();
+              target.raidShield = false;
+            }
+          }
+          
           target.currHealth -= damage;
           
           println(this.name, "uses", mv.name, "and hits", target.name, "for", str(damage), "damage!", target.name, "now has", target.currHealth, "health! ("
           + int((float(target.currHealth)/target.health)*100) + "%)");
           
-          mv.condition(this, target);
+          if (condition)
+            mv.condition(this, target);
+          
+          condition = true;
           
           float r = random(0,1);
           if (this.ability.equals("Shed Skin") && (r <= 0.33)) {
@@ -408,6 +489,8 @@ class Pokemon {
         
         println();
         println(this.name, "takes", str(int(damage*percent)), "damage from recoil! (" + int((float(this.currHealth)/this.health)*100) + "%)");
+      
+        target.recoil = false;
       }
     }
     
