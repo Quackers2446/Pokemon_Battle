@@ -21,6 +21,7 @@ class Pokemon {
   boolean raidShield;
   int shieldHealth;
   boolean facedRaidShield;
+  int shieldDamage;
   
   Pokemon (String n, String t, int l, int hp,
     int att, int def, int satt, int sdef, int spd) {
@@ -71,6 +72,7 @@ class Pokemon {
     this.raidShield = false;
     this.shieldHealth = 0;
     this.facedRaidShield = false;
+    this.shieldDamage = 0;
   }
   
   void raidStats() {
@@ -257,7 +259,6 @@ class Pokemon {
     float randomF = random(0,1);
     float criticalRandom = random(0,100);
     boolean condition = true;
-    int shieldDamage = 0;
     
     mv.currPowerPoints -= 1;
     
@@ -335,7 +336,8 @@ class Pokemon {
             if (target.shieldHealth > 0) {
               if (damage > 0) {
                 target.shieldHealth -= 1;
-                shieldDamage += damage;
+                this.shieldDamage += int(float(damage)/5);
+                println(this.shieldDamage);
                 println(this.name, "hit", target.name + "'s shield and depleted one bar of it's strength!");
                 println();
                 println("The barrier now has", target.shieldHealth, "bars!");
@@ -350,10 +352,11 @@ class Pokemon {
             }
             else {
               println("The barrier has broken!");
-              println(shieldDamage);
-              target.currHealth -= float(shieldDamage)/3.0;
-              println(target.name, "took", (float(shieldDamage)/3.0), "damage!");
+              target.currHealth -= this.shieldDamage;
+              println(target.name, "took", (this.shieldDamage), "damage!", target.name + "'s defense and special defense fell!");
               println();
+              target.battleStats[2] = int(target.stats[2]*0.95);
+              target.battleStats[4] = int(target.stats[4]*0.95);
               target.raidShield = false;
             }
           }

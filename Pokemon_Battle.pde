@@ -238,7 +238,7 @@ void setup() {
 
   //Level 23 Espeon
   Pokemon espeon = new Pokemon("Espeon", "Psychic", 23, 65, 65, 60, 130, 95, 110);
-  espeon.moveSet(confusion, quickAttack, sandAttack, babyDollEyes);
+  espeon.moveSet(psybeam, quickAttack, swift, babyDollEyes);
 
   //Level 20 Seel
   Pokemon seel = new Pokemon("Seel", "Water", 20, 65, 45, 55, 45, 70, 45);
@@ -475,8 +475,8 @@ void setup() {
 
   //CASSIE
 
-  //Level 29 Shelgon
-  Pokemon shelgon = new Pokemon("Shelgon", "Dragon", 29, 65, 95, 100, 60, 50, 50);
+  //Level 34 Shelgon
+  Pokemon shelgon = new Pokemon("Shelgon", "Dragon", 34, 65, 95, 100, 60, 50, 50);
   shelgon.moveSet(dragonBreath, bite, headbutt, ember);
 
   //Level 31 Alolan Sandslash
@@ -487,8 +487,8 @@ void setup() {
   Pokemon arbok = new Pokemon("Arbok", "Poison", 27, 60, 95, 69, 65, 79, 80);
   arbok.moveSet(crunch, poisonSting, thunderFang, fireFang);
 
-  //Level 31 Vaporeon
-  Pokemon vaporeon = new Pokemon("Vaporeon", "Water", 31, 130, 65, 60, 110, 95, 65);
+  //Level 34 Vaporeon
+  Pokemon vaporeon = new Pokemon("Vaporeon", "Water", 34, 130, 65, 60, 110, 95, 65);
   vaporeon.moveSet(waterPulse, auroraBeam, quickAttack, aquaRing);
 
 
@@ -517,8 +517,8 @@ void setup() {
   Pokemon tyranitar = new Pokemon("Tyranitar", "Rock/Dark", 34, 100, 134, 110, 95, 100, 61);
   tyranitar.moveSet(thrash, bite, thunderFang, iceFang);
 
-  //Level 29 Altaria
-  Pokemon altaria = new Pokemon("Altaria", "Dragon/Flying", 29, 75, 70, 90, 70, 105, 80);
+  //Level 36 Altaria
+  Pokemon altaria = new Pokemon("Altaria", "Dragon/Flying",3629, 75, 70, 90, 70, 105, 80);
   altaria.moveSet(dragonBreath, sing, disarmingVoice, dragonDance);
 
 
@@ -572,15 +572,16 @@ void setup() {
   
   //PLS UPDATE.
   // randomSeed(11);
-  randomSeed(15);
+  randomSeed(16);
   Battle battle = new Battle(nicholas, joanna);
   
-  battle.move(vibrava, 3, charizard, 1);
-  battle.move(vibrava, 3, charizard, 1);
-  battle.move(vibrava, 3, charizard, 1);
-  battle.move(vibrava, 3, charizard, 1);
-  battle.move(vibrava, 3, charizard, 1);
-  battle.move(vibrava, 1, charizard, 1);
+  battle.move(vibrava, 1, pidgeot, 2);
+  
+  battle.move(vibrava, 1, pidgeot, 2);
+  
+  battle.move(vibrava, 1, pidgeot, 2);
+  
+  battle.move(vibrava, 1, pidgeot, 2);
   
   //battle.move(arbok, 3, magnemite, 1);
 
