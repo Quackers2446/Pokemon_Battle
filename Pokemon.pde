@@ -10,7 +10,7 @@ class Pokemon {
   String ability;
   Move[] moveSet;
   Boolean burn, freeze, paralysis, poison, sleep, flinch, badlyPoisoned, bound, cantEscape, confusion, curse, drain, heal, recoil, leech;
-  int attackSM, defenseSM, spAttackSM, spDefenseSM, speedSM, accuracySM, evasionSM;
+  int attackSMp, attackSMn, defenseSMp, defenseSMn, spAttackSMp, spAttackSMn, spDefenseSMp, spDefenseSMn, speedSMp, speedSMn, accuracySMp, accuracySMn, evasionSMp, evasionSMn;
   String berry;
   String trainer;
   int sleepCounter;
@@ -55,8 +55,10 @@ class Pokemon {
     this.burn = this.freeze = this.paralysis = this.poison = this.sleep = this.flinch = this.badlyPoisoned
     = this.bound = this.cantEscape = this.confusion = this.curse = this.heal = this.drain = this.recoil = this.leech = false;
     
-    this.attackSM = this.defenseSM = this.spAttackSM = this.spDefenseSM = this.speedSM = 2;
-    this.accuracySM = this.evasionSM = 3;
+    attackSMp = attackSMn = defenseSMp = defenseSMn = spAttackSMp = spAttackSMn = spDefenseSMp = spDefenseSMn = speedSMp
+    = speedSMn = accuracySMp = accuracySMn = evasionSMp = evasionSMn = 2;
+
+    this.accuracySMp = this.accuracySMn = this.evasionSMp = this.evasionSMn = 3;
     
     this.berry = "none";
     
@@ -106,7 +108,7 @@ class Pokemon {
     = this.bound = this.cantEscape = this.confusion = this.curse = this.heal = this.drain = this.recoil = this.leech = false;
   }
   
-  //assuming perfect ivs and evs, calculate stats
+  //assuming perfect ivs and evs = calculate stats
   int calculateHealth() {
     int h = int(((((this.stats[0] + 31)*2 + int(sqrt(252)/4))*this.level)/100)) + this.level + 10;
     this.stats[0] = h;

@@ -184,15 +184,15 @@ class Battle {
       println();
       println(twoP.name + "'was intimidated. Their attack fell!");
             
-      twoP.attackSM += 1;
-      twoP.battleStats[1] = (2/twoP.attackSM)*twoP.stats[1];
+      twoP.attackSMn += 1;
+      twoP.battleStats[1] = int(float(2*twoP.stats[1])/twoP.attackSMn);
     }
     if (twoP.ability.equals("Intimidate")) {
       println();
       println(oneP.name + "'was intimidated. Their attack fell!");
             
-      oneP.attackSM += 1;
-      oneP.battleStats[1] = (2/oneP.attackSM)*oneP.stats[1];
+      oneP.attackSMn += 1;
+      oneP.battleStats[1] = int(float(2*twoP.stats[1])/twoP.attackSMn);
     }
   }
   

@@ -575,13 +575,13 @@ void setup() {
   randomSeed(16);
   Battle battle = new Battle(nicholas, joanna);
   
-  battle.move(vibrava, 1, pidgeot, 2);
+  battle.move(vibrava, 3, charmeleon, 3);
   
-  battle.move(vibrava, 1, pidgeot, 2);
+  battle.move(vibrava, 0, charmeleon, 0);
   
-  battle.move(vibrava, 1, pidgeot, 2);
+  battle.move(vibrava, 0, charmeleon, 0);
   
-  battle.move(vibrava, 1, pidgeot, 2);
+  battle.move(vibrava, 0, charmeleon, 0);
   
   //battle.move(arbok, 3, magnemite, 1);
 
