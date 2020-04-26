@@ -90,7 +90,7 @@ void setup() {
   //POISON
   Move acid = new Move("Acid", 30, 40, 1, "Poison", "Special", 0, "none", 0);  
   Move poisonSting = new Move("Poison Sting", 35, 15, 1, "Poison", "Physical", 0, "Poison", 0.3);
-  Move toxic = new Move("Toxic", 10, 0, 0.9, "Poison", "Status", 0, "Badly Poisoned", 1);
+  Move toxic = new Move("Toxic", 10, 0, 0.9, "Poison", "Status", 0, "Badly Pozisoned", 1);
   Move poisonPowder = new Move("Poison Powder", 35, 0, 0.75, "Poison", "Status", 0, "Poison", 1);
   Move poisonGas = new Move("Poison Gas", 40, 0, 0.9, "Poison", "Status", 0, "Poison", 1);
   Move sludge = new Move("Sludge", 20, 65, 1, "Poison", "Special", 0, "Poison", 0.3);  
@@ -571,17 +571,9 @@ void setup() {
   //altaria.moveSet(dragonBreath, sing, disarmingVoice, dragonDance);
   
   //PLS UPDATE.
-  // randomSeed(11);
+  //For fuschia gym | randomSeed(11); 
   randomSeed(16);
   Battle battle = new Battle(nicholas, joanna);
-  
-  battle.move(vibrava, 3, charmeleon, 3);
-  
-  battle.move(vibrava, 0, charmeleon, 0);
-  
-  battle.move(vibrava, 0, charmeleon, 0);
-  
-  battle.move(vibrava, 0, charmeleon, 0);
   
   //battle.move(arbok, 3, magnemite, 1);
 
