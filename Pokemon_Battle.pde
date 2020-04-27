@@ -44,6 +44,7 @@ void setup() {
   Move crushClaw = new Move("Crush Claw", 10, 75, 0.95, "Normal", "Physical", 0, "Defense-", 0.5);
   Move tickle = new Move("Tickle", 20, 0, 1, "Normal", "Status", 0, "Attack-/Defense-", 1);
   Move screech = new Move("Screech", 40, 0, 0.85, "Normal", "Status", 0, "Defense--", 1);
+  Move doubleHit = new Move("Double Hit", 10, 70, 0.81, "Normal", "Physical", 0, "none", 0);
 
   //FIRE
   Move ember = new Move("Ember", 25, 40, 1, "Fire", "Special", 0, "Burn", 0.1);
@@ -176,6 +177,7 @@ void setup() {
   Move charm = new Move("Charm", 20, 0, 1, "Fairy", "Status", 0, "none", 0);
   Move disarmingVoice = new Move("Disarming Voice", 15, 40, 0, "Fairy", "Special", 0, "none", 0);
   Move babyDollEyes = new Move("Baby-Doll Eyes", 30, 0, 1, "Fairy", "Status", 1, "Attack-", 1);
+  Move fairyWind = new Move("Disarming Voice", 30, 40, 1, "Fairy", "Special", 0, "none", 0);
 
   //PSYCHIC
   Move teleport = new Move("Teleport", 20, 0, 0, "Psychic", "Status", 0, "run", 0);
@@ -469,6 +471,10 @@ void setup() {
   //Level 17 Nickit
   Pokemon nickit = new Pokemon("Nickit", "Dark", 17, 40, 28, 28, 47, 52, 50);
   nickit.moveSet(assurance, snarl, honeClaws, quickAttack);
+  
+  //Level 22 Galarian Ponyta
+  Pokemon galarianPonyta = new Pokemon("Galarian Ponyta", "Psychic", 22, 50, 85, 55, 65, 65, 90);
+  galarianPonyta.moveSet(confusion, fairyWind, tailWhip, agility);
 
 
   //IMPORTANT NPC POKEMON
@@ -573,7 +579,11 @@ void setup() {
   //PLS UPDATE.
   //For fuschia gym | randomSeed(11); 
   randomSeed(16);
+  
   Battle battle = new Battle(nicholas, joanna);
+  battle.move(tyranitar, 0, charizard, 3);
+  battle.move(tyranitar, 0, charizard, 3);
+  battle.move(tyranitar, 0, charizard, 3);
   
   //battle.move(arbok, 3, magnemite, 1);
 
@@ -684,6 +694,8 @@ void setup() {
   //battle.move(muk, 0, pidgeotto, 2);  
 
   //battle.move(muk, 0, pidgeotto, 3);
+
+
 
   //charizard.moveSet(flareBlitz, dragonClaw, shadowClaw, airSlash);
 

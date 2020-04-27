@@ -237,6 +237,20 @@ class Battle {
       firstType2 = twoP.type.substring(0, twoP.type.indexOf("/"));
     }
     
+    if (this.turn == 1 && this.weather.equals("Sandstorm") && (firstType1.equals("Rock") || oneP.type2.equals("Rock")
+    || firstType1.equals("Steel") || oneP.type2.equals("Steel") || firstType1.equals("Ground") || oneP.type2.equals("Ground"))) {
+      oneP.battleStats[4] *= 1.5;
+      println(oneP.name + "'s special defense rose!");
+      println();
+    }
+    
+    if (this.turn == 1 && this.weather.equals("Sandstorm") && (firstType2.equals("Rock") || twoP.type2.equals("Rock")
+    || firstType2.equals("Steel") || twoP.type2.equals("Steel") || firstType2.equals("Ground") || twoP.type2.equals("Ground"))) {
+      twoP.battleStats[4] *= 1.5;
+      println(twoP.name + "'s special defense rose!");
+      println();
+    }
+    
     if (this.weather.equals("Sandstorm") && !(firstType1.equals("Rock") || oneP.type2.equals("Rock")
     || firstType1.equals("Steel") || oneP.type2.equals("Steel") || firstType1.equals("Ground") || oneP.type2.equals("Ground"))) {
       oneP.currHealth -= (oneP.health/16);
