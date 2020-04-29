@@ -487,6 +487,17 @@ class Move {
         if (chance <= this.statusProb) {
           target.heal = true;
         }
+      } else if (firstStatus.equals("Recover")) {
+        chance = random(0, 1);
+
+        if (chance <= this.statusProb) {
+          user.currHealth += int(user.health/2);
+          if (user.currHealth > user.health)
+            user.currHealth = user.health;
+            
+          println();
+          println(user.name, "healed by 50% and is now at", user.currHealth, "health! (" + int((float(user.currHealth)/user.health)*100) + "%)");
+        }
       }
     }
     

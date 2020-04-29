@@ -30,6 +30,7 @@ class Battle {
       println("A BATTLE BETWEEN", this.one.name.toUpperCase(), "AND", this.two.name.toUpperCase(), "HAS BEGUN! Lv.", str(oneP.level), oneP.name, "| Lv.", str(twoP.level), twoP.name);   
       println("*   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *");
       enterBattleEffects(oneP, twoP);
+      enterBattleEffects(twoP, oneP);
     }
     
     println("Turn #" + str(this.turn));
@@ -90,6 +91,7 @@ class Battle {
     checkBerry(twoP);
     
     checkWeather(oneP, twoP);
+    checkWeather(twoP, oneP);
     
     turn += 1;
     println("*   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *");
@@ -121,6 +123,8 @@ class Battle {
     println("*   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *");
     
     enterBattleEffects(oneP, twoP);
+    enterBattleEffects(twoP, oneP);
+    
     while (oneP.currHealth > 0 && twoP.currHealth > 0) {
       println();
       println("Turn #" + str(turn));
@@ -170,6 +174,7 @@ class Battle {
       checkBerry(twoP);
       
       checkWeather(oneP, twoP);
+      checkWeather(twoP, oneP);
       
       turn += 1;
       println("*   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *");
@@ -197,27 +202,10 @@ class Battle {
       twoP.attackSMn += 1;
       twoP.battleStats[1] = int(float(2*twoP.stats[1])/twoP.attackSMn);
     }
-    if (twoP.ability.equals("Intimidate")) {
-      println();
-      println(oneP.name + "was intimidated. Their attack fell!");
-      println();
-            
-      oneP.attackSMn += 1;
-      oneP.battleStats[1] = int(float(2*twoP.stats[1])/twoP.attackSMn);
-    }
-  
+    
     if (oneP.ability.equals("Sand Stream")) {
       println();
       println(oneP.name + "'s Sand Stream whipped up a sandstorm!");
-      println();
-      
-      this.weather = "Sandstorm";
-      this.weatherCounter = 5;
-    }
-    
-    if (twoP.ability.equals("Sand Stream")) {
-      println();
-      println(twoP.name + "'s Sand Stream whipped up a sandstorm!");
       println();
       
       this.weather = "Sandstorm";
@@ -244,24 +232,10 @@ class Battle {
       println();
     }
     
-    if (this.turn == 1 && this.weather.equals("Sandstorm") && (firstType2.equals("Rock") || twoP.type2.equals("Rock")
-    || firstType2.equals("Steel") || twoP.type2.equals("Steel") || firstType2.equals("Ground") || twoP.type2.equals("Ground"))) {
-      twoP.battleStats[4] *= 1.5;
-      println(twoP.name + "'s special defense rose!");
-      println();
-    }
-    
     if (this.weather.equals("Sandstorm") && !(firstType1.equals("Rock") || oneP.type2.equals("Rock")
     || firstType1.equals("Steel") || oneP.type2.equals("Steel") || firstType1.equals("Ground") || oneP.type2.equals("Ground"))) {
       oneP.currHealth -= (oneP.health/16);
       println(oneP.name, "was buffeted by the sandstorm! (" + int((float(oneP.currHealth)/oneP.health)*100) + "%)");
-      println();
-    }
-    
-    if (this.weather.equals("Sandstorm") && !(firstType2.equals("Rock") || twoP.type2.equals("Rock")
-    || firstType2.equals("Steel") || twoP.type2.equals("Steel") || firstType2.equals("Ground") || twoP.type2.equals("Ground"))) {
-      twoP.currHealth -= (twoP.health/16);
-      println(twoP.name, "was buffeted by the sandstorm! (" + int((float(twoP.currHealth)/twoP.health)*100) + "%)");
       println();
     }
     
@@ -397,5 +371,9 @@ class Battle {
       println();
       oneP.berry = "none";
     }
-  }
+    
+    if (oneP.berry == "Berry Juice") {
+    
+    };
+  } 
 }
