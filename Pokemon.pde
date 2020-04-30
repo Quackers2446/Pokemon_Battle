@@ -402,13 +402,12 @@ class Pokemon {
             println(this.name, "was fully paralyzed!");
           }
           if (this.sleep) {
-            if (this.sleepCounter > 0) {
+            if (this.sleepCounter > 1) {
               this.sleepCounter -= 1;
-              println(this.name, "is sleeping...");
             } else {
               this.sleep = false;
-              println(this.name, "woke up!");
             }
+            println(this.name, "is sleeping...");
           }
           if (this.confusion) {
             if (this.confusionCounter > 0) {

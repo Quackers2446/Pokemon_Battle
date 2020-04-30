@@ -177,7 +177,7 @@ class Move {
           println();
           println(target.name, "fell asleep!");
           
-          target.sleepCounter = int(random(0,2));
+          target.sleepCounter = int(random(1,3));
           target.sleep = true;
         }
       } else if (firstStatus.equals("Leech") && !target.leech) {
@@ -498,6 +498,22 @@ class Move {
           println();
           println(user.name, "healed by 50% and is now at", user.currHealth, "health! (" + int((float(user.currHealth)/user.health)*100) + "%)");
         }
+      } else if (firstStatus.equals("Rest") && !target.sleep) {
+        chance = random(0, 1);
+
+        if (chance <= this.statusProb) {
+          user.currHealth = user.health;
+          
+          user.burn = user.freeze = user.paralysis = user.poison = user.sleep = user.flinch = user.badlyPoisoned = user.recover
+          = user.bound = user.cantEscape = user.confusion = user.curse = user.heal = user.drain = user.recoil = user.leech = false;
+          
+          user.sleep = true;
+          user.sleepCounter = 2;
+          
+          println();
+          println(user.name, "healed to max and was cured from all status conditions.");
+          println(user.name, "rested and fell asleep.");
+        }
       }
     }
     
@@ -557,7 +573,7 @@ class Move {
           println();
           println(target.name, "fell asleep!");
           
-          target.sleepCounter = int(random(0,2));
+          target.sleepCounter = int(random(1,3));
           target.sleep = true;
         }
       } else if ( status2.equals("Leech") && !target.leech) {
@@ -866,6 +882,33 @@ class Move {
 
         if (chance <= this.statusProb) {
           target.heal = true;
+        }
+      } else if (status2.equals("Recover")) {
+        chance = random(0, 1);
+
+        if (chance <= this.statusProb) {
+          user.currHealth += int(user.health/2);
+          if (user.currHealth > user.health)
+            user.currHealth = user.health;
+            
+          println();
+          println(user.name, "healed by 50% and is now at", user.currHealth, "health! (" + int((float(user.currHealth)/user.health)*100) + "%)");
+        }
+      } else if (status2.equals("Rest") && !target.sleep) {
+        chance = random(0, 1);
+
+        if (chance <= this.statusProb) {
+          user.currHealth = user.health;
+          
+          user.burn = user.freeze = user.paralysis = user.poison = user.sleep = user.flinch = user.badlyPoisoned = user.recover
+          = user.bound = user.cantEscape = user.confusion = user.curse = user.heal = user.drain = user.recoil = user.leech = false;
+          
+          user.sleep = true;
+          user.sleepCounter = 2;
+          
+          println();
+          println(user.name, "healed to max and was cured from all status conditions.");
+          println(user.name, "rested and fell asleep.");
         }
       }
     }
