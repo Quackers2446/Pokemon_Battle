@@ -346,6 +346,18 @@ class Move {
             user.battleStats[2] = int(float((user.defenseSMp)*user.stats[2])/2);
           }
         }
+      } else if (firstStatus.equals("Defense++")) {
+        chance = random(0, 1);
+
+        if (chance <= this.statusProb) {
+          if (user.defenseSMp < 6) {
+            println();
+            println(user.name + "'s defense reatly rose!");
+            
+            user.defenseSMp += 2;
+            user.battleStats[2] = int(float((user.defenseSMp)*user.stats[2])/2);
+          }
+        }
       } else if (firstStatus.equals("Sp.Defense-")) {
         chance = random(0, 1);
 
@@ -428,6 +440,42 @@ class Move {
             
             target.speedSMn += 2;
             target.battleStats[5] = int((2*target.stats[5])/float(target.speedSMn));
+          }
+        }
+      } else if (firstStatus.equals("U.Defense-")) {
+        chance = random(0, 1);
+
+        if (chance <= this.statusProb) {
+          if (user.defenseSMn < 6) {
+            println();
+            println(user.name + "'s defense fell!");
+            
+            user.defenseSMn += 1;
+            user.battleStats[2] = int((2*user.stats[2])/float(user.defenseSMn));
+          }
+        }
+      } else if (firstStatus.equals("U.Defense--")) {
+        chance = random(0, 1);
+
+        if (chance <= this.statusProb) {
+          if (user.defenseSMn < 6) {
+            println();
+            println(user.name + "'s defense greatly fell!");
+            
+            user.defenseSMn += 2;
+            user.battleStats[2] = int((2*user.stats[2])/float(user.defenseSMn));
+          }
+        }
+      } else if (firstStatus.equals("U.Sp.Defense-")) {
+        chance = random(0, 1);
+
+        if (chance <= this.statusProb) {
+          if (user.spDefenseSMn < 6) {
+            println();
+            println(user.name + "'s special defense fell!");
+            
+            user.spDefenseSMn += 1;
+            user.battleStats[4] = int((2.0*user.stats[4])/float(user.spDefenseSMn));
           }
         }
       } else if (firstStatus.equals("Accuracy-") && !target.ability.equals("Keen Eye")) {
@@ -513,6 +561,15 @@ class Move {
           println();
           println(user.name, "healed to max and was cured from all status conditions.");
           println(user.name, "rested and fell asleep.");
+        }
+      } else if (firstStatus.equals("DestroyItem")) {
+        chance = random(0, 1);
+
+        if (chance <= this.statusProb) {
+          println();
+          println(user.name, "destroyed", target.name + "'s", target.berry);
+          
+          target.berry = "none";
         }
       }
     }

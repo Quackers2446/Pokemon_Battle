@@ -88,10 +88,8 @@ class Pokemon {
 
     for (int i = 1; i < 6; i++) {
       int stat = int(((((this.stats[i] + 31)*2 + int(sqrt(252)/4))*this.level)/100)) + 5;
-      if (!((i == 1) || (i == 3))) {
-        this.stats[i] = int(stat*1.5);
-        this.battleStats[i] = int(stat*1.5);
-      }
+      this.stats[i] = int(stat*1.5);
+      this.battleStats[i] = int(stat*1.5);
     }
   }
 
@@ -279,7 +277,7 @@ class Pokemon {
     if (mv.currPowerPoints >= 0) {
       if ((chanceToHit <= ((mv.accuracy*100)*(this.adjustedStages))) || mv.accuracy == 0) {   
         if (!(this.flinch && !this.ability.equals("Inner Focus")) && !this.sleep && (!(this.paralysis && (randomP <= 0.25)) || (this.type.equals("Electric") || this.type2.equals("Electric"))) 
-          && (!(this.confusion && (randomC <= 0.33)) && (!(this.freeze && (randomF <= 0.2)) || (this.type.equals("Ice") || this.type2.equals("Ice"))))) {
+        && (!(this.confusion && (randomC <= 0.33)) && (!(this.freeze && (randomF <= 0.2)) || (this.type.equals("Ice") || this.type2.equals("Ice"))))) {
           if (mv.damageCatagory.equals("Physical")) {
             if (this.burn && (!this.type.equals("Fire") || !this.type2.equals("Fire"))) {
               damage = int((((((((2*this.level)/5)+2) * mv.power * (float(this.battleStats[1]) / target.battleStats[2]))/50)+2) * modifier)/2);
@@ -408,6 +406,14 @@ class Pokemon {
               this.sleep = false;
             }
             println(this.name, "is sleeping...");
+            
+            if (mv.name.equals("Snore")) {
+              damage = int(((((((2*this.level)/5)+2)* mv.power * (float(this.battleStats[3]) /target.battleStats[4]))/50)+2) * modifier);
+              target.currHealth -= damage;
+
+              println(this.name, "uses", mv.name, "and hits", target.name, "for", str(damage), "damage! (" + int((float((target.currHealth + damage) - target.currHealth)/target.health)*100) + "%)", target.name, "now has", target.currHealth, "health! ("
+              + int((float(target.currHealth)/target.health)*100) + "%)");
+            }
           }
           if (this.confusion) {
             if (this.confusionCounter > 0) {
