@@ -571,6 +571,12 @@ class Move {
           
           target.berry = "none";
         }
+      } else if (firstStatus.equals("Repeat")) {
+        chance = random(0, 1);
+
+        if (chance <= this.statusProb) {
+          user.repeat = true;
+        }
       }
     }
     

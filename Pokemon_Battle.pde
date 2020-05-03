@@ -18,8 +18,8 @@ void setup() {
   Move whirlwind = new Move("Whirlwind", 20, 0, 1, "Normal", "Status", -6, "Switch", 1);
   Move covet = new Move("Covet", 25, 60, 1, "Normal", "Physical", 0, "none", 0);
   Move refresh = new Move("Refresh", 20, 0, 0, "Normal", "Status", 0, "none", 0);
-  Move wrap = new Move("Wrap", 20, 45, 0.9, "Normal", "Physical", 0, "Bound", 1);
-  Move bind = new Move("Bind", 20, 45, 0.85, "Normal", "Physical", 0, "Bound", 1);
+  Move wrap = new Move("Wrap", 20, 45, 0.9, "Normal", "Physical", 0, "Repeat", 1);
+  Move bind = new Move("Bind", 20, 45, 0.85, "Normal", "Physical", 0, "Repeat", 1);
   Move furyAttack = new Move("Fury Attack", 20, 35, 0.85, "Normal", "Physical", 0, "none", 0);
   Move headbutt = new Move("Headbutt", 15, 70, 1, "Normal", "Physical", 0, "none", 0);
   Move slash = new Move("Slash", 20, 70, 1, "Normal", "Physical", 0, "none", 0);
@@ -55,7 +55,7 @@ void setup() {
 
   //FIRE
   Move ember = new Move("Ember", 25, 40, 1, "Fire", "Special", 0, "Burn", 0.1);
-  Move fireSpin = new Move ("Fire Spin", 15, 105, .85, "Fire", "Special", 0, "Bound", 1);
+  Move fireSpin = new Move ("Fire Spin", 15, 35, .85, "Fire", "Special", 0, "Repeat", 1);
   Move fireFang = new Move("Fire Fang", 15, 65, 0.95, "Fire", "Physical", 0, "Flinch/Burn", 0.1);
   Move flameCharge = new Move("Flame Charge", 20, 50, 1, "Fire", "Special", 0, "Speed+", 1);
   Move flameWheel = new Move("Flame Wheel", 20, 60, 1, "Fire", "Physical", 0, "Burn", 0.1);
@@ -74,7 +74,7 @@ void setup() {
   Move stunSpore = new Move("Stun Spore", 30, 0, 0.75, "Grass", "Status", 0, "Parlysis", 1);
   Move sleepPowder = new Move("Sleep Powder", 30, 0, 0.75, "Grass", "Status", 0, "Sleep", 1);
   Move cottonSpore = new Move("Cotton Spore", 40, 0, 1, "Grass", "Status", 0, "Speed--", 1);
-  Move bulletSeed = new Move("Bullet Seed", 30, 62, 1, "Grass", "Physical", 0, "none", 0);
+  Move bulletSeed = new Move("Bullet Seed", 30, 25, 1, "Grass", "Physical", 0, "Repeat", 0);
   Move leechSeed = new Move("Leech Seed", 10, 0, 0.9, "Grass", "Status", 0, "Leech", 1);
   Move razorLeaf = new Move("Razor Leaf", 25, 55, 0.95, "Grass", "Physical", 0, "none", 0);
   Move synthesis = new Move("Synthesis", 16, 0, 0, "Normal", "Status", 0, "Recover", 1);
@@ -101,7 +101,7 @@ void setup() {
   Move rockTomb = new Move("Rock Tomb", 15, 60, 0.95, "Rock", "Physical", 0, "none", 0);
   Move rockThrow = new Move("Rock Throw", 15, 50, 0.9, "Rock", "Physical", 0, "none", 0);
   Move rockSlide = new Move("Rock Slide", 10, 75, 0.9, "Rock", "Physical", 0, "Flinch", 0.3);
-  Move rockBlast = new Move("Rock Blast", 10, 100, 0.725, "Rock", "Physical", 0, "none", 0);
+  Move rockBlast = new Move("Rock Blast", 10, 25, 0.9, "Rock", "Physical", 0, "Repeat", 1);
   Move ancientPower = new Move("Ancient Power", 8, 60, 1, "Rock", "Special", 0, "Attack+/Sp.Attack+", 0.1);
 
   //BUG
@@ -110,7 +110,7 @@ void setup() {
   Move bugBuzz = new Move("Bug Buzz", 10, 90, 1, "Bug", "Special", 0, "Sp.Defense", 0.1);
   Move furyCutter = new Move("Fury Cutter", 20, 40, 0.95, "Bug", "Physical", 0, "none", 0);
   Move uTurn = new Move("U-Turn", 20, 70, 1, "Bug", "Physical", 0, "none", 0);
-  Move infestation = new Move("Infestation", 20, 70, 1, "Bug", "Special", 0, "none", 0);
+  Move infestation = new Move("Infestation", 20, 20, 1, "Bug", "Special", 0, "Repeat", 1);
   Move signalBeam = new Move("Signal Beam", 24, 75, 1, "Bug", "Special", 0, "Confusion", 0.1);
 
   //POISON
@@ -159,7 +159,7 @@ void setup() {
   //ICE
   Move mist = new Move("Mist", 30, 0, 1, "Ice", "Status", 0, "none", 0);
   Move icicleCrash = new Move("Icicle Crash", 10, 85, 0.9, "Ice", "Physical", 0, "Flinch", 0.3);
-  Move icicleSpear = new Move("Icicle Spear", 30, 62, 1, "Ice", "Physical", 0, "none", 0);
+  Move icicleSpear = new Move("Icicle Spear", 30, 25, 1, "Ice", "Physical", 0, "Repeat", 1);
   Move iceShard = new Move("Ice Shard", 30, 40, 1, "Ice", "Physical", 1, "none", 0);
   Move iceFang = new Move("Ice Fang", 15, 65, 0.95, "Ice", "Physical", 0, "Flinch/Freeze", 0.1);
   Move auroraBeam = new Move("Aurora Beam", 20, 65, 1, "Ice", "Special", 0, "Attack-", 0.1);
@@ -247,7 +247,7 @@ void setup() {
 
   //Level 21 Scyther
   Pokemon scyther = new Pokemon("Scyther", "Bug/Flying", 21, 70, 110, 80, 55, 80, 105);
-  scyther.moveSet(pursuit, vacuumWave, quickAttack, agility);
+  scyther.moveSet(pursuit, vacuumWave, wingAttack, agility);
 
   //Level 39 Lapras
   Pokemon lapras = new Pokemon("Lapras", "Water/Ice", 39, 130, 85, 80, 85, 95, 60);
@@ -696,64 +696,16 @@ void setup() {
   //For fuschia gym | randomSeed(11); 
   //randomSeed(20);
 
-  //dreepy.moveSet(astonish, infestation, quickAttack, bite);
-
   Battle battle = new Battle(nicholas, joanna);
   
-  //charizard.moveSet(flareBlitz, dragonClaw, shadowClaw, airSlash);
-
-  //scyther.moveSet(pursuit, vacuumWave, quickAttack, falseSwipe);
-
-  //lapras.moveSet(waterPulse, sing, iceShard, bodySlam);
-
-  //kingler.moveSet(bubble, viceGrip, harden, metalClaw);
-
-  //magnemite.moveSet(thunderShock, magnetBomb, thunderWave, supersonic);
-
-  //mimikyu.moveSet(woodHammer, shadowSneak, doubleTeam, scratch);
-
-
-  //pidgeotto.moveSet(gust, quickAttack, whirlwind, featherdance);
-
-  //arcanine.moveSet(bite, thunderFang, fireFang, none);
-
-  //braxien.moveSet(ember, scratch, flameCharge, tailWhip);
-
-  //cubone.moveSet(boneClub, headbutt, tailWhip, none);
-
-  //espeon.moveSet(confusion, quickAttack, sandAttack, babyDollEyes);
-
-  //seel.moveSet(headbutt, icyWind, none, none);
-
-
-  //dratini.moveSet(twister, wrap, dragonRage, thunderWave);
-
-  //vileplume.moveSet(megaDrain, acid, sleepPowder, toxic);
-
-  //alolanGeodude.moveSet(rollout, tackle, none, none);
-
-  //marshtomp.moveSet(waterGun, mudShot, mudSlap, bide);
-
-  //abra.moveSet(teleport, none, none, none);
+  battle.move(alolanSandslash, 2, snorlax, 0);
   
-  //dreepy.moveSet(astonish, infestation, quickAttack, bite);
-
-  //snorlax.moveSet(lick, amnesia, tackle, none);
-
-  //ponyta.moveSet(flameWheel, stomp, ember, tailWhip);
-
-  //exeggcute.moveSet(bulletSeed, uproar, leechSeed, stunSpore);
-
-  //alolanGeodude.moveSet(rollout, tackle, none, none);
+  //battle.move(kingler, 0, scyther, 0);
+  //battle.move(kingler, 2, scyther, 1);
+  //battle.move(kingler, 0, scyther, 1);
+  //battle.move(kingler, 0, scyther, 1);
+  //battle.move(kingler, 2, scyther, 2);
   
-  
-  //litten.moveSet(ember, scratch, lick, none);
-
-  //gastly.moveSet(lick, confuseRay, hypnosis, none);
-
-  //raichu.moveSet(thunderbolt, quickAttack, thunderShock, tailWhip);
-
-  //vulpix.moveSet(quickAttack, feintAttack, ember, confuseRay);
 }
 
 void catchPokemon(Pokemon p, String pokeball, int catchRate) {
