@@ -565,11 +565,11 @@ class Move {
       } else if (firstStatus.equals("DestroyItem")) {
         chance = random(0, 1);
 
-        if (chance <= this.statusProb) {
+        if (chance <= this.statusProb && (!target.item.equals("none"))) {
           println();
-          println(user.name, "destroyed", target.name + "'s", target.berry);
+          println(user.name, "destroyed", target.name + "'s", target.item);
           
-          target.berry = "none";
+          target.item = "none";
         }
       } else if (firstStatus.equals("Repeat")) {
         chance = random(0, 1);

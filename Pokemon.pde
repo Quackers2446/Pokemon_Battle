@@ -11,7 +11,7 @@ class Pokemon {
   Move[] moveSet;
   Boolean burn, freeze, paralysis, poison, sleep, flinch, badlyPoisoned, bound, cantEscape, confusion, curse, drain, heal, recoil, leech, recover, repeat;
   int attackSMp, attackSMn, defenseSMp, defenseSMn, spAttackSMp, spAttackSMn, spDefenseSMp, spDefenseSMn, speedSMp, speedSMn, accuracySMp, accuracySMn, evasionSMp, evasionSMn;
-  String berry;
+  String item;
   String trainer;
   int sleepCounter;
   int confusionCounter;
@@ -60,7 +60,7 @@ class Pokemon {
 
     this.accuracySMp = this.accuracySMn = this.evasionSMp = this.evasionSMn = 3;
 
-    this.berry = "none";
+    this.item = "none";
 
     this.trainer = "No one";
 
@@ -190,7 +190,8 @@ class Pokemon {
       this.name.equals("Litten") || this.name.equals("Torracat") || this.name.equals("Incineroar"))
       a = "Intimidate";
 
-    else if (this.name.equals("Lapras") || this.name.equals("Krabby") || this.name.equals("Kingler"))
+    else if (this.name.equals("Lapras") || this.name.equals("Krabby") || this.name.equals("Kingler")
+      || this.name.equals("Drednaw"))
       a = "Shell Armor";
 
     return a;
@@ -205,7 +206,7 @@ class Pokemon {
     println("Health:\t", this.currHealth+"/"+this.health);
     println();
     println("Ability:\t", this.ability);
-    println("Berry:\t", this.berry);
+    println("Item:\t", this.item);
 
     println();
 
@@ -270,7 +271,7 @@ class Pokemon {
         println(target.name, "has set up a barrier!");
         println();
         target.raidShield = true;
-        target.shieldHealth = 6;
+        target.shieldHealth = 3;
         target.facedRaidShield = true;
       }
     }
@@ -319,7 +320,7 @@ class Pokemon {
           if (target.ability.equals("Thick Fat") && (mv.type.equals("Ice")) || (mv.type.equals("Fire")))
             damage /= 2;
 
-          if (target.ability.equals("Disguise") && (target.currHealth == target.health)) {
+          if (target.ability.equals("Disguise") && (target.currHealth == target.health) && (damage > 0)) {
             damage = 0;
             println(target.name + "'s disguise was busted!");
             println();
@@ -336,8 +337,7 @@ class Pokemon {
             if (target.shieldHealth > 0) {
               if (damage > 0) {
                 target.shieldHealth -= 1;
-                this.shieldDamage += int(float(damage)/5);
-                println(this.shieldDamage);
+                this.shieldDamage += int(float(damage)/3);
                 println(this.name, "hit", target.name + "'s shield and depleted one bar of it's strength!");
                 println();
                 println("The barrier now has", target.shieldHealth, "bars!");
@@ -353,8 +353,8 @@ class Pokemon {
               target.currHealth -= this.shieldDamage;
               println(target.name, "took", (this.shieldDamage), "damage!", target.name + "'s defense and special defense fell!");
               println();
-              target.battleStats[2] = int(target.stats[2]*0.95);
-              target.battleStats[4] = int(target.stats[4]*0.95);
+              target.battleStats[2] = int(target.stats[2]*0.65);
+              target.battleStats[4] = int(target.stats[4]*0.65);
               target.raidShield = false;
             }
           }

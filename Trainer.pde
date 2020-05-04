@@ -36,10 +36,10 @@ class Trainer {
     }
   }
   
-  void giveBerry(String b, Pokemon p) {
-    p.berry = b;
-    println(this.name, "gave", p.name, "a", b + "!");
-    println();
+  void giveItem(String b, Pokemon ... p) {
+    for (int i = 0; i < p.length; i++) {
+      p[i].item = b;
+    }
   }
   
   void useItem (String item, Pokemon p) {
