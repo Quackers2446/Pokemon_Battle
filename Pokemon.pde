@@ -9,7 +9,7 @@ class Pokemon {
   int[] battleStats;
   String ability;
   Move[] moveSet;
-  Boolean burn, freeze, paralysis, poison, sleep, flinch, badlyPoisoned, bound, cantEscape, confusion, curse, drain, heal, recoil, leech, recover, repeat;
+  Boolean burn, freeze, paralysis, poison, sleep, flinch, badlyPoisoned, bound, cantEscape, confusion, curse, drain, heal, recoil, leech, recover, repeat, protect;
   int attackSMp, attackSMn, defenseSMp, defenseSMn, spAttackSMp, spAttackSMn, spDefenseSMp, spDefenseSMn, speedSMp, speedSMn, accuracySMp, accuracySMn, evasionSMp, evasionSMn;
   String item;
   String trainer;
@@ -46,13 +46,15 @@ class Pokemon {
 
     this.ability = calculateAbility();
 
-    if (this.type.indexOf("/") != -1)
+    if (this.type.indexOf("/") != -1) {
       this.type2 = this.type.substring(this.type.indexOf("/")+1, this.type.length());
-
+      this.type = this.type.substring(0, this.type.indexOf("/"));
+    }
+    
     else 
       this.type2 = "";
 
-    this.burn = this.freeze = this.paralysis = this.poison = this.sleep = this.flinch = this.badlyPoisoned = this.recover
+    this.burn = this.freeze = this.paralysis = this.poison = this.sleep = this.flinch = this.badlyPoisoned = this.recover = this.protect
       = this.bound = this.cantEscape = this.confusion = this.curse = this.heal = this.drain = this.recoil = this.leech = this.repeat = false;
 
     attackSMp = attackSMn = defenseSMp = defenseSMn = spAttackSMp = spAttackSMn = spDefenseSMp = spDefenseSMn = speedSMp
@@ -102,7 +104,7 @@ class Pokemon {
       this.battleStats[i] = this.stats[i];
     }
 
-    this.burn = this.freeze = this.paralysis = this.poison = this.sleep = this.flinch = this.badlyPoisoned = this.recover
+    this.burn = this.freeze = this.paralysis = this.poison = this.sleep = this.flinch = this.badlyPoisoned = this.recover = this.protect
       = this.bound = this.cantEscape = this.confusion = this.curse = this.heal = this.drain = this.recoil = this.leech = this.repeat = false;
   }
 
@@ -263,6 +265,7 @@ class Pokemon {
     int randomRepeat = int(random(2,5));
     float criticalRandom = random(0, 100);
     boolean condition = true;
+    int orgPower = mv.power;
 
     mv.currPowerPoints -= 1;
 
@@ -280,6 +283,11 @@ class Pokemon {
       if ((chanceToHit <= ((mv.accuracy*100)*(this.adjustedStages))) || mv.accuracy == 0) {   
         if (!(this.flinch && !this.ability.equals("Inner Focus")) && !this.sleep && (!(this.paralysis && (randomP <= 0.25)) || (this.type.equals("Electric") || this.type2.equals("Electric"))) 
         && (!(this.confusion && (randomC <= 0.33)) && (!(this.freeze && (randomF <= 0.2)) || (this.type.equals("Ice") || this.type2.equals("Ice"))))) {
+         
+          if (mv.type.equals(this.type) || mv.type.equals(this.type2)) {
+            mv.power *= 1.5;
+          }
+          
           if (mv.damageCatagory.equals("Physical")) {
             if (this.burn && (!this.type.equals("Fire") || !this.type2.equals("Fire"))) {
               damage = int((((((((2*this.level)/5)+2) * mv.power * (float(this.battleStats[1]) / target.battleStats[2]))/50)+2) * modifier)/2);
@@ -292,6 +300,10 @@ class Pokemon {
               damage = int(((((((2*this.level)/5)+2)* mv.power * (float(this.battleStats[3]) /target.battleStats[4]))/50)+2) * modifier);
           } else {
             damage = 0;
+          }
+          
+          if (mv.type.equals(this.type) || mv.type.equals(this.type2)) {
+            mv.power = orgPower;
           }
 
           if (typeEf == 4) {
@@ -311,7 +323,6 @@ class Pokemon {
             damage *= 1.5;
           }
 
-
           if (((this.ability.equals("Blaze") && mv.type.equals("Fire")) || (this.ability.equals("Torrent") && mv.type.equals("Water")) 
             || (this.ability.equals("Overgrowth") && mv.type.equals("Grass"))  || (this.ability.equals("Swarm") && mv.type.equals("Bug"))) 
             && (this.currHealth <= (this.health/3)))
@@ -319,10 +330,11 @@ class Pokemon {
 
           if (target.ability.equals("Thick Fat") && (mv.type.equals("Ice")) || (mv.type.equals("Fire")))
             damage /= 2;
-
+                    
           if (target.ability.equals("Disguise") && (target.currHealth == target.health) && (damage > 0)) {
             damage = 0;
-            println(target.name + "'s disguise was busted!");
+            target.currHealth -= target.health/8;
+            println(target.name + "'s disguise was busted! Mimikyu took", target.health/8, "damage!");
             println();
           }
 
@@ -331,6 +343,15 @@ class Pokemon {
             condition = false;
             println(target.name, "is levitating!");
             println();
+          }
+          
+          if (target.protect) {
+            damage = 0;
+            
+            println(target.name, "is protected!");
+            println();
+            
+            target.protect = false;
           }
 
           if (target.raidShield && target.raidPokemon) {

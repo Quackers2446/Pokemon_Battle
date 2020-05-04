@@ -52,6 +52,7 @@ void setup() {
   Move snore = new Move("Snore", 15, 50, 1, "Normal", "Physical", 0, "Flinch", 0.3);
   Move tearfulLook = new Move("Tearful Look", 20, 0, 0, "Normal", "Status", 0, "Sp.Attack-/Attack-", 1);
   Move glare = new Move("Glare", 20, 0, 0, "Normal", "Status", 0, "Paralysis", 1);
+  Move protect = new Move("Protect", 10, 0, 0, "Normal", "Status", 4, "Protect", 1);
 
   //FIRE
   Move ember = new Move("Ember", 25, 40, 1, "Fire", "Special", 0, "Burn", 0.1);
@@ -215,7 +216,7 @@ void setup() {
   Move dig = new Move("Dig", 10, 80, 1, "Ground", "Physical", 0, "none", 0);
 
   //FAIRY
-  Move charm = new Move("Charm", 20, 0, 1, "Fairy", "Status", 0, "none", 0);
+  Move charm = new Move("Charm", 20, 0, 1, "Fairy", "Status", 0, "Attack--", 1);
   Move disarmingVoice = new Move("Disarming Voice", 15, 40, 0, "Fairy", "Special", 0, "none", 0);
   Move babyDollEyes = new Move("Baby-Doll Eyes", 30, 0, 1, "Fairy", "Status", 1, "Attack-", 1);
   Move fairyWind = new Move("Disarming Voice", 30, 40, 1, "Fairy", "Special", 0, "none", 0);
@@ -341,7 +342,7 @@ void setup() {
 
   //Level 33 Marshtomp
   Pokemon marshtomp = new Pokemon("Marshtomp", "Water/Ground", 33, 70, 85, 70, 60, 70, 50);
-  marshtomp.moveSet(waterGun, mudBomb, rockSlide, surf); //Mud bomb
+  marshtomp.moveSet(protect, mudBomb, rockSlide, surf);
 
   //Level 14 Abra
   Pokemon abra = new Pokemon("Abra", "Psychic", 14, 25, 20, 15, 105, 55, 90);
@@ -478,7 +479,7 @@ void setup() {
 
   //Level 21 Chansey
   Pokemon chansey = new Pokemon("Chansey", "Normal", 21, 250, 5, 5, 35, 105, 50);
-  chansey.moveSet(pound, defenseCurl, takeDown, refresh);
+  chansey.moveSet(pound, defenseCurl, takeDown, recover);
 
   //Level 21 Tauros
   Pokemon tauros = new Pokemon("Tauros", "Normal", 21, 75, 100, 95, 40, 70, 110);
@@ -667,7 +668,6 @@ void setup() {
   Trainer ashley = new Trainer("Ashley");
 
   Trainer ltSurge = new Trainer("Lt. Surge");
-  Trainer nate = new Trainer("Nate");
   Trainer randomTrainer = new Trainer("Random");
   Trainer wild = new Trainer("Wild");
 
@@ -712,7 +712,7 @@ void setup() {
   randomSeed(22);
 
   Battle battle = new Battle(zofia, cassie);
-    
+  
   //charizard.moveSet(heatWave, dragonClaw, shadowClaw, airSlash);
 
   //scyther.moveSet(pursuit, vacuumWave, wingAttack, agility);

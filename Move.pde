@@ -577,6 +577,12 @@ class Move {
         if (chance <= this.statusProb) {
           user.repeat = true;
         }
+      } else if (firstStatus.equals("Protect")) {
+        chance = random(0, 1);
+
+        if (chance <= this.statusProb) {
+          user.protect = true;
+        }
       }
     }
     
@@ -983,42 +989,39 @@ class Move {
     String firstType = target.type;
 
     if (target.type.indexOf("/") != -1) {
-      firstType = target.type.substring(0, target.type.indexOf("/"));
-      String secondType = target.type.substring(target.type.indexOf("/")+1, target.type.length());
-
-      if (secondType.equals("Normal")) {
+      if (target.type2.equals("Normal")) {
         second2 = 0;
-      } else if (secondType.equals("Fighting")) {
+      } else if (target.type2.equals("Fighting")) {
         second2 = 1;
-      } else if (secondType.equals("Flying")) {
+      } else if (target.type2.equals("Flying")) {
         second2 = 2;
-      } else if (secondType.equals("Poison")) {
+      } else if (target.type2.equals("Poison")) {
         second2 = 3;
-      } else if (secondType.equals("Ground")) {
+      } else if (target.type2.equals("Ground")) {
         second2 = 4;
-      } else if (secondType.equals("Rock")) {
+      } else if (target.type2.equals("Rock")) {
         second2 = 5;
-      } else if (secondType.equals("Bug")) {
+      } else if (target.type2.equals("Bug")) {
         second2 = 6;
-      } else if (secondType.equals("Ghost")) {
+      } else if (target.type2.equals("Ghost")) {
         second2 = 7;
-      } else if (secondType.equals("Steel")) {
+      } else if (target.type2.equals("Steel")) {
         second2 = 8;
-      } else if (secondType.equals("Fire")) {
+      } else if (target.type2.equals("Fire")) {
         second2 = 9;
-      } else if (secondType.equals("Water")) {
+      } else if (target.type2.equals("Water")) {
         second2 = 10;
-      } else if (secondType.equals("Grass")) {
+      } else if (target.type2.equals("Grass")) {
         second2 = 11;
-      } else if (secondType.equals("Electric")) {
+      } else if (target.type2.equals("Electric")) {
         second2 = 12;
-      } else if (secondType.equals("Psychic")) {
+      } else if (target.type2.equals("Psychic")) {
         second2 = 13;
-      } else if (secondType.equals("Ice")) {
+      } else if (target.type2.equals("Ice")) {
         second2 = 14;
-      } else if (secondType.equals("Dragon")) {
+      } else if (target.type2.equals("Dragon")) {
         second2 = 15;
-      } else if (secondType.equals("Dark")) {
+      } else if (target.type2.equals("Dark")) {
         second2 = 16;
       }
 
