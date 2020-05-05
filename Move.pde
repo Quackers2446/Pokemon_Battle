@@ -352,7 +352,7 @@ class Move {
         if (chance <= this.statusProb) {
           if (user.defenseSMp < 6) {
             println();
-            println(user.name + "'s defense reatly rose!");
+            println(user.name + "'s defense greatly rose!");
             
             user.defenseSMp += 2;
             user.battleStats[2] = int(float((user.defenseSMp)*user.stats[2])/2);

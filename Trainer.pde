@@ -55,6 +55,10 @@ class Trainer {
       p.currHealth += 10;
     }
     
+    else if (item.equals("Berry Juice")) {
+      p.currHealth += 20;
+    }
+    
     else if (item.equals("Sitrus Berry")) {
       p.currHealth += p.health/4;
     }

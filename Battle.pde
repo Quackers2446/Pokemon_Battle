@@ -21,7 +21,7 @@ class Battle {
     this.turn = 1;
   }
 
-  void move(Pokemon oneP, int mv1, Pokemon twoP, int mv2) {
+  void move(Pokemon oneP, Move mv1, Pokemon twoP, Move mv2) {
     boolean ppLoss1 = true;
     boolean ppLoss2 = true;
 
@@ -45,16 +45,16 @@ class Battle {
     }
 
 
-    if (oneP.moveSet[mv1].currPowerPoints < 1) {
-      println(oneP.moveSet[mv1].name, "has run out of PP,", oneP.name, "uses", oneP.moveSet[(mv1+1)%4].name, "instead.");
-      mv1 = (mv1 + 1)%4;
+    if (mv1.currPowerPoints < 1) {
+      println(mv1.name, "has run out of PP.");
       println();
+      return;
     }
 
-    if (twoP.moveSet[mv2].currPowerPoints < 1) {
-      println(twoP.moveSet[mv1].name, "has run out of PP,", twoP.name, "uses", twoP.moveSet[(mv1+1)%4].name, "instead.");
-      mv2 = (mv2 + 1)%4;
+    if (mv2.currPowerPoints < 1) {
+      println(mv1.name, "has run out of PP.");
       println();
+      return;
     }
 
     for (int i = 0; i < 4; i++) {
@@ -93,6 +93,13 @@ class Battle {
     checkWeather(oneP, twoP);
     checkWeather(twoP, oneP);
 
+    if (oneP.raidPokemon) {
+      recover(oneP);
+    }
+    if (twoP.raidPokemon) {
+      recover(twoP);
+    }
+    
     turn += 1;
     println("*   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *");
     println();
@@ -112,7 +119,7 @@ class Battle {
     }
   }
 
-  void start1v1(Pokemon oneP, int mv1, Pokemon twoP, int mv2) {
+  void start1v1(Pokemon oneP, Move mv1, Pokemon twoP, Move mv2) {
     int turn = 1;
     boolean ppLoss1 = true;
     boolean ppLoss2 = true;
@@ -129,15 +136,13 @@ class Battle {
       println("Turn #" + str(turn));
       println();
 
-      if (oneP.moveSet[mv1].currPowerPoints < 1) {
-        println(oneP.moveSet[mv1].name, "has run out of PP,", oneP.name, "uses", oneP.moveSet[(mv1+1)%4].name, "instead.");
-        mv1 = (mv1 + 1)%4;
+      if (mv1.currPowerPoints < 1) {
+        println(mv1.name, "has run out of PP.");
         println();
       }
-
-      if (twoP.moveSet[mv2].currPowerPoints < 1) {
-        println(twoP.moveSet[mv1].name, "has run out of PP,", twoP.name, "uses", twoP.moveSet[(mv1+1)%4].name, "instead.");
-        mv2 = (mv2 + 1)%4;
+  
+      if (mv2.currPowerPoints < 1) {
+        println(mv1.name, "has run out of PP.");
         println();
       }
 
@@ -174,6 +179,13 @@ class Battle {
 
       checkWeather(oneP, twoP);
       checkWeather(twoP, oneP);
+      
+      if (oneP.raidPokemon) {
+        recover(oneP);
+      }
+      if (twoP.raidPokemon) {
+        recover(twoP);
+      }
 
       turn += 1;
       println("*   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *");
@@ -248,17 +260,17 @@ class Battle {
     }
   }
 
-  void setTurns(Pokemon oneP, int mv1, Pokemon twoP, int mv2) {
+  void setTurns(Pokemon oneP, Move mv1, Pokemon twoP, Move mv2) {
     //Setting up who goes first
 
-    if (oneP.moveSet[mv1].priority < twoP.moveSet[mv2].priority) {
+    if (mv1.priority < mv2.priority) {
       if (twoP.currHealth > 0) {
         this.turnOrder[0] = twoP;
       }  
       if (oneP.currHealth > 0) {
         this.turnOrder[1] = oneP;
       }
-    } else if (oneP.moveSet[mv1].priority > twoP.moveSet[mv2].priority) {
+    } else if (mv1.priority > mv2.priority) {
       if (oneP.currHealth > 0) {
         this.turnOrder[0] = oneP;
       }
@@ -284,25 +296,25 @@ class Battle {
     }
   }
 
-  void useMoves(Pokemon oneP, int mv1, Pokemon twoP, int mv2) {
+  void useMoves(Pokemon oneP, Move mv1, Pokemon twoP, Move mv2) {
     if (this.turnOrder[0] == oneP) {
       if (oneP.currHealth > 0) {
-        oneP.useMove(oneP.moveSet[mv1], twoP);
+        oneP.useMove(mv1, twoP);
         println();
       }
 
       if (twoP.currHealth > 0) {
-        twoP.useMove(twoP.moveSet[mv2], oneP);
+        twoP.useMove(mv2, oneP);
         println();
       }
     } else {
       if (twoP.currHealth > 0) {
-        twoP.useMove(twoP.moveSet[mv2], oneP);
+        twoP.useMove(mv2, oneP);
         println();
       }
 
       if (oneP.currHealth > 0) {
-        oneP.useMove(oneP.moveSet[mv1], twoP);
+        oneP.useMove(mv1, twoP);
         println();
       }
     }
@@ -310,21 +322,30 @@ class Battle {
 
   void checkBerry(Pokemon oneP, Pokemon twoP) {
     if (oneP.item.equals("Sitrus Berry") && oneP.currHealth <= (oneP.health/2) && oneP.currHealth > 0) {
+      if (oneP.ability.equals("Ripen"))
+        oneP.currHealth += int(float(oneP.health)/4);
+        
       oneP.currHealth += int(float(oneP.health)/4);
+      
       if (oneP.currHealth > oneP.health)
         oneP.currHealth = oneP.health;
 
-      println(oneP.name, "ate a Sitrus berry and regained 25% health! Now", oneP.name, "has", str(oneP.currHealth) + ". (" + int((float(oneP.currHealth)/oneP.health)*100) + "%)");
+      println(oneP.name, "ate a Sitrus berry and regained health! Now", oneP.name, "has", str(oneP.currHealth) + " health. (" + int((float(oneP.currHealth)/oneP.health)*100) + "%)");
       println();
       oneP.item = "none";
     }
 
     if (oneP.item.equals("Oran Berry") && oneP.currHealth <= (oneP.health/2) && oneP.currHealth > 0) {
+      if (oneP.ability.equals("Ripen")) {
+        oneP.currHealth += 10;
+      }
+      
       oneP.currHealth += 10;
+      
       if (oneP.currHealth > oneP.health)
         oneP.currHealth = oneP.health;
 
-      println(oneP.name, "ate an Oran berry and regained 10 health! Now", oneP.name, "has", str(oneP.currHealth) + ". (" + int((float(oneP.currHealth)/oneP.health)*100) + "%)");
+      println(oneP.name, "ate an Oran berry and regained health! Now", oneP.name, "has", str(oneP.currHealth) + " health. (" + int((float(oneP.currHealth)/oneP.health)*100) + "%)");
       println();
       oneP.item = "none";
     }
@@ -365,12 +386,17 @@ class Battle {
       oneP.item = "none";
     }
 
-    if (oneP.item.equals("Berry Juice") && oneP.currHealth > 0) {
-      oneP.currHealth += 10;
+    if (oneP.item.equals("Berry Juice") && oneP.currHealth <= (oneP.health/2) && oneP.currHealth > 0) {
+      if (oneP.ability.equals("Ripen")) {
+        oneP.currHealth += 20;
+      }
+      
+      oneP.currHealth += 20;
+      
       if (oneP.currHealth > oneP.health)
         oneP.currHealth = oneP.health;
 
-      println(oneP.name, "drank some berry juice and regained 10 health! Now", oneP.name, "has", str(oneP.currHealth) + ". (" + int((float(oneP.currHealth)/oneP.health)*100) + "%)");
+      println(oneP.name, "drank some berry juice and regained health! Now", oneP.name, "has", str(oneP.currHealth) + " health. (" + int((float(oneP.currHealth)/oneP.health)*100) + "%)");
       println();
       oneP.item = "none";
     }
@@ -383,5 +409,19 @@ class Battle {
       println(oneP.name, "ate some leftovers and gained", (oneP.health/16), "health!");
       println();
     }
+  }
+  
+  void recover(Pokemon p) {
+    for (int i = 0; i < p.moveSet.length; i++) {
+      p.moveSet[i].currPowerPoints = p.moveSet[i].powerPoints;
+    }
+    for (int i = 0; i < 6; i++) {
+      p.battleStats[i] = p.stats[i];
+    }
+    p.burn = p.freeze = p.paralysis = p.poison = p.sleep = p.flinch = p.badlyPoisoned = p.recover = p.protect
+      = p.bound = p.cantEscape = p.confusion = p.curse = p.heal = p.drain = p.recoil = p.leech = p.repeat = false;
+   
+   println(p.name, "recovered from all status conditions and stat changes!");
+   println();
   }
 }
