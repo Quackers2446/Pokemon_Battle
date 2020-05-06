@@ -213,7 +213,7 @@ class Pokemon {
     println("* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *");
     println("Name:\t", this.name);
     println("Trainer:\t", this.trainer);
-    println("Type:\t", this.type);
+    println("Type:\t", this.type + "/" + this.type2);
     println("Level:\t", this.level);
     println("Health:\t", this.currHealth+"/"+this.health);
     println();
