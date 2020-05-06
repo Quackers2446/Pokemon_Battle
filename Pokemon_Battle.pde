@@ -727,13 +727,12 @@ void setup() {
   //PLS UPDATE.
   //For fuschia gym | randomSeed(11); 
 
-  randomSeed(23);
+  randomSeed(24);
   // alcreamie.moveSet(dazzlingGleam, drainingKiss, tackle, acidArmor);
 
   Battle battle = new Battle(zofia, cassie);
 
-  lapras.describe();
-  mantine.describe();
+  battle.move(alcreamie, dazzlingGleam, gastly, metalClaw);
 
   //dratini.moveSet(twister, slam, dragonRage, thunderWave);
 

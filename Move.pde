@@ -17,75 +17,75 @@ class Move {
     // norm  fght  fly   pois  grnd  rock  bug   ghst  stel  fire  wter  grss  elec  psyc  ice   drag  dark fair
   /* norm */     {
     {
-      1, 2, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1
+      1, 2, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
     }
     , 
     /* fght */       {
-      1, 1, 2, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1
+      1, 1, 2, 1, 1, 0.5, 0.5, 1, 1, 1, 1, 1, 1, 2, 1, 1, 0.5, 2
     }
     , 
     /* fly  */       {
-      1, 0.5, 1, 1, 0, 2, 0.5, 1, 1, 1, 1, 0.5, 2, 1, 2, 1, 1
+      1, 0.5, 1, 1, 0, 2, 0.5, 1, 1, 1, 1, 0.5, 2, 1, 2, 1, 1, 1
     }
     , 
     /* pois */       {
-      1, 0.5, 1, 0.5, 2, 1, 0.5, 1, 1, 1, 1, 0.5, 1, 2, 1, 1, 1
+      1, 0.5, 1, 0.5, 2, 1, 0.5, 1, 1, 1, 1, 0.5, 1, 2, 1, 1, 1, 0.5
     }
     , 
     /* grnd */       {
-      1, 1, 1, 0.5, 1, 0.5, 1, 1, 1, 1, 2, 2, 0, 1, 2, 1, 1
+      1, 1, 1, 0.5, 1, 0.5, 1, 1, 1, 1, 2, 2, 0, 1, 2, 1, 1, 1
     }
     , 
     /* rock */       {
-      0.5, 2, 0.5, 0.5, 2, 1, 1, 1, 1, 1, 2, 2, 1, 1, 1, 1, 1
+      0.5, 2, 0.5, 0.5, 2, 1, 1, 1, 2, 0.5, 2, 2, 1, 1, 1, 1, 1, 1
     }
     , 
     /* bug  */       {
-      1, 0.5, 2, 1, 0.5, 2, 1, 1, 1, 2, 1, 0.5, 1, 1, 1, 1, 1
+      1, 0.5, 2, 1, 0.5, 2, 1, 1, 1, 2, 1, 0.5, 1, 1, 1, 1, 1, 1
     }
     , 
     /* ghst */       {
-      0, 0, 1, 0.5, 1, 1, 0.5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2
+      0, 0, 1, 0.5, 1, 1, 0.5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1
     }
     , 
     /* stel */       {
-      0.5, 2, 0.5, 0, 2, 0.5, 0.5, 0.5, 0.5, 2, 1, 0.5, 1, 0.5, 0.5, 0.5, 0.5
+      0.5, 2, 0.5, 0, 2, 0.5, 0.5, 1, 0.5, 2, 1, 0.5, 1, 0.5, 0.5, 0.5, 1, 0.5
     }
-    , 
+    ,
     /* fire */       {
-      1, 1, 1, 1, 2, 2, 0.5, 1, 0.5, 0.5, 2, 0.5, 1, 1, 0.5, 1, 1
+      1, 1, 1, 1, 2, 2, 0.5, 1, 0.5, 0.5, 2, 0.5, 1, 1, 0.5, 1, 1, 0.5
     }
     , 
     /* wter */       {
-      1, 1, 1, 1, 1, 1, 1, 1, 0.5, 0.5, 0.5, 2, 2, 1, 0.5, 1, 1
+      1, 1, 1, 1, 1, 1, 1, 1, 0.5, 0.5, 0.5, 2, 2, 1, 0.5, 1, 1, 1
     }
     , 
     /* grss */       {
-      1, 1, 2, 2, 0.5, 1, 2, 1, 1, 2, 0.5, 0.5, 0.5, 1, 2, 1, 1
+      1, 1, 2, 2, 0.5, 1, 2, 1, 1, 2, 0.5, 0.5, 0.5, 1, 2, 1, 1, 1
     }
     , 
     /* elec */       {
-      1, 1, 0.5, 1, 2, 1, 1, 1, 0.5, 1, 1, 1, 0.5, 1, 1, 1, 1
+      1, 1, 0.5, 1, 2, 1, 1, 1, 0.5, 1, 1, 1, 0.5, 1, 1, 1, 1, 1
     }
     , 
     /* psyc */       {
-      1, 0.5, 1, 1, 1, 1, 2, 2, 1, 1, 1, 1, 1, 0.5, 1, 1, 2
+      1, 0.5, 1, 1, 1, 1, 2, 2, 1, 1, 1, 1, 1, 0.5, 1, 1, 2, 1
     }
     , 
     /* ice  */       {
-      1, 2, 1, 1, 1, 2, 1, 1, 2, 2, 1, 1, 1, 1, 0.5, 1, 1
+      1, 2, 1, 1, 1, 2, 1, 1, 2, 2, 1, 1, 1, 1, 0.5, 1, 1, 1
     }
     , 
     /* drag */       {
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 0.5, 0.5, 0.5, 0.5, 1, 2, 2, 1
+      1, 1, 1, 1, 1, 1, 1, 1, 1, 0.5, 0.5, 0.5, 0.5, 1, 2, 2, 1, 2
     }
     , 
     /* dark */       {
-      1, 2, 1, 1, 1, 2, 0.5, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0.5
+      1, 2, 1, 1, 1, 1, 2, 0.5, 1, 1, 1, 1, 1, 0, 1, 1, 0.5, 2
     }
     , 
     /* fair */       {
-      1, 2, 1, 0.5, 1, 1, 1, 1, 0.5, 0.5, 1, 1, 1, 1, 1, 2, 2, 1
+      1, 0.5, 1, 2, 1, 1, 0.5, 1, 2, 1, 1, 1, 1, 1, 1, 0, 0.5, 1
     }
   };
   // norm  fght  fly   pois  grnd  rock  bug   ghst  stel  fire  wter  grss  elec  psyc  ice   drag  dark fair
@@ -988,7 +988,7 @@ class Move {
     int second2 = 0;
     String firstType = target.type;
 
-    if (target.type.indexOf("/") != -1) {
+    if (!target.type2.equals("")) {
       if (target.type2.equals("Normal")) {
         second2 = 0;
       } else if (target.type2.equals("Fighting")) {
@@ -1023,6 +1023,8 @@ class Move {
         second2 = 15;
       } else if (target.type2.equals("Dark")) {
         second2 = 16;
+      } else if (target.type2.equals("Fairy")) {
+        second2 = 17;
       }
 
       if (this.type.equals("Normal")) {
@@ -1057,8 +1059,10 @@ class Move {
         first2 = 14;
       } else if (this.type.equals("Dragon")) {
         first2 = 15;
-      } else if (this.type.equals("Steel")) {
+      } else if (this.type.equals("Dark")) {
         first2 = 16;
+      } else if (this.type.equals("Fairy")) {
+        first2 = 17;
       }
     }
 
@@ -1099,6 +1103,8 @@ class Move {
       first = 15;
     } else if (this.type.equals("Dark")) {
       first = 16;
+    } else if (this.type.equals("Fairy")) {
+      first = 17;
     }
 
     if (firstType.equals("Normal")) {
@@ -1133,11 +1139,13 @@ class Move {
       second = 14;
     } else if (firstType.equals("Dragon")) {
       second = 15;
-    } else if (this.type.equals("Dark")) {
+    } else if (firstType.equals("Dark")) {
       second = 16;
+    } else if (firstType.equals("Fairy")) {
+      second = 17;
     }
-
-    if (target.type.indexOf("/") != -1) {
+    
+    if (!target.type2.equals("") || !target.type2.equals("none")) {
       return typeChart[second][first] * typeChart[second2][first2];
     } else
       return typeChart[second][first];
