@@ -228,14 +228,6 @@ class Battle {
     String firstType1 = oneP.type;
     String firstType2 = twoP.type;
 
-    if (oneP.type.indexOf("/") != -1) {
-      firstType1 = oneP.type.substring(0, oneP.type.indexOf("/"));
-    }
-
-    if (twoP.type.indexOf("/") != -1) {
-      firstType2 = twoP.type.substring(0, twoP.type.indexOf("/"));
-    }
-
     if (this.turn == 1 && this.weather.equals("Sandstorm") && (firstType1.equals("Rock") || oneP.type2.equals("Rock")
       || firstType1.equals("Steel") || oneP.type2.equals("Steel") || firstType1.equals("Ground") || oneP.type2.equals("Ground"))) {
       oneP.battleStats[4] *= 1.5;
