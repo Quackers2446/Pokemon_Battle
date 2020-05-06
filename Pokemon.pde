@@ -24,7 +24,7 @@ class Pokemon {
   int shieldDamage;
   boolean max;
   int maxLevel;
-  boolean turnsMaxed;
+  int maxTurns;
 
   Pokemon (String n, String t, int l, int hp, 
     int att, int def, int satt, int sdef, int spd) {
@@ -81,13 +81,13 @@ class Pokemon {
     
     this.max = false;
     this.maxLevel = 0;
-    this.turnsMaxed = false;
+    this.maxTurns = 0;
   }
 
   void raidStats() {
     this.raidPokemon = true;
 
-    int h = int(((((((this.stats[0] + 31)*2 + int(sqrt(252)/4))*this.level)/100)) + this.level + 10)*2.5);
+    int h = int(((((((this.stats[0] + 31)*2 + int(sqrt(252)/4))*this.level)/100)) + this.level + 10)*2.25);
     this.stats[0] = h;
     this.health = h;
     this.currHealth = h;
@@ -96,9 +96,77 @@ class Pokemon {
   
   void dynamax() {
     this.max = true;
-
-    this.health *= (1.5 + (level*0.05));
-    this.currHealth = this.health;
+    this.health *= (1.5 + (this.maxLevel*0.05));
+    this.currHealth *= (1.5 + (this.maxLevel*0.05));
+    this.battleStats[0] = this.health;
+    
+    for (int i = 0; i < 4; i++) {
+      if (this.moveSet[i].damageCatagory.equals("Status")) {
+        this.moveSet[i].name = "Max Guard";
+      }
+      else if (this.moveSet[i].type.equals("Normal")) {
+        this.moveSet[i].name = ("Max Strike");
+      }
+      else if (this.moveSet[i].type.equals("Fighting")) {
+        this.moveSet[i].name = ("Max Knuckle");
+      }
+      else if (this.moveSet[i].type.equals("Flying")) {
+        this.moveSet[i].name = ("Max Airstream");
+      }
+      else if (this.moveSet[i].type.equals("Poison")) {
+        this.moveSet[i].name = ("Max Ooze");
+      }
+      else if (this.moveSet[i].type.equals("Ground")) {
+        this.moveSet[i].name = ("Max Quake");
+      }
+      else if (this.moveSet[i].type.equals("Rock")) {
+        this.moveSet[i].name = ("Max Rockfall");
+      }
+      else if (this.moveSet[i].type.equals("Bug")) {
+        this.moveSet[i].name = ("Max Flutterby");
+      }
+      else if (this.moveSet[i].type.equals("Ghost")) {
+        this.moveSet[i].name = ("Max Phantasm");
+      }
+      else if (this.moveSet[i].type.equals("Steel")) {
+        this.moveSet[i].name = ("Max Steelspike");
+      }
+      else if (this.moveSet[i].type.equals("Fire")) {
+        this.moveSet[i].name = ("Max Flare");
+      }
+      else if (this.moveSet[i].type.equals("Water")) {
+        this.moveSet[i].name = ("Max Geyser");
+      }
+      else if (this.moveSet[i].type.equals("Grass")) {
+        this.moveSet[i].name = ("Max Overgrowth");
+      }
+      else if (this.moveSet[i].type.equals("Electric")) {
+        this.moveSet[i].name = ("Max Lightning");
+      }
+      else if (this.moveSet[i].type.equals("Psychic")) {
+        this.moveSet[i].name = ("Max Mindstorm");
+      }
+      else if (this.moveSet[i].type.equals("Ice")) {
+        this.moveSet[i].name = ("Max Hailstorm");
+      }
+      else if (this.moveSet[i].type.equals("Dragon")) {
+        this.moveSet[i].name = ("Max Wyrmwind");
+      }
+      else if (this.moveSet[i].type.equals("Dark")) {
+        this.moveSet[i].name = ("Max Darkness");
+      }
+      else if (this.moveSet[i].type.equals("Fairy")) {
+        this.moveSet[i].name = ("Max Starfall");
+      }
+      
+      this.moveSet[i].power *= 1.5;
+    }
+  }
+  
+  void unmax() {
+    this.max = false;
+    this.health = this.stats[0];
+    this.currHealth /= (1.5 + (this.maxLevel*0.05));
     this.battleStats[0] = this.stats[0];
   }
 
@@ -225,10 +293,10 @@ class Pokemon {
     println("HP \tATT \tDEF \tS.ATT \tS.DEF \tSPD");
 
     for (int i = 0; i < 6; i++) {
-      print(stats[i] + "\t");
+      print(battleStats[i] + "\t");
     }
     println();
-
+    
     println("* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *");
     println();
   }
@@ -288,7 +356,14 @@ class Pokemon {
         target.facedRaidShield = true;
       }
     }
-
+    
+    if (this.max) {
+      if (this.maxTurns == 0) {
+        println("* * *", this.name, "grew enourmous! * * *");
+        println();
+      }
+    }
+    
     if (mv.currPowerPoints >= 0) {
       if ((chanceToHit <= ((mv.accuracy*100)*(this.adjustedStages))) || mv.accuracy == 0) {   
         if (!(this.flinch && !this.ability.equals("Inner Focus")) && !this.sleep && (!(this.paralysis && (randomP <= 0.25)) || (this.type.equals("Electric") || this.type2.equals("Electric"))) 
@@ -542,6 +617,19 @@ class Pokemon {
       println();
       println(target.name, "has fainted!", this.name, "wins the battle!");
       target.currHealth = 0;
+    }
+    
+    if (this.max) {
+      if (this.maxTurns < 3) {
+        this.maxTurns += 1;
+      }
+      else {
+        println();
+        
+        println("* * *", this.name, "returned back to their original size!", this.name, "now has", this.currHealth, "health! ("+ int((float(this.currHealth)/this.health)*100) + "%) * * *");
+        
+        this.unmax();
+      }
     }
   }
 }

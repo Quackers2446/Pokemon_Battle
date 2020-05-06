@@ -249,21 +249,21 @@ void setup() {
   //TRAINER POKEMON
 
   //ZOFIA
-  //Level 41 Charizard
-  Pokemon charizard = new Pokemon("Charizard", "Fire/Flying", 41, 78, 84, 78, 109, 85, 100); 
+  //Level 42 Charizard
+  Pokemon charizard = new Pokemon("Charizard", "Fire/Flying", 42, 78, 84, 78, 109, 85, 100); 
   charizard.moveSet(heatWave, dragonClaw, shadowClaw, airSlash);
 
   //Level 21 Scyther
   Pokemon scyther = new Pokemon("Scyther", "Bug/Flying", 21, 70, 110, 80, 55, 80, 105);
   scyther.moveSet(pursuit, vacuumWave, wingAttack, agility);
 
-  //Level 42 Lapras
-  Pokemon lapras = new Pokemon("Lapras", "Water/Ice", 42, 130, 85, 80, 85, 95, 60);
+  //Level 43 Lapras
+  Pokemon lapras = new Pokemon("Lapras", "Water/Ice", 43, 130, 85, 80, 85, 95, 60);
   lapras.moveSet(waterPulse, sing, iceBeam, bodySlam);
 
   //Level 35 Kingler
   Pokemon kingler = new Pokemon("Kingler", "Water", 35, 55, 130, 115, 50, 50, 75);
-  kingler.moveSet(bubbleBeam, stomp, mudShot, metalClaw);
+  kingler.moveSet (bubbleBeam, stomp, mudShot, metalClaw);
 
   //Level 25 Magnemite
   Pokemon magnemite = new Pokemon("Magnemite", "Electric/Steel", 25, 25, 35, 70, 95, 55, 45);
@@ -271,11 +271,12 @@ void setup() {
 
   //Level 28 Mimikyu
   Pokemon mimikyu = new Pokemon("Mimikyu", "Ghost/Fairy", 28, 55, 90, 80, 50, 105, 96);
-  mimikyu.moveSet(woodHammer, shadowSneak, feintAttack, babyDollEyes);
+  mimikyu.moveSet(woodHammer, shadowSneak, feintAttack, charm);
 
   //Level 27 G-Max Drednaw
   Pokemon drednaw = new Pokemon("Drednaw", "Water/Rock", 27, 90, 115, 90, 48, 68, 74);
   drednaw.moveSet(rockPolish, rockSlide, razorShell, crunch);
+  drednaw.maxLevel = 0;
 
   //JASMINE
   //Level 44 Pidgeot
@@ -426,7 +427,7 @@ void setup() {
   charmeleon.moveSet(dragonRage, flameBurst, fireFang, smokescreen);
 
   //Level 17 Pawniard
-  Pokemon pawniard = new Pokemon("Pawniard", "Dark/Seel", 17, 45, 85, 70, 40, 40, 60);
+  Pokemon pawniard = new Pokemon("Pawniard", "Dark/Steel", 17, 45, 85, 70, 40, 40, 60);
   pawniard.moveSet(feintAttack, scratch, furyCutter, leer);
 
   //Level 25 Drowzee
@@ -447,11 +448,11 @@ void setup() {
 
   //Level 16 Geodude
   Pokemon geodude = new Pokemon("Geodude", "Rock", 16, 40, 80, 100, 30, 30, 20);
-  geodude.moveSet(rockThrow, rollout, none, defenseCurl);
+  geodude.moveSet(rockThrow, rollout, defenseCurl, none);
 
   //Level 17 Graveler
   Pokemon graveler = new Pokemon("Graveler", "Rock/Ground", 17, 55, 95, 115, 45, 45, 35);
-  graveler.moveSet(none, tackle, rollout, none);
+  graveler.moveSet(tackle, rollout, defenseCurl, none);
 
   //Level 13 Sandshrew
   Pokemon sandshrew = new Pokemon("Sandshrew", "Ground", 13, 50, 75, 85, 20, 30, 40);
@@ -549,8 +550,8 @@ void setup() {
   Pokemon meganium = new Pokemon("Meganium", "Grass", 36, 80, 82, 100, 83, 100, 80);
   meganium.moveSet(petalBlizzard, poisonPowder, synthesis, magicalLeaf);
 
-  //Level 31 Shuckle
-  Pokemon shuckle = new Pokemon("Shuckle", "Bug/Rock", 31, 20, 10, 230, 10, 230, 5);
+  //Level 41 Shuckle
+  Pokemon shuckle = new Pokemon("Shuckle", "Bug/Rock", 41, 20, 10, 230, 10, 230, 5);
   shuckle.moveSet(withdraw, struggleBug, rest, rockThrow);
 
   //Level 28 Slugma
@@ -706,7 +707,7 @@ void setup() {
   printPokemon();
   printCharizard();
 
-  zofia.giveItem("Sitrus Berry", charizard, scyther, lapras, magnemite, mimikyu);
+  zofia.giveItem("Sitrus Berry", charizard, scyther, lapras, magnemite, mimikyu, drednaw);
   zofia.giveItem("Leftovers", kingler);
   jasmine.giveItem("Sitrus Berry", arcanine, snover, seel);
   jasmine.giveItem("Leftovers", espeon, braixen);
@@ -732,7 +733,11 @@ void setup() {
 
   Battle battle = new Battle(zofia, cassie);
 
-  battle.move(alcreamie, dazzlingGleam, gastly, metalClaw);
+  drednaw.printMoves();
+  drednaw.dynamax();
+  drednaw.printMoves();
+  
+
 
   //dratini.moveSet(twister, slam, dragonRage, thunderWave);
 
