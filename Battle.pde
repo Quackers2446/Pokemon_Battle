@@ -22,8 +22,8 @@ class Battle {
   }
 
   void move(Pokemon oneP, Move mv1, Pokemon twoP, Move mv2) {
-    boolean ppLoss1 = true;
-    boolean ppLoss2 = true;
+    boolean ppLoss1 = false;
+    boolean ppLoss2 = false;
 
     if (turn == 1) {
       println("*   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *");
@@ -57,13 +57,13 @@ class Battle {
       return;
     }
 
-    for (int i = 0; i < 4; i++) {
-      if (oneP.moveSet[i].currPowerPoints > 0)
-        ppLoss1 = false;
+    //for (int i = 0; i < 4; i++) {
+    //  if (oneP.moveSet[i].currPowerPoints > 0)
+    //    ppLoss1 = false;
 
-      if (twoP.moveSet[i].currPowerPoints > 0) 
-        ppLoss2 = false;
-    }
+    //  if (twoP.moveSet[i].currPowerPoints > 0) 
+    //    ppLoss2 = false;
+    //}
 
     if (ppLoss1 == true) {
       println(oneP.name, "has run out of PP!", twoP.name, "wins the battle!");
@@ -404,9 +404,9 @@ class Battle {
   }
   
   void recover(Pokemon p) {
-    for (int i = 0; i < p.moveSet.length; i++) {
-      p.moveSet[i].currPowerPoints = p.moveSet[i].powerPoints;
-    }
+    //for (int i = 0; i < p.moveSet.length; i++) {
+    //  p.moveSet[i].currPowerPoints = p.moveSet[i].powerPoints;
+    //}
     for (int i = 0; i < 6; i++) {
       p.battleStats[i] = p.stats[i];
     }

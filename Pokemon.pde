@@ -12,7 +12,7 @@ class Pokemon {
   Boolean burn, freeze, paralysis, poison, sleep, flinch, badlyPoisoned, bound, cantEscape, confusion, curse, drain, heal, recoil, leech, recover, repeat, protect;
   int attackSMp, attackSMn, defenseSMp, defenseSMn, spAttackSMp, spAttackSMn, spDefenseSMp, spDefenseSMn, speedSMp, speedSMn, accuracySMp, accuracySMn, evasionSMp, evasionSMn;
   String item;
-  String trainer;
+  Trainer trainer;
   int sleepCounter;
   int confusionCounter;
   int poisonCounter;
@@ -58,16 +58,14 @@ class Pokemon {
     this.type2 = "";
 
     this.burn = this.freeze = this.paralysis = this.poison = this.sleep = this.flinch = this.badlyPoisoned = this.recover = this.protect
-      = this.bound = this.cantEscape = this.confusion = this.curse = this.heal = this.drain = this.recoil = this.leech = this.repeat = false;
+    = this.bound = this.cantEscape = this.confusion = this.curse = this.heal = this.drain = this.recoil = this.leech = this.repeat = false;
 
     attackSMp = attackSMn = defenseSMp = defenseSMn = spAttackSMp = spAttackSMn = spDefenseSMp = spDefenseSMn = speedSMp
-      = speedSMn = accuracySMp = accuracySMn = evasionSMp = evasionSMn = 2;
+    = speedSMn = accuracySMp = accuracySMn = evasionSMp = evasionSMn = 2;
 
     this.accuracySMp = this.accuracySMn = this.evasionSMp = this.evasionSMn = 3;
 
     this.item = "none";
-
-    this.trainer = "No one";
 
     this.sleepCounter = 0;
     this.confusionCounter = 0;
