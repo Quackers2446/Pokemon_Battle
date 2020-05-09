@@ -447,6 +447,17 @@ class Move {
             user.battleStats[2] = int((2*user.stats[2])/float(user.defenseSMn));
           }
         }
+      } else if (firstStatus.equals("U.Sp.Attack--")) {
+        chance = random(0, 1);
+
+        if (chance <= this.statusProb) {
+          if (user.spAttackSMn < 6) {
+            println(user.name + "'s special attack greatly fell!");
+            
+            user.spAttackSMn += 2;
+            user.battleStats[3] = int((2*user.stats[3])/float(user.spAttackSMn));
+          }
+        }
       } else if (firstStatus.equals("U.Sp.Defense-")) {
         chance = random(0, 1);
 

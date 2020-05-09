@@ -53,6 +53,7 @@ void setup() {
   Move tearfulLook = new Move("Tearful Look", 20, 0, 0, "Normal", "Status", 0, "Sp.Attack-/Attack-", 1);
   Move glare = new Move("Glare", 20, 0, 0, "Normal", "Status", 0, "Paralysis", 1);
   Move protect = new Move("Protect", 10, 0, 0, "Normal", "Status", 4, "Protect", 1);
+  Move strength = new Move("Strength", 15, 80, 1, "Normal", "Physical", 0, "none", 0);
 
   //FIRE
   Move ember = new Move("Ember", 25, 40, 1, "Fire", "Special", 0, "Burn", 0.1);
@@ -65,6 +66,7 @@ void setup() {
   Move flareBlitz = new Move("Flare Blitz", 15, 120, 1, "Fire", "Physical", 0, "Recoil/0.33", 1);
   Move heatWave = new Move("Heat Wave", 10, 95, 0.9, "Fire", "Special", 0, "Burn", 0.1);
   Move incinerate = new Move("Incinerate", 24, 60, 1, "Fire", "Special", 0, "DestroyItem", 1);
+  Move flamethrower = new Move("Flamethrower", 15, 90, 1, "Fire", "Special", 0, "Burn", 0.1);
 
   //GRASS
   Move absorb = new Move("Absorb", 25, 20, 1, "Grass", "Special", 0, "Drain", 1);
@@ -136,6 +138,8 @@ void setup() {
   Move dragonDance = new Move("Dragon Dance", 20, 0, 0, "Dragon", "Status", 0, "Attack+/Speed+", 1);
   Move dragonClaw = new Move("Dragon Claw", 15, 80, 1, "Dragon", "Physical", 0, "none", 0);
   Move breakingSwipe = new Move("Breaking Swipe", 24, 60, 1, "Dragon", "Physical", 0, "Attack-", 1);
+  Move dualChop = new Move("Breaking Swipe", 15, 80, 0.9, "Dragon", "Physical", 0, "none", 0);
+  Move dracoMeteor = new Move("Draco Meteor", 8, 130, 0.9, "Dragon", "Special", 0, "U.Sp.Attack--", 1);
 
   //FIGHTING
   Move vacuumWave = new Move("Vacuum Wave", 30, 40, 1, "Fighting", "Special", 1, "none", 0);
@@ -145,6 +149,8 @@ void setup() {
   Move closeCombat = new Move("Close Combat", 8, 120, 1, "Fighting", "Physical", 0, "U.Defense-/U.Sp.Defense-", 0);
   Move rockSmash = new Move("Rock Smash", 24, 40, 1, "Fighting", "Physical", 0, "Defense-", 0.5);
   Move hammerArm = new Move("Hammer Arm", 10, 100, 0.9, "Fighting", "Physical", 0, "U.Speed-", 1);
+  Move doubleKick = new Move("Double Kick", 30, 60, 1, "Fighting", "Physical", 0, "none", 0);
+  Move lowSweep = new Move("Low Sweep", 20, 65, 1, "Fighting", "Physical", 0, "Speed-", 1);
 
   //DARK
   Move pursuit = new Move("Pursuit", 20, 40, 1, "Dark", "Physical", 0, "none", 0);
@@ -196,6 +202,7 @@ void setup() {
   Move metalClaw = new Move("Metal Claw", 35, 50, 0.95, "Steel", "Physical", 0, "Attack+", 0.1);
   Move ironDefense = new Move("Iron Defense", 15, 0, 0, "Steel", "Status", 0, "Defense++", 1);
   Move mirrorShot = new Move("Mirror Shot", 10, 65, 0.85, "Steel", "Special", 0, "Accuracy-", 0.3);
+  Move flashCannon = new Move("Flash Cannon", 16, 80, 1, "Steel", "Special", 0, "Sp.Defense-", 0.1);
 
   //FLYING
   Move gust = new Move("Gust", 35, 40, 1, "Flying", "Special", 0, "none", 0);
@@ -255,28 +262,28 @@ void setup() {
   Pokemon charizard = new Pokemon("Charizard", "Fire/Flying", 42, 78, 84, 78, 109, 85, 100); 
   charizard.moveSet(heatWave, dragonClaw, roost, airSlash);
 
-  //Level 21 Scyther
-  Pokemon scyther = new Pokemon("Scyther", "Bug/Flying", 21, 70, 110, 80, 55, 80, 105);
+  //Level 24 Scyther
+  Pokemon scyther = new Pokemon("Scyther", "Bug/Flying", 24, 70, 110, 80, 55, 80, 105);
   scyther.moveSet(pursuit, vacuumWave, wingAttack, agility);
 
-  //Level 43 Lapras
-  Pokemon lapras = new Pokemon("Lapras", "Water/Ice", 43, 130, 85, 80, 85, 95, 60);
+  //Level 44 Lapras
+  Pokemon lapras = new Pokemon("Lapras", "Water/Ice", 44, 130, 85, 80, 85, 95, 60);
   lapras.moveSet(waterPulse, sing, iceBeam, bodySlam);
 
   //Level 35 Kingler
   Pokemon kingler = new Pokemon("Kingler", "Water", 35, 55, 130, 115, 50, 50, 75);
   kingler.moveSet (bubbleBeam, stomp, mudShot, metalClaw);
 
-  //Level 25 Magnemite
-  Pokemon magnemite = new Pokemon("Magnemite", "Electric/Steel", 25, 25, 35, 70, 95, 55, 45);
-  magnemite.moveSet(spark, magnetBomb, thunderWave, supersonic);
+  //Level 28 Magnemite
+  Pokemon magnemite = new Pokemon("Magnemite", "Electric/Steel", 28, 25, 35, 70, 95, 55, 45);
+  magnemite.moveSet(spark, mirrorShot, thunderWave, supersonic);
 
-  //Level 28 Mimikyu
-  Pokemon mimikyu = new Pokemon("Mimikyu", "Ghost/Fairy", 28, 55, 90, 80, 50, 105, 96);
+  //Level 31 Mimikyu
+  Pokemon mimikyu = new Pokemon("Mimikyu", "Ghost/Fairy", 31, 55, 90, 80, 50, 105, 96);
   mimikyu.moveSet(woodHammer, shadowSneak, feintAttack, charm);
 
-  //Level 27 G-Max Drednaw
-  Pokemon drednaw = new Pokemon("Drednaw", "Water/Rock", 27, 90, 115, 90, 48, 68, 74);
+  //Level 31 G-Max Drednaw
+  Pokemon drednaw = new Pokemon("Drednaw", "Water/Rock", 31, 90, 115, 90, 48, 68, 74);
   drednaw.moveSet(rockPolish, rockSlide, razorShell, crunch);
   drednaw.maxLevel = 0;
 
@@ -285,12 +292,12 @@ void setup() {
   Pokemon megaPidgeot = new Pokemon("Pidgeot", "Normal/Flying", 44, 83, 80, 80, 135, 80, 121);
   megaPidgeot.moveSet(hurricane, roost, featherDance, twister);
 
-  //Level 44 Pidgeot
-  Pokemon pidgeot = new Pokemon("Pidgeot", "Normal/Flying", 44, 83, 80, 75, 70, 70, 101);
+  //Level 45 Pidgeot
+  Pokemon pidgeot = new Pokemon("Pidgeot", "Normal/Flying", 45, 83, 80, 75, 70, 70, 101);
   pidgeot.moveSet(hurricane, wingAttack, featherDance, twister);
 
-  //Level 29 Arcanine
-  Pokemon arcanine = new Pokemon("Arcanine", "Fire", 29, 90, 110, 80, 100, 80, 95);
+  //Level 33 Arcanine
+  Pokemon arcanine = new Pokemon("Arcanine", "Fire", 33, 90, 110, 80, 100, 80, 95);
   arcanine.moveSet(bite, thunderFang, fireFang, none);
 
   //Level 31 Braixen
@@ -301,8 +308,8 @@ void setup() {
   Pokemon cubone = new Pokemon("Cubone", "Ground", 12, 50, 50, 95, 40, 50, 35);
   cubone.moveSet(boneClub, headbutt, tailWhip, none);
 
-  //Level 34 Espeon
-  Pokemon espeon = new Pokemon("Espeon", "Psychic", 34, 65, 65, 60, 130, 95, 110);
+  //Level 35 Espeon
+  Pokemon espeon = new Pokemon("Espeon", "Psychic", 35, 65, 65, 60, 130, 95, 110);
   espeon.moveSet(psybeam, quickAttack, futureSight, babyDollEyes);
 
   //Level 24 Seel
@@ -313,8 +320,8 @@ void setup() {
   Pokemon snover = new Pokemon("Snover", "Grass/Ice", 29, 60, 62, 50, 62, 60, 40);
   snover.moveSet(leer, icyWind, razorLeaf, iceShard);
 
-  //Level 30 Alcremie
-  Pokemon alcremie = new Pokemon("Alcremie", "Fairy", 30, 65, 60, 75, 110, 121, 64);
+  //Level 32 Alcremie
+  Pokemon alcremie = new Pokemon("Alcremie", "Fairy", 32, 65, 60, 75, 110, 121, 64);
   alcremie.moveSet(dazzlingGleam, drainingKiss, tackle, acidArmor);
 
   //BARNABAS
@@ -371,8 +378,8 @@ void setup() {
   Pokemon kadabra = new Pokemon("Kadabra", "Psychic", 16, 40, 35, 30, 120, 70, 105);
   kadabra.moveSet(confusion, psybeam, teleport, kinesis);
 
-  //Level 35 Snorlax
-  Pokemon snorlax = new Pokemon("Snorlax", "Normal", 35, 160, 110, 65, 65, 110, 30);
+  //Level 37 Snorlax
+  Pokemon snorlax = new Pokemon("Snorlax", "Normal", 37, 160, 110, 65, 65, 110, 30);
   snorlax.moveSet(snore, amnesia, rest, bodySlam);
 
   //Level 19 Ponyta
@@ -383,12 +390,12 @@ void setup() {
   Pokemon exeggcute = new Pokemon("Exeggcute", "Grass/Psychic", 21, 60, 40, 80, 60, 45, 40);
   exeggcute.moveSet(bulletSeed, uproar, leechSeed, stunSpore);
 
-  //Level 28 Dreepy
-  Pokemon dreepy = new Pokemon("Dreepy", "Dragon/Ghost", 28, 28, 60, 30, 40, 20, 82);
+  //Level 29 Dreepy
+  Pokemon dreepy = new Pokemon("Dreepy", "Dragon/Ghost", 29, 28, 60, 30, 40, 20, 82);
   dreepy.moveSet(astonish, infestation, quickAttack, bite);
 
-  //Level 28 Appletun
-  Pokemon appletun = new Pokemon("Appletun", "Grass/Dragon", 28, 110, 85, 80, 100, 80, 30);
+  //Level 30 Appletun
+  Pokemon appletun = new Pokemon("Appletun", "Grass/Dragon", 30, 110, 85, 80, 100, 80, 30);
   appletun.moveSet(ironDefense, leechSeed, recover, headbutt);
 
   //JOANNA
@@ -406,7 +413,7 @@ void setup() {
 
   //Level 29 Vulpix
   Pokemon vulpix = new Pokemon("Vulpix", "Fire", 29, 38, 41, 40, 50, 65, 65);
-  vulpix.moveSet(quickAttack, feintAttack, ember, confuseRay);
+  vulpix.moveSet(quickAttack, feintAttack, flamethrower, confuseRay);
 
   //STELLA
   //Level 17 Dartrix
@@ -605,6 +612,10 @@ void setup() {
   //Level 17 Nickit
   Pokemon nickit = new Pokemon("Nickit", "Dark", 17, 40, 28, 28, 47, 52, 50);
   nickit.moveSet(assurance, snarl, honeClaws, quickAttack);
+  
+  //Level 21 Wooloo
+  Pokemon wooloo = new Pokemon("Wooloo", "Normal", 21, 42, 40, 55, 40, 45, 48);
+  wooloo.moveSet(defenseCurl, tackle, doubleKick, headbutt);
 
   //Level 22 Galarian Ponyta
   Pokemon galarianPonyta = new Pokemon("Galarian Ponyta", "Psychic", 22, 50, 85, 55, 65, 65, 90);
@@ -616,11 +627,17 @@ void setup() {
   galarianWeezing.raidStats();
 
   //IMPORTANT NPC POKEMON
-
+  
+  //CYNTHIA
+  
+  //Level 42 Duraludon
+  Pokemon duraludon = new Pokemon("Duraludon", "Steel/Dragon", 42, 70, 95, 115, 120, 50, 85);
+  duraludon.moveSet(dracoMeteor, flashCannon, thunderbolt, darkPulse);
+  
   //CASSIE
 
-  //Level 37 Shelgon
-  Pokemon shelgon = new Pokemon("Shelgon", "Dragon", 37, 65, 95, 100, 60, 50, 50);
+  //Level 34 Shelgon
+  Pokemon shelgon = new Pokemon("Shelgon", "Dragon", 34, 65, 95, 100, 60, 50, 50);
   shelgon.moveSet(dragonBreath, crunch, zenHeadbutt, ember);
 
   //Level 34 Alolan Sandslash
@@ -638,6 +655,10 @@ void setup() {
   //Level 33 Gliscor
   Pokemon gliscor = new Pokemon("Gliscor", "Ground/Flying", 33, 75, 95, 125, 45, 75, 95);
   gliscor.moveSet(poisonJab, acrobatics, uTurn, knockOff);
+  
+  //Level 41 Machamp
+  Pokemon machamp = new Pokemon("Machamp", "Fighting", 41, 90, 130, 80, 65, 85, 55);
+  machamp.moveSet(dualChop, knockOff, lowSweep, strength);
 
   //Level 43 Porygon-z
   Pokemon porygonZ = new Pokemon("Porygon-Z", "Normal", 43, 85, 80, 70, 135, 75, 90);
