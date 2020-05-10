@@ -12,7 +12,7 @@ class Pokemon {
   Boolean burn, freeze, paralysis, poison, sleep, flinch, badlyPoisoned, bound, cantEscape, confusion, curse, drain, heal, recoil, leech, recover, repeat, protect;
   int attackSMp, attackSMn, defenseSMp, defenseSMn, spAttackSMp, spAttackSMn, spDefenseSMp, spDefenseSMn, speedSMp, speedSMn, accuracySMp, accuracySMn, evasionSMp, evasionSMn;
   String item;
-  String trainer;
+  Trainer trainer;
   int sleepCounter;
   int confusionCounter;
   int poisonCounter;
@@ -25,6 +25,8 @@ class Pokemon {
   boolean max;
   int maxLevel;
   int maxTurns;
+  String[] formerMove;
+  String[] formerStatus;
 
   Pokemon (String n, String t, int l, int hp, 
     int att, int def, int satt, int sdef, int spd) {
@@ -56,16 +58,14 @@ class Pokemon {
     this.type2 = "";
 
     this.burn = this.freeze = this.paralysis = this.poison = this.sleep = this.flinch = this.badlyPoisoned = this.recover = this.protect
-      = this.bound = this.cantEscape = this.confusion = this.curse = this.heal = this.drain = this.recoil = this.leech = this.repeat = false;
+    = this.bound = this.cantEscape = this.confusion = this.curse = this.heal = this.drain = this.recoil = this.leech = this.repeat = false;
 
     attackSMp = attackSMn = defenseSMp = defenseSMn = spAttackSMp = spAttackSMn = spDefenseSMp = spDefenseSMn = speedSMp
-      = speedSMn = accuracySMp = accuracySMn = evasionSMp = evasionSMn = 2;
+    = speedSMn = accuracySMp = accuracySMn = evasionSMp = evasionSMn = 2;
 
     this.accuracySMp = this.accuracySMn = this.evasionSMp = this.evasionSMn = 3;
 
     this.item = "none";
-
-    this.trainer = "No one";
 
     this.sleepCounter = 0;
     this.confusionCounter = 0;
@@ -82,6 +82,8 @@ class Pokemon {
     this.max = false;
     this.maxLevel = 0;
     this.maxTurns = 0;
+    this.formerMove = new String[4];
+    this.formerStatus = new String[4];
   }
 
   void raidStats() {
@@ -106,57 +108,75 @@ class Pokemon {
       }
       else if (this.moveSet[i].type.equals("Normal")) {
         this.moveSet[i].name = ("Max Strike");
+        this.moveSet[i].status = "Speed-";
       }
       else if (this.moveSet[i].type.equals("Fighting")) {
         this.moveSet[i].name = ("Max Knuckle");
+        this.moveSet[i].status = "Attack+";
       }
       else if (this.moveSet[i].type.equals("Flying")) {
         this.moveSet[i].name = ("Max Airstream");
+        this.moveSet[i].status = "Speed+";
       }
       else if (this.moveSet[i].type.equals("Poison")) {
         this.moveSet[i].name = ("Max Ooze");
+        this.moveSet[i].status = "Sp.Attack+";
       }
       else if (this.moveSet[i].type.equals("Ground")) {
         this.moveSet[i].name = ("Max Quake");
+        this.moveSet[i].status = "Sp.Defense+";
       }
       else if (this.moveSet[i].type.equals("Rock")) {
         this.moveSet[i].name = ("Max Rockfall");
+        this.moveSet[i].status = "Sandstorm";
       }
       else if (this.moveSet[i].type.equals("Bug")) {
         this.moveSet[i].name = ("Max Flutterby");
+        this.moveSet[i].status = "Sp.Attack-";
       }
       else if (this.moveSet[i].type.equals("Ghost")) {
         this.moveSet[i].name = ("Max Phantasm");
+        this.moveSet[i].status = "Defense-";
       }
       else if (this.moveSet[i].type.equals("Steel")) {
         this.moveSet[i].name = ("Max Steelspike");
+        this.moveSet[i].status = "Defense+";
       }
       else if (this.moveSet[i].type.equals("Fire")) {
         this.moveSet[i].name = ("Max Flare");
+        this.moveSet[i].status = "Harsh Sunlight";
       }
       else if (this.moveSet[i].type.equals("Water")) {
         this.moveSet[i].name = ("Max Geyser");
+        this.moveSet[i].status = "Rain";
       }
       else if (this.moveSet[i].type.equals("Grass")) {
         this.moveSet[i].name = ("Max Overgrowth");
+        this.moveSet[i].status = "Grassy Terrain";
       }
       else if (this.moveSet[i].type.equals("Electric")) {
         this.moveSet[i].name = ("Max Lightning");
+        this.moveSet[i].status = "Electric Terrain";
       }
       else if (this.moveSet[i].type.equals("Psychic")) {
         this.moveSet[i].name = ("Max Mindstorm");
+        this.moveSet[i].status = "Psychic Terrain";
       }
       else if (this.moveSet[i].type.equals("Ice")) {
         this.moveSet[i].name = ("Max Hailstorm");
+        this.moveSet[i].status = "Hail";
       }
       else if (this.moveSet[i].type.equals("Dragon")) {
         this.moveSet[i].name = ("Max Wyrmwind");
+        this.moveSet[i].status = "Attack-";
       }
       else if (this.moveSet[i].type.equals("Dark")) {
         this.moveSet[i].name = ("Max Darkness");
+        this.moveSet[i].status = "Sp.Defense-";
       }
       else if (this.moveSet[i].type.equals("Fairy")) {
         this.moveSet[i].name = ("Max Starfall");
+        this.moveSet[i].status = "Misty Terrain";
       }
       
       this.moveSet[i].power *= 1.5;
@@ -168,6 +188,15 @@ class Pokemon {
     this.health = this.stats[0];
     this.currHealth /= (1.5 + (this.maxLevel*0.05));
     this.battleStats[0] = this.stats[0];
+    
+    for (int i = 0; i < 4; i++) {
+      this.moveSet[i].name = this.formerMove[i];
+      this.moveSet[i].status = this.formerStatus[i];
+      
+      this.moveSet[i].power /= 1.5;
+    }
+    
+    this.maxTurns = 0;
   }
 
   void rest() {
@@ -329,6 +358,16 @@ class Pokemon {
     moveSet[1] = mv2;
     moveSet[2] = mv3;
     moveSet[3] = mv4;
+    
+    formerMove[0] = mv1.name;
+    formerMove[1] = mv2.name;
+    formerMove[2] = mv3.name;
+    formerMove[3] = mv4.name;
+    
+    formerStatus[0] = mv1.status;
+    formerStatus[1] = mv2.status;
+    formerStatus[2] = mv3.status;
+    formerStatus[3] = mv4.status;
   }
 
   void useMove(Move mv, Pokemon target) {
@@ -620,15 +659,16 @@ class Pokemon {
     }
     
     if (this.max) {
-      if (this.maxTurns < 3) {
+      if (this.maxTurns < 2) {
         this.maxTurns += 1;
       }
       else {
         println();
         
+        this.unmax();
+        
         println("* * *", this.name, "returned back to their original size!", this.name, "now has", this.currHealth, "health! ("+ int((float(this.currHealth)/this.health)*100) + "%) * * *");
         
-        this.unmax();
       }
     }
   }

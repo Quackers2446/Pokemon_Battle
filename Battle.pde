@@ -22,8 +22,6 @@ class Battle {
   }
 
   void move(Pokemon oneP, Move mv1, Pokemon twoP, Move mv2) {
-    boolean ppLoss1 = true;
-    boolean ppLoss2 = true;
 
     if (turn == 1) {
       println("*   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *");
@@ -57,28 +55,6 @@ class Battle {
       return;
     }
 
-    for (int i = 0; i < 4; i++) {
-      if (oneP.moveSet[i].currPowerPoints > 0)
-        ppLoss1 = false;
-
-      if (twoP.moveSet[i].currPowerPoints > 0) 
-        ppLoss2 = false;
-    }
-
-    if (ppLoss1 == true) {
-      println(oneP.name, "has run out of PP!", twoP.name, "wins the battle!");
-      println();
-      two.battlesWon += 1;
-      return;
-    }
-
-    if (ppLoss2 == true) {
-      println(twoP.name, "has run out of PP!", oneP.name, "wins the battle!");
-      println();
-      one.battlesWon += 1;
-      return;
-    }
-
     //Setting up who goes first
 
     setTurns(oneP, mv1, twoP, mv2);
@@ -90,8 +66,8 @@ class Battle {
     checkBerry(oneP, twoP);
     checkBerry(twoP, oneP);
 
-    checkWeather(oneP, twoP);
-    checkWeather(twoP, oneP);
+    checkWeather(oneP, mv1, twoP);
+    checkWeather(twoP, mv2, oneP);
 
     if (oneP.raidPokemon) {
       recover(oneP);
@@ -121,8 +97,6 @@ class Battle {
 
   void start1v1(Pokemon oneP, Move mv1, Pokemon twoP, Move mv2) {
     int turn = 1;
-    boolean ppLoss1 = true;
-    boolean ppLoss2 = true;
 
     println("*   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *");
     println("A BATTLE BETWEEN", this.one.name.toUpperCase(), "AND", this.two.name.toUpperCase(), "HAS BEGUN! Lv.", str(oneP.level), oneP.name, "| Lv.", str(twoP.level), twoP.name);   
@@ -145,27 +119,7 @@ class Battle {
         println(mv1.name, "has run out of PP.");
         println();
       }
-
-      for (int i = 0; i < 4; i++) {
-        if (oneP.moveSet[i].currPowerPoints > 0)
-          ppLoss1 = false;
-
-        if (twoP.moveSet[i].currPowerPoints > 0) 
-          ppLoss2 = false;
-      }
-
-      if (ppLoss1 == true) {
-        println(oneP.name, "has run out of PP!", twoP.name, "wins the battle!");
-        println();
-        break;
-      }
-
-      if (ppLoss2 == true) {
-        println(twoP.name, "has run out of PP!", oneP.name, "wins the battle!");
-        println();
-        break;
-      }
-
+      
       //Setting up who goes first
 
       setTurns(oneP, mv1, twoP, mv2);
@@ -177,8 +131,8 @@ class Battle {
       checkBerry(oneP, twoP);
       checkBerry(twoP, oneP);
 
-      checkWeather(oneP, twoP);
-      checkWeather(twoP, oneP);
+      checkWeather(oneP, mv1, twoP);
+      checkWeather(twoP, mv2, oneP);
       
       if (oneP.raidPokemon) {
         recover(oneP);
@@ -193,7 +147,7 @@ class Battle {
 
     println();
 
-    if (oneP.currHealth > 0 || ppLoss2)
+    if (oneP.currHealth > 0)
       one.battlesWon += 1;
     else
       two.battlesWon += 1;
@@ -224,17 +178,9 @@ class Battle {
     }
   }
 
-  void checkWeather(Pokemon oneP, Pokemon twoP) {
+  void checkWeather(Pokemon oneP, Move mv1, Pokemon twoP) {
     String firstType1 = oneP.type;
     String firstType2 = twoP.type;
-
-    if (oneP.type.indexOf("/") != -1) {
-      firstType1 = oneP.type.substring(0, oneP.type.indexOf("/"));
-    }
-
-    if (twoP.type.indexOf("/") != -1) {
-      firstType2 = twoP.type.substring(0, twoP.type.indexOf("/"));
-    }
 
     if (this.turn == 1 && this.weather.equals("Sandstorm") && (firstType1.equals("Rock") || oneP.type2.equals("Rock")
       || firstType1.equals("Steel") || oneP.type2.equals("Steel") || firstType1.equals("Ground") || oneP.type2.equals("Ground"))) {
@@ -257,6 +203,16 @@ class Battle {
       this.weather = "none";
       println("The sandstorm subsided!");
       println();
+    }
+    
+    if (mv1.status.equals("Rain") && !this.weather.equals("Rain")) {
+      this.weather = "Rain";
+      
+      println(oneP.name, "made it rain!");
+      println();
+      this.weatherCounter = 5;
+    } else if (this.weather.equals("Rain")) {
+      
     }
   }
 
@@ -412,9 +368,9 @@ class Battle {
   }
   
   void recover(Pokemon p) {
-    for (int i = 0; i < p.moveSet.length; i++) {
-      p.moveSet[i].currPowerPoints = p.moveSet[i].powerPoints;
-    }
+    //for (int i = 0; i < p.moveSet.length; i++) {
+    //  p.moveSet[i].currPowerPoints = p.moveSet[i].powerPoints;
+    //}
     for (int i = 0; i < 6; i++) {
       p.battleStats[i] = p.stats[i];
     }

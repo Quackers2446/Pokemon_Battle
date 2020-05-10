@@ -32,7 +32,7 @@ class Trainer {
   void addPokemon (Pokemon ... p ) {
     for (int i = 0; i < p.length; i++) { 
       team.add(p[i]);
-      p[i].trainer = this.name;
+      p[i].trainer = this;
     }
   }
   
