@@ -9,7 +9,7 @@ class Pokemon {
   int[] battleStats;
   String ability;
   Move[] moveSet;
-  Boolean burn, freeze, paralysis, poison, sleep, flinch, badlyPoisoned, bound, cantEscape, confusion, curse, drain, heal, recoil, leech, recover, repeat, protect;
+  Boolean burn, freeze, paralysis, poison, sleep, attract, flinch, badlyPoisoned, bound, cantEscape, confusion, curse, drain, heal, recoil, leech, recover, repeat, protect;
   int attackSMp, attackSMn, defenseSMp, defenseSMn, spAttackSMp, spAttackSMn, spDefenseSMp, spDefenseSMn, speedSMp, speedSMn, accuracySMp, accuracySMn, evasionSMp, evasionSMn;
   String item;
   Trainer trainer;
@@ -57,7 +57,7 @@ class Pokemon {
     } else 
     this.type2 = "";
 
-    this.burn = this.freeze = this.paralysis = this.poison = this.sleep = this.flinch = this.badlyPoisoned = this.recover = this.protect
+    this.burn = this.freeze = this.paralysis = this.poison = this.sleep = this.attract = this.flinch = this.badlyPoisoned = this.recover = this.protect
     = this.bound = this.cantEscape = this.confusion = this.curse = this.heal = this.drain = this.recoil = this.leech = this.repeat = false;
 
     attackSMp = attackSMn = defenseSMp = defenseSMn = spAttackSMp = spAttackSMn = spDefenseSMp = spDefenseSMn = speedSMp
@@ -208,7 +208,7 @@ class Pokemon {
       this.battleStats[i] = this.stats[i];
     }
 
-    this.burn = this.freeze = this.paralysis = this.poison = this.sleep = this.flinch = this.badlyPoisoned = this.recover = this.protect
+    this.burn = this.freeze = this.paralysis = this.poison = this.sleep = this.attract = this.flinch = this.badlyPoisoned = this.recover = this.protect
       = this.bound = this.cantEscape = this.confusion = this.curse = this.heal = this.drain = this.recoil = this.leech = this.repeat = false;
   }
 
@@ -379,6 +379,7 @@ class Pokemon {
     float randomP = random(0, 1);
     float randomC = random(0, 1);
     float randomF = random(0, 1);
+    float randomA = random(0, 1);
     int randomRepeat = int(random(2, 5));
     float criticalRandom = random(0, 100);
     boolean condition = true;
@@ -405,8 +406,8 @@ class Pokemon {
     
     if (mv.currPowerPoints >= 0) {
       if ((chanceToHit <= ((mv.accuracy*100)*(this.adjustedStages))) || mv.accuracy == 0) {   
-        if (!(this.flinch && !this.ability.equals("Inner Focus")) && !this.sleep && (!(this.paralysis && (randomP <= 0.25)) || (this.type.equals("Electric") || this.type2.equals("Electric"))) 
-          && (!(this.confusion && (randomC <= 0.33)) && (!(this.freeze && (randomF <= 0.2)) || (this.type.equals("Ice") || this.type2.equals("Ice"))))) {
+        if (!(this.flinch && !this.ability.equals("Inner Focus")) && !this.sleep && !(this.attract && (randomA <= 0.5)) && (!(this.paralysis && (randomP <= 0.25)) || (this.type.equals("Electric") || this.type2.equals("Electric"))) 
+          && !(this.confusion && (randomC <= 0.33)) && (!(this.freeze && (randomF <= 0.2)) || (this.type.equals("Ice") || this.type2.equals("Ice")))) {
 
           if (mv.type.equals(this.type) || mv.type.equals(this.type2)) {
             mv.power *= 1.5;
@@ -572,6 +573,9 @@ class Pokemon {
               println(this.name, "uses", mv.name, "and hits", target.name, "for", str(damage), "damage! (" + int((float((target.currHealth + damage) - target.currHealth)/target.health)*100) + "%)", target.name, "now has", target.currHealth, "health! ("
                 + int((float(target.currHealth)/target.health)*100) + "%)");
             }
+          }
+          if (this.attract) {
+            println(this.name, "is immobilized by love!");
           }
           if (this.confusion) {
             if (this.confusionCounter > 0) {

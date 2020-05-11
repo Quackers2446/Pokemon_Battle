@@ -54,6 +54,8 @@ void setup() {
   Move glare = new Move("Glare", 20, 0, 0, "Normal", "Status", 0, "Paralysis", 1);
   Move protect = new Move("Protect", 10, 0, 0, "Normal", "Status", 4, "Protect", 1);
   Move strength = new Move("Strength", 15, 80, 1, "Normal", "Physical", 0, "none", 0);
+  Move nobleRoar = new Move("Noble Roar", 48, 0, 1, "Normal", "Status", 0, "Sp.Attack-/Attack-", 1);
+  Move attract = new Move("Attract", 24, 0, 1, "Normal", "Status", 0, "Attract", 1);
 
   //FIRE
   Move ember = new Move("Ember", 25, 40, 1, "Fire", "Special", 0, "Burn", 0.1);
@@ -129,6 +131,7 @@ void setup() {
   Move smog = new Move("Sludge", 20, 30, 0.7, "Poison", "Special", 0, "Poison", 0.4);  
   Move poisonJab = new Move("Poison Jab", 20, 80, 1, "Poison", "Physical", 0, "Poison", 0.3);
   Move acidArmor = new Move("Acid Armor", 20, 0, 0, "Poison", "Status", 0, "Defense++", 1);  
+  Move coil = new Move("Coil", 32, 0, 0, "Poison", "Status", 0, "Attack+/Defense+", 1);  
 
   //DRAGON
   Move dragonRage = new Move("Dragon Rage", 10, 40, 1, "Dragon", "Special", 0, "none", 0);
@@ -634,6 +637,26 @@ void setup() {
   Pokemon duraludon = new Pokemon("Duraludon", "Steel/Dragon", 42, 70, 95, 115, 120, 50, 85);
   duraludon.moveSet(dracoMeteor, flashCannon, thunderbolt, darkPulse);
   
+  //Level 37 Inteleon
+  Pokemon inteleon = new Pokemon("Inteleon", "Water", 37, 70, 85, 65, 125, 65, 120);
+  inteleon.moveSet(uTurn, suckerPunch, snipeShot, tearfulLook);
+  
+  //Level 32 Centiscorch
+  Pokemon centiscorch = new Pokemon("Centiscorch", "Fire/Bug", 32, 100, 115, 65, 90, 90, 65);
+  centiscorch.moveSet(coil, flameWheel, bite, bugBite);
+  
+  //Level 36 Sandaconda
+  Pokemon sandaconda = new Pokemon("Sandaconda", "Ground", 36, 72, 107, 125, 65, 70, 71);
+  sandaconda.moveSet(dig, glare, brutalSwing, bulldoze);
+  
+  //Level 33 Toxtricity
+  Pokemon toxtricity = new Pokemon("Toxtricity", "Electric/Poison", 33, 75, 98, 70, 114, 70, 75);
+  toxtricity.moveSet(toxic, nobleRoar, screech, spark);
+  
+  //Level 35 Frosmoth
+  Pokemon frosmoth = new Pokemon("Frosmoth", "Ice/Bug", 35, 70, 65, 60, 125, 90, 65);
+  frosmoth.moveSet(bugBuzz, featherDance, auroraBeam, attract);
+  
   //CASSIE
 
   //Level 34 Shelgon
@@ -772,7 +795,6 @@ void setup() {
 
 
   Battle battle = new Battle(zofia, wild);
-  
   
   //dratini.moveSet(twister, slam, dragonRage, thunderWave);
 

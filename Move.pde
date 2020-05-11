@@ -174,6 +174,14 @@ class Move {
           target.sleepCounter = int(random(1,3));
           target.sleep = true;
         }
+      } else if (firstStatus.equals("Attract") && !target.attract) {
+        chance = random(0, 1);
+
+        if (chance <= this.statusProb) {
+          println(target.name, "fell in love with", this.name + "!");
+          
+          target.attract = true;
+        }
       } else if (firstStatus.equals("Leech") && !target.leech) {
         chance = random(0, 1);
 
