@@ -258,12 +258,12 @@ void setup() {
   //TRAINER POKEMON
 
   //ZOFIA
-  //Level 42 Charizard
-  Pokemon charizard = new Pokemon("Charizard", "Fire/Flying", 42, 78, 84, 78, 109, 85, 100); 
+  //Level 43 Charizard
+  Pokemon charizard = new Pokemon("Charizard", "Fire/Flying", 43, 78, 84, 78, 109, 85, 100); 
   charizard.moveSet(heatWave, dragonClaw, roost, airSlash);
 
-  //Level 24 Scyther
-  Pokemon scyther = new Pokemon("Scyther", "Bug/Flying", 24, 70, 110, 80, 55, 80, 105);
+  //Level 26 Scyther
+  Pokemon scyther = new Pokemon("Scyther", "Bug/Flying", 26, 70, 110, 80, 55, 80, 105);
   scyther.moveSet(pursuit, vacuumWave, wingAttack, agility);
 
   //Level 44 Lapras
@@ -278,12 +278,12 @@ void setup() {
   Pokemon magnemite = new Pokemon("Magnemite", "Electric/Steel", 28, 25, 35, 70, 95, 55, 45);
   magnemite.moveSet(spark, mirrorShot, thunderWave, supersonic);
 
-  //Level 31 Mimikyu
-  Pokemon mimikyu = new Pokemon("Mimikyu", "Ghost/Fairy", 31, 55, 90, 80, 50, 105, 96);
+  //Level 32 Mimikyu
+  Pokemon mimikyu = new Pokemon("Mimikyu", "Ghost/Fairy", 32, 55, 90, 80, 50, 105, 96);
   mimikyu.moveSet(woodHammer, shadowSneak, feintAttack, charm);
 
-  //Level 31 G-Max Drednaw
-  Pokemon drednaw = new Pokemon("Drednaw", "Water/Rock", 31, 90, 115, 90, 48, 68, 74);
+  //Level 33 G-Max Drednaw
+  Pokemon drednaw = new Pokemon("Drednaw", "Water/Rock", 33, 90, 115, 90, 48, 68, 74);
   drednaw.moveSet(rockPolish, rockSlide, razorShell, crunch);
   drednaw.maxLevel = 0;
 
@@ -394,8 +394,8 @@ void setup() {
   Pokemon dreepy = new Pokemon("Dreepy", "Dragon/Ghost", 29, 28, 60, 30, 40, 20, 82);
   dreepy.moveSet(astonish, infestation, quickAttack, bite);
 
-  //Level 30 Appletun
-  Pokemon appletun = new Pokemon("Appletun", "Grass/Dragon", 30, 110, 85, 80, 100, 80, 30);
+  //Level 31 Appletun
+  Pokemon appletun = new Pokemon("Appletun", "Grass/Dragon", 31, 110, 85, 80, 100, 80, 30);
   appletun.moveSet(ironDefense, leechSeed, recover, headbutt);
 
   //JOANNA
@@ -755,7 +755,7 @@ void setup() {
   cassie.giveItem("Leftovers", porygonZ);
   ashley.giveItem("Sitrus Berry", gyarados, lucario, ampharos, pupitar, altaria, metang);
   joanna.giveItem("Sitrus Berry", vulpix);
-
+  
   //gyarados.moveSet(bite, twister, thrash, iceFang);
   //lucario.moveSet(auraSphere, quickAttack, detect, swordsDance);
   //ampharos.moveSet(dragonPulse, firePunch, thunderPunch, takeDown);
@@ -766,7 +766,7 @@ void setup() {
   //PLS UPDATE.
   //For fuschia gym | randomSeed(11); 
 
-  randomSeed(26);
+  randomSeed(27);
   // alcremie.moveSet(dazzlingGleam, drainingKiss, tackle, acidArmor);
   //  weezing.moveSet(heatWave, fairyWind, sludge, assurance);
 
