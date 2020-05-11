@@ -316,7 +316,8 @@ void setup() {
   Pokemon seel = new Pokemon("Seel", "Water", 24, 65, 45, 55, 45, 70, 45);
   seel.moveSet(headbutt, iceBeam, iceShard, surf);
 
- //Level 29 Snover
+
+  //Level 29 Snover
   Pokemon snover = new Pokemon("Snover", "Grass/Ice", 29, 60, 62, 50, 62, 60, 40);
   snover.moveSet(leer, icyWind, razorLeaf, iceShard);
 
