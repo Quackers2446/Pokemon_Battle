@@ -593,367 +593,413 @@ class Move {
       }
     }
     
-    if ( status2.equals("")) {
+    if (status2.equals("")) {
     } else {
-      if ( status2.equals("Burn")) {
+      if (status2.equals("Burn")) {
         chance = random(0, 1);
 
         if (chance <= this.statusProb && !target.burn) {
-          println();
           println(target.name, "was burned!");
           
           target.burn = true;
         }
-      } else if ( status2.equals("Freeze")) {
+      } else if (status2.equals("Freeze")) {
         chance = random(0, 1);
 
         if (chance <= this.statusProb && !target.freeze) {
-          println();
           println(target.name, "was frozen!");
           
           target.freeze = true;
         }
-      } else if ( status2.equals("Paralysis") && !(target.type.equals("Electric") || target.type2.equals("Electric"))) {
+      } else if (status2.equals("Paralysis") && !(target.type.equals("Electric") || target.type2.equals("Electric"))) {
         chance = random(0, 1);
 
         if (chance <= this.statusProb && !target.paralysis) {
           target.battleStats[5] = int(target.battleStats[5]*0.75);
           target.paralysis = true;
           
-          println();
           println(target.name, "was paralyzed!");
         }
-      } else if ( status2.equals("Poison") && !target.poison) {
+      } else if (status2.equals("Poison") && !target.poison) {
         chance = random(0, 1);
 
         if (chance <= this.statusProb) {
-          println();
           println(target.name, "was poisoned!");
           
           target.poison = true;
         }
-      } else if ( status2.equals("Badly Poisoned") && !target.badlyPoisoned) {
+      } else if (status2.equals("Badly Poisoned") && !target.badlyPoisoned) {
         chance = random(0, 1);
 
         if (chance <= this.statusProb) {
-          println();
           println(target.name, "was badly poisoned!");
           
           target.poisonCounter = 1;
           target.badlyPoisoned = true;
         }
-      } else if ( status2.equals("Sleep") && !target.sleep) {
+      } else if (status2.equals("Sleep") && !target.sleep) {
         chance = random(0, 1);
 
         if (chance <= this.statusProb) {
-          println();
           println(target.name, "fell asleep!");
           
           target.sleepCounter = int(random(1,3));
           target.sleep = true;
         }
-      } else if ( status2.equals("Leech") && !target.leech) {
+      } else if (status2.equals("Attract") && !target.attract) {
         chance = random(0, 1);
 
         if (chance <= this.statusProb) {
-          println();
+          println(target.name, "fell in love with", this.name + "!");
+          
+          target.attract = true;
+        }
+      } else if (status2.equals("Leech") && !target.leech) {
+        chance = random(0, 1);
+
+        if (chance <= this.statusProb) {
           println(target.name, "was seeded!");
           
           target.leech = true;
         }
-      } else if ( status2.equals("Flinch") && !target.flinch && !target.ability.equals("Inner Focus")) {
+      } else if (status2.equals("Flinch") && !target.flinch && !target.ability.equals("Inner Focus")) {
         chance = random(0, 1);
 
         if (chance <= this.statusProb) {
-          println();
           println(target.name, "flinched!");
           
           target.flinch = true;
         }
-      } else if ( status2.equals("Confusion") && !target.confusion) {
+      } else if (status2.equals("Confusion") && !target.confusion) {
         chance = random(0, 1);
 
         if (chance <= this.statusProb) {
-          println();
           println(target.name, "was confused!");
         
           target.confusionCounter = int(random(1, 4));
           target.confusion = true;
         }
-      } else if ( status2.equals("Recoil")) {
+      } else if (status2.equals("Recoil")) {
         chance = random(0, 1);
 
         if (chance <= this.statusProb) {
           target.recoil = true;
         }
-      } else if ( status2.equals("Attack-")) {
+      } else if (status2.equals("Attack-")) {
         chance = random(0, 1);
 
         if (chance <= this.statusProb) {
           if (target.attackSMn < 6) {
-            println();
             println(target.name + "'s attack fell!");
             
             target.attackSMn += 1;
             target.battleStats[1] = int(float(2*target.stats[1])/(target.attackSMn));
           }
         }
-      } else if ( status2.equals("Attack--")) {
+      } else if (status2.equals("Attack--")) {
         chance = random(0, 1);
 
         if (chance <= this.statusProb) {
           if (target.attackSMn < 6) {
-            println();
             println(target.name + "'s attack greatly fell!");
             
             target.attackSMn += 2;
             target.battleStats[1] = int(float(2*target.stats[1])/(target.attackSMn));
           }
         }
-      } else if ( status2.equals("Attack+")) {
+      } else if (status2.equals("Attack+")) {
         chance = random(0, 1);
 
         if (chance <= this.statusProb) {
           if (user.attackSMp < 6) {
-            println();
             println(user.name + "'s attack rose!");
 
             user.attackSMp += 1;
             user.battleStats[1] = int(float((user.attackSMp)*user.stats[1])/2);
           }
         }
-      } else if ( status2.equals("Attack++")) {
+      } else if (status2.equals("Attack++")) {
         chance = random(0, 1);
         
         if (chance <= this.statusProb) {
           if (user.attackSMp < 6) {
-            println();
             println(user.name + "'s attack greatly rose!");
 
             user.attackSMp += 2;
             user.battleStats[1] = int(float((user.attackSMp)*user.stats[1])/2);
           }
         }
-      } else if ( status2.equals("Sp.Attack+")) {
+      } else if (status2.equals("Sp.Attack+")) {
         chance = random(0, 1);
 
         if (chance <= this.statusProb) {
           if (user.spAttackSMp < 6) {
-            println();
             println(user.name + "'s special attack rose!");
 
             user.spAttackSMp += 1;
             user.battleStats[3] = int(float((user.spAttackSMp)*user.stats[3])/2);
           }
         }
-      } else if ( status2.equals("Sp.Attack++")) {
+      } else if (status2.equals("Sp.Attack++")) {
         chance = random(0, 1);
 
         if (chance <= this.statusProb) {
           if (user.spAttackSMp < 6) {
-            println();
             println(user.name + "'s special attack greatly rose!");
 
             user.spAttackSMp += 2;
             user.battleStats[3] = int(float((user.spAttackSMp)*user.stats[3])/2);
           }
         }
-      } else if ( status2.equals("Sp.Attack-")) {
+      } else if (status2.equals("Sp.Attack-")) {
         chance = random(0, 1);
 
         if (chance <= this.statusProb) {
           if (target.spAttackSMn < 6) {
-            println();
             println(target.name + "'s special attack fell!");
             
             target.spAttackSMn += 1;
             target.battleStats[3] = int((2*target.stats[3])/float(target.spAttackSMn));
           }
         }
-      } else if ( status2.equals("Sp.Attack--")) {
+      } else if (status2.equals("Sp.Attack--")) {
         chance = random(0, 1);
 
         if (chance <= this.statusProb) {
           if (target.spAttackSMn < 6) {
-            println();
             println(target.name + "'s special attack greatly fell!");
             
             target.spAttackSMn += 2;
             target.battleStats[3] = int((2*target.stats[3])/float(target.spAttackSMn));
           }
         }
-      } else if ( status2.equals("Defense-")) {
+      } else if (status2.equals("Defense-")) {
         chance = random(0, 1);
 
         if (chance <= this.statusProb) {
           if (target.defenseSMn < 6) {
-            println();
             println(target.name + "'s defense fell!");
             
             target.defenseSMn += 1;
             target.battleStats[2] = int((2*target.stats[2])/float(target.defenseSMn));
           }
         }
-      } else if ( status2.equals("Defense--")) {
+      } else if (status2.equals("Defense--")) {
         chance = random(0, 1);
 
         if (chance <= this.statusProb) {
           if (target.defenseSMn < 6) {
-            println();
             println(target.name + "'s defense greatly fell!");
             
             target.defenseSMn += 2;
             target.battleStats[2] = int((2*target.stats[2])/float(target.defenseSMn));
           }
         }
-      } else if ( status2.equals("Defense+")) {
+      } else if (status2.equals("Defense+")) {
         chance = random(0, 1);
 
         if (chance <= this.statusProb) {
           if (user.defenseSMp < 6) {
-            println();
             println(user.name + "'s defense rose!");
             
             user.defenseSMp += 1;
             user.battleStats[2] = int(float((user.defenseSMp)*user.stats[2])/2);
           }
         }
-      } else if ( status2.equals("Sp.Defense-")) {
+      } else if (status2.equals("Defense++")) {
+        chance = random(0, 1);
+
+        if (chance <= this.statusProb) {
+          if (user.defenseSMp < 6) {
+            println(user.name + "'s defense greatly rose!");
+            
+            user.defenseSMp += 2;
+            user.battleStats[2] = int(float((user.defenseSMp)*user.stats[2])/2);
+          }
+        }
+      } else if (status2.equals("Sp.Defense-")) {
         chance = random(0, 1);
 
         if (chance <= this.statusProb) {
           if (target.spDefenseSMn < 6) {
-            println();
             println(target.name + "'s special defense fell!");
             
             target.spDefenseSMn += 1;
             target.battleStats[4] = int((2.0*target.stats[4])/float(target.spDefenseSMn));
           }
         }
-      } else if ( status2.equals("Sp.Defense+")) {
+      } else if (status2.equals("Sp.Defense+")) {
         chance = random(0, 1);
 
         if (chance <= this.statusProb) {
           if (user.spDefenseSMp < 6) {
-            println();
             println(user.name + "'s special defense rose!");
 
             user.spDefenseSMp += 1;
             user.battleStats[4] = int(float((user.spDefenseSMp+1)*user.stats[4])/2);
           }
         }
-      } else if ( status2.equals("Sp.Defense++")) {
+      } else if (status2.equals("Sp.Defense++")) {
         chance = random(0, 1);
 
         if (chance <= this.statusProb) {
           if (user.spDefenseSMp < 6) {
-            println();
             println(user.name + "'s special defense greatly rose!");
             
             user.spDefenseSMp += 2;
             user.battleStats[4] = int(float((user.spDefenseSMp)*user.stats[4])/2);
           }
         }
-      } else if ( status2.equals("Speed+")) {
+      } else if (status2.equals("Speed+")) {
         chance = random(0, 1);
 
         if (chance <= this.statusProb) {
           if (user.speedSMp < 6) {
-            println();
             println(user.name + "'s speed rose!");
             
             user.speedSMp += 1;
             user.battleStats[5] = int(float((user.speedSMp)*user.stats[5])/2);
           }
         }
-      } else if ( status2.equals("Speed++")) {
+      } else if (status2.equals("Speed++")) {
         chance = random(0, 1);
 
         if (chance <= this.statusProb) {
           if (user.speedSMp < 6) {
-            println();
             println(user.name + "'s speed greatly rose!");
 
             user.speedSMp += 2;
             user.battleStats[5] = int(float((user.speedSMp+2)*user.stats[5])/2);
           }
         }
-      } else if ( status2.equals("Speed-")) {
+      } else if (status2.equals("Speed-")) {
         chance = random(0, 1);
 
         if (chance <= this.statusProb) {
           if (target.speedSMn < 6) {
-            println();
             println(target.name + "'s speed fell!");
             
             target.speedSMn += 1;
             target.battleStats[5] = int((2*target.stats[5])/float(target.speedSMn));
           }
         }
-      } else if ( status2.equals("Speed--")) {
+      } else if (status2.equals("Speed--")) {
         chance = random(0, 1);
 
         if (chance <= this.statusProb) {
           if (target.speedSMn < 6) {
-            println();
             println(target.name + "'s speed greatly fell!");
             
             target.speedSMn += 2;
             target.battleStats[5] = int((2*target.stats[5])/float(target.speedSMn));
           }
         }
-      } else if ( status2.equals("Accuracy-") && !target.ability.equals("Keen Eye")) {
+      } else if (status2.equals("U.Speed-")) {
+        chance = random(0, 1);
+
+        if (chance <= this.statusProb) {
+          if (user.speedSMn < 6) {
+            println(user.name + "'s speed fell!");
+            
+            user.speedSMn += 1;
+            user.battleStats[5] = int((2*user.stats[5])/float(user.speedSMn));
+          }
+        }
+      } else if (status2.equals("U.Defense-")) {
+        chance = random(0, 1);
+
+        if (chance <= this.statusProb) {
+          if (user.defenseSMn < 6) {
+            println(user.name + "'s defense fell!");
+            
+            user.defenseSMn += 1;
+            user.battleStats[2] = int((2*user.stats[2])/float(user.defenseSMn));
+          }
+        }
+      } else if (status2.equals("U.Defense--")) {
+        chance = random(0, 1);
+
+        if (chance <= this.statusProb) {
+          if (user.defenseSMn < 6) {
+            println(user.name + "'s defense greatly fell!");
+            
+            user.defenseSMn += 2;
+            user.battleStats[2] = int((2*user.stats[2])/float(user.defenseSMn));
+          }
+        }
+      } else if (status2.equals("U.Sp.Attack--")) {
+        chance = random(0, 1);
+
+        if (chance <= this.statusProb) {
+          if (user.spAttackSMn < 6) {
+            println(user.name + "'s special attack greatly fell!");
+            
+            user.spAttackSMn += 2;
+            user.battleStats[3] = int((2*user.stats[3])/float(user.spAttackSMn));
+          }
+        }
+      } else if (status2.equals("U.Sp.Defense-")) {
+        chance = random(0, 1);
+
+        if (chance <= this.statusProb) {
+          if (user.spDefenseSMn < 6) {
+            println(user.name + "'s special defense fell!");
+            
+            user.spDefenseSMn += 1;
+            user.battleStats[4] = int((2.0*user.stats[4])/float(user.spDefenseSMn));
+          }
+        }
+      } else if (status2.equals("Accuracy-") && !target.ability.equals("Keen Eye")) {
         chance = random(0, 1);
 
         if (chance <= this.statusProb) {
           if (target.accuracySMn < 6) {
-            println();
             println(target.name + "'s accuracy fell!");
             
             target.accuracySMn += 1;
             target.adjustedStages = float(target.evasionSMp)/float(target.accuracySMn);
           }
         }
-      } else if ( status2.equals("Accuracy+")) {
+      } else if (status2.equals("Accuracy+")) {
         chance = random(0, 1);
 
         if (chance <= this.statusProb) {
           if (user.accuracySMp < 6) {
-            println();
             println(user.name + "'s accuracy rose!");
+            
             user.accuracySMp += 1;
             user.adjustedStages = float(user.accuracySMp)/float(user.evasionSMn);
           }
         }
-      } else if ( status2.equals("Evasion+")) {
+      } else if (status2.equals("Evasion+")) {
         chance = random(0, 1);
 
         if (chance <= this.statusProb) {
           if (user.evasionSMp < 6) {
-            println();
             println(user.name + "'s evasion rose!");
+            
             user.evasionSMp += 1;
             user.adjustedStages = float(user.evasionSMp)/float(user.accuracySMn);
           }
         }
-      } else if ( status2.equals("Evasion-")) {
+      } else if (status2.equals("Evasion-")) {
         chance = random(0, 1);
 
         if (chance <= this.statusProb) {
           if (target.evasionSMn < 6) {
-            println();
             println(target.name + "'s evasion fell!");
+            
             target.evasionSMn += 1;
             target.adjustedStages = float(target.evasionSMn)/float(target.accuracySMn);
           }
         }
-      } else if ( status2.equals("Drain")) {
+      } else if (status2.equals("Drain")) {
         chance = random(0, 1);
 
         if (chance <= this.statusProb) {
           target.drain = true;
         }
-      } else if ( status2.equals("Heal")) {
+      } else if (status2.equals("Heal")) {
         chance = random(0, 1);
 
         if (chance <= this.statusProb) {
@@ -967,7 +1013,6 @@ class Move {
           if (user.currHealth > user.health)
             user.currHealth = user.health;
             
-          println();
           println(user.name, "healed by 50% and is now at", user.currHealth, "health! (" + int((float(user.currHealth)/user.health)*100) + "%)");
         }
       } else if (status2.equals("Rest") && !target.sleep) {
@@ -982,9 +1027,40 @@ class Move {
           user.sleep = true;
           user.sleepCounter = 2;
           
-          println();
           println(user.name, "healed to max and was cured from all status conditions.");
           println(user.name, "rested and fell asleep.");
+        }
+      } else if (status2.equals("DestroyItem")) {
+        chance = random(0, 1);
+
+        if (chance <= this.statusProb && (!target.item.equals("none"))) {
+          println();
+          println(user.name, "destroyed", target.name + "'s", target.item);
+          
+          target.item = "none";
+        }
+      } else if (status2.equals("Repeat")) {
+        chance = random(0, 1);
+
+        if (chance <= this.statusProb) {
+          user.repeat = true;
+        }
+      } else if (status2.equals("Protect")) {
+        chance = random(0, 1);
+
+        if (chance <= this.statusProb) {
+          user.protect = true;
+        }
+      } else if (status2.equals("Cure")) {
+        chance = random(0, 1);
+
+        if (chance <= this.statusProb) {
+          for (int i = 0; i < user.trainer.team.size(); i++) {
+            Pokemon p = user.trainer.team.get(i);
+            p.burn = p.freeze = p.paralysis = p.poison = p.sleep = p.flinch = p.badlyPoisoned = p.confusion = false;
+          }
+          
+          println("The entire party has been cured of major status effects.");
         }
       }
     }
