@@ -103,6 +103,7 @@ void setup() {
   Move withdraw = new Move("Withdraw", 64, 0, 0, "Water", "Status", 0, "Defense+", 1);
   Move snipeShot = new Move("Snipe Shot", 15, 80, 1, "Water", "Special", 0, "none", 0);
   Move razorShell = new Move("Razor Shell", 10, 75, 0.95, "Water", "Physical", 0, "Defense-", 0.5);
+  Move liquidation = new Move("Liquidation", 10, 85, 1, "Water", "Physical", 0, "Defense-", 0.2);
 
   //ROCK
   Move rollout = new Move("Rollout", 20, 30, 0.9, "Rock", "Physical", 0, "none", 0);
@@ -566,9 +567,13 @@ void setup() {
   Pokemon mantine = new Pokemon("Mantine", "Water/Flying", 38, 85, 40, 70, 80, 140, 70);
   mantine.moveSet(psybeam, roost, waterPulse, signalBeam);
 
-  //Level 32 Steelix
-  Pokemon steelix = new Pokemon("Steelix", "Steel/Ground", 32, 75, 85, 200, 55, 65, 30);
+  //Level 42 Steelix
+  Pokemon steelix = new Pokemon("Steelix", "Steel/Ground", 42, 75, 85, 200, 55, 65, 30);
   steelix.moveSet(thunderFang, iceFang, fireFang, dragonBreath);
+  
+  //Level 42 Mega Steelix
+  Pokemon megaSteelix = new Pokemon("Mega Steelix", "Steel/Ground", 42, 75, 125, 230, 55, 95, 30);
+  megaSteelix.moveSet(thunderFang, iceFang, fireFang, dragonBreath);
 
   //Level 36 Meganium
   Pokemon meganium = new Pokemon("Meganium", "Grass", 36, 80, 82, 100, 83, 100, 80);
@@ -645,12 +650,12 @@ void setup() {
   
   //CYNTHIA
   
-  //Level 42 Duraludon
-  Pokemon duraludon = new Pokemon("Duraludon", "Steel/Dragon", 42, 70, 95, 115, 120, 50, 85);
+  //Level 43 Duraludon
+  Pokemon duraludon = new Pokemon("Duraludon", "Steel/Dragon", 43, 70, 95, 115, 120, 50, 85);
   duraludon.moveSet(dracoMeteor, flashCannon, thunderbolt, darkPulse);
   
-  //Level 37 Inteleon
-  Pokemon inteleon = new Pokemon("Inteleon", "Water", 37, 70, 85, 65, 125, 65, 120);
+  //Level 39 Inteleon
+  Pokemon inteleon = new Pokemon("Inteleon", "Water", 39, 70, 85, 65, 125, 65, 120);
   inteleon.moveSet(uTurn, suckerPunch, snipeShot, tearfulLook);
   
   //Level 32 Centiscorch
@@ -661,8 +666,8 @@ void setup() {
   Pokemon sandaconda = new Pokemon("Sandaconda", "Ground", 36, 72, 107, 125, 65, 70, 71);
   sandaconda.moveSet(dig, glare, brutalSwing, bulldoze);
   
-  //Level 36 Toxtricity
-  Pokemon toxtricity = new Pokemon("Toxtricity", "Electric/Poison", 36, 75, 98, 70, 114, 70, 75);
+  //Level 37 Toxtricity
+  Pokemon toxtricity = new Pokemon("Toxtricity", "Electric/Poison", 37, 75, 98, 70, 114, 70, 75);
   toxtricity.moveSet(toxic, nobleRoar, screech, spark);
   
   //Level 35 Frosmoth
@@ -693,7 +698,11 @@ void setup() {
   
   //Level 40 Aerodactyl
   Pokemon aerodactyl = new Pokemon("Aerodactyl", "Rock/Flying", 40, 80, 105, 65, 60, 75, 130);
-  aerodactyl.moveSet(crunch, ancientPower, thunderFang, ironHead);
+  aerodactyl.moveSet(crunch, rockSlide, thunderFang, ironHead);
+  
+  //Level 40 Mega Aerodactyl
+  Pokemon megaAerodactyl = new Pokemon("Mega Aerodactyl", "Rock/Flying", 40, 80, 135, 85, 60, 95, 150);
+  megaAerodactyl.moveSet(crunch, rockSlide, thunderFang, ironHead);
   
   //Level 42 Machamp
   Pokemon machamp = new Pokemon("Machamp", "Fighting", 42, 90, 130, 80, 65, 85, 55);
@@ -763,10 +772,11 @@ void setup() {
   Trainer ashley = new Trainer("Ashley");
 
   Trainer ltSurge = new Trainer("Lt. Surge");
+  Trainer leo = new Trainer("Leo");
   Trainer randomTrainer = new Trainer("Random");
   Trainer wild = new Trainer("Wild");
 
-  zofia.addPokemon(charizard, scyther, lapras, magnemite, kingler, mimikyu);
+  zofia.addPokemon(megaCharizardX, scyther, lapras, magnemite, kingler, mimikyu);
   jasmine.addPokemon(megaPidgeot, arcanine, braixen, snover, espeon, alcremie);
   barnabas.addPokemon(diglett, spearow, weepinbell, mankey, magikarp, rhydon);
   nicholas.addPokemon(dratini, vileplume, dreepy, megaSwampert, snorlax, appletun);
@@ -776,23 +786,24 @@ void setup() {
 
   theGuy.addPokemon(golduck);
   cynthia.addPokemon(duraludon, inteleon, centiscorch, sandaconda, toxtricity, frosmoth);
-  cassie.addPokemon(shelgon, alolanSandslash, arbok, vaporeon, machamp, porygonZ);
+  cassie.addPokemon(shelgon, alolanSandslash, megaAerodactyl, vaporeon, machamp, porygonZ);
   ashley.addPokemon(gyarados, lucario, ampharos, pupitar, altaria, metang);
 
   ltSurge.addPokemon(voltorb, ltPikachu, ltRaichu);
+  leo.addPokemon(hitmontop, mantine, megaSteelix, meganium, shuckle, slugma);
   randomTrainer.addPokemon(koffing, muk, koffing, weezing);
   wild.addPokemon(galarianWeezing);
 
   printPokemon();
   printCharizard();
 
-  zofia.giveItem("Sitrus Berry", charizard, scyther, lapras, magnemite, mimikyu, drednaw);
+  zofia.giveItem("Sitrus Berry", scyther, lapras, magnemite, mimikyu, drednaw);
   zofia.giveItem("Leftovers", kingler);
   jasmine.giveItem("Sitrus Berry", arcanine, snover, seel, alcremie);
   jasmine.giveItem("Leftovers", espeon, braixen);
   nicholas.giveItem("Sitrus Berry", dratini, vileplume, ponyta, kadabra);
   nicholas.giveItem("Leftovers", appletun, snorlax);
-  cassie.giveItem("Sitrus Berry", shelgon, alolanSandslash, arbok, vaporeon, gliscor);
+  cassie.giveItem("Sitrus Berry", shelgon, alolanSandslash, arbok, vaporeon);
   cassie.giveItem("Leftovers", porygonZ);
   ashley.giveItem("Sitrus Berry", gyarados, lucario, ampharos, pupitar, altaria, metang);
   joanna.giveItem("Sitrus Berry", vulpix);
@@ -820,6 +831,7 @@ void setup() {
   nicholas.showTeam();
   cynthia.showTeam();
   cassie.showTeam();
+  leo.showTeam();
   
   
   //dratini.moveSet(twister, slam, dragonRage, thunderWave);
