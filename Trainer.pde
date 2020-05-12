@@ -109,19 +109,34 @@ class Trainer {
   }
   
   void showTeam () {
+    int avgLevel = 0;
     println("* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *");    
     println(this.name + "'s Team:");
     println();
     println("Name:\t\tType:\t\tLevel:");
     
     for (int i = 0; i < team.size(); i++) {
-      if (this.team.get(i).type.length() > 10) {
-        println(this.team.get(i).name + "\t\t" + this.team.get(i).type + "\t" + this.team.get(i).level);
+      if (this.team.get(i).name.length() > 10) {
+        if (this.team.get(i).type.length() > 10) {
+          println(this.team.get(i).name + "\t" + this.team.get(i).type + "\t" + this.team.get(i).level);
+        }
+        else  {
+          println(this.team.get(i).name + "\t" + this.team.get(i).type + "\t\t" + this.team.get(i).level);
+        }
       }
       else {
-        println(this.team.get(i).name + "\t\t" + this.team.get(i).type + "\t\t" + this.team.get(i).level);
+        if (this.team.get(i).type.length() > 10) {
+          println(this.team.get(i).name + "\t\t" + this.team.get(i).type + "\t" + this.team.get(i).level);
+        }
+        else  {
+          println(this.team.get(i).name + "\t\t" + this.team.get(i).type + "\t\t" + this.team.get(i).level);
+        }
       }
+      avgLevel += this.team.get(i).level;
     }
+    
+    println();
+    println("Team Avg. Level:", avgLevel/this.team.size());
 
     println("* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *");
     println();

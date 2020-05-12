@@ -89,7 +89,7 @@ class Pokemon {
   void raidStats() {
     this.raidPokemon = true;
 
-    int h = int(((((((this.stats[0] + 31)*2 + int(sqrt(252)/4))*this.level)/100)) + this.level + 10)*2.25);
+    int h = int(((((((this.stats[0] + 31)*2 + int(sqrt(252)/4))*this.level)/100)) + this.level + 10)*1.5);
     this.stats[0] = h;
     this.health = h;
     this.currHealth = h;
@@ -663,7 +663,9 @@ class Pokemon {
     }
     
     if (this.max) {
-      if (this.maxTurns < 2) {
+      if (this.raidPokemon){}
+      else{
+      if ((this.maxTurns < 2)) {
         this.maxTurns += 1;
       }
       else {
@@ -673,6 +675,7 @@ class Pokemon {
         
         println("* * *", this.name, "returned back to their original size!", this.name, "now has", this.currHealth, "health! ("+ int((float(this.currHealth)/this.health)*100) + "%) * * *");
         
+      }
       }
     }
   }
