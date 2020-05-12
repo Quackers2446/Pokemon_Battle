@@ -263,9 +263,13 @@ void setup() {
   //TRAINER POKEMON
 
   //ZOFIA
-  //Level 43 Charizard
-  Pokemon charizard = new Pokemon("Charizard", "Fire/Flying", 43, 78, 84, 78, 109, 85, 100); 
+  //Level 44 Charizard
+  Pokemon charizard = new Pokemon("Charizard", "Fire/Flying", 44, 78, 84, 78, 109, 85, 100); 
   charizard.moveSet(heatWave, dragonClaw, roost, airSlash);
+  
+  //Level 44 Mega Charizard X
+  Pokemon megaCharizardX = new Pokemon("Mega Charizard X", "Fire/Dragon", 44, 78, 130, 111, 130, 85, 100); 
+  megaCharizardX.moveSet(heatWave, dragonClaw, roost, airSlash);
 
   //Level 26 Scyther
   Pokemon scyther = new Pokemon("Scyther", "Bug/Flying", 26, 70, 110, 80, 55, 80, 105);
@@ -657,8 +661,8 @@ void setup() {
   Pokemon sandaconda = new Pokemon("Sandaconda", "Ground", 36, 72, 107, 125, 65, 70, 71);
   sandaconda.moveSet(dig, glare, brutalSwing, bulldoze);
   
-  //Level 33 Toxtricity
-  Pokemon toxtricity = new Pokemon("Toxtricity", "Electric/Poison", 33, 75, 98, 70, 114, 70, 75);
+  //Level 36 Toxtricity
+  Pokemon toxtricity = new Pokemon("Toxtricity", "Electric/Poison", 36, 75, 98, 70, 114, 70, 75);
   toxtricity.moveSet(toxic, nobleRoar, screech, spark);
   
   //Level 35 Frosmoth
@@ -686,6 +690,10 @@ void setup() {
   //Level 33 Gliscor
   Pokemon gliscor = new Pokemon("Gliscor", "Ground/Flying", 33, 75, 95, 125, 45, 75, 95);
   gliscor.moveSet(poisonJab, acrobatics, uTurn, knockOff);
+  
+  //Level 40 Aerodactyl
+  Pokemon aerodactyl = new Pokemon("Aerodactyl", "Rock/Flying", 40, 80, 105, 65, 60, 75, 130);
+  aerodactyl.moveSet(crunch, ancientPower, thunderFang, ironHead);
   
   //Level 42 Machamp
   Pokemon machamp = new Pokemon("Machamp", "Fighting", 42, 90, 130, 80, 65, 85, 55);
