@@ -60,7 +60,7 @@ class Trainer {
     }
     
     else if (item.equals("Sitrus Berry")) {
-      p.currHealth += p.health/4;
+      p.currHealth += p.stats[0]/4;
     }
     
     else if (item.equals("Sweet Heart")) {

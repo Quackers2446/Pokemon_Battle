@@ -257,6 +257,7 @@ void setup() {
   Move calmMind = new Move("Calm Mind", 32, 0, 0, "Psychic", "Status", 0, "Sp.Attack+/Sp.Defense+", 1);
   Move rest = new Move("Rest", 16, 0, 0, "Psychic", "Status", 0, "Rest", 1);
   Move futureSight = new Move("Future Sight", 10, 120, 1, "Psychic", "Special", 0, "none", 0);  
+  Move mistBall = new Move("Mist Ball", 5, 70, 1, "Psychic", "Special", 0, "Special-", 0.5);  
 
   // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // 
   //                                                    (Base stats)
@@ -287,8 +288,8 @@ void setup() {
   Pokemon kingler = new Pokemon("Kingler", "Water", 35, 55, 130, 115, 50, 50, 75);
   kingler.moveSet (bubbleBeam, stomp, mudShot, metalClaw);
 
-  //Level 28 Magnemite
-  Pokemon magnemite = new Pokemon("Magnemite", "Electric/Steel", 28, 25, 35, 70, 95, 55, 45);
+  //Level 29 Magnemite
+  Pokemon magnemite = new Pokemon("Magnemite", "Electric/Steel", 29, 25, 35, 70, 95, 55, 45);
   magnemite.moveSet(spark, mirrorShot, thunderWave, supersonic);
 
   //Level 32 Mimikyu
@@ -298,7 +299,7 @@ void setup() {
   //Level 33 G-Max Drednaw
   Pokemon drednaw = new Pokemon("Drednaw", "Water/Rock", 33, 90, 115, 90, 48, 68, 74);
   drednaw.moveSet(rockPolish, rockSlide, razorShell, crunch);
-  drednaw.maxLevel = 0;
+  drednaw.maxLevel = 2;
 
   //JASMINE
   //Level 44 Mega Pidgeot
@@ -336,10 +337,12 @@ void setup() {
   //Level 33 Alcremie
   Pokemon alcremie = new Pokemon("Alcremie", "Fairy", 33, 65, 60, 75, 110, 121, 64);
   alcremie.moveSet(dazzlingGleam, drainingKiss, tackle, acidArmor);
+  alcremie.maxLevel = 1;
   
-  //Level 47 Falinks
-  Pokemon falinks = new Pokemon("Falinks", "Fighting", 47, 65, 100, 100, 70, 60, 75);
+  //Level 33 Falinks
+  Pokemon falinks = new Pokemon("Falinks", "Fighting", 33, 65, 100, 100, 70, 60, 75);
   falinks.moveSet(bulkUp, rockSmash, headbutt, protect);
+  falinks.maxLevel = 0;
 
   //BARNABUS
   //Level 9 Diglett
@@ -407,8 +410,8 @@ void setup() {
   Pokemon exeggcute = new Pokemon("Exeggcute", "Grass/Psychic", 21, 60, 40, 80, 60, 45, 40);
   exeggcute.moveSet(bulletSeed, uproar, leechSeed, stunSpore);
 
-  //Level 29 Dreepy
-  Pokemon dreepy = new Pokemon("Dreepy", "Dragon/Ghost", 29, 28, 60, 30, 40, 20, 82);
+  //Level 36 Dreepy
+  Pokemon dreepy = new Pokemon("Dreepy", "Dragon/Ghost", 36, 28, 60, 30, 40, 20, 82);
   dreepy.moveSet(astonish, infestation, quickAttack, bite);
 
   //Level 32 Appletun
@@ -646,18 +649,17 @@ void setup() {
   Pokemon galarianWeezing = new Pokemon("Galarian Weezing", "Poison/Fairy", 37, 65, 90, 120, 85, 70, 60);
   weezing.moveSet(heatWave, fairyWind, sludge, assurance);
   
-  //Level 50 Latias
-  Pokemon latias = new Pokemon("Latias", "Dragon/Psychic", 50, 80, 80, 90, 110, 130, 110);
-  latias.moveSet(iceBeam, psyShock, calmMind, recover);
+  //Level 51 Latias
+  Pokemon latias = new Pokemon("Latias", "Dragon/Psychic", 51, 80, 80, 90, 110, 130, 110);
+  latias.moveSet(dragonBreath, mistBall, calmMind, recover);
   
   latias.raidStats();
   latias.dynamax();
 
-
   //IMPORTANT NPC POKEMON
 
   //CYNTHIA
-  //Level 43 Duraludon
+  //Level 44 Duraludon
   Pokemon duraludon = new Pokemon("Duraludon", "Steel/Dragon", 43, 70, 95, 115, 120, 50, 85);
   duraludon.moveSet(dracoMeteor, flashCannon, thunderbolt, darkPulse);
 
@@ -677,7 +679,7 @@ void setup() {
   Pokemon toxtricity = new Pokemon("Toxtricity", "Electric/Poison", 37, 75, 98, 70, 114, 70, 75);
   toxtricity.moveSet(toxic, nobleRoar, screech, spark);
 
-  //Level 35 Frosmoth
+  //Level 36 Frosmoth
   Pokemon frosmoth = new Pokemon("Frosmoth", "Ice/Bug", 35, 70, 65, 60, 125, 90, 65);
   frosmoth.moveSet(bugBuzz, featherDance, auroraBeam, attract);
 
@@ -822,37 +824,36 @@ void setup() {
   //PLS UPDATE.
   //For fuschia gym | randomSeed(11); 
 
-  randomSeed(30);
+  randomSeed(31);
   
   //latias.moveSet(iceBeam, psyShock, calmMind, recover);
   
   //falinks.moveSet(bulkUp, rockSmash, headbutt, firstImpression);
 
   Battle battle = new Battle(zofia, wild);
-  falinks.raidStats();
-  falinks.dynamax();
   
-  battle.move(falinks, firstImpression, scyther, wingAttack);
-  battle.move(falinks, rockSmash, espeon, futureSight);
-  battle.move(falinks, rockSmash, megaSwampert, rockSlide);
+  //falinks.raidStats();
+  //falinks.dynamax();
   
-  battle.move(falinks, headbutt, scyther, agility);
-  battle.move(falinks, headbutt, espeon, psybeam);
-  battle.move(falinks, firstImpression, megaSwampert, rockSlide);
+  //battle.move(falinks, firstImpression, scyther, wingAttack);
+  //battle.move(falinks, rockSmash, espeon, futureSight);
+  //battle.move(falinks, rockSmash, megaSwampert, rockSlide);
   
-  battle.move(falinks, headbutt, charizard, airSlash);
-  jasmine.useItem("Soda Pop", espeon);
-  falinks.useMove(headbutt, espeon);
-  battle.move(falinks, headbutt, megaSwampert, rockSlide);
+  //battle.move(falinks, headbutt, scyther, agility);
+  //battle.move(falinks, headbutt, espeon, psybeam);
+  //battle.move(falinks, firstImpression, megaSwampert, rockSlide);
   
-  battle.move(falinks, rockSmash, charizard, airSlash);
-  battle.move(falinks, headbutt, espeon, psybeam);
-  falinks.useMove(rockSmash, appletun);
+  //battle.move(falinks, headbutt, charizard, airSlash);
+  //jasmine.useItem("Soda Pop", espeon);
+  //falinks.useMove(headbutt, espeon);
+  //battle.move(falinks, headbutt, megaSwampert, rockSlide);
   
-  battle.move(falinks, rockSmash, charizard, airSlash);
+  //battle.move(falinks, rockSmash, charizard, airSlash);
+  //battle.move(falinks, headbutt, espeon, psybeam);
+  //falinks.useMove(rockSmash, appletun);
   
-  charizard.describe();
-  
+  //battle.move(falinks, rockSmash, charizard, airSlash);
+    
   //shelgon.moveSet(dragonBreath, bite, headbutt, ember);
 
   //alolanSandslash.moveSet(icicleCrash, slash, icicleSpear, metalClaw);

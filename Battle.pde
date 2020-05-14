@@ -279,9 +279,9 @@ class Battle {
   void checkBerry(Pokemon oneP, Pokemon twoP) {
     if (oneP.item.equals("Sitrus Berry") && oneP.currHealth <= (oneP.health/2) && oneP.currHealth > 0) {
       if (oneP.ability.equals("Ripen"))
-        oneP.currHealth += int(float(oneP.health)/4);
-        
-      oneP.currHealth += int(float(oneP.health)/4);
+        oneP.currHealth += int(float(oneP.stats[0])/4);
+
+      oneP.currHealth += int(float(oneP.stats[0])/4);
       
       if (oneP.currHealth > oneP.health)
         oneP.currHealth = oneP.health;
@@ -368,9 +368,10 @@ class Battle {
   }
   
   void recover(Pokemon p) {
-    //for (int i = 0; i < p.moveSet.length; i++) {
-    //  p.moveSet[i].currPowerPoints = p.moveSet[i].powerPoints;
-    //}
+    for (int i = 0; i < p.moveSet.length; i++) {
+      p.moveSet[i].currPowerPoints = p.moveSet[i].powerPoints;
+    }
+    
     for (int i = 0; i < 6; i++) {
       p.battleStats[i] = p.stats[i];
     }

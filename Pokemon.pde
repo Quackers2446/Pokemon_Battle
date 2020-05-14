@@ -28,6 +28,7 @@ class Pokemon {
   String[] formerMove;
   String[] formerStatus;
   String[] formerStatus2;
+  Float[] formerStatusProb;
 
   Pokemon (String n, String t, int l, int hp, 
     int att, int def, int satt, int sdef, int spd) {
@@ -86,6 +87,7 @@ class Pokemon {
     this.formerMove = new String[4];
     this.formerStatus = new String[4];
     this.formerStatus2 = new String[4];
+    this.formerStatusProb = new Float[4];
   }
 
   void raidStats() {
@@ -100,6 +102,7 @@ class Pokemon {
   
   void dynamax() {
     this.max = true;
+    
     if (!this.raidPokemon) {
       this.health *= (1.5 + (this.maxLevel*0.05));
       this.currHealth *= (1.5 + (this.maxLevel*0.05));
@@ -193,6 +196,8 @@ class Pokemon {
         }
       }
       
+      this.moveSet[i].statusProb = 1;
+            
       this.moveSet[i].power *= 1.5;
     }
   }
@@ -207,6 +212,7 @@ class Pokemon {
       this.moveSet[i].name = this.formerMove[i];
       this.moveSet[i].status = this.formerStatus[i];
       this.moveSet[i].status2 = this.formerStatus2[i];
+      this.moveSet[i].statusProb = this.formerStatusProb[i];
       
       this.moveSet[i].power /= 1.5;
     }
@@ -389,6 +395,11 @@ class Pokemon {
     formerStatus2[1] = mv2.status2;
     formerStatus2[2] = mv3.status2;
     formerStatus2[3] = mv4.status2;
+    
+    formerStatusProb[0] = mv1.statusProb;
+    formerStatusProb[1] = mv2.statusProb;
+    formerStatusProb[2] = mv3.statusProb;
+    formerStatusProb[3] = mv4.statusProb;
   }
 
   void useMove(Move mv, Pokemon target) {
@@ -651,12 +662,11 @@ class Pokemon {
       }
 
       if (this.heal) {
-        int amtHealed = int(float(this.health)*int(mv.status2));
-        this.currHealth += int(float(this.health)*int(mv.status2));
-        
-        println(this.health, ":", mv.status2);
-        
+        int amtHealed = int(this.health*float(mv.status2));
+        this.currHealth += int(this.health*float(mv.status2));
+                
         if (this.currHealth > this.health) {
+          amtHealed = 0;
           this.currHealth = this.health;
         }
 
