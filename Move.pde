@@ -111,6 +111,21 @@ class Move {
     this.counter = 0;
     this.status2Prob = this.statusProb;
   }
+  
+  void describe() {
+    println("* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *");    
+    println(this.name);
+    println();
+    println("PP:\tPower:\tAccuracy: \tDamage Catagory:");
+
+    println( str(this.currPowerPoints) + "/" + str(this.powerPoints) + " \t" + str(this.power) + " \t" + str(round(this.accuracy*100)) + "% \t" + this.damageCatagory);
+    println();
+    
+    println("Effects:", this.status, this.status2);
+
+    println("* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *");
+    println();
+  }
 
   void condition (Pokemon user, Pokemon target) {
     String firstStatus = this.status;
@@ -525,13 +540,13 @@ class Move {
         chance = random(0, 1);
 
         if (chance <= this.statusProb) {
-          target.drain = true;
+          user.drain = true;
         }
       } else if (firstStatus.equals("Heal")) {
         chance = random(0, 1);
 
         if (chance <= this.statusProb) {
-          target.heal = true;
+          user.heal = true;
         }
       } else if (firstStatus.equals("Recover")) {
         chance = random(0, 1);

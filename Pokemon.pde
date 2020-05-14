@@ -27,6 +27,7 @@ class Pokemon {
   int maxTurns;
   String[] formerMove;
   String[] formerStatus;
+  String[] formerStatus2;
 
   Pokemon (String n, String t, int l, int hp, 
     int att, int def, int satt, int sdef, int spd) {
@@ -84,12 +85,13 @@ class Pokemon {
     this.maxTurns = 0;
     this.formerMove = new String[4];
     this.formerStatus = new String[4];
+    this.formerStatus2 = new String[4];
   }
 
   void raidStats() {
     this.raidPokemon = true;
 
-    int h = int(((((((this.stats[0] + 31)*2 + int(sqrt(252)/4))*this.level)/100)) + this.level + 10)*1.5);
+    int h = int(((((((this.stats[0] + 31)*2 + int(sqrt(252)/4))*this.level)/100)) + this.level + 10)*2);
     this.stats[0] = h;
     this.health = h;
     this.currHealth = h;
@@ -98,13 +100,18 @@ class Pokemon {
   
   void dynamax() {
     this.max = true;
-    this.health *= (1.5 + (this.maxLevel*0.05));
-    this.currHealth *= (1.5 + (this.maxLevel*0.05));
-    this.battleStats[0] = this.health;
-    
+    if (!this.raidPokemon) {
+      this.health *= (1.5 + (this.maxLevel*0.05));
+      this.currHealth *= (1.5 + (this.maxLevel*0.05));
+      this.battleStats[0] = this.health;
+    }
     for (int i = 0; i < 4; i++) {
+      this.moveSet[i].status = "";
+      this.moveSet[i].status2 = "";
+      
       if (this.moveSet[i].damageCatagory.equals("Status")) {
         this.moveSet[i].name = "Max Guard";
+        this.moveSet[i].status = "Protect";
       }
       else if (this.moveSet[i].type.equals("Normal")) {
         this.moveSet[i].name = ("Max Strike");
@@ -175,8 +182,15 @@ class Pokemon {
         this.moveSet[i].status = "Sp.Defense-";
       }
       else if (this.moveSet[i].type.equals("Fairy")) {
-        this.moveSet[i].name = ("Max Starfall");
-        this.moveSet[i].status = "Misty Terrain";
+        if (this.name.equals("Alcremie")) {
+          this.moveSet[i].name = ("G-Max Finale");
+          this.moveSet[i].status = "Heal";
+          this.moveSet[i].status2 = "0.16";
+        }
+        else {
+          this.moveSet[i].name = ("Max Starfall");
+          this.moveSet[i].status = "Misty Terrain";
+        }
       }
       
       this.moveSet[i].power *= 1.5;
@@ -192,6 +206,7 @@ class Pokemon {
     for (int i = 0; i < 4; i++) {
       this.moveSet[i].name = this.formerMove[i];
       this.moveSet[i].status = this.formerStatus[i];
+      this.moveSet[i].status2 = this.formerStatus2[i];
       
       this.moveSet[i].power /= 1.5;
     }
@@ -354,6 +369,7 @@ class Pokemon {
 
   void moveSet(Move mv1, Move mv2, Move mv3, Move mv4) {
     moveSet = new Move[4];
+    
     moveSet[0] = mv1;
     moveSet[1] = mv2;
     moveSet[2] = mv3;
@@ -368,6 +384,11 @@ class Pokemon {
     formerStatus[1] = mv2.status;
     formerStatus[2] = mv3.status;
     formerStatus[3] = mv4.status;
+    
+    formerStatus2[0] = mv1.status2;
+    formerStatus2[1] = mv2.status2;
+    formerStatus2[2] = mv3.status2;
+    formerStatus2[3] = mv4.status2;
   }
 
   void useMove(Move mv, Pokemon target) {
@@ -526,7 +547,7 @@ class Pokemon {
             println(this.name, "uses", mv.name, "and hits", target.name, "for", str(damage), "damage! (" + int((float((target.currHealth + damage) - target.currHealth)/target.health)*100) + "%)", target.name, "now has", target.currHealth, "health! ("
               + int((float(target.currHealth)/target.health)*100) + "%)");
           }
-
+          
           float r = random(0, 1);
           if (this.ability.equals("Shed Skin") && (r <= 0.33)) {
             if ((this.burn || this.freeze || this.paralysis || this.poison || this.sleep || this.badlyPoisoned || this.confusion || this.drain || this.leech)) {
@@ -538,7 +559,7 @@ class Pokemon {
             }
           }
 
-          if (target.drain) {
+          if (this.drain) {
             this.currHealth += int(damage/2);
 
             if (this.currHealth > this.health) {
@@ -548,7 +569,7 @@ class Pokemon {
             println();
             println(this.name, "is healed by", mv.name, "and heals", str(int(damage/2)), "health! (" + int((float(this.currHealth)/this.health)*100) + "%)");
 
-            target.drain = false;
+            this.drain = false;
           }
         } else { 
           if (this.flinch) {
@@ -598,56 +619,59 @@ class Pokemon {
 
     if (target.currHealth > 0) {
       if (target.burn && (!target.type.equals("Fire") || !target.type2.equals("Fire"))) {
-        target.currHealth -= int(float(target.health)/16);
+        target.currHealth -= int(float(target.stats[0])/16);
         println();
-        println(target.name, "is hurt by the burn, and takes", str(int(float(target.health)/16)), "damage! (" + int((float(target.currHealth)/target.health)*100) + "%)");
+        println(target.name, "is hurt by the burn, and takes", str(int(float(target.stats[0])/16)), "damage! (" + int((float(target.currHealth)/target.health)*100) + "%)");
       }
 
       if (target.poison && (!target.type.equals("Poison") || !target.type.equals("Steel") || !target.type2.equals("Poison") || !target.type2.equals("Steel"))) {
-        target.currHealth -= int(float(target.health)/16);
+        target.currHealth -= int(float(target.stats[0])/16);
         println();
-        println(target.name, "is hurt by poison, and takes", str(int(float(target.health)/16)), "damage! (" + int((float(target.currHealth)/target.health)*100) + "%)");
+        println(target.name, "is hurt by poison, and takes", str(int(float(target.stats[0])/16)), "damage! (" + int((float(target.currHealth)/target.health)*100) + "%)");
       }
 
       if (target.leech && (!target.type.equals("Grass") || !target.type2.equals("Grass"))) {
-        target.currHealth -= int(float(target.health)/8);
-        this.currHealth += int(float(target.health)/8);
+        target.currHealth -= int(float(target.stats[0])/8);
+        this.currHealth += int(float(target.stats[0])/8);
 
         if (this.currHealth > this.health)
           this.currHealth = this.health;
 
         println();
-        println(target.name, "is sapped by leech seed, and takes", str(int(float(target.health)/8)), "damage! (" + int((float(target.currHealth)/target.health)*100) + "%)");
+        println(target.name, "is sapped by leech seed, and takes", str(int(float(target.stats[0])/8)), "damage! (" + int((float(target.currHealth)/target.health)*100) + "%)");
         println();
-        println(this.name, "gains", str(int(float(target.health)/8)), "health! (" + int((float(this.currHealth)/this.health)*100) + "%)");
+        println(this.name, "gains", str(int(float(target.stats[0])/8)), "health! (" + int((float(this.currHealth)/this.health)*100) + "%)");
       }
 
       if (target.badlyPoisoned && (!target.type.equals("Poison") || !target.type.equals("Steel") || !target.type2.equals("Poison") || !target.type2.equals("Steel"))) {
-        target.currHealth -= int((float(target.health*this.poisonCounter))/16);
+        target.currHealth -= int((float(target.stats[0]*this.poisonCounter))/16);
         println();
-        println(target.name, "is badly hurt by poison, and takes", str(int((float(target.health*this.poisonCounter))/16)), "damage! (" + int((float(target.currHealth)/target.health)*100) + "%)");
+        println(target.name, "is badly hurt by poison, and takes", str(int((float(target.stats[0]*this.poisonCounter))/16)), "damage! (" + int((float(target.currHealth)/target.health)*100) + "%)");
         this.poisonCounter += 1;
       }
 
-      if (target.heal) {
-        this.currHealth += int(float(this.health)/16);
-
+      if (this.heal) {
+        int amtHealed = int(float(this.health)*int(mv.status2));
+        this.currHealth += int(float(this.health)*int(mv.status2));
+        
+        println(this.health, ":", mv.status2);
+        
         if (this.currHealth > this.health) {
           this.currHealth = this.health;
         }
 
         println();
-        println(this.name, "is healed and heals", str(int(float(this.health)/16)), "health! (" + int((float(this.currHealth)/this.health)*100) + "%)");
+        println(this.name, "is healed and heals", str(amtHealed), "health! (" + int((float(this.currHealth)/this.health)*100) + "%)");
+        
+        if (!mv.name.equals("Aqua Ring")) {
+          this.heal = false;
+        }
       }
 
       if (target.recoil) {
         Float percent = float(mv.status2);
 
         this.currHealth -= int(damage*percent);
-
-        if (this.currHealth > this.health) {
-          this.currHealth = this.health;
-        }
 
         println();
         println(this.name, "takes", str(int(damage*percent)), "damage from recoil! (" + int((float(this.currHealth)/this.health)*100) + "%)");
@@ -665,17 +689,17 @@ class Pokemon {
     if (this.max) {
       if (this.raidPokemon){}
       else{
-      if ((this.maxTurns < 2)) {
-        this.maxTurns += 1;
-      }
-      else {
-        println();
-        
-        this.unmax();
-        
-        println("* * *", this.name, "returned back to their original size!", this.name, "now has", this.currHealth, "health! ("+ int((float(this.currHealth)/this.health)*100) + "%) * * *");
-        
-      }
+        if ((this.maxTurns < 2)) {
+          this.maxTurns += 1;
+        }
+        else {
+          println();
+          
+          this.unmax();
+          
+          println("* * *", this.name, "returned back to their original size!", this.name, "now has", this.currHealth, "health! ("+ int((float(this.currHealth)/this.health)*100) + "%) * * *");
+          
+        }
       }
     }
   }
