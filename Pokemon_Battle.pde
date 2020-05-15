@@ -280,8 +280,8 @@ void setup() {
   Pokemon megaCharizardX = new Pokemon("Mega Charizard X", "Fire/Dragon", 45, 78, 130, 111, 130, 85, 100); 
   megaCharizardX.moveSet(heatWave, dragonClaw, roost, airSlash);
 
-  //Level 29 Scyther
-  Pokemon scyther = new Pokemon("Scyther", "Bug/Flying", 29, 70, 110, 80, 55, 80, 105);
+  //Level 31 Scyther
+  Pokemon scyther = new Pokemon("Scyther", "Bug/Flying", 31, 70, 110, 80, 55, 80, 105);
   scyther.moveSet(pursuit, furyCutter, wingAttack, agility);
 
   //Level 45 Lapras
@@ -292,22 +292,22 @@ void setup() {
   Pokemon kingler = new Pokemon("Kingler", "Water", 35, 55, 130, 115, 50, 50, 75);
   kingler.moveSet (bubbleBeam, stomp, mudShot, metalClaw);
 
-  //Level 30 Magneton
-  Pokemon magneton = new Pokemon("Magneton", "Electric/Steel", 30, 50, 60, 95, 120, 70, 70);
+  //Level 31 Magneton
+  Pokemon magneton = new Pokemon("Magneton", "Electric/Steel", 31, 50, 60, 95, 120, 70, 70);
   magneton.moveSet(triAttack, mirrorShot, zapCannon, metalSound);
 
-  //Level 35 Mimikyu
-  Pokemon mimikyu = new Pokemon("Mimikyu", "Ghost/Fairy", 35, 55, 90, 80, 50, 105, 96);
+  //Level 36 Mimikyu
+  Pokemon mimikyu = new Pokemon("Mimikyu", "Ghost/Fairy", 36, 55, 90, 80, 50, 105, 96);
   mimikyu.moveSet(woodHammer, shadowSneak, feintAttack, charm);
 
-  //Level 35 G-Max Drednaw
-  Pokemon drednaw = new Pokemon("Drednaw", "Water/Rock", 35, 90, 115, 90, 48, 68, 74);
+  //Level 37 G-Max Drednaw
+  Pokemon drednaw = new Pokemon("Drednaw", "Water/Rock", 37, 90, 115, 90, 48, 68, 74);
   drednaw.moveSet(rockPolish, rockSlide, razorShell, crunch);
   drednaw.maxLevel = 2;
 
   //JASMINE
-  //Level 44 Mega Pidgeot
-  Pokemon megaPidgeot = new Pokemon("Pidgeot", "Normal/Flying", 44, 83, 80, 80, 135, 80, 121);
+  //Level 45 Mega Pidgeot
+  Pokemon megaPidgeot = new Pokemon("Pidgeot", "Normal/Flying", 45, 83, 80, 80, 135, 80, 121);
   megaPidgeot.moveSet(hurricane, roost, featherDance, twister);
 
   //Level 45 Pidgeot
@@ -342,7 +342,7 @@ void setup() {
   Pokemon alcremie = new Pokemon("Alcremie", "Fairy", 33, 65, 60, 75, 110, 121, 64);
   alcremie.moveSet(dazzlingGleam, drainingKiss, tackle, acidArmor);
   alcremie.maxLevel = 1;
-  
+
   //Level 33 Falinks
   Pokemon falinks = new Pokemon("Falinks", "Fighting", 33, 65, 100, 100, 70, 60, 75);
   falinks.moveSet(bulkUp, rockSmash, headbutt, protect);
@@ -654,15 +654,15 @@ void setup() {
   //Level 37 Galarian Weezing
   Pokemon galarianWeezing = new Pokemon("Galarian Weezing", "Poison/Fairy", 37, 65, 90, 120, 85, 70, 60);
   weezing.moveSet(heatWave, fairyWind, sludge, assurance);
-  
+
   //Level 46 Stonjourner
   Pokemon stonjourner = new Pokemon("Stonjourner", "Rock", 46, 100, 125, 135, 20, 20, 70);
   stonjourner.moveSet(rockSlide, stealthRock, stomp, block);
-  
+
   //Level 51 Latias
   Pokemon latias = new Pokemon("Latias", "Dragon/Psychic", 51, 80, 80, 90, 110, 130, 110);
   latias.moveSet(dragonBreath, mistBall, calmMind, recover);
-  
+
   latias.raidStats();
   latias.dynamax();
 
@@ -742,8 +742,8 @@ void setup() {
 
 
   //ASHLEY
-  //Level 42 Gyarados
-  Pokemon gyarados = new Pokemon("Gyarados", "Water/Flying", 42, 95, 125, 79, 60, 100, 81);
+  //Level 44 Gyarados
+  Pokemon gyarados = new Pokemon("Gyarados", "Water/Flying", 44, 95, 125, 79, 60, 100, 81);
   gyarados.moveSet(bite, twister, thrash, iceFang);
 
   //Level 36 Lucario
@@ -813,8 +813,9 @@ void setup() {
   printPokemon();
   printCharizard();
 
-  zofia.giveItem("Sitrus Berry", scyther, lapras, magneton, mimikyu, drednaw);
-  zofia.giveItem("Leftovers", kingler);
+  zofia.giveItem("Sitrus Berry", mimikyu, magneton);
+  zofia.giveItem("Leftovers", lapras, kingler, drednaw);
+  zofia.giveItem("Berry Juice", scyther);
   jasmine.giveItem("Sitrus Berry", falinks, snover, seel, espeon);
   jasmine.giveItem("Leftovers", alcremie, arcanine);
   nicholas.giveItem("Sitrus Berry", dratini, vileplume, ponyta, kadabra);
@@ -836,43 +837,38 @@ void setup() {
 
   randomSeed(31);
   
-  //latias.moveSet(iceBeam, psyShock, calmMind, recover);
+  Battle b = new Battle(wild, randomTrainer);
   
+
+  //latias.moveSet(iceBeam, psyShock, calmMind, recover);
+
   //falinks.moveSet(bulkUp, rockSmash, headbutt, firstImpression);
 
   Battle battle = new Battle(zofia, wild);
-  
-  battle.move(arcanine, stealthRock, appletun, protect);
-  appletun.switchOut();
-  battle.move(arcanine, fireFang, alcremie, dazzlingGleam);
-  battle.move(arcanine, fireFang, alcremie, dazzlingGleam);
-  battle.move(arcanine, fireFang, alcremie, dazzlingGleam);
-  battle.move(arcanine, fireFang, alcremie, dazzlingGleam);
-  battle.move(arcanine, fireFang, alcremie, dazzlingGleam);
-  battle.move(arcanine, fireFang, alcremie, dazzlingGleam);
-  
+
+
   //falinks.raidStats();
   //falinks.dynamax();
-  
+
   //battle.move(falinks, firstImpression, scyther, wingAttack);
   //battle.move(falinks, rockSmash, espeon, futureSight);
   //battle.move(falinks, rockSmash, megaSwampert, rockSlide);
-  
+
   //battle.move(falinks, headbutt, scyther, agility);
   //battle.move(falinks, headbutt, espeon, psybeam);
   //battle.move(falinks, firstImpression, megaSwampert, rockSlide);
-  
+
   //battle.move(falinks, headbutt, charizard, airSlash);
   //jasmine.useItem("Soda Pop", espeon);
   //falinks.useMove(headbutt, espeon);
   //battle.move(falinks, headbutt, megaSwampert, rockSlide);
-  
+
   //battle.move(falinks, rockSmash, charizard, airSlash);
   //battle.move(falinks, headbutt, espeon, psybeam);
   //falinks.useMove(rockSmash, appletun);
-  
+
   //battle.move(falinks, rockSmash, charizard, airSlash);
-    
+
   //shelgon.moveSet(dragonBreath, bite, headbutt, ember);
 
   //alolanSandslash.moveSet(icicleCrash, slash, icicleSpear, metalClaw);

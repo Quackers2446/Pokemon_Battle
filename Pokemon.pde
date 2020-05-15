@@ -326,7 +326,7 @@ class Pokemon {
   void describe() {
     println("* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *");
     println("Name:\t", this.name);
-    println("Trainer:\t", this.trainer);
+    println("Trainer:\t", this.trainer.name);
     println("Type:\t", this.type + "/" + this.type2);
     println("Level:\t", this.level);
     println("Health:\t", this.currHealth+"/"+this.health);
