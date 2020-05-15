@@ -71,6 +71,7 @@ void setup() {
   Move heatWave = new Move("Heat Wave", 10, 95, 0.9, "Fire", "Special", 0, "Burn", 0.1);
   Move incinerate = new Move("Incinerate", 24, 60, 1, "Fire", "Special", 0, "DestroyItem", 1);
   Move flamethrower = new Move("Flamethrower", 15, 90, 1, "Fire", "Special", 0, "Burn", 0.1);
+  Move overheat = new Move("Overheat", 8, 130, 0.9, "Fire", "Special", 0, "Burn", 0.1);
 
   //GRASS
   Move absorb = new Move("Absorb", 25, 20, 1, "Grass", "Special", 0, "Drain", 1);
@@ -212,6 +213,7 @@ void setup() {
   Move mirrorShot = new Move("Mirror Shot", 10, 65, 0.85, "Steel", "Special", 0, "Accuracy-", 0.3);
   Move flashCannon = new Move("Flash Cannon", 16, 80, 1, "Steel", "Special", 0, "Sp.Defense-", 0.1);
   Move ironHead = new Move("Iron Head", 15, 80, 1, "Steel", "Physical", 0, "Flinch", 0.3);
+  Move metalSound = new Move("Metal Sound", 40, 0, 0.85, "Steel", "Status", 0, "Sp.Defense--", 0);
 
   //FLYING
   Move gust = new Move("Gust", 35, 40, 1, "Flying", "Special", 0, "none", 0);
@@ -280,24 +282,24 @@ void setup() {
   Pokemon scyther = new Pokemon("Scyther", "Bug/Flying", 29, 70, 110, 80, 55, 80, 105);
   scyther.moveSet(pursuit, furyCutter, wingAttack, agility);
 
-  //Level 44 Lapras
-  Pokemon lapras = new Pokemon("Lapras", "Water/Ice", 44, 130, 85, 80, 85, 95, 60);
+  //Level 45 Lapras
+  Pokemon lapras = new Pokemon("Lapras", "Water/Ice", 45, 130, 85, 80, 85, 95, 60);
   lapras.moveSet(waterPulse, sing, iceBeam, bodySlam);
 
   //Level 35 Kingler
   Pokemon kingler = new Pokemon("Kingler", "Water", 35, 55, 130, 115, 50, 50, 75);
   kingler.moveSet (bubbleBeam, stomp, mudShot, metalClaw);
 
-  //Level 29 Magnemite
-  Pokemon magnemite = new Pokemon("Magnemite", "Electric/Steel", 29, 25, 35, 70, 95, 55, 45);
-  magnemite.moveSet(spark, mirrorShot, thunderWave, supersonic);
+  //Level 30 Magneton
+  Pokemon magneton = new Pokemon("Magneton", "Electric/Steel", 30, 50, 60, 95, 120, 70, 70);
+  magneton.moveSet(triAttack, mirrorShot, zapCannon, metalSound);
 
-  //Level 32 Mimikyu
-  Pokemon mimikyu = new Pokemon("Mimikyu", "Ghost/Fairy", 32, 55, 90, 80, 50, 105, 96);
+  //Level 35 Mimikyu
+  Pokemon mimikyu = new Pokemon("Mimikyu", "Ghost/Fairy", 35, 55, 90, 80, 50, 105, 96);
   mimikyu.moveSet(woodHammer, shadowSneak, feintAttack, charm);
 
-  //Level 33 G-Max Drednaw
-  Pokemon drednaw = new Pokemon("Drednaw", "Water/Rock", 33, 90, 115, 90, 48, 68, 74);
+  //Level 35 G-Max Drednaw
+  Pokemon drednaw = new Pokemon("Drednaw", "Water/Rock", 35, 90, 115, 90, 48, 68, 74);
   drednaw.moveSet(rockPolish, rockSlide, razorShell, crunch);
   drednaw.maxLevel = 2;
 
@@ -471,7 +473,9 @@ void setup() {
   Pokemon drowzee = new Pokemon("Drowzee", "Psychic", 25, 60, 48, 45, 43, 90, 42);
   drowzee.moveSet(confusion, headbutt, hypnosis, pound);
 
-
+  //Level 29 Magnemite
+  Pokemon magnemite = new Pokemon("Magnemite", "Electric/Steel", 29, 25, 35, 70, 95, 55, 45);
+  magnemite.moveSet(spark, mirrorShot, thunderWave, supersonic);
 
   //Level 16 Jigglypuff
   Pokemon jigglypuff = new Pokemon("Jigglypuff", "Normal/Fairy", 16, 115, 45, 20, 45, 25, 20);
@@ -782,7 +786,7 @@ void setup() {
   Trainer randomTrainer = new Trainer("Random");
   Trainer wild = new Trainer("Wild");
 
-  zofia.addPokemon(megaCharizardX, scyther, lapras, magnemite, kingler, mimikyu);
+  zofia.addPokemon(megaCharizardX, scyther, lapras, magneton, drednaw, mimikyu);
   jasmine.addPokemon(megaPidgeot, arcanine, falinks, snover, espeon, alcremie);
   barnabas.addPokemon(diglett, spearow, weepinbell, mankey, magikarp, rhydon);
   nicholas.addPokemon(dratini, vileplume, dreepy, megaSwampert, snorlax, appletun);
@@ -803,7 +807,7 @@ void setup() {
   printPokemon();
   printCharizard();
 
-  zofia.giveItem("Sitrus Berry", scyther, lapras, magnemite, mimikyu, drednaw);
+  zofia.giveItem("Sitrus Berry", scyther, lapras, magneton, mimikyu, drednaw);
   zofia.giveItem("Leftovers", kingler);
   jasmine.giveItem("Sitrus Berry", falinks, snover, seel, espeon);
   jasmine.giveItem("Leftovers", alcremie, arcanine);
