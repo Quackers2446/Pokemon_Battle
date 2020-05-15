@@ -29,6 +29,8 @@ class Pokemon {
   String[] formerStatus;
   String[] formerStatus2;
   Float[] formerStatusProb;
+  int turnsOut;
+  Boolean sR;
 
   Pokemon (String n, String t, int l, int hp, 
     int att, int def, int satt, int sdef, int spd) {
@@ -60,10 +62,10 @@ class Pokemon {
     this.type2 = "";
 
     this.burn = this.freeze = this.paralysis = this.poison = this.sleep = this.attract = this.flinch = this.badlyPoisoned = this.recover = this.protect
-    = this.bound = this.cantEscape = this.confusion = this.curse = this.heal = this.drain = this.recoil = this.leech = this.repeat = false;
+      = this.bound = this.cantEscape = this.confusion = this.curse = this.heal = this.drain = this.recoil = this.leech = this.repeat = false;
 
     attackSMp = attackSMn = defenseSMp = defenseSMn = spAttackSMp = spAttackSMn = spDefenseSMp = spDefenseSMn = speedSMp
-    = speedSMn = accuracySMp = accuracySMn = evasionSMp = evasionSMn = 2;
+      = speedSMn = accuracySMp = accuracySMn = evasionSMp = evasionSMn = 2;
 
     this.accuracySMp = this.accuracySMn = this.evasionSMp = this.evasionSMn = 3;
 
@@ -80,7 +82,7 @@ class Pokemon {
     this.shieldHealth = 0;
     this.facedRaidShield = false;
     this.shieldDamage = 0;
-    
+
     this.max = false;
     this.maxLevel = 0;
     this.maxTurns = 0;
@@ -88,6 +90,10 @@ class Pokemon {
     this.formerStatus = new String[4];
     this.formerStatus2 = new String[4];
     this.formerStatusProb = new Float[4];
+
+    this.turnsOut = 0;
+
+    this.sR = false;
   }
 
   void raidStats() {
@@ -99,10 +105,10 @@ class Pokemon {
     this.currHealth = h;
     this.battleStats[0] = h;
   }
-  
+
   void dynamax() {
     this.max = true;
-    
+
     if (!this.raidPokemon) {
       this.health *= (1.5 + (this.maxLevel*0.05));
       this.currHealth *= (1.5 + (this.maxLevel*0.05));
@@ -111,113 +117,103 @@ class Pokemon {
     for (int i = 0; i < 4; i++) {
       this.moveSet[i].status = "";
       this.moveSet[i].status2 = "";
-      
+
       if (this.moveSet[i].damageCatagory.equals("Status")) {
         this.moveSet[i].name = "Max Guard";
         this.moveSet[i].status = "Protect";
-      }
-      else if (this.moveSet[i].type.equals("Normal")) {
+      } else if (this.moveSet[i].type.equals("Normal")) {
         this.moveSet[i].name = ("Max Strike");
         this.moveSet[i].status = "Speed-";
-      }
-      else if (this.moveSet[i].type.equals("Fighting")) {
+      } else if (this.moveSet[i].type.equals("Fighting")) {
         this.moveSet[i].name = ("Max Knuckle");
         this.moveSet[i].status = "Attack+";
-      }
-      else if (this.moveSet[i].type.equals("Flying")) {
+      } else if (this.moveSet[i].type.equals("Flying")) {
         this.moveSet[i].name = ("Max Airstream");
         this.moveSet[i].status = "Speed+";
-      }
-      else if (this.moveSet[i].type.equals("Poison")) {
+      } else if (this.moveSet[i].type.equals("Poison")) {
         this.moveSet[i].name = ("Max Ooze");
         this.moveSet[i].status = "Sp.Attack+";
-      }
-      else if (this.moveSet[i].type.equals("Ground")) {
+      } else if (this.moveSet[i].type.equals("Ground")) {
         this.moveSet[i].name = ("Max Quake");
         this.moveSet[i].status = "Sp.Defense+";
-      }
-      else if (this.moveSet[i].type.equals("Rock")) {
+      } else if (this.moveSet[i].type.equals("Rock")) {
         this.moveSet[i].name = ("Max Rockfall");
         this.moveSet[i].status = "Sandstorm";
-      }
-      else if (this.moveSet[i].type.equals("Bug")) {
+      } else if (this.moveSet[i].type.equals("Bug")) {
         this.moveSet[i].name = ("Max Flutterby");
         this.moveSet[i].status = "Sp.Attack-";
-      }
-      else if (this.moveSet[i].type.equals("Ghost")) {
+      } else if (this.moveSet[i].type.equals("Ghost")) {
         this.moveSet[i].name = ("Max Phantasm");
         this.moveSet[i].status = "Defense-";
-      }
-      else if (this.moveSet[i].type.equals("Steel")) {
+      } else if (this.moveSet[i].type.equals("Steel")) {
         this.moveSet[i].name = ("Max Steelspike");
         this.moveSet[i].status = "Defense+";
-      }
-      else if (this.moveSet[i].type.equals("Fire")) {
+      } else if (this.moveSet[i].type.equals("Fire")) {
         this.moveSet[i].name = ("Max Flare");
         this.moveSet[i].status = "Harsh Sunlight";
-      }
-      else if (this.moveSet[i].type.equals("Water")) {
+      } else if (this.moveSet[i].type.equals("Water")) {
         this.moveSet[i].name = ("Max Geyser");
         this.moveSet[i].status = "Rain";
-      }
-      else if (this.moveSet[i].type.equals("Grass")) {
+      } else if (this.moveSet[i].type.equals("Grass")) {
         this.moveSet[i].name = ("Max Overgrowth");
         this.moveSet[i].status = "Grassy Terrain";
-      }
-      else if (this.moveSet[i].type.equals("Electric")) {
+      } else if (this.moveSet[i].type.equals("Electric")) {
         this.moveSet[i].name = ("Max Lightning");
         this.moveSet[i].status = "Electric Terrain";
-      }
-      else if (this.moveSet[i].type.equals("Psychic")) {
+      } else if (this.moveSet[i].type.equals("Psychic")) {
         this.moveSet[i].name = ("Max Mindstorm");
         this.moveSet[i].status = "Psychic Terrain";
-      }
-      else if (this.moveSet[i].type.equals("Ice")) {
+      } else if (this.moveSet[i].type.equals("Ice")) {
         this.moveSet[i].name = ("Max Hailstorm");
         this.moveSet[i].status = "Hail";
-      }
-      else if (this.moveSet[i].type.equals("Dragon")) {
+      } else if (this.moveSet[i].type.equals("Dragon")) {
         this.moveSet[i].name = ("Max Wyrmwind");
         this.moveSet[i].status = "Attack-";
-      }
-      else if (this.moveSet[i].type.equals("Dark")) {
+      } else if (this.moveSet[i].type.equals("Dark")) {
         this.moveSet[i].name = ("Max Darkness");
         this.moveSet[i].status = "Sp.Defense-";
-      }
-      else if (this.moveSet[i].type.equals("Fairy")) {
+      } else if (this.moveSet[i].type.equals("Fairy")) {
         if (this.name.equals("Alcremie")) {
           this.moveSet[i].name = ("G-Max Finale");
           this.moveSet[i].status = "Heal";
           this.moveSet[i].status2 = "0.16";
-        }
-        else {
+        } else {
           this.moveSet[i].name = ("Max Starfall");
           this.moveSet[i].status = "Misty Terrain";
         }
       }
-      
+
       this.moveSet[i].statusProb = 1;
-            
+
       this.moveSet[i].power *= 1.5;
     }
   }
-  
+
   void unmax() {
     this.max = false;
     this.health = this.stats[0];
     this.currHealth /= (1.5 + (this.maxLevel*0.05));
     this.battleStats[0] = this.stats[0];
-    
+
     for (int i = 0; i < 4; i++) {
       this.moveSet[i].name = this.formerMove[i];
       this.moveSet[i].status = this.formerStatus[i];
       this.moveSet[i].status2 = this.formerStatus2[i];
       this.moveSet[i].statusProb = this.formerStatusProb[i];
-      
+
       this.moveSet[i].power /= 1.5;
     }
-    
+
     this.maxTurns = 0;
+  }
+
+  void switchOut() {
+    this.turnsOut = 0;
+    this.unmax();
+
+    for (int i = 0; i < 6; i++) {
+      this.battleStats[i] = this.stats[i];
+    }
   }
 
   void rest() {
@@ -287,10 +283,10 @@ class Pokemon {
 
     else if (this.name.equals("Tyranitar") || this.name.equals("Mega Tyranitar") || this.name.equals("Gigalith"))
       a = "Sand Stream";
-    
+
     else if (this.name.equals("Applin") || this.name.equals("Flapple") || this.name.equals("Appletun"))
       a = "Ripen";
-      
+
     else if (this.name.equals("Gastly") || this.name.equals("Haunter") || this.name.equals("Gengar") || 
       this.name.equals("Koffing") || this.name.equals("Weezing") || this.name.equals("Vibrava") || 
       this.name.equals("Flygon") || this.name.equals("Galarian Weezing"))
@@ -346,7 +342,7 @@ class Pokemon {
       print(battleStats[i] + "\t");
     }
     println();
-    
+
     println("* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *");
     println();
   }
@@ -375,27 +371,27 @@ class Pokemon {
 
   void moveSet(Move mv1, Move mv2, Move mv3, Move mv4) {
     moveSet = new Move[4];
-    
+
     moveSet[0] = mv1;
     moveSet[1] = mv2;
     moveSet[2] = mv3;
     moveSet[3] = mv4;
-    
+
     formerMove[0] = mv1.name;
     formerMove[1] = mv2.name;
     formerMove[2] = mv3.name;
     formerMove[3] = mv4.name;
-    
+
     formerStatus[0] = mv1.status;
     formerStatus[1] = mv2.status;
     formerStatus[2] = mv3.status;
     formerStatus[3] = mv4.status;
-    
+
     formerStatus2[0] = mv1.status2;
     formerStatus2[1] = mv2.status2;
     formerStatus2[2] = mv3.status2;
     formerStatus2[3] = mv4.status2;
-    
+
     formerStatusProb[0] = mv1.statusProb;
     formerStatusProb[1] = mv2.statusProb;
     formerStatusProb[2] = mv3.statusProb;
@@ -428,14 +424,14 @@ class Pokemon {
         target.facedRaidShield = true;
       }
     }
-    
+
     if (this.max) {
       if (this.maxTurns == 0) {
         println("* * *", this.name, "grew enourmous! * * *");
         println();
       }
     }
-    
+
     if (mv.currPowerPoints >= 0) {
       if ((chanceToHit <= ((mv.accuracy*100)*(this.adjustedStages))) || mv.accuracy == 0) {   
         if (!(this.flinch && !this.ability.equals("Inner Focus")) && !this.sleep && !(this.attract && (randomA <= 0.5)) && (!(this.paralysis && (randomP <= 0.25)) || (this.type.equals("Electric") || this.type2.equals("Electric"))) 
@@ -539,9 +535,7 @@ class Pokemon {
 
           if (condition)
             mv.condition(this, target);
-
           condition = true;
-
           if (this.repeat) {
             for (int i = 0; i < randomRepeat; i++) {
               target.currHealth -= damage;
@@ -558,7 +552,7 @@ class Pokemon {
             println(this.name, "uses", mv.name, "and hits", target.name, "for", str(damage), "damage! (" + int((float((target.currHealth + damage) - target.currHealth)/target.health)*100) + "%)", target.name, "now has", target.currHealth, "health! ("
               + int((float(target.currHealth)/target.health)*100) + "%)");
           }
-          
+
           float r = random(0, 1);
           if (this.ability.equals("Shed Skin") && (r <= 0.33)) {
             if ((this.burn || this.freeze || this.paralysis || this.poison || this.sleep || this.badlyPoisoned || this.confusion || this.drain || this.leech)) {
@@ -664,7 +658,7 @@ class Pokemon {
       if (this.heal) {
         int amtHealed = int(this.health*float(mv.status2));
         this.currHealth += int(this.health*float(mv.status2));
-                
+
         if (this.currHealth > this.health) {
           amtHealed = 0;
           this.currHealth = this.health;
@@ -672,7 +666,7 @@ class Pokemon {
 
         println();
         println(this.name, "is healed and heals", str(amtHealed), "health! (" + int((float(this.currHealth)/this.health)*100) + "%)");
-        
+
         if (!mv.name.equals("Aqua Ring")) {
           this.heal = false;
         }
@@ -695,20 +689,18 @@ class Pokemon {
       println(target.name, "has fainted!", this.name, "wins the battle!");
       target.currHealth = 0;
     }
-    
+
     if (this.max) {
-      if (this.raidPokemon){}
-      else{
+      if (this.raidPokemon) {
+      } else {
         if ((this.maxTurns < 2)) {
           this.maxTurns += 1;
-        }
-        else {
+        } else {
           println();
-          
+
           this.unmax();
-          
+
           println("* * *", this.name, "returned back to their original size!", this.name, "now has", this.currHealth, "health! ("+ int((float(this.currHealth)/this.health)*100) + "%) * * *");
-          
         }
       }
     }

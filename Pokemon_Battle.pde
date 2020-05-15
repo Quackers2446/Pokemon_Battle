@@ -58,6 +58,7 @@ void setup() {
   Move strength = new Move("Strength", 15, 80, 1, "Normal", "Physical", 0, "none", 0);
   Move nobleRoar = new Move("Noble Roar", 48, 0, 1, "Normal", "Status", 0, "Sp.Attack-/Attack-", 1);
   Move attract = new Move("Attract", 24, 0, 1, "Normal", "Status", 0, "Attract", 1);
+  Move block = new Move("Block", 5, 0, 0, "Normal", "Status", 0, "none", 0);
 
   //FIRE
   Move ember = new Move("Ember", 25, 40, 1, "Fire", "Special", 0, "Burn", 0.1);
@@ -115,6 +116,7 @@ void setup() {
   Move rockBlast = new Move("Rock Blast", 10, 25, 0.9, "Rock", "Physical", 0, "Repeat", 1);
   Move ancientPower = new Move("Ancient Power", 8, 60, 1, "Rock", "Special", 0, "Attack+/Sp.Attack+", 0.1);
   Move rockPolish = new Move("Rock Polish", 20, 0, 0, "Rock", "Status", 0, "Speed++", 1);
+  Move stealthRock = new Move("Stealth Rock", 20, 0, 0, "Rock", "Status", 0, "StealthRock", 1);
 
   //BUG
   Move struggleBug = new Move("Struggle Bug", 20, 50, 1, "Bug", "Special", 0, "Sp.Attack-", 1);
@@ -653,6 +655,10 @@ void setup() {
   Pokemon galarianWeezing = new Pokemon("Galarian Weezing", "Poison/Fairy", 37, 65, 90, 120, 85, 70, 60);
   weezing.moveSet(heatWave, fairyWind, sludge, assurance);
   
+  //Level 46 Stonjourner
+  Pokemon stonjourner = new Pokemon("Stonjourner", "Rock", 46, 100, 125, 135, 20, 20, 70);
+  stonjourner.moveSet(rockSlide, stealthRock, stomp, block);
+  
   //Level 51 Latias
   Pokemon latias = new Pokemon("Latias", "Dragon/Psychic", 51, 80, 80, 90, 110, 130, 110);
   latias.moveSet(dragonBreath, mistBall, calmMind, recover);
@@ -835,6 +841,15 @@ void setup() {
   //falinks.moveSet(bulkUp, rockSmash, headbutt, firstImpression);
 
   Battle battle = new Battle(zofia, wild);
+  
+  battle.move(arcanine, stealthRock, appletun, protect);
+  appletun.switchOut();
+  battle.move(arcanine, fireFang, alcremie, dazzlingGleam);
+  battle.move(arcanine, fireFang, alcremie, dazzlingGleam);
+  battle.move(arcanine, fireFang, alcremie, dazzlingGleam);
+  battle.move(arcanine, fireFang, alcremie, dazzlingGleam);
+  battle.move(arcanine, fireFang, alcremie, dazzlingGleam);
+  battle.move(arcanine, fireFang, alcremie, dazzlingGleam);
   
   //falinks.raidStats();
   //falinks.dynamax();

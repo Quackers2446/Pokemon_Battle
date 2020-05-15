@@ -605,6 +605,12 @@ class Move {
           
           println("The entire party has been cured of major status effects.");
         }
+      } else if (firstStatus.equals("StealthRock")) {
+        chance = random(0, 1);
+
+        if (chance <= this.statusProb) {
+          user.sR = true;
+        }
       }
     }
     

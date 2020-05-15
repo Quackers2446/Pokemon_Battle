@@ -5,6 +5,8 @@ class Battle {
   Pokemon[] turnOrder;
   String weather;
   int weatherCounter;
+  Boolean sR;
+  Move stealthRock;
 
   Battle (Trainer o, Trainer t) {
     this.one = o;
@@ -15,6 +17,9 @@ class Battle {
 
     this.weather = "Normal";
     this.weatherCounter = 0;
+    
+    this.sR = false;
+    this.stealthRock = new Move("Stealth Rock", 20, 0, 0, "Rock", "Status", 0, "StealthRock", 1);
   }
 
   void reset() {
@@ -27,12 +32,13 @@ class Battle {
       println("*   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *");
       println("A BATTLE BETWEEN", this.one.name.toUpperCase(), "AND", this.two.name.toUpperCase(), "HAS BEGUN! Lv.", str(oneP.level), oneP.name, "| Lv.", str(twoP.level), twoP.name);   
       println("*   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *");
-      enterBattleEffects(oneP, twoP);
-      enterBattleEffects(twoP, oneP);
     }
 
     println("Turn #" + str(this.turn));
     println();
+    
+    enterBattleEffects(oneP, twoP);
+    enterBattleEffects(twoP, oneP);
 
     if (oneP.currHealth == 0 || twoP.currHealth == 0) {
       println("One of the pokemon has already fainted, the battle cannot begin.");
@@ -41,7 +47,6 @@ class Battle {
       println();
       return;
     }
-
 
     if (mv1.currPowerPoints < 1) {
       println(mv1.name, "has run out of PP.");
@@ -76,6 +81,9 @@ class Battle {
       recover(twoP);
     }
     
+    oneP.turnsOut += 1;
+    twoP.turnsOut += 1;
+    
     turn += 1;
     println("*   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *");
     println();
@@ -102,14 +110,14 @@ class Battle {
     println("A BATTLE BETWEEN", this.one.name.toUpperCase(), "AND", this.two.name.toUpperCase(), "HAS BEGUN! Lv.", str(oneP.level), oneP.name, "| Lv.", str(twoP.level), twoP.name);   
     println("*   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *");
 
-    enterBattleEffects(oneP, twoP);
-    enterBattleEffects(twoP, oneP);
-
     while (oneP.currHealth > 0 && twoP.currHealth > 0) {
       println();
       println("Turn #" + str(turn));
       println();
-
+  
+      enterBattleEffects(oneP, twoP);
+      enterBattleEffects(twoP, oneP);
+      
       if (mv1.currPowerPoints < 1) {
         println(mv1.name, "has run out of PP.");
         println();
@@ -141,6 +149,9 @@ class Battle {
         recover(twoP);
       }
 
+      oneP.turnsOut += 1;
+      twoP.turnsOut += 1;
+      
       turn += 1;
       println("*   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *");
     }
@@ -158,23 +169,55 @@ class Battle {
     }
   }
 
-  void enterBattleEffects(Pokemon oneP, Pokemon twoP) {
-    if (oneP.ability.equals("Intimidate")) {
-      println();
-      println(twoP.name + "was intimidated. Their attack fell!");
-      println();
-
-      twoP.attackSMn += 1;
-      twoP.battleStats[1] = int(float(2*twoP.stats[1])/twoP.attackSMn);
+  void enterBattleEffects(Pokemon oneP, Pokemon twoP) {   
+    if (oneP.sR)
+      this.sR = true;
+    
+    if (oneP.turnsOut == 0) {
+      if (this.sR) {
+        float effective = stealthRock.typeEffectiveness(oneP);
+        float damage = 0;
+        if (effective == 0.25) {
+          damage = oneP.stats[0] * 0.03125;
+        } else if (effective == 0.5) {
+          damage = oneP.stats[0] * 0.0625;
+        } else if (effective == 1) {
+          damage = oneP.stats[0] * 0.125;
+        } else if (effective == 2) {
+          damage = oneP.stats[0] * 0.25;
+        } else if (effective == 3) {
+          damage = oneP.stats[0] * 0.5;
+        }
+        
+        damage = int(damage);
+        
+        oneP.currHealth -= damage;
+        
+        println("Pointed rocks poked", oneP.name + "! They lost", damage, "health. (" + int((float(oneP.currHealth)/oneP.health)*100) + "%)");
+        println();
+      }
+      
+      if (oneP.ability.equals("Intimidate")) {
+        println(twoP.name, "was intimidated. Their attack fell!");
+        println();
+  
+        twoP.attackSMn += 1;
+        twoP.battleStats[1] = int(float(2*twoP.stats[1])/twoP.attackSMn);
+      }
+  
+      if (oneP.ability.equals("Sand Stream") && !weather.equals("Sandstorm")) {
+        println(oneP.name + "'s Sand Stream whipped up a sandstorm!");
+        println();
+  
+        this.weather = "Sandstorm";
+        this.weatherCounter = 5;
+      }
     }
-
-    if (oneP.ability.equals("Sand Stream")) {
+    
+    if (oneP.currHealth < 1) {
       println();
-      println(oneP.name + "'s Sand Stream whipped up a sandstorm!");
-      println();
-
-      this.weather = "Sandstorm";
-      this.weatherCounter = 5;
+      println(oneP.name, "has fainted!", twoP.name, "wins the battle!");
+      oneP.currHealth = 0;
     }
   }
 
