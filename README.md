@@ -3,7 +3,7 @@ A project used for a Pokemon RPG with friends. Very far from being done.
 
 Right now what it can do:
 
-  Make Trainers, Pokemon, Moves, and Initiate Battles.
+  Have Trainers, Pokemon, and more! Battle eachother, and even join raids to fight dynamaxed pokemon!
   
   Trainers
   
@@ -12,12 +12,13 @@ Right now what it can do:
   Pokemon
   
     Calculate stats based off of it's base stats and level, 
-    Describe, Show Moves, Assign movesets,
+    Describe, Show Moves, Assign movesets, Assign abilities
     Use moves on other pokemon
+    Dynamaxing / Raid Status
     
   Moves
   
-    Assign conditions/statuses onto Pokemon, calculate type effectiveness
+    Assign conditions/statuses onto Pokemon, calculate type effectiveness, deal damage, change the weather
     
   Battles
   
@@ -26,3 +27,4 @@ Right now what it can do:
       Set turn order
       Use moves
       Eat berries
+      Weather changes
