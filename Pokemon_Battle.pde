@@ -92,6 +92,7 @@ void setup() {
   Move gravApple = new Move("Grav Apple", 10, 80, 1, "Grass", "Physical", 0, "Sp.Defense-", 0);
   Move appleAcid = new Move("Apple Acid", 100, 80, 1, "Grass", "Special", 0, "Sp.Defense-", 0);
   Move aromatherapy = new Move("Aromatherapy", 5, 0, 0, "Grass", "Status", 0, "Cure", 1);
+  Move hornLeech = new Move("Horn Leech", 10, 75, 1, "Grass", "Physical", 0, "Sp.Defense-", 0);
 
   //WATER
   Move waterGun = new Move("Water Gun", 25, 40, 1, "Water", "Special", 0, "none", 0);
@@ -127,6 +128,7 @@ void setup() {
   Move infestation = new Move("Infestation", 20, 20, 1, "Bug", "Special", 0, "Repeat", 1);
   Move signalBeam = new Move("Signal Beam", 24, 75, 1, "Bug", "Special", 0, "Confusion", 0.1);
   Move firstImpression = new Move("First Impression", 10, 90, 1, "Bug", "Physical", 2, "none", 0);
+  Move megahorn = new Move("Megahorn", 10, 120, 0.85, "Bug", "Physical", 0, "none", 0);
 
   //POISON
   Move acid = new Move("Acid", 30, 40, 1, "Poison", "Special", 0, "none", 0);  
@@ -148,7 +150,7 @@ void setup() {
   Move dragonDance = new Move("Dragon Dance", 20, 0, 0, "Dragon", "Status", 0, "Attack+/Speed+", 1);
   Move dragonClaw = new Move("Dragon Claw", 15, 80, 1, "Dragon", "Physical", 0, "none", 0);
   Move breakingSwipe = new Move("Breaking Swipe", 24, 60, 1, "Dragon", "Physical", 0, "Attack-", 1);
-  Move dualChop = new Move("Breaking Swipe", 15, 80, 0.9, "Dragon", "Physical", 0, "none", 0);
+  Move dualChop = new Move("Dual Chop", 15, 80, 0.9, "Dragon", "Physical", 0, "none", 0);
   Move dracoMeteor = new Move("Draco Meteor", 8, 130, 0.9, "Dragon", "Special", 0, "U.Sp.Attack--", 1);
 
   //FIGHTING
@@ -246,6 +248,7 @@ void setup() {
   Move drainingKiss = new Move("Draining Kiss", 10, 50, 1, "Fairy", "Special", 0, "Drain", 1);
   Move dazzlingGleam = new Move("Dazzling Gleam", 10, 80, 1, "Fairy", "Special", 0, "none", 0);
   Move fairyWind = new Move("Fairy Wind", 30, 40, 1, "Fairy", "Special", 0, "none", 0);
+  Move moonblast = new Move("Moonblast", 15, 95, 1, "Fairy", "Special", 0, "Sp.Attack-", 0.3);
 
   //PSYCHIC
   Move teleport = new Move("Teleport", 20, 0, 0, "Psychic", "Status", 0, "run", 0);
@@ -351,8 +354,10 @@ void setup() {
   //Level 38 Latias
   Pokemon latias = new Pokemon("Latias", "Dragon/Psychic", 38, 80, 80, 90, 110, 130, 110);
   latias.moveSet(dragonBreath, mistBall, calmMind, recover);
+  //latias.raidStats();
+  //latias.dynamax();
   latias.maxLevel = 0;
-
+  
   //BARNABUS
   //Level 9 Diglett
   Pokemon diglett = new Pokemon("Diglett", "Ground", 9, 10, 55, 25, 35, 45, 95);
@@ -659,7 +664,11 @@ void setup() {
   //Level 37 Galarian Weezing
   Pokemon galarianWeezing = new Pokemon("Galarian Weezing", "Poison/Fairy", 37, 65, 90, 120, 85, 70, 60);
   weezing.moveSet(heatWave, fairyWind, sludge, assurance);
-
+  
+  //Level 55 Xerneas
+  Pokemon xerneas = new Pokemon("Xerneas", "Fairy", 55, 126, 131, 95, 131, 98, 99);
+  xerneas.moveSet(moonblast);
+  
   //Level 46 Stonjourner
   Pokemon stonjourner = new Pokemon("Stonjourner", "Rock", 46, 100, 125, 135, 20, 20, 70);
   stonjourner.moveSet(rockSlide, stealthRock, stomp, block);
@@ -752,12 +761,12 @@ void setup() {
   Pokemon ampharos = new Pokemon("Ampharos", "Electric", 33, 90, 75, 85, 115, 90, 55);
   ampharos.moveSet(dragonPulse, firePunch, thunderPunch, cottonSpore);
 
-  //Level 34 Pupitar
-  Pokemon pupitar = new Pokemon("Pupitar", "Rock/Ground", 34, 70, 84, 70, 65, 70, 51);
+  //Level 42 Pupitar
+  Pokemon pupitar = new Pokemon("Pupitar", "Rock/Ground", 42, 70, 84, 70, 65, 70, 51);
   pupitar.moveSet(screech, chipAway, rockSlide, darkPulse);
 
-  //Level 34 Tyranitar
-  Pokemon tyranitar = new Pokemon("Tyranitar", "Rock/Dark", 34, 100, 134, 110, 95, 100, 61);
+  //Level 42 Tyranitar
+  Pokemon tyranitar = new Pokemon("Tyranitar", "Rock/Dark", 42, 100, 134, 110, 95, 100, 61);
   tyranitar.moveSet(darkPulse, iceFang, thunderFang, screech);
 
   //Level 36 Altaria
@@ -834,9 +843,14 @@ void setup() {
   //For fuschia gym | randomSeed(11); 
 
   randomSeed(34);
+  //randomSeed(31);
   
   Battle battle = new Battle(wild, randomTrainer);
-
+  
+  zofia.showTeam();
+  jasmine.showTeam();
+  nicholas.showTeam();
+  
   //battle.move(latias, dragonBreath, dreepy, astonish);
   //alcremie.dynamax();
   //battle.move(latias, mistBall, alcremie, dazzlingGleam);
