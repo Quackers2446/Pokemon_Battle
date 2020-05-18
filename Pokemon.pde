@@ -26,6 +26,7 @@ class Pokemon {
   int maxLevel;
   int maxTurns;
   String[] formerMove;
+  Float[] formerAcc;
   String[] formerStatus;
   String[] formerStatus2;
   Float[] formerStatusProb;
@@ -87,6 +88,7 @@ class Pokemon {
     this.maxLevel = 0;
     this.maxTurns = 0;
     this.formerMove = new String[4];
+    this.formerAcc = new Float[4];
     this.formerStatus = new String[4];
     this.formerStatus2 = new String[4];
     this.formerStatusProb = new Float[4];
@@ -152,8 +154,13 @@ class Pokemon {
         this.moveSet[i].name = ("Max Flare");
         this.moveSet[i].status = "Harsh Sunlight";
       } else if (this.moveSet[i].type.equals("Water")) {
-        this.moveSet[i].name = ("Max Geyser");
-        this.moveSet[i].status = "Rain";
+        if (this.name.equals("Drednaw")) {
+          this.moveSet[i].name = ("G-Max Stonesurge");
+          this.moveSet[i].status = "StealthRock";
+        } else {
+          this.moveSet[i].name = ("Max Geyser");
+          this.moveSet[i].status = "Rain";
+        }
       } else if (this.moveSet[i].type.equals("Grass")) {
         this.moveSet[i].name = ("Max Overgrowth");
         this.moveSet[i].status = "Grassy Terrain";
@@ -197,6 +204,7 @@ class Pokemon {
 
     for (int i = 0; i < 4; i++) {
       this.moveSet[i].name = this.formerMove[i];
+      this.moveSet[i].accuracy = this.formerAcc[i];
       this.moveSet[i].status = this.formerStatus[i];
       this.moveSet[i].status2 = this.formerStatus2[i];
       this.moveSet[i].statusProb = this.formerStatusProb[i];
@@ -381,6 +389,11 @@ class Pokemon {
     formerMove[1] = mv2.name;
     formerMove[2] = mv3.name;
     formerMove[3] = mv4.name;
+    
+    formerAcc[0] = mv1.accuracy;
+    formerAcc[1] = mv2.accuracy;
+    formerAcc[2] = mv3.accuracy;
+    formerAcc[3] = mv4.accuracy;
 
     formerStatus[0] = mv1.status;
     formerStatus[1] = mv2.status;

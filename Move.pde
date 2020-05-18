@@ -239,6 +239,17 @@ class Move {
             target.battleStats[1] = int(float(2*target.stats[1])/(target.attackSMn));
           }
         }
+      } else if (firstStatus.equals("U.Attack-")) {
+        chance = random(0, 1);
+
+        if (chance <= this.statusProb) {
+          if (user.attackSMn < 6) {
+            println(user.name + "'s attack fell!");
+            
+            user.attackSMn += 1;
+            user.battleStats[1] = int(float(2*user.stats[1])/(user.attackSMn));
+          }
+        }
       } else if (firstStatus.equals("Attack--")) {
         chance = random(0, 1);
 
@@ -325,6 +336,17 @@ class Move {
             
             target.defenseSMn += 1;
             target.battleStats[2] = int((2*target.stats[2])/float(target.defenseSMn));
+          }
+        }
+      } else if (firstStatus.equals("U.Defense-")) {
+        chance = random(0, 1);
+
+        if (chance <= this.statusProb) {
+          if (user.defenseSMn < 6) {
+            println(user.name + "'s defense fell!");
+            
+            user.defenseSMn += 1;
+            user.battleStats[2] = int((2*user.stats[2])/float(user.defenseSMn));
           }
         }
       } else if (firstStatus.equals("Defense--")) {
@@ -605,11 +627,12 @@ class Move {
           
           println("The entire party has been cured of major status effects.");
         }
-      } else if (firstStatus.equals("StealthRock")) {
+      } else if (firstStatus.equals("StealthRock") && !user.sR) {
         chance = random(0, 1);
 
         if (chance <= this.statusProb) {
           user.sR = true;
+          println(user.name, "threw floating pointy rocks on the other side of the field!");
         }
       }
     }
