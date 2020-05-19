@@ -359,8 +359,6 @@ void setup() {
   //Level 38 Latias
   Pokemon latias = new Pokemon("Latias", "Dragon/Psychic", 38, 80, 80, 90, 110, 130, 110);
   latias.moveSet(dragonBreath, mistBall, calmMind, recover);
-  //latias.raidStats();
-  //latias.dynamax();
   latias.maxLevel = 0;
   
   //BARNABUS
