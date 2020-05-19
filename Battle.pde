@@ -39,6 +39,9 @@ class Battle {
     
     enterBattleEffects(oneP, twoP);
     enterBattleEffects(twoP, oneP);
+    
+    oneP.battle = this;
+    twoP.battle = this;
 
     if (oneP.currHealth == 0 || twoP.currHealth == 0) {
       println("One of the pokemon has already fainted, the battle cannot begin.");
@@ -71,6 +74,8 @@ class Battle {
     checkBerry(oneP, twoP);
     checkBerry(twoP, oneP);
 
+    updateWeather();
+    
     checkWeather(oneP, mv1, twoP);
     checkWeather(twoP, mv2, oneP);
 
@@ -110,6 +115,9 @@ class Battle {
     println("A BATTLE BETWEEN", this.one.name.toUpperCase(), "AND", this.two.name.toUpperCase(), "HAS BEGUN! Lv.", str(oneP.level), oneP.name, "| Lv.", str(twoP.level), twoP.name);   
     println("*   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *");
 
+    oneP.battle = this;
+    twoP.battle = this;
+    
     while (oneP.currHealth > 0 && twoP.currHealth > 0) {
       println();
       println("Turn #" + str(turn));
@@ -138,7 +146,9 @@ class Battle {
 
       checkBerry(oneP, twoP);
       checkBerry(twoP, oneP);
-
+      
+      updateWeather();
+      
       checkWeather(oneP, mv1, twoP);
       checkWeather(twoP, mv2, oneP);
       
@@ -225,7 +235,7 @@ class Battle {
     String firstType1 = oneP.type;
     String firstType2 = twoP.type;
 
-    if (this.turn == 1 && this.weather.equals("Sandstorm") && (firstType1.equals("Rock") || oneP.type2.equals("Rock")
+    if (oneP.turnsOut == 1 && this.weather.equals("Sandstorm") && (firstType1.equals("Rock") || oneP.type2.equals("Rock")
       || firstType1.equals("Steel") || oneP.type2.equals("Steel") || firstType1.equals("Ground") || oneP.type2.equals("Ground"))) {
       oneP.battleStats[4] *= 1.5;
       println(oneP.name + "'s special defense rose!");
@@ -238,15 +248,6 @@ class Battle {
       println(oneP.name, "was buffeted by the sandstorm! (" + int((float(oneP.currHealth)/oneP.health)*100) + "%)");
       println();
     }
-
-    if (this.weather.equals("Sandstorm"))      
-      this.weatherCounter -= 1;
-
-    if (this.weatherCounter == 0 && this.weather.equals("Sandstorm")) {
-      this.weather = "none";
-      println("The sandstorm subsided!");
-      println();
-    }
     
     if (mv1.status.equals("Rain") && !this.weather.equals("Rain")) {
       this.weather = "Rain";
@@ -254,8 +255,52 @@ class Battle {
       println(oneP.name, "made it rain!");
       println();
       this.weatherCounter = 5;
-    } else if (this.weather.equals("Rain")) {
+    } 
+    
+    if (mv1.status.equals("Harsh Sunlight") && !this.weather.equals("Harsh Sunlight")) {
+      this.weather = "Harsh Sunlight";
       
+      println(oneP.name, "made the sunlight turn harsh!");
+      println();
+      this.weatherCounter = 5;
+    } 
+  }
+  
+  void updateWeather() {
+    if (this.weather.equals("Sandstorm")) {  
+      this.weatherCounter -= 1;
+      println("The sandstorm rages!");
+      println();
+    }
+    
+    if (this.weatherCounter == 0 && this.weather.equals("Sandstorm")) {
+      this.weather = "none";
+      println("The sandstorm subsided!");
+      println();
+    }
+    
+    if (this.weather.equals("Rain")) {
+      this.weatherCounter -= 1;
+      
+      println("Rain continues to fall.");
+      println();
+    } else if (this.weatherCounter == 0 && this.weather.equals("Rain")) {
+      this.weather = "none";
+      
+      println("The rain stopped!");
+      println();
+    }
+    
+    if (this.weather.equals("Harsh Sunlight")) {
+      this.weatherCounter -= 1;
+      
+      println("The sunlight is strong.");
+      println();
+    } else if (this.weatherCounter == 0 && this.weather.equals("Harsh Sunlight")) {
+      this.weather = "none";
+      
+      println("The harsh sunlight faded!");
+      println();
     }
   }
 

@@ -233,6 +233,7 @@ void setup() {
   Move airSlash = new Move("Air Slash", 15, 75, 0.95, "Flying", "Special", 0, "Flinch", 0.3);
   Move acrobatics = new Move("Acrobatics", 15, 55, 1, "Flying", "Physical", 0, "none", 0);
   Move roost = new Move("Roost", 10, 0, 0, "Normal", "Status", 0, "Recover", 1);
+  Move fly = new Move("Fly", 15, 90, 0.95, "Flying", "Physical", 0, "none", 0);
 
   //GROUND
   Move boneClub = new Move("Bone Club", 20, 65, 0.85, "Ground", "Physical", 0, "none", 0);
@@ -281,7 +282,7 @@ void setup() {
   //ZOFIA
   //Level 47 Charizard
   Pokemon charizard = new Pokemon("Charizard", "Fire/Flying", 47, 78, 84, 78, 109, 85, 100); 
-  charizard.moveSet(flamethrower, dragonClaw, roost, airSlash);
+  charizard.moveSet(flamethrower, dragonClaw, roost, fly);
 
   //Level 47 Mega Charizard X
   Pokemon megaCharizardX = new Pokemon("Mega Charizard X", "Fire/Dragon", 47, 78, 130, 111, 130, 85, 100); 
@@ -852,34 +853,39 @@ void setup() {
   
   Battle battle = new Battle(wild, randomTrainer);
   
-  battle.move(milotic, dragonTail, latias, dragonBreath);
-  battle.move(milotic, dragonTail, megaCharizardX, dragonClaw);
+  milotic.dynamax();
+  battle.move(milotic, surf, megaCharizardX, heatWave);
+  battle.move(milotic, surf, megaCharizardX, heatWave);
+  battle.move(milotic, surf, megaCharizardX, heatWave);
   
-  battle.move(milotic, dragonTail, latias, dragonBreath);
-  battle.move(milotic, dragonTail, megaCharizardX, dragonClaw);
+  //battle.move(milotic, dragonTail, latias, dragonBreath);
+  //battle.move(milotic, dragonTail, megaCharizardX, dragonClaw);
   
-  battle.move(milotic, dragonTail, latias, recover);
-  battle.move(milotic, dragonTail, megaCharizardX, roost);
+  //battle.move(milotic, dragonTail, latias, dragonBreath);
+  //battle.move(milotic, dragonTail, megaCharizardX, dragonClaw);
   
-  battle.move(milotic, dragonTail, megaPidgeot, hurricane);
-  battle.move(milotic, dragonTail, megaCharizardX, airSlash);
+  //battle.move(milotic, dragonTail, latias, recover);
+  //battle.move(milotic, dragonTail, megaCharizardX, roost);
   
-  battle.move(milotic, dragonTail, megaPidgeot, hurricane);
-  battle.move(milotic, dragonTail, megaCharizardX, dragonClaw);
+  //battle.move(milotic, dragonTail, megaPidgeot, hurricane);
+  //battle.move(milotic, dragonTail, megaCharizardX, airSlash);
   
-  battle.move(milotic, surf, megaPidgeot, hurricane);
-  battle.move(milotic, surf, mimikyu, woodHammer);
+  //battle.move(milotic, dragonTail, megaPidgeot, hurricane);
+  //battle.move(milotic, dragonTail, megaCharizardX, dragonClaw);
   
-  battle.move(milotic, surf, megaPidgeot, roost);
-  battle.move(milotic, surf, mimikyu, woodHammer);
+  //battle.move(milotic, surf, megaPidgeot, hurricane);
+  //battle.move(milotic, surf, mimikyu, woodHammer);
   
-  battle.move(milotic, surf, megaPidgeot, roost);
-  drednaw.dynamax();
-  battle.move(milotic, surf, drednaw, crunch);
+  //battle.move(milotic, surf, megaPidgeot, roost);
+  //battle.move(milotic, surf, mimikyu, woodHammer);
   
-  battle.move(milotic, surf, megaPidgeot, hurricane);
+  //battle.move(milotic, surf, megaPidgeot, roost);
+  //drednaw.dynamax();
+  //battle.move(milotic, surf, drednaw, crunch);
   
-  battle.move(milotic, surf, drednaw, protect);
+  //battle.move(milotic, surf, megaPidgeot, hurricane);
+  
+  //battle.move(milotic, surf, drednaw, protect);
 }
 
 void catchPokemon(Pokemon p, String pokeball, int catchRate) {

@@ -32,6 +32,7 @@ class Pokemon {
   Float[] formerStatusProb;
   int turnsOut;
   Boolean sR;
+  Battle battle;
 
   Pokemon (String n, String t, int l, int hp, 
     int att, int def, int satt, int sdef, int spd) {
@@ -453,6 +454,11 @@ class Pokemon {
           if (mv.type.equals(this.type) || mv.type.equals(this.type2)) {
             mv.power *= 1.5;
           }
+          if (mv.type.equals("Water") && battle.weather.equals("Rain")) {
+            mv.power *= 1.5;
+          } else if (mv.type.equals("Fire") && battle.weather.equals("Rain")) {
+            mv.power *= 0.5;
+          }
 
           if (mv.damageCatagory.equals("Physical")) {
             if (this.burn && (!this.type.equals("Fire") || !this.type2.equals("Fire"))) {
@@ -469,6 +475,12 @@ class Pokemon {
           }
 
           if (mv.type.equals(this.type) || mv.type.equals(this.type2)) {
+            mv.power = orgPower;
+          }
+          
+          if (mv.type.equals("Water") && battle.weather.equals("Rain")) {
+            mv.power = orgPower;
+          } else if (mv.type.equals("Fire") && battle.weather.equals("Rain")) {
             mv.power = orgPower;
           }
 
