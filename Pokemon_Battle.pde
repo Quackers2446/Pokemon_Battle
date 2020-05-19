@@ -312,6 +312,10 @@ void setup() {
   Pokemon drednaw = new Pokemon("Drednaw", "Water/Rock", 37, 90, 115, 90, 48, 68, 74);
   drednaw.moveSet(rockPolish, rockSlide, razorShell, crunch);
   drednaw.maxLevel = 2;
+  
+  //Level 38 Shiny Milotic
+  Pokemon milotic = new Pokemon("Milotic", "Water", 38, 95, 60, 79, 100, 125, 81);
+  milotic.moveSet(surf, dragonTail, recover, disarmingVoice);
 
   //JASMINE
   //Level 48 Mega Pidgeot
@@ -353,7 +357,7 @@ void setup() {
 
   //Level 33 Falinks
   Pokemon falinks = new Pokemon("Falinks", "Fighting", 33, 65, 100, 100, 70, 60, 75);
-  falinks.moveSet(bulkUp, rockSmash, headbutt, protect);
+  falinks.moveSet(megahorn, rockSmash, headbutt, protect);
   falinks.maxLevel = 0;
   
   //Level 38 Latias
@@ -391,20 +395,20 @@ void setup() {
   Pokemon dratini = new Pokemon("Dratini", "Dragon", 25, 41, 64, 45, 50, 50, 50);
   dratini.moveSet(twister, slam, dragonRage, thunderWave);
 
-  //Level 27 Vileplume
-  Pokemon vileplume = new Pokemon("Vileplume", "Grass/Poison", 27, 75, 80, 85, 110, 90, 50);
+  //Level 29 Vileplume
+  Pokemon vileplume = new Pokemon("Vileplume", "Grass/Poison", 29, 75, 80, 85, 110, 90, 50);
   vileplume.moveSet(megaDrain, acid, sleepPowder, toxic);
 
   //Level 9 Alolan Geodude
   Pokemon alolanGeodude = new Pokemon("Alolan Geodude", "Rock/Electric", 9, 40, 80, 100, 30, 30, 20);
   alolanGeodude.moveSet(rollout, tackle, none, none);
 
-  //Level 44 Swampert
-  Pokemon swampert = new Pokemon("Swampert", "Water/Ground", 44, 100, 110, 90, 85, 90, 60);
+  //Level 46 Swampert
+  Pokemon swampert = new Pokemon("Swampert", "Water/Ground", 46, 100, 110, 90, 85, 90, 60);
   swampert.moveSet(hammerArm, mudBomb, rockSlide, surf);
 
-  //Level 44 Mega Swampert
-  Pokemon megaSwampert = new Pokemon("Mega Swampert", "Water/Ground", 44, 100, 150, 110, 95, 110, 70);
+  //Level 46 Mega Swampert
+  Pokemon megaSwampert = new Pokemon("Mega Swampert", "Water/Ground", 46, 100, 150, 110, 95, 110, 70);
   megaSwampert.moveSet(hammerArm, mudBomb, rockSlide, surf);
 
   //Level 14 Abra
@@ -435,6 +439,10 @@ void setup() {
   //Level 32 Appletun
   Pokemon appletun = new Pokemon("Appletun", "Grass/Dragon", 32, 110, 85, 80, 100, 80, 30);
   appletun.moveSet(ironDefense, appleAcid, recover, bodySlam);
+  
+  //Level 31 Quagsire
+  Pokemon quagsire = new Pokemon("Quagsire", "Water/Ground", 31, 95, 85, 85, 65, 65, 35);
+  quagsire.moveSet(amnesia, mudBomb, slam, waterGun);
 
   //JOANNA
   //Level 13 Litten
@@ -676,12 +684,8 @@ void setup() {
   //Level 46 Stonjourner
   Pokemon stonjourner = new Pokemon("Stonjourner", "Rock", 46, 100, 125, 135, 20, 20, 70);
   stonjourner.moveSet(rockSlide, stealthRock, stomp, block);
-
-  //Level 51 Milotic
-  Pokemon milotic = new Pokemon("Milotic", "Water", 51, 95, 60, 79, 100, 125, 81);
-  milotic.moveSet(surf, dragonTail, recover, disarmingVoice);
-  milotic.raidStats();
-  milotic.dynamax();
+  
+  
   
   //IMPORTANT NPC POKEMON
 
@@ -842,19 +846,13 @@ void setup() {
   ashley.giveItem("Sitrus Berry", gyarados, lucario, ampharos, pupitar, altaria, metang);
   joanna.giveItem("Sitrus Berry", vulpix);
 
-  //  milotic.moveSet(surf, dragonTail, recover, disarmingVoice);
-
-
   //PLS UPDATE.
 
   randomSeed(35);
   
   Battle battle = new Battle(wild, randomTrainer);
   
-  milotic.dynamax();
-  battle.move(milotic, surf, megaCharizardX, heatWave);
-  battle.move(milotic, surf, megaCharizardX, heatWave);
-  battle.move(milotic, surf, megaCharizardX, heatWave);
+  //milotic.dynamax();
   
   //battle.move(milotic, dragonTail, latias, dragonBreath);
   //battle.move(milotic, dragonTail, megaCharizardX, dragonClaw);
@@ -884,6 +882,38 @@ void setup() {
   //battle.move(milotic, surf, megaPidgeot, hurricane);
   
   //battle.move(milotic, surf, drednaw, protect);
+  
+  //milotic.useMove(dragonTail, espeon);
+  //megaPidgeot.rest();
+  
+  //milotic.useMove(surf, lapras);
+  
+  //milotic.useMove(dragonTail, megaPidgeot);
+  
+  //lapras.useMove(dragonTail, milotic);
+  //lapras.useMove(dragonTail, milotic);  
+  //lapras.useMove(dragonTail, milotic);
+  //lapras.useMove(dragonTail, milotic);
+  
+  //battle.move(milotic, disarmingVoice, lapras, iceBeam);
+  
+  //battle.move(milotic, disarmingVoice, megaPidgeot, hurricane);
+  //battle.move(milotic, disarmingVoice, lapras, bodySlam);
+  
+  //battle.move(milotic, surf, megaPidgeot, roost);
+  //battle.move(milotic, disarmingVoice, lapras, bodySlam);
+  
+  //battle.move(milotic, dragonTail, megaPidgeot, roost);
+  
+  //zofia.useItem("Soda Pop", lapras);
+  //milotic.useMove(dragonTail, lapras);
+  
+  //battle.move(milotic, dragonTail, megaPidgeot, roost);
+  //battle.move(milotic, disarmingVoice, lapras, bodySlam);
+  
+  //battle.move(milotic, dragonTail, megaPidgeot, hurricane);
+  
+  
 }
 
 void catchPokemon(Pokemon p, String pokeball, int catchRate) {
