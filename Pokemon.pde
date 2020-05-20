@@ -30,9 +30,11 @@ class Pokemon {
   String[] formerStatus;
   String[] formerStatus2;
   Float[] formerStatusProb;
+  int[] formerPower;
   int turnsOut;
   Boolean sR;
   Battle battle;
+  Boolean zMove;
 
   Pokemon (String n, String t, int l, int hp, 
     int att, int def, int satt, int sdef, int spd) {
@@ -93,10 +95,13 @@ class Pokemon {
     this.formerStatus = new String[4];
     this.formerStatus2 = new String[4];
     this.formerStatusProb = new Float[4];
+    this.formerPower = new int[4];
 
     this.turnsOut = 0;
 
     this.sR = false;
+    
+    this.zMove = false;
   }
 
   void raidStats() {
@@ -119,7 +124,7 @@ class Pokemon {
     }
     for (int i = 0; i < 4; i++) {
       this.moveSet[i].status = "";
-      this.moveSet[i].status2 = "";
+      this.moveSet[i].status2 = "Max-Move";
 
       if (this.moveSet[i].damageCatagory.equals("Status")) {
         this.moveSet[i].name = "Max Guard";
@@ -209,11 +214,76 @@ class Pokemon {
       this.moveSet[i].status = this.formerStatus[i];
       this.moveSet[i].status2 = this.formerStatus2[i];
       this.moveSet[i].statusProb = this.formerStatusProb[i];
-
-      this.moveSet[i].power /= 1.5;
+      this.moveSet[i].power = this.formerPower[i];
     }
 
     this.maxTurns = 0;
+  }
+  
+  void useZMove() {
+    zMove = true;
+    
+    if (this.item.equals("Mimikium-Z")) {
+      for (int i = 0; i < 4; i++) {
+        if (this.moveSet[i].name.equals("Play Rough")) {
+          this.moveSet[i].status = "";
+          
+          this.moveSet[i].name = "Let's Snuggle Forever";
+          this.moveSet[i].status2 = "Z-Move";
+          this.moveSet[i].power = 190;
+          
+          this.moveSet[i].statusProb = 0;
+        }
+      }
+    } else if (this.item.equals("Fightinium-Z")) {
+      for (int i = 0; i < 4; i++) {
+        if (this.moveSet[i].type.equals("Fighting")) {
+          this.moveSet[i].status = "";
+          
+          this.moveSet[i].name = "All-Out Pummeling";
+          this.moveSet[i].status2 = "Z-Move";
+          this.moveSet[i].power = zMovePower(this.moveSet[i].power);
+          
+          this.moveSet[i].statusProb = 0;
+        }
+      }
+    }
+  }
+  
+  int zMovePower(int p) {
+    if (p < 55)
+      p = 100;
+    else if (p < 65)
+      p = 120;
+    else if (p < 75)
+      p = 140;
+    else if (p < 85)
+      p = 160;
+    else if (p < 95)
+      p = 175;
+    else if (p < 100)
+      p = 180;
+    else if (p < 125)
+      p = 190;
+    else if (p < 130)
+      p = 195;
+    else
+      p = 200;
+    
+    return p;
+  }
+  
+  void unZMove() {
+    this.zMove = false;
+
+    for (int i = 0; i < 4; i++) {
+      this.moveSet[i].name = this.formerMove[i];
+      this.moveSet[i].accuracy = this.formerAcc[i];
+      this.moveSet[i].status = this.formerStatus[i];
+      this.moveSet[i].status2 = this.formerStatus2[i];
+      this.moveSet[i].statusProb = this.formerStatusProb[i];
+      this.moveSet[i].power = this.formerPower[i];
+    }
   }
 
   void switchOut() {
@@ -410,6 +480,11 @@ class Pokemon {
     formerStatusProb[1] = mv2.statusProb;
     formerStatusProb[2] = mv3.statusProb;
     formerStatusProb[3] = mv4.statusProb;
+
+    formerPower[0] = mv1.power;
+    formerPower[1] = mv2.power;
+    formerPower[2] = mv3.power;
+    formerPower[3] = mv4.power;
   }
 
   void useMove(Move mv, Pokemon target) {
@@ -428,7 +503,7 @@ class Pokemon {
     int orgPower = mv.power;
 
     mv.currPowerPoints -= 1;
-
+    
     if (target.raidPokemon && !target.raidShield && !target.facedRaidShield) {
       if ((target.currHealth < int((float(target.health)*2)/3)) && !target.raidShield) {
         println(target.name, "has set up a barrier!");
@@ -729,5 +804,8 @@ class Pokemon {
         }
       }
     }
+    
+    if (zMove)
+      unZMove();
   }
 }

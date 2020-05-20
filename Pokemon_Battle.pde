@@ -87,7 +87,7 @@ void setup() {
   Move bulletSeed = new Move("Bullet Seed", 30, 25, 1, "Grass", "Physical", 0, "Repeat", 0);
   Move leechSeed = new Move("Leech Seed", 10, 0, 0.9, "Grass", "Status", 0, "Leech", 1);
   Move razorLeaf = new Move("Razor Leaf", 25, 55, 0.95, "Grass", "Physical", 0, "none", 0);
-  Move synthesis = new Move("Synthesis", 16, 0, 0, "Normal", "Status", 0, "Recover", 1);
+  Move synthesis = new Move("Synthesis", 16, 0, 0, "Grass", "Status", 0, "Recover", 1);
   Move petalBlizzard = new Move("Petal Blizzard", 24, 90, 1, "Grass", "Physical", 0, "none", 0);
   Move magicalLeaf = new Move("Magical Leaf", 32, 60, 0, "Grass", "Special", 0, "none", 0);
   Move gravApple = new Move("Grav Apple", 10, 80, 1, "Grass", "Physical", 0, "Sp.Defense-", 0);
@@ -290,9 +290,9 @@ void setup() {
   Pokemon megaCharizardX = new Pokemon("Mega Charizard X", "Fire/Dragon", 49, 78, 130, 111, 130, 85, 100); 
   megaCharizardX.moveSet(flamethrower, dragonClaw, roost, airSlash);
 
-  //Level 31 Scyther
-  Pokemon scyther = new Pokemon("Scyther", "Bug/Flying", 31, 70, 110, 80, 55, 80, 105);
-  scyther.moveSet(pursuit, furyCutter, wingAttack, agility);
+  //Level 38 Scyther
+  Pokemon scyther = new Pokemon("Scyther", "Bug/Flying", 38, 70, 110, 80, 55, 80, 105);
+  scyther.moveSet(pursuit, furyCutter, wingAttack, doubleTeam);
 
   //Level 49 Lapras
   Pokemon lapras = new Pokemon("Lapras", "Water/Ice", 49, 130, 85, 80, 85, 95, 60);
@@ -308,7 +308,7 @@ void setup() {
 
   //Level 37 Mimikyu
   Pokemon mimikyu = new Pokemon("Mimikyu", "Ghost/Fairy", 37, 55, 90, 80, 50, 105, 96);
-  mimikyu.moveSet(woodHammer, shadowSneak, feintAttack, charm);
+  mimikyu.moveSet(woodHammer, shadowSneak, feintAttack, playRough);
 
   //Level 39 G-Max Drednaw
   Pokemon drednaw = new Pokemon("Drednaw", "Water/Rock", 39, 90, 115, 90, 48, 68, 74);
@@ -817,7 +817,7 @@ void setup() {
   Trainer wild = new Trainer("Wild");
 
   zofia.addPokemon(megaCharizardX, scyther, lapras, magneton, drednaw, mimikyu);
-  jasmine.addPokemon(megaPidgeot, arcanine, falinks, latias, espeon, alcremie);
+  jasmine.addPokemon(megaPidgeot, arcanine, falinks, latias, snover, alcremie);
   barnabas.addPokemon(diglett, spearow, weepinbell, mankey, magikarp, rhydon);
   nicholas.addPokemon(dratini, vileplume, dreepy, megaSwampert, snorlax, appletun);
   joanna.addPokemon(litten, gastly, raichu, vulpix);
@@ -837,11 +837,13 @@ void setup() {
   printPokemon();
   printCharizard();
 
-  zofia.giveItem("Sitrus Berry", mimikyu, magneton);
+  zofia.giveItem("Sitrus Berry", magneton, milotic);
   zofia.giveItem("Leftovers", lapras, kingler, drednaw);
+  zofia.giveItem("Mimikium-Z", mimikyu);
   zofia.giveItem("Berry Juice", scyther);
-  jasmine.giveItem("Sitrus Berry", falinks, seel, espeon, latias);
+  jasmine.giveItem("Sitrus Berry", seel, snover, latias);
   jasmine.giveItem("Leftovers", alcremie, arcanine);
+  jasmine.giveItem("Fightinium-Z", falinks);
   nicholas.giveItem("Sitrus Berry", dratini, vileplume, dreepy);
   nicholas.giveItem("Leftovers", appletun, snorlax);
   cassie.giveItem("Sitrus Berry", shelgon, alolanSandslash, arbok, vaporeon);
@@ -851,71 +853,12 @@ void setup() {
 
   //PLS UPDATE.
 
-  randomSeed(36);
+  randomSeed(37);
   
   Battle battle = new Battle(wild, randomTrainer);
-  
-  //milotic.dynamax();
-  
-  //battle.move(milotic, dragonTail, latias, dragonBreath);
-  //battle.move(milotic, dragonTail, megaCharizardX, dragonClaw);
-  
-  //battle.move(milotic, dragonTail, latias, dragonBreath);
-  //battle.move(milotic, dragonTail, megaCharizardX, dragonClaw);
-  
-  //battle.move(milotic, dragonTail, latias, recover);
-  //battle.move(milotic, dragonTail, megaCharizardX, roost);
-  
-  //battle.move(milotic, dragonTail, megaPidgeot, hurricane);
-  //battle.move(milotic, dragonTail, megaCharizardX, airSlash);
-  
-  //battle.move(milotic, dragonTail, megaPidgeot, hurricane);
-  //battle.move(milotic, dragonTail, megaCharizardX, dragonClaw);
-  
-  //battle.move(milotic, surf, megaPidgeot, hurricane);
-  //battle.move(milotic, surf, mimikyu, woodHammer);
-  
-  //battle.move(milotic, surf, megaPidgeot, roost);
-  //battle.move(milotic, surf, mimikyu, woodHammer);
-  
-  //battle.move(milotic, surf, megaPidgeot, roost);
-  //drednaw.dynamax();
-  //battle.move(milotic, surf, drednaw, crunch);
-  
-  //battle.move(milotic, surf, megaPidgeot, hurricane);
-  
-  //battle.move(milotic, surf, drednaw, protect);
-  
-  //milotic.useMove(dragonTail, espeon);
-  //megaPidgeot.rest();
-  
-  //milotic.useMove(surf, lapras);
-  
-  //milotic.useMove(dragonTail, megaPidgeot);
-  
-  //lapras.useMove(dragonTail, milotic);
-  //lapras.useMove(dragonTail, milotic);  
-  //lapras.useMove(dragonTail, milotic);
-  //lapras.useMove(dragonTail, milotic);
-  
-  //battle.move(milotic, disarmingVoice, lapras, iceBeam);
-  
-  //battle.move(milotic, disarmingVoice, megaPidgeot, hurricane);
-  //battle.move(milotic, disarmingVoice, lapras, bodySlam);
-  
-  //battle.move(milotic, surf, megaPidgeot, roost);
-  //battle.move(milotic, disarmingVoice, lapras, bodySlam);
-  
-  //battle.move(milotic, dragonTail, megaPidgeot, roost);
-  
-  //zofia.useItem("Soda Pop", lapras);
-  //milotic.useMove(dragonTail, lapras);
-  
-  //battle.move(milotic, dragonTail, megaPidgeot, roost);
-  //battle.move(milotic, disarmingVoice, lapras, bodySlam);
-  
-  //battle.move(milotic, dragonTail, megaPidgeot, hurricane);
-  
+  falinks.useZMove();
+  battle.move(lapras, iceBeam, falinks, rockSmash);
+  battle.move(lapras, iceBeam, falinks, rockSmash);
   
 }
 
