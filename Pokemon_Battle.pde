@@ -282,6 +282,7 @@ void setup() {
   //TRAINER POKEMON
 
   //ZOFIA
+  //Level 49 Charizard
   Pokemon charizard = new Pokemon("Charizard", "Fire/Flying", 49, 78, 84, 78, 109, 85, 100); 
   charizard.moveSet(flamethrower, dragonClaw, roost, fly);
 
