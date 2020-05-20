@@ -211,6 +211,7 @@ void setup() {
   Move thunderFang = new Move("Thunder Fang", 15, 65, 0.95, "Electric", "Physical", 0, "Flinch/Paralysis", 0.1);
   Move spark = new Move("Spark", 20, 65, 1, "Electric", "Physical", 0, "Paralysis", 0.3);
   Move thunderbolt = new Move("Thunderbolt", 15, 90, 1, "Electric", "Special", 0, "Paralysis", 0.1);
+  Move thunder = new Move("Thunder", 10, 110, 0.7, "Electric", "Special", 0, "Paralysis", 0.3);
   Move thunderPunch = new Move("Thunder Punch", 15, 75, 1, "Electric", "Physical", 0, "Paralysis", 0.1);
   Move zapCannon = new Move("Zap Cannon", 5, 120, 0.5, "Electric", "Special", 0, "Paralysis", 1);
 
@@ -254,6 +255,7 @@ void setup() {
   Move dazzlingGleam = new Move("Dazzling Gleam", 10, 80, 1, "Fairy", "Special", 0, "none", 0);
   Move fairyWind = new Move("Fairy Wind", 30, 40, 1, "Fairy", "Special", 0, "none", 0);
   Move moonblast = new Move("Moonblast", 15, 95, 1, "Fairy", "Special", 0, "Sp.Attack-", 0.3);
+  Move playRough = new Move("Play Rough", 15, 95, 1, "Fairy", "Special", 0, "Sp.Attack-", 0.3);
 
   //PSYCHIC
   Move teleport = new Move("Teleport", 20, 0, 0, "Psychic", "Status", 0, "run", 0);
@@ -280,20 +282,19 @@ void setup() {
   //TRAINER POKEMON
 
   //ZOFIA
-  //Level 47 Charizard
-  Pokemon charizard = new Pokemon("Charizard", "Fire/Flying", 47, 78, 84, 78, 109, 85, 100); 
+  Pokemon charizard = new Pokemon("Charizard", "Fire/Flying", 49, 78, 84, 78, 109, 85, 100); 
   charizard.moveSet(flamethrower, dragonClaw, roost, fly);
 
-  //Level 47 Mega Charizard X
-  Pokemon megaCharizardX = new Pokemon("Mega Charizard X", "Fire/Dragon", 47, 78, 130, 111, 130, 85, 100); 
+  //Level 49 Mega Charizard X
+  Pokemon megaCharizardX = new Pokemon("Mega Charizard X", "Fire/Dragon", 49, 78, 130, 111, 130, 85, 100); 
   megaCharizardX.moveSet(flamethrower, dragonClaw, roost, airSlash);
 
   //Level 31 Scyther
   Pokemon scyther = new Pokemon("Scyther", "Bug/Flying", 31, 70, 110, 80, 55, 80, 105);
   scyther.moveSet(pursuit, furyCutter, wingAttack, agility);
 
-  //Level 47 Lapras
-  Pokemon lapras = new Pokemon("Lapras", "Water/Ice", 47, 130, 85, 80, 85, 95, 60);
+  //Level 49 Lapras
+  Pokemon lapras = new Pokemon("Lapras", "Water/Ice", 49, 130, 85, 80, 85, 95, 60);
   lapras.moveSet(waterPulse, sing, iceBeam, bodySlam);
 
   //Level 38 Kingler
@@ -304,26 +305,27 @@ void setup() {
   Pokemon magneton = new Pokemon("Magneton", "Electric/Steel", 31, 50, 60, 95, 120, 70, 70);
   magneton.moveSet(triAttack, mirrorShot, zapCannon, metalSound);
 
-  //Level 36 Mimikyu
-  Pokemon mimikyu = new Pokemon("Mimikyu", "Ghost/Fairy", 36, 55, 90, 80, 50, 105, 96);
+  //Level 37 Mimikyu
+  Pokemon mimikyu = new Pokemon("Mimikyu", "Ghost/Fairy", 37, 55, 90, 80, 50, 105, 96);
   mimikyu.moveSet(woodHammer, shadowSneak, feintAttack, charm);
 
-  //Level 37 G-Max Drednaw
-  Pokemon drednaw = new Pokemon("Drednaw", "Water/Rock", 37, 90, 115, 90, 48, 68, 74);
+  //Level 39 G-Max Drednaw
+  Pokemon drednaw = new Pokemon("Drednaw", "Water/Rock", 39, 90, 115, 90, 48, 68, 74);
   drednaw.moveSet(rockPolish, rockSlide, razorShell, crunch);
   drednaw.maxLevel = 2;
   
   //Level 38 Shiny Milotic
   Pokemon milotic = new Pokemon("Milotic", "Water", 38, 95, 60, 79, 100, 125, 81);
   milotic.moveSet(surf, dragonTail, recover, disarmingVoice);
+  milotic.maxLevel = 5;
 
   //JASMINE
-  //Level 48 Mega Pidgeot
-  Pokemon megaPidgeot = new Pokemon("Pidgeot", "Normal/Flying", 48, 83, 80, 80, 135, 80, 121);
+  //Level 50 Mega Pidgeot
+  Pokemon megaPidgeot = new Pokemon("Pidgeot", "Normal/Flying", 50, 83, 80, 80, 135, 80, 121);
   megaPidgeot.moveSet(hurricane, roost, featherDance, twister);
 
-  //Level 48 Pidgeot
-  Pokemon pidgeot = new Pokemon("Pidgeot", "Normal/Flying", 48, 83, 80, 75, 70, 70, 101);
+  //Level 50 Pidgeot
+  Pokemon pidgeot = new Pokemon("Pidgeot", "Normal/Flying", 50, 83, 80, 75, 70, 70, 101);
   pidgeot.moveSet(hurricane, wingAttack, featherDance, twister);
 
   //Level 36 Arcanine
@@ -355,13 +357,13 @@ void setup() {
   alcremie.moveSet(dazzlingGleam, drainPunch, recover, acidArmor);
   alcremie.maxLevel = 5;
 
-  //Level 33 Falinks
-  Pokemon falinks = new Pokemon("Falinks", "Fighting", 33, 65, 100, 100, 70, 60, 75);
+  //Level 36 Falinks
+  Pokemon falinks = new Pokemon("Falinks", "Fighting", 36, 65, 100, 100, 70, 60, 75);
   falinks.moveSet(megahorn, rockSmash, headbutt, protect);
   falinks.maxLevel = 0;
   
-  //Level 38 Latias
-  Pokemon latias = new Pokemon("Latias", "Dragon/Psychic", 38, 80, 80, 90, 110, 130, 110);
+  //Level 40 Latias
+  Pokemon latias = new Pokemon("Latias", "Dragon/Psychic", 40, 80, 80, 90, 110, 130, 110);
   latias.moveSet(dragonBreath, mistBall, calmMind, recover);
   latias.maxLevel = 0;
   
@@ -848,7 +850,7 @@ void setup() {
 
   //PLS UPDATE.
 
-  randomSeed(35);
+  randomSeed(36);
   
   Battle battle = new Battle(wild, randomTrainer);
   
