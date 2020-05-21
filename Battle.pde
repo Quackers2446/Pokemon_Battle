@@ -74,7 +74,7 @@ class Battle {
     checkBerry(oneP, twoP);
     checkBerry(twoP, oneP);
 
-    updateWeather();
+    updateWeather(oneP, twoP);
     
     checkWeather(oneP, mv1, twoP);
     checkWeather(twoP, mv2, oneP);
@@ -147,7 +147,7 @@ class Battle {
       checkBerry(oneP, twoP);
       checkBerry(twoP, oneP);
       
-      updateWeather();
+      updateWeather(oneP, twoP);
       
       checkWeather(oneP, mv1, twoP);
       checkWeather(twoP, mv2, oneP);
@@ -222,6 +222,14 @@ class Battle {
         this.weather = "Sandstorm";
         this.weatherCounter = 5;
       }
+      
+      if (oneP.ability.equals("Snow Warning") && !weather.equals("Hail")) {
+        println(oneP.name + "'s Snow Warning whipped up a hailstorm!");
+        println();
+  
+        this.weather = "Hail";
+        this.weatherCounter = 1000; //or some arbitrary big number
+      }
     }
     
     if (oneP.currHealth < 1) {
@@ -244,8 +252,14 @@ class Battle {
 
     if (this.weather.equals("Sandstorm") && !(firstType1.equals("Rock") || oneP.type2.equals("Rock")
       || firstType1.equals("Steel") || oneP.type2.equals("Steel") || firstType1.equals("Ground") || oneP.type2.equals("Ground"))) {
-      oneP.currHealth -= (oneP.health/16);
+      oneP.currHealth -= (oneP.stats[0]/16);
       println(oneP.name, "was buffeted by the sandstorm! (" + int((float(oneP.currHealth)/oneP.health)*100) + "%)");
+      println();
+    }
+    
+    if (this.weather.equals("Hail") && !(firstType1.equals("Ice") || oneP.type2.equals("Ice"))) {
+      oneP.currHealth -= (oneP.stats[0]/16);
+      println(oneP.name, "was buffeted by the hail! (" + int((float(oneP.currHealth)/oneP.health)*100) + "%)");
       println();
     }
     
@@ -264,9 +278,15 @@ class Battle {
       println();
       this.weatherCounter = 5;
     } 
+    
+    if (oneP.turnsOut == 0 && this.weather.equals("Harsh Sunlight")) {
+      if (oneP.ability.equals("Chlorophyll")) {
+        oneP.battleStats[5] *= 2;
+      }
+    }
   }
   
-  void updateWeather() {
+  void updateWeather(Pokemon oneP, Pokemon twoP) {
     if (this.weather.equals("Sandstorm")) {  
       this.weatherCounter -= 1;
       println("The sandstorm rages!");
@@ -276,6 +296,18 @@ class Battle {
     if (this.weatherCounter == 0 && this.weather.equals("Sandstorm")) {
       this.weather = "none";
       println("The sandstorm subsided!");
+      println();
+    }
+    
+    if (this.weather.equals("Hail")) {  
+      this.weatherCounter -= 1;
+      println("The hail continues!");
+      println();
+    }
+    
+    if (this.weatherCounter == 0 && this.weather.equals("Hail")) {
+      this.weather = "none";
+      println("The hailstorm subsided!");
       println();
     }
     
@@ -296,11 +328,15 @@ class Battle {
       
       println("The sunlight is strong.");
       println();
+      
     } else if (this.weatherCounter == 0 && this.weather.equals("Harsh Sunlight")) {
       this.weather = "none";
       
-      println("The harsh sunlight faded!");
+      println("The sunlight faded!");
       println();
+      
+      oneP.battleStats[5] = oneP.stats[5];
+      twoP.battleStats[5] = twoP.stats[5];
     }
   }
 

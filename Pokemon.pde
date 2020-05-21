@@ -368,7 +368,7 @@ class Pokemon {
 
     else if (this.name.equals("Gastly") || this.name.equals("Haunter") || this.name.equals("Gengar") || 
       this.name.equals("Koffing") || this.name.equals("Weezing") || this.name.equals("Vibrava") || 
-      this.name.equals("Flygon") || this.name.equals("Galarian Weezing"))
+      this.name.equals("Flygon") || this.name.equals("Galarian Weezing") || this.name.equals("Latias"))
       a = "Levitate";
 
     else if (this.name.equals("Dratini") || this.name.equals("Ekans") || this.name.equals("Arbok") || 
@@ -396,16 +396,37 @@ class Pokemon {
       a = "Intimidate";
 
     else if (this.name.equals("Lapras") || this.name.equals("Krabby") || this.name.equals("Kingler")
-      || this.name.equals("Drednaw"))
+      || this.name.equals("Drednaw") || this.name.equals("Falinks"))
       a = "Shell Armor";
+      
+    else if (this.name.equals("Mega Charizard X") || this.name.equals("Mega Aerodactyl"))
+      a = "Tough Claws";
+      
+    else if (this.name.equals("Magneton") || this.name.equals("Onix") || this.name.equals("Steelix")
+      || this.name.equals("Shuckle") || this.name.equals("Magnezone"))
+      a = "Sturdy";
+      
+    else if (this.name.equals("Milotic") || this.name.equals("Sylveon") || this.name.equals("Clefable"))
+      a = "Cute Charm";
 
+    else if (this.name.equals("Snover") || this.name.equals("Abomasnow") || this.name.equals("Mega Abomasnow"))
+      a = "Snow Warning";
+    
+    else if (this.name.equals("Vileplume") || this.name.equals("Venusaur") || this.name.equals("Exeggcute")
+     || this.name.equals("Seedot") || this.name.equals("Leafeon"))
+      a = "Chlorophyll";
+      
+    else if (this.name.equals("Dreepy") || this.name.equals("Drakloak") || this.name.equals("Dragapult"))
+      a = "Clear Body";
+      
     return a;
   }
 
   void describe() {
     println("* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *");
     println("Name:\t", this.name);
-    println("Trainer:\t", this.trainer.name);
+    if (this.trainer != null)
+      println("Trainer:\t", this.trainer.name);
     println("Type:\t", this.type + "/" + this.type2);
     println("Level:\t", this.level);
     println("Health:\t", this.currHealth+"/"+this.health);
@@ -525,6 +546,13 @@ class Pokemon {
       if ((chanceToHit <= ((mv.accuracy*100)*(this.adjustedStages))) || mv.accuracy == 0) {   
         if (!(this.flinch && !this.ability.equals("Inner Focus")) && !this.sleep && !(this.attract && (randomA <= 0.5)) && (!(this.paralysis && (randomP <= 0.25)) || (this.type.equals("Electric") || this.type2.equals("Electric"))) 
           && !(this.confusion && (randomC <= 0.33)) && (!(this.freeze && (randomF <= 0.2)) || (this.type.equals("Ice") || this.type2.equals("Ice")))) {
+          int randomAttract = int(random(0,3));
+                    
+          if (target.ability.equals("Cute Charm") && randomAttract == 0 && !this.attract) {
+            this.attract = true;
+            println(this.name, "was infatuated by", target.name + "!");
+            println();
+          }
 
           if (mv.type.equals(this.type) || mv.type.equals(this.type2)) {
             mv.power *= 1.5;
@@ -533,6 +561,10 @@ class Pokemon {
             mv.power *= 1.5;
           } else if (mv.type.equals("Fire") && battle.weather.equals("Rain")) {
             mv.power *= 0.5;
+          }
+          
+          if (this.ability.equals("Tough Claws")) {
+            mv.power *= 1.33;
           }
 
           if (mv.damageCatagory.equals("Physical")) {
@@ -550,6 +582,10 @@ class Pokemon {
           }
 
           if (mv.type.equals(this.type) || mv.type.equals(this.type2)) {
+            mv.power = orgPower;
+          }
+          
+          if (this.ability.equals("Tough Claws")) {
             mv.power = orgPower;
           }
           
@@ -588,14 +624,18 @@ class Pokemon {
             damage = 0;
             target.currHealth -= target.health/8;
             println(target.name + "'s disguise was busted! Mimikyu took", target.health/8, "damage!");
-            println();
           }
 
           if (target.ability.equals("Levitate") && mv.type.equals("Ground")) {
             damage = 0;
             condition = false;
             println(target.name, "is levitating!");
-            println();
+          }
+          
+          if ((target.currHealth == target.health) && damage > target.health) {
+            damage = target.health - 1;
+            
+            println(target.name, "is sturdy!");
           }
 
           if (target.protect) {
