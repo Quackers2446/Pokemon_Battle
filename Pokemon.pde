@@ -530,7 +530,7 @@ class Pokemon {
         println(target.name, "has set up a barrier!");
         println();
         target.raidShield = true;
-        target.shieldHealth = 6;
+        target.shieldHealth = 5;
         target.facedRaidShield = true;
       }
     }
