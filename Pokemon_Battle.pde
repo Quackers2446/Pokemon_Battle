@@ -59,6 +59,7 @@ void setup() {
   Move nobleRoar = new Move("Noble Roar", 48, 0, 1, "Normal", "Status", 0, "Sp.Attack-/Attack-", 1);
   Move attract = new Move("Attract", 24, 0, 1, "Normal", "Status", 0, "Attract", 1);
   Move block = new Move("Block", 5, 0, 0, "Normal", "Status", 0, "none", 0);
+  Move gigaImpact = new Move("Giga Impact", 5, 150, 0.9, "Normal", "Physical", 0, "none", 0);
 
   //FIRE
   Move ember = new Move("Ember", 25, 40, 1, "Fire", "Special", 0, "Burn", 0.1);
@@ -863,103 +864,117 @@ void setup() {
 
   //PLS UPDATE.
 
-  randomSeed(40);
-  //  sirfetchd.moveSet(firstImpression, rockSmash, knockOff, ironDefense);
- 
+  randomSeed(41);
+  
+  Battle b = new Battle(wild, randomTrainer);
+  
+  
 }
 
 void catchPokemon(Pokemon p, String pokeball, int catchRate) {
-  if (pokeball.equals("Master Ball")) {
-    println(p.name, "was caught!");
-    println();
-    return;
-  }
-
-  int n;
-
+  Float bonusBall = 1.0;
+  
   if (pokeball.equals("Poke Ball"))
-    n = int(random(0, 255));
+    bonusBall = 1.0;
 
   else if (pokeball.equals("Great Ball"))
-    n = int(random(0, 200));
+    bonusBall = 1.5;
 
   else
-    n = int(random(0, 150));
+    bonusBall = 2.0;
+    
+  Float bonusStatus = 1.0;
+  
+  if (p.sleep || p.freeze)
+    bonusStatus = 2.0;
+    
+  else if (p.paralysis || p.burn || p.poison || p.badlyPoisoned)
+    bonusStatus = 1.5;
+    
+  float a = (((3*p.health)-(2*p.currHealth)*catchRate*bonusBall)/float(3*p.health)) * bonusStatus;
+  
+  //if (pokeball.equals("Master Ball")) {
+  //  println(p.name, "was caught!");
+  //  println();
+  //  return;
+  //}
 
-  if ((((p.sleep || p.freeze) && (n < 25)) || ((p.paralysis || p.burn || p.poison)) && (n < 12))) {
-    println(p.name, "was caught!");
-    println();
-    return;
-  }
+  //int n;
 
-  int x = 0;
-  int d;
-  int z;
+  //if ((((p.sleep || p.freeze) && (n < 25)) || ((p.paralysis || p.burn || p.poison)) && (n < 12))) {
+  //  println(p.name, "was caught!");
+  //  println();
+  //  return;
+  //}
 
-  if (p.sleep || p.freeze) {
-    x = 25;
-  } else if (p.paralysis || p.burn || p.poison) {
-    x = 12;
-  } else if ((n - (x)) > catchRate) {
-    println(p.name, "broke free!");
-    println();
-    return;
-  }
+  //int x = 0;
+  //int d;
+  //int z;
 
-  int m = int(random(0, 255));
+  //if (p.sleep || p.freeze) {
+  //  x = 25;
+  //} else if (p.paralysis || p.burn || p.poison) {
+  //  x = 12;
+  //} else if ((n - (x)) > catchRate) {
+  //  println(p.name, "broke free!");
+  //  println();
+  //  return;
+  //}
 
-  int f;
+  //int m = int(random(0, 255));
 
-  if (pokeball.equals("Great Ball"))
-    f = int(float(p.health*255*4)/(p.currHealth * 8));
+  //int f;
 
-  else
-    f = int(float(p.health*255*4)/(p.currHealth * 12));
+  //if (pokeball.equals("Great Ball"))
+  //  f = int(float(p.health*255*4)/(p.currHealth * 8));
 
-  if (f >= m) {
-    println(p.name, "was caught!");
-    println();
-    return;
-  } else {
-    if (pokeball.equals("Poke Ball"))
-      d = catchRate * 100 / 255;
+  //else
+  //  f = int(float(p.health*255*4)/(p.currHealth * 12));
 
-    else if (pokeball.equals("Great Ball"))
-      d = catchRate * 100 / 200;
+  //if (f >= m) {
+  //  println(p.name, "was caught!");
+  //  println();
+  //  return;
+  //} else {
+  //  if (pokeball.equals("Poke Ball"))
+  //    d = catchRate * 100 / 255;
 
-    else
-      d = catchRate * 100 / 150;
+  //  else if (pokeball.equals("Great Ball"))
+  //    d = catchRate * 100 / 200;
 
-    if (d >= 256) {
-      println("Wobble, wobble, wobble.");
-      println();
-    } else {
-      if (p.sleep || p.freeze)
-        z = int(float(d * f) / 255 + 10);
-      else if (p.burn || p.poison || p.paralysis)
-        z = int(float(d * f) / 255 + 5);
-      else
-        z = int(float(d * f) / 255);
+  //  else
+  //    d = catchRate * 100 / 150;
 
-      if (z < 10) {
-        println("The ball misses!");
-        println();
-      } else if (z < 30) {
-        println("Wobble.");
-        println();
-      } else if (z < 70) {
-        println("Wobble, wobble.");
-        println();
-      } else {
-        println("Wobble, wobble, wobble.");
-        println();
-      }
-    }
+  //  if (d >= 256) {
+  //    println("Wobble, wobble, wobble.");
+  //    println();
+  //  } else {
+  //    if (p.sleep || p.freeze)
+  //      z = int(float(d * f) / 255 + 10);
+  //    else if (p.burn || p.poison || p.paralysis)
+  //      z = int(float(d * f) / 255 + 5);
+  //    else
+  //      z = int(float(d * f) / 255);
 
-    println(p.name, "broke free!");
-    println();
-    return;
-  }
+  //    if (z < 10) {
+  //      println("The ball misses!");
+  //      println();
+  //    } else if (z < 30) {
+  //      println("Wobble.");
+  //      println();
+  //    } else if (z < 70) {
+  //      println("Wobble, wobble.");
+  //      println();
+  //    } else {
+  //      println("Wobble, wobble, wobble.");
+  //      println();
+  //    }
+  //  }
+
+  //  println(p.name, "broke free!");
+  //  println();
+  //  return;
+  //}
 }
 
 void printPokemon() {

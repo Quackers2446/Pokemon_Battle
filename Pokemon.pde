@@ -231,6 +231,20 @@ class Pokemon {
           this.moveSet[i].name = "Let's Snuggle Forever";
           this.moveSet[i].status2 = "Z-Move";
           this.moveSet[i].power = 190;
+          this.moveSet[i].accuracy = 0;
+          
+          this.moveSet[i].statusProb = 0;
+        }
+      }
+    } if (this.item.equals("Snorium-Z")) {
+      for (int i = 0; i < 4; i++) {
+        if (this.moveSet[i].name.equals("Giga Impact")) {
+          this.moveSet[i].status = "";
+          
+          this.moveSet[i].name = "Pulverizing Pancake";
+          this.moveSet[i].status2 = "Z-Move";
+          this.moveSet[i].power = 210;
+          this.moveSet[i].accuracy = 0;
           
           this.moveSet[i].statusProb = 0;
         }
@@ -243,6 +257,7 @@ class Pokemon {
           this.moveSet[i].name = "All-Out Pummeling";
           this.moveSet[i].status2 = "Z-Move";
           this.moveSet[i].power = zMovePower(this.moveSet[i].power);
+          this.moveSet[i].accuracy = 0;
           
           this.moveSet[i].statusProb = 0;
         }
