@@ -283,14 +283,16 @@ void setup() {
   //TRAINER POKEMON
 
   //ZOFIA
-  //Level 52 Charizard
-  Pokemon charizard = new Pokemon("Charizard", "Fire/Flying", 52, 78, 84, 78, 109, 85, 100); 
+  //Level 56 Charizard
+  Pokemon charizard = new Pokemon("Charizard", "Fire/Flying", 56, 78, 84, 78, 109, 85, 100); 
   charizard.moveSet(flamethrower, dragonClaw, roost, fly);
-  
+  charizard.raidStats();
+  charizard.dynamax();
+
   //Level 52 Mega Charizard X
   Pokemon megaCharizardX = new Pokemon("Mega Charizard X", "Fire/Dragon", 52, 78, 130, 111, 130, 85, 100); 
   megaCharizardX.moveSet(flamethrower, dragonClaw, roost, airSlash);
- 
+
   //Level 38 Scyther
   Pokemon scyther = new Pokemon("Scyther", "Bug/Flying", 38, 70, 110, 80, 55, 80, 105);
   scyther.moveSet(pursuit, furyCutter, wingAttack, doubleTeam);
@@ -320,6 +322,10 @@ void setup() {
   Pokemon milotic = new Pokemon("Milotic", "Water", 38, 95, 60, 79, 100, 125, 81);
   milotic.moveSet(surf, dragonTail, recover, disarmingVoice);
   milotic.maxLevel = 5;
+
+  //Level 41 Xerneas
+  Pokemon xerneas = new Pokemon("Xerneas", "Fairy", 41, 126, 131, 95, 131, 98, 99);
+  xerneas.moveSet(moonblast, auroraBeam, megahorn, hornLeech);
 
   //JASMINE
   //Level 50 Mega Pidgeot
@@ -353,7 +359,6 @@ void setup() {
   //Level 41 Abomasnow
   Pokemon abomasnow = new Pokemon("Abomasnow", "Grass/Ice", 41, 90, 92, 75, 92, 85, 60);
   abomasnow.moveSet(woodHammer, blizzard, razorLeaf, iceShard);
-  
   //Level 37 Alcremie
   Pokemon alcremie = new Pokemon("Alcremie", "Fairy", 37, 65, 60, 75, 110, 121, 64);
   alcremie.moveSet(dazzlingGleam, drainPunch, recover, acidArmor);
@@ -436,6 +441,7 @@ void setup() {
   Pokemon exeggcute = new Pokemon("Exeggcute", "Grass/Psychic", 21, 60, 40, 80, 60, 45, 40);
   exeggcute.moveSet(bulletSeed, uproar, leechSeed, stunSpore);
   
+
   //Level 51 Drakloak
   Pokemon drakloak = new Pokemon("Drakloak", "Dragon/Ghost", 51, 68, 80, 50, 60, 50, 105);
   drakloak.moveSet(dragonPulse, hex, uTurn, bite);
@@ -447,7 +453,7 @@ void setup() {
   //Level 31 Quagsire
   Pokemon quagsire = new Pokemon("Quagsire", "Water/Ground", 31, 95, 85, 85, 65, 65, 35);
   quagsire.moveSet(amnesia, mudBomb, slam, waterGun);
-  
+
   //Level 39 Sirfetch'd
   Pokemon sirfetchd = new Pokemon("Sir Fetch'd", "Fighting", 39, 62, 135, 95, 68, 82, 65);
   sirfetchd.moveSet(firstImpression, rockSmash, knockOff, ironDefense);
@@ -690,9 +696,6 @@ void setup() {
   weezing.moveSet(heatWave, fairyWind, sludge, assurance);
 
   //Level 55 Xerneas
-  Pokemon xerneas = new Pokemon("Xerneas", "Fairy", 55, 126, 131, 95, 131, 98, 99);
-  xerneas.moveSet(moonblast, auroraBeam, megahorn, hornLeech);
-
   //Level 46 Stonjourner
   Pokemon stonjourner = new Pokemon("Stonjourner", "Rock", 46, 100, 125, 135, 20, 20, 70);
   stonjourner.moveSet(rockSlide, stealthRock, stomp, block);
@@ -704,12 +707,11 @@ void setup() {
   //IMPORTANT NPC POKEMON
 
   //CYNTHIA
-  //Level 46 Duraludon
-  Pokemon duraludon = new Pokemon("Duraludon", "Steel/Dragon", 43, 70, 95, 115, 120, 50, 85);
+  //Level 47 Duraludon
   duraludon.moveSet(dracoMeteor, flashCannon, thunderbolt, darkPulse);
 
   //Level 42 Inteleon
-  Pokemon inteleon = new Pokemon("Inteleon", "Water", 39, 70, 85, 65, 125, 65, 120);
+  Pokemon inteleon = new Pokemon("Inteleon", "Water", 42, 70, 85, 65, 125, 65, 120);
   inteleon.moveSet(uTurn, suckerPunch, snipeShot, tearfulLook);
 
   //Level 39 Centiscorch
@@ -725,7 +727,7 @@ void setup() {
   toxtricity.moveSet(toxic, nobleRoar, screech, spark);
 
   //Level 43 Frosmoth
-  Pokemon frosmoth = new Pokemon("Frosmoth", "Ice/Bug", 35, 70, 65, 60, 125, 90, 65);
+  Pokemon frosmoth = new Pokemon("Frosmoth", "Ice/Bug", 43, 70, 65, 60, 125, 90, 65);
   frosmoth.moveSet(bugBuzz, featherDance, auroraBeam, attract);
 
   //CASSIE
@@ -875,6 +877,12 @@ void catchPokemon(Pokemon p, String pokeball, int catchRate) {
   Float bonusBall = 1.0;
   
   if (pokeball.equals("Poke Ball"))
+
+  if (pokeball.equals("Master Ball")) {
+    println("* * *", p.name, "was caught!! * * *");
+    println();
+    return;
+  } else if (pokeball.equals("Poke Ball"))
     bonusBall = 1.0;
 
   else if (pokeball.equals("Great Ball"))
@@ -882,99 +890,47 @@ void catchPokemon(Pokemon p, String pokeball, int catchRate) {
 
   else
     bonusBall = 2.0;
-    
+
   Float bonusStatus = 1.0;
-  
+
   if (p.sleep || p.freeze)
-    bonusStatus = 2.0;
-    
+    bonusStatus = 2.5;
+
   else if (p.paralysis || p.burn || p.poison || p.badlyPoisoned)
     bonusStatus = 1.5;
-    
-  float a = (((3*p.health)-(2*p.currHealth)*catchRate*bonusBall)/float(3*p.health)) * bonusStatus;
-  
-  //if (pokeball.equals("Master Ball")) {
-  //  println(p.name, "was caught!");
-  //  println();
-  //  return;
-  //}
 
-  //int n;
+  int a = int(((((3*p.health)-(2*p.currHealth))*catchRate*bonusBall)/float(3*p.health)) * bonusStatus);
+  int b = int(65536 / pow((255/a), 0.1875));
 
-  //if ((((p.sleep || p.freeze) && (n < 25)) || ((p.paralysis || p.burn || p.poison)) && (n < 12))) {
-  //  println(p.name, "was caught!");
-  //  println();
-  //  return;
-  //}
+  int rand = int(random(0, 65535));
+  int counter = 0;
 
-  //int x = 0;
-  //int d;
-  //int z;
+  while (rand <= b) {
+    if (counter == 3) {
+      println("* * * Gotcha!", p.name, "was caught! * * *");
+      println();
+      return;
+    }
 
-  //if (p.sleep || p.freeze) {
-  //  x = 25;
-  //} else if (p.paralysis || p.burn || p.poison) {
-  //  x = 12;
-  //} else if ((n - (x)) > catchRate) {
-  //  println(p.name, "broke free!");
-  //  println();
-  //  return;
-  //}
+    println("Wobble");
+    println();
+    rand = int(random(0, 65535));
+    counter += 1;
+  }
 
-  //int m = int(random(0, 255));
+  if (counter == 0)
+    println("* * * Oh no! The Pokémon broke free! * * *");
 
-  //int f;
+  else if (counter == 1)
+    println("* * * Aww! It appeared to be caught! * * *");
 
-  //if (pokeball.equals("Great Ball"))
-  //  f = int(float(p.health*255*4)/(p.currHealth * 8));
+  else if (counter == 2)
+    println("* * * Aargh! Almost had it! * * *");
 
-  //else
-  //  f = int(float(p.health*255*4)/(p.currHealth * 12));
+  else if (counter == 3)
+    println("* * * Gah! It was so close, too! * * *");
 
-  //if (f >= m) {
-  //  println(p.name, "was caught!");
-  //  println();
-  //  return;
-  //} else {
-  //  if (pokeball.equals("Poke Ball"))
-  //    d = catchRate * 100 / 255;
-
-  //  else if (pokeball.equals("Great Ball"))
-  //    d = catchRate * 100 / 200;
-
-  //  else
-  //    d = catchRate * 100 / 150;
-
-  //  if (d >= 256) {
-  //    println("Wobble, wobble, wobble.");
-  //    println();
-  //  } else {
-  //    if (p.sleep || p.freeze)
-  //      z = int(float(d * f) / 255 + 10);
-  //    else if (p.burn || p.poison || p.paralysis)
-  //      z = int(float(d * f) / 255 + 5);
-  //    else
-  //      z = int(float(d * f) / 255);
-
-  //    if (z < 10) {
-  //      println("The ball misses!");
-  //      println();
-  //    } else if (z < 30) {
-  //      println("Wobble.");
-  //      println();
-  //    } else if (z < 70) {
-  //      println("Wobble, wobble.");
-  //      println();
-  //    } else {
-  //      println("Wobble, wobble, wobble.");
-  //      println();
-  //    }
-  //  }
-
-  //  println(p.name, "broke free!");
-  //  println();
-  //  return;
-  //}
+  println();
 }
 
 void printPokemon() {

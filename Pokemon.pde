@@ -545,7 +545,7 @@ class Pokemon {
         println(target.name, "has set up a barrier!");
         println();
         target.raidShield = true;
-        target.shieldHealth = 5;
+        //target.shieldHealth = 5;
         target.facedRaidShield = true;
       }
     }
@@ -647,7 +647,7 @@ class Pokemon {
             println(target.name, "is levitating!");
           }
           
-          if ((target.currHealth == target.health) && damage > target.health) {
+          if (((target.currHealth == target.health) && damage > target.health)&& this.ability.equals("Sturdy")) {
             damage = target.health - 1;
             
             println(target.name, "is sturdy!");
