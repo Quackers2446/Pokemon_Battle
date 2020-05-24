@@ -323,10 +323,10 @@ void setup() {
   milotic.moveSet(surf, dragonTail, recover, disarmingVoice);
   milotic.maxLevel = 5;
 
-  //Level 41 Xerneas
-  Pokemon xerneas = new Pokemon("Xerneas", "Fairy", 41, 126, 131, 95, 131, 98, 99);
+  //Level 45 Xerneas
+  Pokemon xerneas = new Pokemon("Xerneas", "Fairy", 45, 126, 131, 95, 131, 98, 99);
   xerneas.moveSet(moonblast, auroraBeam, megahorn, hornLeech);
-  xerneas.maxLevel = 0;
+  xerneas.maxLevel = 5;
 
   //JASMINE
   //Level 50 Mega Pidgeot
@@ -376,35 +376,7 @@ void setup() {
   latias.moveSet(dragonBreath, mistBall, calmMind, recover);
   latias.maxLevel = 0;
 
-  //BARNABUS
-  //Level 9 Diglett
-  Pokemon diglett = new Pokemon("Diglett", "Ground", 9, 10, 55, 25, 35, 45, 95);
-  diglett.moveSet(scratch, astonish, none, none);
-
-  //Level 15 Spearow
-  Pokemon spearow = new Pokemon("Spearow", "Normal/Flying", 13, 40, 60, 30, 31, 31, 70);
-  spearow.moveSet(peck, pursuit, furyAttack, none);
-
-  //Level 12 Weepinbell
-  Pokemon weepinbell = new Pokemon("Weepinbell", "Grass/Poison", 12, 65, 90, 50, 85, 45, 55);
-  weepinbell.moveSet(vineWhip, wrap, none, none);
-
-  //Level 8 Mankey
-  Pokemon mankey = new Pokemon("Mankey", "Fighting", 8, 40, 80, 35, 35, 45, 70);
-  mankey.moveSet(covet, scratch, karateChop, none);
-
-  //Level 14 Rhydon
-  Pokemon rhydon = new Pokemon("Rhydon", "Rock/Ground", 14, 80, 85, 95, 30, 30, 25);
-  rhydon.moveSet(hornAttack, scaryFace, tailWhip, none);
-
-  //Level 9 Magikarp
-  Pokemon magikarp = new Pokemon("Magikarp", "Water", 9, 20, 10, 55, 15, 20, 80);
-  magikarp.moveSet(splash, none, none, none);
-
   //NICHOLAS
-  //Level 25 Dratini
-  Pokemon dratini = new Pokemon("Dratini", "Dragon", 25, 41, 64, 45, 50, 50, 50);
-  dratini.moveSet(twister, slam, dragonRage, thunderWave);
 
   //Level 29 Vileplume
   Pokemon vileplume = new Pokemon("Vileplume", "Grass/Poison", 29, 75, 80, 85, 110, 90, 50);
@@ -455,10 +427,39 @@ void setup() {
   Pokemon quagsire = new Pokemon("Quagsire", "Water/Ground", 31, 95, 85, 85, 65, 65, 35);
   quagsire.moveSet(amnesia, mudBomb, slam, waterGun);
 
-  //Level 39 Sirfetch'd
-  Pokemon sirfetchd = new Pokemon("Sir Fetch'd", "Fighting", 39, 62, 135, 95, 68, 82, 65);
+  //Level 41 Sirfetch'd
+  Pokemon sirfetchd = new Pokemon("Sir Fetch'd", "Fighting", 41, 62, 135, 95, 68, 82, 65);
   sirfetchd.moveSet(firstImpression, rockSmash, knockOff, ironDefense);
+  
+  //Level 36 Stonjourner
+  Pokemon stonjourner = new Pokemon("Stonjourner", "Rock", 36, 100, 125, 135, 20, 20, 70);
+  stonjourner.moveSet(rockSlide, stealthRock, stomp, block);
 
+  //BARNABUS
+  //Level 9 Diglett
+  Pokemon diglett = new Pokemon("Diglett", "Ground", 9, 10, 55, 25, 35, 45, 95);
+  diglett.moveSet(scratch, astonish, none, none);
+
+  //Level 15 Spearow
+  Pokemon spearow = new Pokemon("Spearow", "Normal/Flying", 13, 40, 60, 30, 31, 31, 70);
+  spearow.moveSet(peck, pursuit, furyAttack, none);
+
+  //Level 12 Weepinbell
+  Pokemon weepinbell = new Pokemon("Weepinbell", "Grass/Poison", 12, 65, 90, 50, 85, 45, 55);
+  weepinbell.moveSet(vineWhip, wrap, none, none);
+
+  //Level 8 Mankey
+  Pokemon mankey = new Pokemon("Mankey", "Fighting", 8, 40, 80, 35, 35, 45, 70);
+  mankey.moveSet(covet, scratch, karateChop, none);
+
+  //Level 14 Rhydon
+  Pokemon rhydon = new Pokemon("Rhydon", "Rock/Ground", 14, 80, 85, 95, 30, 30, 25);
+  rhydon.moveSet(hornAttack, scaryFace, tailWhip, none);
+
+  //Level 9 Magikarp
+  Pokemon magikarp = new Pokemon("Magikarp", "Water", 9, 20, 10, 55, 15, 20, 80);
+  magikarp.moveSet(splash, none, none, none);
+  
   //JOANNA
   //Level 13 Litten
   Pokemon litten = new Pokemon("Litten", "Fire", 13, 45, 65, 40, 60, 40, 70);
@@ -696,10 +697,6 @@ void setup() {
   Pokemon galarianWeezing = new Pokemon("Galarian Weezing", "Poison/Fairy", 37, 65, 90, 120, 85, 70, 60);
   weezing.moveSet(heatWave, fairyWind, sludge, assurance);
 
-  //Level 46 Stonjourner
-  Pokemon stonjourner = new Pokemon("Stonjourner", "Rock", 46, 100, 125, 135, 20, 20, 70);
-  stonjourner.moveSet(rockSlide, stealthRock, stomp, block);
-
   //Level 42 Dreepy
   Pokemon dreepy = new Pokemon("Dreepy", "Dragon/Ghost", 42, 28, 60, 30, 40, 20, 82);
   dreepy.moveSet(astonish, infestation, quickAttack, bite);
@@ -730,6 +727,10 @@ void setup() {
   //Level 43 Frosmoth
   Pokemon frosmoth = new Pokemon("Frosmoth", "Ice/Bug", 43, 70, 65, 60, 125, 90, 65);
   frosmoth.moveSet(bugBuzz, featherDance, auroraBeam, attract);
+  
+  //Level 25 Dratini
+  Pokemon dratini = new Pokemon("Dratini", "Dragon", 25, 41, 64, 45, 50, 50, 50);
+  dratini.moveSet(twister, slam, dragonRage, thunderWave);
 
   //CASSIE
   //Level 36 Shelgon
@@ -830,10 +831,10 @@ void setup() {
   Trainer randomTrainer = new Trainer("Random");
   Trainer wild = new Trainer("Wild");
 
-  zofia.addPokemon(xerneas, scyther, lapras, magneton, drednaw, mimikyu);
+  zofia.addPokemon(xerneas, scyther, lapras, magneton, milotic, mimikyu, drednaw);
   jasmine.addPokemon(megaPidgeot, arcanine, falinks, latias, abomasnow, alcremie);
   barnabas.addPokemon(diglett, spearow, weepinbell, mankey, magikarp, rhydon);
-  nicholas.addPokemon(dratini, vileplume, drakloak, megaSwampert, snorlax, sirfetchd);
+  nicholas.addPokemon(stonjourner, vileplume, drakloak, megaSwampert, snorlax, sirfetchd);
   joanna.addPokemon(litten, gastly, raichu, vulpix);
   stella.addPokemon(dartrix);
   nina.addPokemon(popplio);
@@ -851,7 +852,7 @@ void setup() {
   printPokemon();
   printCharizard();
 
-  zofia.giveItem("Sitrus Berry", magneton, milotic);
+  zofia.giveItem("Sitrus Berry", magneton, milotic, xerneas);
   zofia.giveItem("Leftovers", lapras, kingler, drednaw);
   zofia.giveItem("Mimikium-Z", mimikyu);
   zofia.giveItem("Berry Juice", scyther);
@@ -871,7 +872,30 @@ void setup() {
   randomSeed(44);
 
   Battle b = new Battle(wild, randomTrainer);
-  //    xerneas.moveSet(moonblast, auroraBeam, megahorn, hornLeech);
+  //stonjourner.moveSet(rockSlide, stealthRock, stomp, block);
+  
+  // snorlax/swampert/sir fetch'd
+  //xerneas, scyther
+  
+  b.move(stonjourner, rockSlide, sirfetchd, firstImpression);
+  xerneas.dynamax();
+  b.move(stonjourner, rockSlide, xerneas, moonblast);
+  
+  b.move(stonjourner, rockSlide, sirfetchd, rockSmash);
+  b.move(stonjourner, rockSlide, xerneas, moonblast);
+  
+  nicholas.useItem("Fresh Water", sirfetchd);
+  stonjourner.useMove(rockSlide, sirfetchd);
+  sirfetchd.currHealth += sirfetchd.stats[0]/16;
+  
+  b.move(stonjourner, rockSlide, xerneas, moonblast);
+  
+  catchPokemon(stonjourner, "Ultra Ball", 60);
+  catchPokemon(stonjourner, "Ultra Ball", 60);
+  catchPokemon(stonjourner, "Great Ball", 60);
+  
+  zofia.heal();
+  
 }
 
 void catchPokemon(Pokemon p, String pokeball, int catchRate) {

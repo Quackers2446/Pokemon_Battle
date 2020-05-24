@@ -36,6 +36,12 @@ class Trainer {
     }
   }
   
+  void heal (Pokemon ... p) {
+    for (int i = 0; i < p.length; i++) { 
+      p[i].currHealth = p[i].stats[0];
+    }
+  }
+  
   void giveItem(String b, Pokemon ... p) {
     for (int i = 0; i < p.length; i++) {
       p[i].item = b;

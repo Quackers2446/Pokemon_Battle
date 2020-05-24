@@ -122,6 +122,7 @@ class Pokemon {
       this.currHealth *= (1.5 + (this.maxLevel*0.05));
       this.battleStats[0] = this.health;
     }
+    
     for (int i = 0; i < 4; i++) {
       this.moveSet[i].status = "";
       this.moveSet[i].status2 = "Max-Move";
@@ -545,7 +546,7 @@ class Pokemon {
         println(target.name, "has set up a barrier!");
         println();
         target.raidShield = true;
-        //target.shieldHealth = 5;
+        target.shieldHealth = 2;
         target.facedRaidShield = true;
       }
     }
