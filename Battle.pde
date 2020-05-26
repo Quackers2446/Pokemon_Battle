@@ -181,6 +181,7 @@ class Battle {
 
   void enterBattleEffects(Pokemon oneP, Pokemon twoP) {      
     if (oneP.turnsOut == 0) {
+
       if (oneP.trainer.sR) {
         float effective = stealthRock.typeEffectiveness(oneP);
         float damage = 0;
@@ -203,7 +204,7 @@ class Battle {
         println("Pointed rocks poked", oneP.name + "! They lost", damage, "health. (" + int((float(oneP.currHealth)/oneP.health)*100) + "%)");
         println();
       }
-      
+
       if (oneP.ability.equals("Intimidate")) {
         println(twoP.name, "was intimidated. Their attack fell!");
         println();
@@ -227,9 +228,18 @@ class Battle {
         this.weather = "Hail";
         this.weatherCounter = 1000; //or some arbitrary big number
       }
+      
+      if (oneP.ability.equals("Drought") && !this.weather.equals("Harsh Sunlight")) {
+        this.weather = "Harsh Sunlight";
+        
+        println(oneP.name, "made the sunlight turn harsh!");
+        println();
+        this.weatherCounter = 5;
+      } 
     }
     
     if (oneP.trainer.reflect) {      
+      oneP.trainer.reflectC -= 1;
       if (oneP.trainer.reflectC == 0) {
         println(oneP.name + "'s reflect wore off!");
         println();
@@ -271,14 +281,14 @@ class Battle {
       println();
     }
 
-    if (this.weather.equals("Sandstorm") && !(firstType1.equals("Rock") || oneP.type2.equals("Rock")
+    if (this.weather.equals("Sandstorm") && !oneP.raidPokemon && !(firstType1.equals("Rock") || oneP.type2.equals("Rock")
       || firstType1.equals("Steel") || oneP.type2.equals("Steel") || firstType1.equals("Ground") || oneP.type2.equals("Ground"))) {
       oneP.currHealth -= (oneP.stats[0]/16);
       println(oneP.name, "was buffeted by the sandstorm! (" + int((float(oneP.currHealth)/oneP.health)*100) + "%)");
       println();
     }
     
-    if (this.weather.equals("Hail") && !(firstType1.equals("Ice") || oneP.type2.equals("Ice"))) {
+    if (this.weather.equals("Hail") && !oneP.raidPokemon && !(firstType1.equals("Ice") || oneP.type2.equals("Ice"))) {
       oneP.currHealth -= (oneP.stats[0]/16);
       println(oneP.name, "was buffeted by the hail! (" + int((float(oneP.currHealth)/oneP.health)*100) + "%)");
       println();
@@ -300,8 +310,22 @@ class Battle {
       this.weatherCounter = 5;
     } 
     
+    if (mv1.status.equals("Hail") && !weather.equals("Hail")) {
+      println(oneP.name, "whipped up a hailstorm!");
+      println();
+
+      this.weather = "Hail";
+      this.weatherCounter = 1000; //or some arbitrary big number
+    }
+    
     if (oneP.turnsOut == 0 && this.weather.equals("Harsh Sunlight")) {
       if (oneP.ability.equals("Chlorophyll")) {
+        oneP.battleStats[5] *= 2;
+      }
+    }
+    
+    if (oneP.turnsOut == 0 && this.weather.equals("Rain")) {
+      if (oneP.ability.equals("Swift Swim")) {
         oneP.battleStats[5] *= 2;
       }
     }

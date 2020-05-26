@@ -82,8 +82,16 @@ class Trainer {
       p.currHealth += 60;
     }
     
+    else if (item.equals("Hyper Potion")) {
+      p.currHealth += 200;
+    }
+    
     else if (item.equals("Revive")) {
-      p.currHealth += p.health/2;
+      p.currHealth = p.health/2;
+    }
+    
+    else if (item.equals("Max Revive")) {
+      p.currHealth = p.health;
     }
     
     else if (item.equals("Cheri Berry")) {
@@ -107,12 +115,10 @@ class Trainer {
       println(p.name, "is no longer poisoned!");
     }
     
-    if (p.currHealth > p.health) {
+    if (p.currHealth > p.health)
       p.currHealth = p.health;
-    }
     
-    if (p.currHealth > x)
-      println(p.name, "heals", str(p.currHealth-x), "health and is now at", p.currHealth, "health! (" + int((float(p.currHealth)/p.health)*100) + "%)");
+    println(p.name, "heals", str(p.currHealth-x), "health and is now at", p.currHealth, "health! (" + int((float(p.currHealth)/p.health)*100) + "%)");
 
     println();
     println("* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *");

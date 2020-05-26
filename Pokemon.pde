@@ -35,6 +35,7 @@ class Pokemon {
   Boolean sR;
   Battle battle;
   Boolean zMove;
+  Boolean mega;
 
   Pokemon (String n, String t, int l, int hp, 
     int att, int def, int satt, int sdef, int spd) {
@@ -102,16 +103,17 @@ class Pokemon {
     this.sR = false;
     
     this.zMove = false;
+    
+    this.mega = false;
   }
 
   void raidStats() {
     this.raidPokemon = true;
 
-    int h = int(((((((this.stats[0] + 31)*2 + int(sqrt(252)/4))*this.level)/100)) + this.level + 10)*2);
-    this.stats[0] = h;
-    this.health = h;
-    this.currHealth = h;
-    this.battleStats[0] = h;
+    this.stats[0] *= 2;
+    this.health = stats[0];
+    this.currHealth = stats[0];
+    this.battleStats[0] = stats[0];
   }
 
   void dynamax() {
@@ -219,6 +221,58 @@ class Pokemon {
     }
 
     this.maxTurns = 0;
+  }
+  
+  void mega() {
+    this.mega = true;
+    
+    if (this.name.equals("Pidgeot")) {
+      this.name = "Mega Pidgeot";
+      this.ability = "No Guard";
+      
+      this.stats[0] = 83;
+      this.stats[1] = 80;
+      this.stats[2] = 80;
+      this.stats[3] = 135;
+      this.stats[4] = 80;
+      this.stats[5] = 121;
+    }
+    if (this.name.equals("Charizard")) {
+      if (this.item.equals("Charizardite Y")) {
+        this.name = "Mega Charizard Y";
+        this.ability = "Drought";
+        
+        this.stats[0] = 78;
+        this.stats[1] = 104;
+        this.stats[2] = 78;
+        this.stats[3] = 159;
+        this.stats[4] = 115;
+        this.stats[5] = 100;
+      } else {
+        this.name = "Mega Charizard X";
+        this.ability = "Tough Claws";
+        
+        this.stats[0] = 78;
+        this.stats[1] = 130;
+        this.stats[2] = 111;
+        this.stats[3] = 130;
+        this.stats[4] = 85;
+        this.stats[5] = 100;
+      }
+    }
+    if (this.name.equals("Swampert")) {
+      this.name = "Mega Swampert";
+      this.ability = "Swift Swim";
+      
+      this.stats[0] = 100;
+      this.stats[1] = 150;
+      this.stats[2] = 110;
+      this.stats[3] = 95;
+      this.stats[4] = 110;
+      this.stats[5] = 70;
+    }
+    
+    this.calculateStats();
   }
   
   void useZMove() {
@@ -538,8 +592,12 @@ class Pokemon {
     float criticalRandom = random(0, 100);
     boolean condition = true;
     int orgPower = mv.power;
-
+    float formerMvA = mv.accuracy;
     mv.currPowerPoints -= 1;
+    
+    if (this.ability.equals("No Guard") || target.ability.equals("No Guard")) {
+      mv.accuracy = 0;
+    }
     
     if (target.raidPokemon && !target.raidShield && !target.facedRaidShield) {
       if ((target.currHealth < int((float(target.health)*2)/3)) && !target.raidShield) {
@@ -569,16 +627,27 @@ class Pokemon {
             println(this.name, "was infatuated by", target.name + "!");
             println();
           }
-
+          
+          //STAB
           if (mv.type.equals(this.type) || mv.type.equals(this.type2)) {
             mv.power *= 1.5;
           }
+          
+          //Rain
           if (mv.type.equals("Water") && battle.weather.equals("Rain")) {
             mv.power *= 1.5;
           } else if (mv.type.equals("Fire") && battle.weather.equals("Rain")) {
             mv.power *= 0.5;
           }
           
+          //Harsh Sunlight
+          if (mv.type.equals("Water") && battle.weather.equals("Harsh Sunlight")) {
+            mv.power *= 0.5;
+          } else if (mv.type.equals("Fire") && battle.weather.equals("Harsh Sunlight")) {
+            mv.power *= 1.5;
+          }
+          
+          //Does not check for contact -> OP
           if (this.ability.equals("Tough Claws")) {
             mv.power *= 1.33;
           }
@@ -611,6 +680,12 @@ class Pokemon {
             mv.power = orgPower;
           }
 
+          if (mv.type.equals("Water") && battle.weather.equals("Harsh Sunlight")) {
+            mv.power = orgPower;
+          } else if (mv.type.equals("Fire") && battle.weather.equals("Harsh Sunlight")) {
+            mv.power = orgPower;
+          }
+          
           if (typeEf == 4) {
             println(mv.name, "is super duper effective!");
           } else if (typeEf >= 2) {
@@ -679,9 +754,12 @@ class Pokemon {
           if (target.raidShield && target.raidPokemon) {
             if (target.shieldHealth > 0) {
               if (damage > 0) {
+                if (mv.status2.equals("Max-Move"))
+                  target.shieldHealth -= 1;
+                  
                 target.shieldHealth -= 1;
                 this.shieldDamage += int(float(damage)/3);
-                println(this.name, "hit", target.name + "'s shield and depleted one bar of it's strength!");
+                println(this.name, "hit", target.name + "'s shield and depleted its strength!");
                 println();
                 println("The barrier now has", target.shieldHealth, "bars!");
                 println();
@@ -876,5 +954,10 @@ class Pokemon {
     
     if (zMove)
       unZMove();
+      
+    
+    if (this.ability.equals("No Guard") || target.ability.equals("No Guard")) {
+      mv.accuracy = formerMvA;
+    }
   }
 }
