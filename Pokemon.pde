@@ -662,6 +662,19 @@ class Pokemon {
 
             target.protect = false;
           }
+          
+          if (target.trainer.reflect && mv.damageCatagory.equals("Physical")) {
+            damage /= 2;
+          }
+          
+          if (target.trainer.lightScreen && mv.damageCatagory.equals("Special")) {
+            damage /= 2;
+          }
+          
+          if (target.trainer.auroraVeil) {
+            damage /= 2;
+          }
+          
 
           if (target.raidShield && target.raidPokemon) {
             if (target.shieldHealth > 0) {

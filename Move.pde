@@ -627,12 +627,39 @@ class Move {
           
           println("The entire party has been cured of major status effects.");
         }
-      } else if (firstStatus.equals("StealthRock") && !user.sR) {
+      } else if (firstStatus.equals("StealthRock") && !target.trainer.sR) {
         chance = random(0, 1);
 
         if (chance <= this.statusProb) {
-          user.sR = true;
+          target.trainer.sR = true;
           println(user.name, "threw floating pointy rocks on the other side of the field!");
+        }
+      } else if (firstStatus.equals("Reflect") && !user.trainer.reflect) {
+        chance = random(0, 1);
+
+        if (chance <= this.statusProb) {
+          user.trainer.reflect = true;
+          user.trainer.reflectC = 5;
+          
+          println(user.name, "set up Reflect!");
+        }
+      } else if (firstStatus.equals("LightScreen") && !user.trainer.lightScreen) {
+        chance = random(0, 1);
+
+        if (chance <= this.statusProb) {
+          user.trainer.lightScreen = true;
+          user.trainer.lightScreenC = 5;
+          
+          println(user.name, "set up a Light Screen!");
+        }
+      } else if (firstStatus.equals("AuroraVeil") && !user.trainer.auroraVeil) {
+        chance = random(0, 1);
+
+        if (chance <= this.statusProb) {
+          user.trainer.auroraVeil = true;
+          user.trainer.auroraVeilC = 5;
+          
+          println(user.name, "set up an Aurora Veil!!");
         }
       }
     }

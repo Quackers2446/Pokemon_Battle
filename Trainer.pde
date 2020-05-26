@@ -2,12 +2,17 @@ class Trainer {
   String name;
   int battlesWon;
   ArrayList<Pokemon> team;
+  Boolean sR, reflect, lightScreen, auroraVeil;
+  int reflectC, lightScreenC, auroraVeilC;
   
   Trainer (String n) {
     this.name = n;
     
-    battlesWon = 0;
-    team = new ArrayList<Pokemon>();
+    this.battlesWon = 0;
+    this.team = new ArrayList<Pokemon>();
+    
+    this.sR = this.reflect = this.lightScreen = this.auroraVeil = false;
+    this.reflectC = this.lightScreenC = this.auroraVeilC = 0;
   }
   
   void describe () {

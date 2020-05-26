@@ -179,12 +179,9 @@ class Battle {
     }
   }
 
-  void enterBattleEffects(Pokemon oneP, Pokemon twoP) {   
-    if (oneP.sR)
-      this.sR = true;
-    
+  void enterBattleEffects(Pokemon oneP, Pokemon twoP) {      
     if (oneP.turnsOut == 0) {
-      if (this.sR) {
+      if (oneP.trainer.sR) {
         float effective = stealthRock.typeEffectiveness(oneP);
         float damage = 0;
         if (effective == 0.25) {
@@ -229,6 +226,30 @@ class Battle {
   
         this.weather = "Hail";
         this.weatherCounter = 1000; //or some arbitrary big number
+      }
+    }
+    
+    if (oneP.trainer.reflect) {      
+      if (oneP.trainer.reflectC == 0) {
+        println(oneP.name + "'s reflect wore off!");
+        println();
+        oneP.trainer.reflect = false;
+      }
+    }
+    if (oneP.trainer.lightScreen) {
+      oneP.trainer.lightScreenC -= 1;
+      if (oneP.trainer.lightScreenC == 0) {
+        println(oneP.name + "'s Light Screen wore off!");
+        println();
+        oneP.trainer.lightScreen = false;
+      }
+    }
+    if (oneP.trainer.auroraVeil) {
+      oneP.trainer.auroraVeilC -= 1;
+      if (oneP.trainer.auroraVeilC == 0) {
+        println(oneP.name + "'s Aurora Veil wore off!");
+        println();
+        oneP.trainer.auroraVeil = false;
       }
     }
     
