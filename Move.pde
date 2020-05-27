@@ -209,7 +209,17 @@ class Move {
         chance = random(0, 1);
 
         if (chance <= this.statusProb) {
+          
           println(target.name, "flinched!");
+          
+          if (target.ability.equals("Steadfast")) {
+            if (target.speedSMp < 6) {
+              println(target.name, "is steadfast! Their speed rose!");
+              
+              target.speedSMp += 1;
+              target.battleStats[5] = int(float((target.speedSMp)*target.stats[5])/2);
+            }
+          }
           
           target.flinch = true;
         }
@@ -627,6 +637,22 @@ class Move {
           
           println("The entire party has been cured of major status effects.");
         }
+      } else if (firstStatus.equals("StrengthSap")) {
+        chance = random(0, 1);
+
+        if (chance <= this.statusProb) {
+          user.currHealth += target.battleStats[1];
+          if (user.currHealth >= user.health)
+            user.currHealth = user.health;
+          
+          println(user.name, "healed to", user.currHealth, "health! (" +int((float(user.currHealth)/user.health)*100) + "%)");
+          
+          if (target.attackSMn < 6) {
+            println(target.name + "'s attack fell!");
+            target.attackSMn += 1;
+            target.battleStats[1] = int(float(2*target.stats[1])/(target.attackSMn));
+          }
+        }
       } else if (firstStatus.equals("StealthRock") && !target.trainer.sR) {
         chance = random(0, 1);
 
@@ -738,6 +764,15 @@ class Move {
 
         if (chance <= this.statusProb) {
           println(target.name, "flinched!");
+          
+          if (target.ability.equals("Steadfast")) {
+            if (user.speedSMp < 6) {
+              println(user.name + "'s speed rose!");
+              
+              user.speedSMp += 1;
+              user.battleStats[5] = int(float((user.speedSMp)*user.stats[5])/2);
+            }
+          }
           
           target.flinch = true;
         }

@@ -181,7 +181,6 @@ class Battle {
 
   void enterBattleEffects(Pokemon oneP, Pokemon twoP) {      
     if (oneP.turnsOut == 0) {
-
       if (oneP.trainer.sR) {
         float effective = stealthRock.typeEffectiveness(oneP);
         float damage = 0;

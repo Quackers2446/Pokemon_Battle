@@ -489,20 +489,26 @@ class Pokemon {
     else if (this.name.equals("Dreepy") || this.name.equals("Drakloak") || this.name.equals("Dragapult"))
       a = "Clear Body";
       
+    else if (this.name.equals("Xerneas"))
+      a = "Fairy Aura";
+    
+    else if (this.name.equals("Sirfetch'd") || this.name.equals("Lucario") || this.name.equals("Machamp"))
+      a = "Steadfast";
+      
     return a;
   }
 
   void describe() {
     println("* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *");
-    println("Name:\t", this.name);
+    println("Name:\t\t", this.name);
     if (this.trainer != null)
       println("Trainer:\t", this.trainer.name);
-    println("Type:\t", this.type + "/" + this.type2);
-    println("Level:\t", this.level);
-    println("Health:\t", this.currHealth+"/"+this.health);
+    println("Type:\t\t", this.type + "/" + this.type2);
+    println("Level:\t\t", this.level);
+    println("Health:\t\t", this.currHealth+"/"+this.health);
     println();
     println("Ability:\t", this.ability);
-    println("Item:\t", this.item);
+    println("Item:\t\t", this.item);
 
     println();
 
@@ -647,6 +653,11 @@ class Pokemon {
             mv.power *= 1.5;
           }
           
+          //Fairy Aura
+          if (mv.type.equals("Fairy") && (this.ability.equals("Fairy Aura") || target.ability.equals("Fairy Aura"))) {
+            mv.power *= 1.33;
+          }
+          
           //Does not check for contact -> OP
           if (this.ability.equals("Tough Claws")) {
             mv.power *= 1.33;
@@ -665,26 +676,8 @@ class Pokemon {
           } else {
             damage = 0;
           }
-
-          if (mv.type.equals(this.type) || mv.type.equals(this.type2)) {
-            mv.power = orgPower;
-          }
           
-          if (this.ability.equals("Tough Claws")) {
-            mv.power = orgPower;
-          }
-          
-          if (mv.type.equals("Water") && battle.weather.equals("Rain")) {
-            mv.power = orgPower;
-          } else if (mv.type.equals("Fire") && battle.weather.equals("Rain")) {
-            mv.power = orgPower;
-          }
-
-          if (mv.type.equals("Water") && battle.weather.equals("Harsh Sunlight")) {
-            mv.power = orgPower;
-          } else if (mv.type.equals("Fire") && battle.weather.equals("Harsh Sunlight")) {
-            mv.power = orgPower;
-          }
+          mv.power = orgPower;
           
           if (typeEf == 4) {
             println(mv.name, "is super duper effective!");

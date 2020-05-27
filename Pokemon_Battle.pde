@@ -95,6 +95,7 @@ void setup() {
   Move appleAcid = new Move("Apple Acid", 100, 80, 1, "Grass", "Special", 0, "Sp.Defense-", 0);
   Move aromatherapy = new Move("Aromatherapy", 5, 0, 0, "Grass", "Status", 0, "Cure", 1);
   Move hornLeech = new Move("Horn Leech", 10, 75, 1, "Grass", "Physical", 0, "Drain", 1);
+  Move strengthSap = new Move("Strength Sap", 10, 0, 1, "Grass", "Status", 0, "StrengthSap", 1);
 
   //WATER
   Move waterGun = new Move("Water Gun", 25, 40, 1, "Water", "Special", 0, "none", 0);
@@ -120,6 +121,7 @@ void setup() {
   Move ancientPower = new Move("Ancient Power", 8, 60, 1, "Rock", "Special", 0, "Attack+/Sp.Attack+", 0.1);
   Move rockPolish = new Move("Rock Polish", 20, 0, 0, "Rock", "Status", 0, "Speed++", 1);
   Move stealthRock = new Move("Stealth Rock", 20, 0, 0, "Rock", "Status", 0, "StealthRock", 1);
+  Move powerGem = new Move("Power Gem", 20, 80, 1, "Rock", "Special", 0, "none", 0);
 
   //BUG
   Move struggleBug = new Move("Struggle Bug", 20, 50, 1, "Bug", "Special", 0, "Sp.Attack-", 1);
@@ -143,6 +145,7 @@ void setup() {
   Move poisonJab = new Move("Poison Jab", 20, 80, 1, "Poison", "Physical", 0, "Poison", 0.3);
   Move acidArmor = new Move("Acid Armor", 20, 0, 0, "Poison", "Status", 0, "Defense++", 1);  
   Move coil = new Move("Coil", 32, 0, 0, "Poison", "Status", 0, "Attack+/Defense+", 1);  
+  Move pinMissile = new Move("Pin Missile", 20, 25, 0.95, "Bug", "Physical", 0, "Repeat", 1);
 
   //DRAGON
   Move dragonRage = new Move("Dragon Rage", 10, 40, 1, "Dragon", "Special", 0, "none", 0);
@@ -170,6 +173,7 @@ void setup() {
   Move superpower = new Move("Superpower", 5, 120, 1, "Fighting", "Physical", 0, "U.Attack-/U.Defense-", 1);
   Move drainPunch = new Move("Drain Punch", 16, 75, 1, "Fighting", "Physical", 0, "Drain", 1);
   Move powerUpPunch = new Move("Power-Up Punch", 20, 40, 1, "Fighting", "Physical", 0, "Attack+", 1);
+  Move crossChop = new Move("Cross Chop", 5, 100, 0.8, "Fighting", "Physical", 0, "none", 0);
 
   //DARK
   Move pursuit = new Move("Pursuit", 20, 40, 1, "Dark", "Physical", 0, "none", 0);
@@ -186,6 +190,7 @@ void setup() {
   Move knockOff = new Move("Knock Off", 20, 65, 1, "Dark", "Physical", 0, "DestroyItem", 0);
   Move brutalSwing = new Move("Brutal Swing", 20, 60, 1, "Dark", "Physical", 0, "none", 0);
   Move suckerPunch = new Move("Sucker Punch", 5, 70, 1, "Dark", "Physical", 1, "none", 0);
+  Move obstruct = new Move("Obstruct", 10, 0, 1, "Dark", "Status", 4, "Protect/Defense--", 1);
 
   //ICE
   Move mist = new Move("Mist", 30, 0, 1, "Ice", "Status", 0, "none", 0);
@@ -496,6 +501,10 @@ void setup() {
 
   //GENERATION 1
 
+  //Level 42 Haunter
+  Pokemon haunter = new Pokemon("Haunter", "Ghost/Poison", 42, 45, 50, 45, 115, 55, 95);
+  haunter.moveSet(lick, suckerPunch, hypnosis, shadowPunch);
+  
   //Level 41 Snover
   Pokemon snover = new Pokemon("Snover", "Grass/Ice", 41, 60, 62, 50, 62, 60, 40);
   snover.moveSet(woodHammer, blizzard, razorLeaf, iceShard);
@@ -818,9 +827,9 @@ void setup() {
   Pokemon runerigus = new Pokemon("Runerigus", "Ground/Ghost", 45, 58, 95, 145, 50, 105, 30);
   runerigus.moveSet(shadowBall, hex, protect, brutalSwing);
   
-  //Level 45 Polteageist2
-  Pokemon polteageist2 = new Pokemon("Polteageist2", "Ghost", 45, 60, 65, 65, 134, 114, 70);
-  polteageist2.moveSet(shadowBall, gigaDrain, suckerPunch, protect);
+  //Level 45 Polteageist-Phony
+  Pokemon polteageistPhony = new Pokemon("Polteageist-Phony", "Ghost", 45, 60, 65, 65, 134, 114, 70);
+  polteageistPhony.moveSet(shadowBall, gigaDrain, suckerPunch, protect);
 
   //Level 47 Morpeko
   Pokemon morpeko = new Pokemon("Morpeko", "Electric/Dark", 47, 58, 95, 58, 70, 58, 97);
@@ -829,9 +838,7 @@ void setup() {
   //Level 48 Grimmsnarl
   Pokemon grimmsnarl = new Pokemon("Grimmsnarl", "Dark/Dark", 48, 95, 120, 65, 95, 75, 60);
   grimmsnarl.moveSet(spiritBreak, darkPulse, powerUpPunch, bulkUp);
-  grimmsnarl.raidStats();
-  grimmsnarl.dynamax();
-
+  
   //Level 56 Marshadow
   Pokemon marshadow = new Pokemon("Marshadow", "Ghost/Fighting", 56, 90, 125, 80, 90, 90, 125);
   marshadow.moveSet(closeCombat, spectralThief, icePunch, thunderPunch);
@@ -840,7 +847,15 @@ void setup() {
   marshadow.dynamax();
 
   marshadow.currHealth *= 1.5;
-
+  
+  //Level 46 Cursola
+  Pokemon cursola = new Pokemon("Cursola", "Ghost", 46, 60, 95, 50, 145, 130, 30);
+  cursola.moveSet(hex, strengthSap, powerGem, ancientPower);
+  
+  //Level 46 Obstagoon
+  Pokemon obstagoon = new Pokemon("Obstagoon", "Dark/Normal", 46, 93, 90, 101, 60, 81, 95);
+  obstagoon.moveSet(crossChop, pinMissile, nightSlash, honeClaws);
+  
   // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // 
 
   //Initiate trainers
@@ -867,7 +882,7 @@ void setup() {
   jasmine.addPokemon(pidgeot, arcanine, falinks, latias, abomasnow, alcremie);
   barnabas.addPokemon(diglett, spearow, weepinbell, mankey, magikarp, rhydon);
   nicholas.addPokemon(stonjourner, vileplume, drakloak, swampert, snorlax, sirfetchd);
-  joanna.addPokemon(litten, haunter, raichu, vulpix);
+  joanna.addPokemon(litten, gengar, raichu, vulpix, polteageist);
   stella.addPokemon(flapple);
   nina.addPokemon(popplio);
 
@@ -878,7 +893,7 @@ void setup() {
 
   ltSurge.addPokemon(voltorb, ltPikachu, ltRaichu);
   leo.addPokemon(hitmontop, mantine, megaSteelix, meganium, shuckle, slugma);
-  wild.addPokemon(raidStonjourner, morpeko, grimmsnarl, marshadow, charizardGmax, charizard, polteageist, polteageist2);
+  wild.addPokemon(obstagoon, cursola, raidStonjourner, haunter, morpeko, grimmsnarl, marshadow, charizardGmax, charizard, polteageistPhony);
 
   printPokemon();
   printCharizard();
@@ -904,131 +919,131 @@ void setup() {
   ashley.giveItem("Sitrus Berry", gyarados, lucario, ampharos, pupitar, altaria, metang);
   joanna.giveItem("Sitrus Berry", vulpix);
 
-  //PLS UPDATE.
+  // // // // // // BATTLE DETAILS // // // // // // 
 
   randomSeed(44);
 
   Battle b = new Battle(wild, randomTrainer);
-
-  b.move(raidStonjourner, rockSlide, sirfetchd, firstImpression);
-  xerneas.dynamax();
-  b.move(raidStonjourner, rockSlide, xerneas, moonblast);
-
-  b.move(raidStonjourner, rockSlide, sirfetchd, rockSmash);
-  b.move(raidStonjourner, rockSlide, xerneas, moonblast);
-
-  nicholas.useItem("Fresh Water", sirfetchd);
-  raidStonjourner.useMove(rockSlide, sirfetchd);
-  sirfetchd.currHealth += sirfetchd.stats[0]/16;
-
-  b.move(raidStonjourner, rockSlide, xerneas, moonblast);
-
-  catchPokemon(raidStonjourner, "Ultra Ball", 60);
-  catchPokemon(raidStonjourner, "Ultra Ball", 60);
-  catchPokemon(raidStonjourner, "Great Ball", 60);
-  raidStonjourner.unmax();
-
-  zofia.heal();
-  //  marshadow.moveSet(closeCombat, spectralThief, icePunch, thunderPunch);
-
-  b.move(marshadow, spectralThief, stonjourner, stomp);
-
-  for (int i = 0; i < 4; i++) {
-    alcremie.moveSet[i].power *= 1.33;
-    haunter.moveSet[i].power *= 1.33;
-  }
-
-  alcremie.dynamax();
-
-  b.move(marshadow, icePunch, alcremie, dazzlingGleam);
-  b.move(marshadow, thunderPunch, haunter, suckerPunch);
-
-  for (int i = 0; i < 4; i++) {
-    alcremie.moveSet[i].power /= 1.33;
-    haunter.moveSet[i].power /= 1.33;
-  }
-
-  b.move(marshadow, icePunch, sirfetchd, firstImpression);
-  b.move(marshadow, closeCombat, alcremie, dazzlingGleam);
-  b.move(marshadow, thunderPunch, vulpix, flamethrower);
-
-  b.move(marshadow, icePunch, sirfetchd, knockOff);
-  b.move(marshadow, thunderPunch, alcremie, dazzlingGleam);
-  b.move(marshadow, thunderPunch, vulpix, flamethrower);
-
-  joanna.useItem("Revive", haunter); 
-
-  swampert.mega();
-  pidgeot.mega();
-
-  b.move(marshadow, icePunch, swampert, rockSlide);
-  b.move(marshadow, icePunch, pidgeot, hurricane);
-  haunter.useMove(shadowPunch, marshadow);
-  b.move(marshadow, thunderPunch, haunter, shadowPunch);
-
-  b.move(marshadow, spectralThief, swampert, rockSlide);
-  b.move(marshadow, thunderPunch, pidgeot, roost);
-
-  b.move(marshadow, icePunch, swampert, surf);
-  marshadow.useMove(thunderPunch, latias);
-
-  jasmine.useItem("Max Revive", pidgeot); 
-
-  marshadow.useMove(closeCombat, snorlax);
-
-  nicholas.useItem("Hyper Potion", drakloak); 
-
-  b.move(marshadow, thunderPunch, latias, mistBall);
-
-  b.move(marshadow, thunderPunch, drakloak, hex);
-
-  marshadow.useMove(spectralThief, pidgeot);
-
-  b.move(marshadow, spectralThief, drakloak, hex);
-
-  b.move(marshadow, thunderPunch, pidgeot, hurricane);
-
-  //Jasmine + Nicholas heading north east
-  //Zofia heading West
-
-  stonjourner.currHealth = stonjourner.health;
-  //  polteageist.moveSet(shadowBall, gigaDrain, suckerPunch, nastyPlot);
-  haunter.rest();
-
-  b.weather = "none";
-
-  b.move(polteageist, gigaDrain, stonjourner, rockSlide);
-  b.move(polteageist, nastyPlot, abomasnow, blizzard);
-  b.move(polteageist, gigaDrain, haunter, shadowPunch);
   
-  b.move(polteageist, suckerPunch, abomasnow, blizzard);
-  catchPokemon(polteageist, "Great Ball", 60);
+  sirfetchd.describe();
   
-  jasmine.useItem("Sweetheart Chocolate", abomasnow);
+  //b.move(raidStonjourner, rockSlide, sirfetchd, firstImpression);
+  //xerneas.dynamax();
+  //b.move(raidStonjourner, rockSlide, xerneas, moonblast);
+
+  //b.move(raidStonjourner, rockSlide, sirfetchd, rockSmash);
+  //b.move(raidStonjourner, rockSlide, xerneas, moonblast);
+
+  //nicholas.useItem("Fresh Water", sirfetchd);
+  //raidStonjourner.useMove(rockSlide, sirfetchd);
+  //sirfetchd.currHealth += sirfetchd.stats[0]/16;
+
+  //b.move(raidStonjourner, rockSlide, xerneas, moonblast);
+
+  //catchPokemon(raidStonjourner, "Ultra Ball", 60);
+  //catchPokemon(raidStonjourner, "Ultra Ball", 60);
+  //catchPokemon(raidStonjourner, "Great Ball", 60);
+  //raidStonjourner.unmax();
+
+  //zofia.heal();
+
+  //b.move(marshadow, spectralThief, stonjourner, stomp);
+
+  //for (int i = 0; i < 4; i++) {
+  //  alcremie.moveSet[i].power *= 1.33;
+  //  haunter.moveSet[i].power *= 1.33;
+  //}
+
+  //alcremie.dynamax();
+
+  //b.move(marshadow, icePunch, alcremie, dazzlingGleam);
+  //b.move(marshadow, thunderPunch, haunter, suckerPunch);
+
+  //for (int i = 0; i < 4; i++) {
+  //  alcremie.moveSet[i].power /= 1.33;
+  //  haunter.moveSet[i].power /= 1.33;
+  //}
+
+  //b.move(marshadow, icePunch, sirfetchd, firstImpression);
+  //b.move(marshadow, closeCombat, alcremie, dazzlingGleam);
+  //b.move(marshadow, thunderPunch, vulpix, flamethrower);
+
+  //b.move(marshadow, icePunch, sirfetchd, knockOff);
+  //b.move(marshadow, thunderPunch, alcremie, dazzlingGleam);
+  //b.move(marshadow, thunderPunch, vulpix, flamethrower);
+
+  //joanna.useItem("Revive", haunter); 
+
+  //swampert.mega();
+  //pidgeot.mega();
+
+  //b.move(marshadow, icePunch, swampert, rockSlide);
+  //b.move(marshadow, icePunch, pidgeot, hurricane);
+  //haunter.useMove(shadowPunch, marshadow);
+  //b.move(marshadow, thunderPunch, haunter, shadowPunch);
+
+  //b.move(marshadow, spectralThief, swampert, rockSlide);
+  //b.move(marshadow, thunderPunch, pidgeot, roost);
+
+  //b.move(marshadow, icePunch, swampert, surf);
+  //marshadow.useMove(thunderPunch, latias);
+
+  //jasmine.useItem("Max Revive", pidgeot); 
+
+  //marshadow.useMove(closeCombat, snorlax);
+
+  //nicholas.useItem("Hyper Potion", drakloak); 
+
+  //b.move(marshadow, thunderPunch, latias, mistBall);
+
+  //b.move(marshadow, thunderPunch, drakloak, hex);
+
+  //marshadow.useMove(spectralThief, pidgeot);
+
+  //b.move(marshadow, spectralThief, drakloak, hex);
+
+  //b.move(marshadow, thunderPunch, pidgeot, hurricane);
+
+  ////Jasmine + Nicholas heading north east -> runerigus lair
+  ////Zofia heading West
+
+  //stonjourner.currHealth = stonjourner.health;
+  //haunter.rest();
+
+  //b.weather = "none";
+
+  //b.move(polteageist, gigaDrain, stonjourner, rockSlide);
+  //b.move(polteageist, nastyPlot, abomasnow, blizzard);
+  //b.move(polteageist, gigaDrain, haunter, shadowPunch);
   
-  catchPokemon(polteageist, "Great Ball", 60);
+  //b.move(polteageist, suckerPunch, abomasnow, blizzard);
+  //catchPokemon(polteageist, "Great Ball", 60);
   
-  jasmine.useItem("Revive", pidgeot);
-  polteageist.useMove(gigaDrain, abomasnow);
+  //jasmine.useItem("Sweetheart Chocolate", abomasnow);
   
-  b.move(polteageist, nastyPlot, haunter, hypnosis);
+  //catchPokemon(polteageist, "Great Ball", 60);
   
-  jasmine.useItem("Berry Juice", abomasnow);
+  //jasmine.useItem("Revive", pidgeot);
+  //polteageist.useMove(gigaDrain, abomasnow);
   
-  catchPokemon(polteageist, "Poke Ball", 60);
+  //b.move(polteageist, nastyPlot, haunter, hypnosis);
   
-  jasmine.useItem("Berry Juice", pidgeot);
+  //jasmine.useItem("Berry Juice", abomasnow);
   
-  catchPokemon(polteageist, "Great Ball", 60);
-  nicholas.useItem("Max Revive", drakloak);
+  //catchPokemon(polteageist, "Poke Ball", 60);
   
-  b.weather = "none";
+  //jasmine.useItem("Berry Juice", pidgeot);
+  
+  //catchPokemon(polteageist, "Great Ball", 60);
+  //nicholas.useItem("Max Revive", drakloak);
+  
+  //b.weather = "none";
    
-  b.move(polteageist2, shadowBall, drakloak, hex);
+  //b.move(polteageistPhony, shadowBall, drakloak, hex);
   
-  drakloak.useMove(hex, polteageist2);
+  //drakloak.useMove(hex, polteageistPhony);
   
-  b.move(polteageist2, shadowBall, drakloak, hex);
+  //b.move(polteageistPhony, shadowBall, drakloak, hex);
   
 }
 
