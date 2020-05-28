@@ -77,15 +77,15 @@ class Battle {
     updateWeather(oneP, twoP);
     
     checkWeather(oneP, mv1, twoP);
-    checkWeather(twoP, mv2, oneP);
+    checkWeather(twoP, mv2, oneP); 
     
     endTurn(oneP, mv1, twoP);
     endTurn(twoP, mv2, oneP);
 
-    if (oneP.raidPokemon) {
+    if (oneP.raidPokemon && (int(random(0,3)) == 0)) {
       recover(oneP);
     }
-    if (twoP.raidPokemon) {
+    if (twoP.raidPokemon && (int(random(0,3)) == 0)) {
       recover(twoP);
     }
     
@@ -155,10 +155,10 @@ class Battle {
       checkWeather(oneP, mv1, twoP);
       checkWeather(twoP, mv2, oneP);
       
-      if (oneP.raidPokemon) {
+      if (oneP.raidPokemon && (int(random(0,3)) == 0)) {
         recover(oneP);
       }
-      if (twoP.raidPokemon) {
+      if (twoP.raidPokemon && (int(random(0,3)) == 0)) {
         recover(twoP);
       }
 
@@ -569,6 +569,7 @@ class Battle {
     for (int i = 0; i < 6; i++) {
       p.battleStats[i] = p.stats[i];
     }
+    
     p.burn = p.freeze = p.paralysis = p.poison = p.sleep = p.flinch = p.badlyPoisoned = p.recover = p.protect
       = p.bound = p.cantEscape = p.confusion = p.curse = p.heal = p.drain = p.recoil = p.leech = p.repeat = false;
    

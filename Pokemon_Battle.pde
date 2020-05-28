@@ -340,10 +340,8 @@ void setup() {
   milotic.maxLevel = 5;
 
   //Level 45 Xerneas
-  Pokemon xerneas = new Pokemon("Xerneas", "Fairy", 54, 126, 131, 95, 131, 98, 99);
+  Pokemon xerneas = new Pokemon("Xerneas", "Fairy", 45, 126, 131, 95, 131, 98, 99);
   xerneas.moveSet(moonblast, auroraBeam, megahorn, hornLeech);
-  xerneas.raidStats();
-  xerneas.dynamax();
   
   //Level 42 Morpeko
   Pokemon morpeko = new Pokemon("Morpeko", "Electric/Dark", 42, 58, 95, 58, 70, 58, 97);
@@ -728,10 +726,6 @@ void setup() {
   Pokemon aerodactyl = new Pokemon("Aerodactyl", "Rock/Flying", 40, 80, 105, 65, 60, 75, 130);
   aerodactyl.moveSet(crunch, rockSlide, thunderFang, ironHead);
 
-  //Level 40 Mega Aerodactyl
-  Pokemon megaAerodactyl = new Pokemon("Mega Aerodactyl", "Rock/Flying", 40, 80, 135, 85, 60, 95, 150);
-  megaAerodactyl.moveSet(crunch, rockSlide, thunderFang, ironHead);
-
   //Level 42 Machamp
   Pokemon machamp = new Pokemon("Machamp", "Fighting", 42, 90, 130, 80, 65, 85, 55);
   machamp.moveSet(dualChop, knockOff, lowSweep, strength);
@@ -752,32 +746,32 @@ void setup() {
 
 
   //ASHLEY
-  //Level 44 Gyarados
-  Pokemon gyarados = new Pokemon("Gyarados", "Water/Flying", 44, 95, 125, 79, 60, 100, 81);
+  //Level 54 Gyarados
+  Pokemon gyarados = new Pokemon("Gyarados", "Water/Flying", 54, 95, 125, 79, 60, 100, 81);
   gyarados.moveSet(bite, twister, thrash, iceFang);
 
-  //Level 36 Lucario
-  Pokemon lucario = new Pokemon("Lucario", "Fighting/Steel", 36, 70, 110, 70, 115, 70, 90);
+  //Level 48 Lucario
+  Pokemon lucario = new Pokemon("Lucario", "Fighting/Steel", 48, 70, 110, 70, 115, 70, 90);
   lucario.moveSet(auraSphere, metalClaw, detect, swordsDance);
 
-  //Level 33 Ampharos
-  Pokemon ampharos = new Pokemon("Ampharos", "Electric", 33, 90, 75, 85, 115, 90, 55);
+  //Level 41 Ampharos
+  Pokemon ampharos = new Pokemon("Ampharos", "Electric", 41, 90, 75, 85, 115, 90, 55);
   ampharos.moveSet(dragonPulse, firePunch, thunderPunch, cottonSpore);
 
-  //Level 42 Pupitar
-  Pokemon pupitar = new Pokemon("Pupitar", "Rock/Ground", 42, 70, 84, 70, 65, 70, 51);
+  //Level 44 Pupitar
+  Pokemon pupitar = new Pokemon("Pupitar", "Rock/Ground", 44, 70, 84, 70, 65, 70, 51);
   pupitar.moveSet(screech, chipAway, rockSlide, darkPulse);
 
-  //Level 42 Tyranitar
-  Pokemon tyranitar = new Pokemon("Tyranitar", "Rock/Dark", 42, 100, 134, 110, 95, 100, 61);
+  //Level 44 Tyranitar
+  Pokemon tyranitar = new Pokemon("Tyranitar", "Rock/Dark", 44, 100, 134, 110, 95, 100, 61);
   tyranitar.moveSet(darkPulse, iceFang, thunderFang, screech);
 
-  //Level 36 Altaria
-  Pokemon altaria = new Pokemon("Altaria", "Dragon/Flying", 36, 75, 70, 90, 70, 105, 80);
+  //Level 43 Altaria
+  Pokemon altaria = new Pokemon("Altaria", "Dragon/Flying", 43, 75, 70, 90, 70, 105, 80);
   altaria.moveSet(dragonBreath, sing, disarmingVoice, dragonDance);
 
-  //Level 34 Metang
-  Pokemon metang = new Pokemon("Metang", "Steel/Psychic", 34, 60, 75, 100, 55, 80, 50);
+  //Level 42 Metang
+  Pokemon metang = new Pokemon("Metang", "Steel/Psychic", 42, 60, 75, 100, 55, 80, 50);
   metang.moveSet(confusion, metalClaw, pursuit, takeDown);
 
   //GALAR REIGON
@@ -906,7 +900,7 @@ void setup() {
 
   theGuy.addPokemon(golduck);
   cynthia.addPokemon(duraludon, inteleon, centiscorch, sandaconda, toxtricity, frosmoth);
-  cassie.addPokemon(shelgon, alolanSandslash, megaAerodactyl, vaporeon, machamp, porygonZ);
+  cassie.addPokemon(shelgon, alolanSandslash, aerodactyl, vaporeon, machamp, porygonZ);
   ashley.addPokemon(gyarados, lucario, ampharos, pupitar, altaria, metang);
 
   ltSurge.addPokemon(voltorb, ltPikachu, ltRaichu);
@@ -917,7 +911,7 @@ void setup() {
   printCharizard();
 
   zofia.giveItem("Sitrus Berry", magneton, milotic, xerneas);
-  zofia.giveItem("Leftovers", lapras, kingler, drednaw);
+  zofia.giveItem("Leftovers", lapras, kingler, drednaw, morpeko);
   zofia.giveItem("Mimikium-Z", mimikyu);
   zofia.giveItem("Charizardite X", charizard);
   zofia.giveItem("Berry Juice", scyther);
@@ -927,7 +921,7 @@ void setup() {
   jasmine.giveItem("Fightinium-Z", falinks);
   jasmine.giveItem("Pidgeotite", pidgeot);
 
-  nicholas.giveItem("Sitrus Berry", dratini, vileplume, stonjourner);
+  nicholas.giveItem("Sitrus Berry", vileplume, stonjourner);
   nicholas.giveItem("Leftovers", sirfetchd, drakloak);
   nicholas.giveItem("Snorium-Z", snorlax);
   nicholas.giveItem("Swampertite", swampert);
@@ -937,143 +931,24 @@ void setup() {
   ashley.giveItem("Sitrus Berry", gyarados, lucario, ampharos, pupitar, altaria, metang);
   joanna.giveItem("Sitrus Berry", vulpix);
   
-  wild.giveItem("Leftovers", morpeko);
-
   // // // // // // BATTLE DETAILS // // // // // // 
 
   randomSeed(44);
 
-  Battle b = new Battle(wild, randomTrainer);
+  Battle b = new Battle(wild, randomTrainer); 
+
+  stonjourner.currHealth = 0;
+  drakloak.currHealth = 27;
+  snorlax.currHealth = 0;
+  sirfetchd.currHealth = 0;
   
-  //b.move(raidStonjourner, rockSlide, sirfetchd, firstImpression);
-  //xerneas.dynamax();
-  //b.move(raidStonjourner, rockSlide, xerneas, moonblast);
-
-  //b.move(raidStonjourner, rockSlide, sirfetchd, rockSmash);
-  //b.move(raidStonjourner, rockSlide, xerneas, moonblast);
-
-  //nicholas.useItem("Fresh Water", sirfetchd);
-  //raidStonjourner.useMove(rockSlide, sirfetchd);
-  //sirfetchd.currHealth += sirfetchd.stats[0]/16;
-
-  //b.move(raidStonjourner, rockSlide, xerneas, moonblast);
-
-  //catchPokemon(raidStonjourner, "Ultra Ball", 60);
-  //catchPokemon(raidStonjourner, "Ultra Ball", 60);
-  //catchPokemon(raidStonjourner, "Great Ball", 60);
-  //raidStonjourner.unmax();
-
-  //zofia.heal();
-
-  //b.move(marshadow, spectralThief, stonjourner, stomp);
-
-  //for (int i = 0; i < 4; i++) {
-  //  alcremie.moveSet[i].power *= 1.33;
-  //  haunter.moveSet[i].power *= 1.33;
-  //}
-
-  //alcremie.dynamax();
-
-  //b.move(marshadow, icePunch, alcremie, dazzlingGleam);
-  //b.move(marshadow, thunderPunch, haunter, suckerPunch);
-
-  //for (int i = 0; i < 4; i++) {
-  //  alcremie.moveSet[i].power /= 1.33;
-  //  haunter.moveSet[i].power /= 1.33;
-  //}
-
-  //b.move(marshadow, icePunch, sirfetchd, firstImpression);
-  //b.move(marshadow, closeCombat, alcremie, dazzlingGleam);
-  //b.move(marshadow, thunderPunch, vulpix, flamethrower);
-
-  //b.move(marshadow, icePunch, sirfetchd, knockOff);
-  //b.move(marshadow, thunderPunch, alcremie, dazzlingGleam);
-  //b.move(marshadow, thunderPunch, vulpix, flamethrower);
-
-  //joanna.useItem("Revive", haunter); 
-
-  //swampert.mega();
-  //pidgeot.mega();
-
-  //b.move(marshadow, icePunch, swampert, rockSlide);
-  //b.move(marshadow, icePunch, pidgeot, hurricane);
-  //haunter.useMove(shadowPunch, marshadow);
-  //b.move(marshadow, thunderPunch, haunter, shadowPunch);
-
-  //b.move(marshadow, spectralThief, swampert, rockSlide);
-  //b.move(marshadow, thunderPunch, pidgeot, roost);
-
-  //b.move(marshadow, icePunch, swampert, surf);
-  //marshadow.useMove(thunderPunch, latias);
-
-  //jasmine.useItem("Max Revive", pidgeot); 
-
-  //marshadow.useMove(closeCombat, snorlax);
-
-  //nicholas.useItem("Hyper Potion", drakloak); 
-
-  //b.move(marshadow, thunderPunch, latias, mistBall);
-
-  //b.move(marshadow, thunderPunch, drakloak, hex);
-
-  //marshadow.useMove(spectralThief, pidgeot);
-
-  //b.move(marshadow, spectralThief, drakloak, hex);
-
-  //b.move(marshadow, thunderPunch, pidgeot, hurricane);
-
-  ////Jasmine + Nicholas heading north east -> runerigus lair
-  ////Zofia heading West
-
-  //stonjourner.currHealth = stonjourner.health;
-  //haunter.rest();
-
-  //b.weather = "none";
-
-  //b.move(polteageist, gigaDrain, stonjourner, rockSlide);
-  //b.move(polteageist, nastyPlot, abomasnow, blizzard);
-  //b.move(polteageist, gigaDrain, haunter, shadowPunch);
+  falinks.currHealth = 0;
+  latias.currHealth = 46;
+  alcremie.currHealth = 0;
   
-  //b.move(polteageist, suckerPunch, abomasnow, blizzard);
-  //catchPokemon(polteageist, "Great Ball", 60);
-  
-  //jasmine.useItem("Sweetheart Chocolate", abomasnow);
-  
-  //catchPokemon(polteageist, "Great Ball", 60);
-  
-  //jasmine.useItem("Revive", pidgeot);
-  //polteageist.useMove(gigaDrain, abomasnow);
-  
-  //b.move(polteageist, nastyPlot, haunter, hypnosis);
-  
-  //jasmine.useItem("Berry Juice", abomasnow);
-  
-  //catchPokemon(polteageist, "Poke Ball", 60);
-  
-  //jasmine.useItem("Berry Juice", pidgeot);
-  
-  //catchPokemon(polteageist, "Great Ball", 60);
-  //nicholas.useItem("Max Revive", drakloak);
-  
-  //b.weather = "none";
-   
-  //b.move(polteageistPhony, shadowBall, drakloak, hex);
-  
-  //drakloak.useMove(hex, polteageistPhony);
-  
-  //b.move(polteageistPhony, shadowBall, drakloak, hex);
-  
-  ////morpeko.moveSet(bulletSeed, auraWheel, crunch, protect);
-  
-  //b.move(morpekoR, auraWheel, falinks, megahorn);
-  //xerneas.dynamax();
-  //b.move(morpekoR, auraWheel, xerneas, moonblast);
-  
-  //catchPokemon(morpekoR, "Ultra Ball", 60);
-  
-  //catchPokemon(morpekoR, "Ultra Ball", 180);
-  
-  
+  zofia.showTeam();
+  nicholas.showTeam();
+  jasmine.showTeam();
   
   //duraludon.moveSet(dracoMeteor, flashCannon, thunderbolt, darkPulse);   
   
@@ -1082,7 +957,12 @@ void setup() {
   //charizardGmax.moveSet(flamethrower, dragonClaw, roost, fly);
   
   //xerneas.moveSet(moonblast, auroraBeam, megahorn, hornLeech);
-
+  
+  xerneas.level += 9;
+  xerneas.calculateStats();
+  xerneas.raidStats();
+  xerneas.dynamax();
+  
   b.move(eternamaxEternatus, dynamaxCannon, charizardGmax, flamethrower);
   b.move(eternamaxEternatus, dynamaxCannon, duraludon, flashCannon);
   b.move(eternamaxEternatus, cosmicPower, xerneas, moonblast);

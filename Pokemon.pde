@@ -9,13 +9,14 @@ class Pokemon {
   int[] battleStats;
   String ability;
   Move[] moveSet;
-  Boolean burn, freeze, paralysis, poison, sleep, attract, flinch, badlyPoisoned, bound, cantEscape, confusion, curse, drain, heal, recoil, leech, recover, repeat, protect;
+  Boolean burn, freeze, paralysis, poison, sleep, attract, flinch, badlyPoisoned, bound, cantEscape, confusion, curse, drain, heal, recoil, leech, recover, repeat, protect, wildfire;
   int attackSMp, attackSMn, defenseSMp, defenseSMn, spAttackSMp, spAttackSMn, spDefenseSMp, spDefenseSMn, speedSMp, speedSMn, accuracySMp, accuracySMn, evasionSMp, evasionSMn;
   String item;
   Trainer trainer;
   int sleepCounter;
   int confusionCounter;
   int poisonCounter;
+  int wildfireCounter;
   float adjustedStages;
   boolean raidPokemon;
   boolean raidShield;
@@ -68,7 +69,7 @@ class Pokemon {
     this.type2 = "";
 
     this.burn = this.freeze = this.paralysis = this.poison = this.sleep = this.attract = this.flinch = this.badlyPoisoned = this.recover = this.protect
-      = this.bound = this.cantEscape = this.confusion = this.curse = this.heal = this.drain = this.recoil = this.leech = this.repeat = false;
+      = this.bound = this.cantEscape = this.confusion = this.curse = this.heal = this.drain = this.recoil = this.leech = this.repeat = this.wildfire = false;
 
     attackSMp = attackSMn = defenseSMp = defenseSMn = spAttackSMp = spAttackSMn = spDefenseSMp = spDefenseSMn = speedSMp
       = speedSMn = accuracySMp = accuracySMn = evasionSMp = evasionSMn = 2;
@@ -80,6 +81,7 @@ class Pokemon {
     this.sleepCounter = 0;
     this.confusionCounter = 0;
     this.poisonCounter = 1;
+    this.wildfireCounter = 0;
 
     this.adjustedStages = 1;
 
@@ -163,8 +165,13 @@ class Pokemon {
         this.moveSet[i].name = ("Max Steelspike");
         this.moveSet[i].status = "Defense+";
       } else if (this.moveSet[i].type.equals("Fire")) {
-        this.moveSet[i].name = ("Max Flare");
-        this.moveSet[i].status = "Harsh Sunlight";
+        if (this.name.equals("Gmax Charizard")) {
+          this.moveSet[i].name = ("G-Max Wildfire");
+          this.moveSet[i].status = "Wildfire";
+        } else {
+          this.moveSet[i].name = ("Max Flare");
+          this.moveSet[i].status = "Harsh Sunlight";
+        }
       } else if (this.moveSet[i].type.equals("Water")) {
         if (this.name.equals("Drednaw")) {
           this.moveSet[i].name = ("G-Max Stonesurge");
@@ -275,6 +282,18 @@ class Pokemon {
       this.stats[4] = 110;
       this.stats[5] = 70;
     }
+
+    if (this.name.equals("Aerodactyl")) {
+      this.name = "Mega Aerodactyl";
+      this.ability = "Tough Claws";
+      
+      this.stats[0] = 80;
+      this.stats[1] = 135;
+      this.stats[2] = 85;
+      this.stats[3] = 70;
+      this.stats[4] = 95;
+      this.stats[5] = 150;
+    }
     
     this.calculateStats();
   }
@@ -379,7 +398,7 @@ class Pokemon {
     }
 
     this.burn = this.freeze = this.paralysis = this.poison = this.sleep = this.attract = this.flinch = this.badlyPoisoned = this.recover = this.protect
-      = this.bound = this.cantEscape = this.confusion = this.curse = this.heal = this.drain = this.recoil = this.leech = this.repeat = false;
+      = this.bound = this.cantEscape = this.confusion = this.curse = this.heal = this.drain = this.recoil = this.leech = this.repeat = this.wildfire = false;
   }
 
   //assuming perfect ivs and evs = calculate stats
@@ -623,7 +642,7 @@ class Pokemon {
     //}
 
     if (this.max) {
-      if (this.maxTurns == 0) {
+      if ((this.maxTurns == 0) && !raidPokemon) {
         println("* * *", this.name, "grew enourmous! * * *");
         println();
       }
@@ -715,6 +734,10 @@ class Pokemon {
             damage = 0;
             target.currHealth -= target.health/8;
             println(target.name + "'s disguise was busted! Mimikyu took", target.health/8, "damage!");
+          }
+          
+          if (mv.name.equals("Dynamax Cannon") && target.max) {
+            damage *= 2;
           }
 
           if (target.ability.equals("Levitate") && mv.type.equals("Ground")) {
@@ -874,6 +897,19 @@ class Pokemon {
         target.currHealth -= int(float(target.stats[0])/16);
         println();
         println(target.name, "is hurt by the burn, and takes", str(int(float(target.stats[0])/16)), "damage! (" + int((float(target.currHealth)/target.health)*100) + "%)");
+      }
+      
+      if (target.wildfire && (!target.type.equals("Fire") || !target.type2.equals("Fire"))) {
+        target.currHealth -= int(float(target.stats[0])/6);
+        println();
+        println(target.name, "is burned by the flaming wildfire, and takes", str(int(float(target.stats[0])/16)), "damage! (" + int((float(target.currHealth)/target.health)*100) + "%)");
+        target.wildfireCounter -= 1;
+      } 
+      
+      if ((target.wildfireCounter < 1) && target.wildfire) {
+        println();
+        println("The wildfire around", target.name, "dissipated!");
+        target.wildfire = false;
       }
 
       if (target.poison && (!target.type.equals("Poison") || !target.type.equals("Steel") || !target.type2.equals("Poison") || !target.type2.equals("Steel"))) {

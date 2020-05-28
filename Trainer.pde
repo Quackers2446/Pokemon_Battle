@@ -130,23 +130,27 @@ class Trainer {
     println("* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *");    
     println(this.name + "'s Team:");
     println();
-    println("Name:\t\tType:\t\tLevel:");
+    println("Name:\t\tType:\t\tLevel:\t\tHealth Points:");
     
     for (int i = 0; i < team.size(); i++) {
       if (this.team.get(i).name.length() > 7) {
         if (this.team.get(i).type.length() > 7) {
-          println(this.team.get(i).name + "\t" + this.team.get(i).type + "\t" + this.team.get(i).level);
+          println(this.team.get(i).name + "\t" + this.team.get(i).type + "\t" + this.team.get(i).level + "\t\t"
+          + this.team.get(i).currHealth + "/" + this.team.get(i).health + " HP (" + int((float(team.get(i).currHealth)/team.get(i).health)*100) + "%)");
         }
         else  {
-          println(this.team.get(i).name + "\t" + this.team.get(i).type + "\t\t" + this.team.get(i).level);
+          println(this.team.get(i).name + "\t" + this.team.get(i).type + "\t\t" + this.team.get(i).level + "\t\t" + 
+          this.team.get(i).currHealth + "/" + this.team.get(i).health + " HP (" + int((float(team.get(i).currHealth)/team.get(i).health)*100) + "%)");
         }
       }
       else {
         if (this.team.get(i).type.length() > 7) {
-          println(this.team.get(i).name + "\t\t" + this.team.get(i).type + "\t" + this.team.get(i).level);
+          println(this.team.get(i).name + "\t\t" + this.team.get(i).type + "\t" + this.team.get(i).level + "\t\t" + 
+          this.team.get(i).currHealth + "/" + this.team.get(i).health + " HP (" + int((float(team.get(i).currHealth)/team.get(i).health)*100) + "%)");
         }
         else  {
-          println(this.team.get(i).name + "\t\t" + this.team.get(i).type + "\t\t" + this.team.get(i).level);
+          println(this.team.get(i).name + "\t\t" + this.team.get(i).type + "\t\t" + this.team.get(i).level + "\t\t" + 
+          this.team.get(i).currHealth + "/" + this.team.get(i).health + " HP (" + int((float(team.get(i).currHealth)/team.get(i).health)*100) + "%)");
         }
       }
       avgLevel += this.team.get(i).level;
