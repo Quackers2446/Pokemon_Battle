@@ -340,7 +340,7 @@ void setup() {
   milotic.maxLevel = 5;
 
   //Level 45 Xerneas
-  Pokemon xerneas = new Pokemon("Xerneas", "Fairy", 45, 126, 131, 95, 131, 98, 99);
+  Pokemon xerneas = new Pokemon("Xerneas", "Fairy", 54, 126, 131, 95, 131, 98, 99);
   xerneas.moveSet(moonblast, auroraBeam, megahorn, hornLeech);
   
   //Level 42 Morpeko
@@ -401,8 +401,8 @@ void setup() {
   Pokemon alolanGeodude = new Pokemon("Alolan Geodude", "Rock/Electric", 9, 40, 80, 100, 30, 30, 20);
   alolanGeodude.moveSet(rollout, tackle, none, none);
 
-  //Level 50 Swampert
-  Pokemon swampert = new Pokemon("Swampert", "Water/Ground", 50, 100, 110, 90, 85, 90, 60);
+  //Level 46 Swampert
+  Pokemon swampert = new Pokemon("Swampert", "Water/Ground", 46, 100, 110, 90, 85, 90, 60);
   swampert.moveSet(hammerArm, mudBomb, rockSlide, surf);
 
   //Level 14 Abra
@@ -413,8 +413,8 @@ void setup() {
   Pokemon kadabra = new Pokemon("Kadabra", "Psychic", 16, 40, 35, 30, 120, 70, 105);
   kadabra.moveSet(confusion, psybeam, teleport, kinesis);
 
-  //Level 39 Snorlax
-  Pokemon snorlax = new Pokemon("Snorlax", "Normal", 39, 160, 110, 65, 65, 110, 30);
+  //Level 38 Snorlax
+  Pokemon snorlax = new Pokemon("Snorlax", "Normal", 38, 160, 110, 65, 65, 110, 30);
   snorlax.moveSet(snore, gigaImpact, rest, bodySlam);
   snorlax.maxLevel = 0;
 
@@ -426,8 +426,8 @@ void setup() {
   Pokemon exeggcute = new Pokemon("Exeggcute", "Grass/Psychic", 21, 60, 40, 80, 60, 45, 40);
   exeggcute.moveSet(bulletSeed, uproar, leechSeed, stunSpore);
 
-  //Level 53 Drakloak
-  Pokemon drakloak = new Pokemon("Drakloak", "Dragon/Ghost", 53, 68, 80, 50, 60, 50, 105);
+  //Level 50 Drakloak
+  Pokemon drakloak = new Pokemon("Drakloak", "Dragon/Ghost", 50, 68, 80, 50, 60, 50, 105);
   drakloak.moveSet(dragonPulse, hex, uTurn, bite);
 
   //Level 32 Appletun
@@ -438,14 +438,18 @@ void setup() {
   Pokemon quagsire = new Pokemon("Quagsire", "Water/Ground", 31, 95, 85, 85, 65, 65, 35);
   quagsire.moveSet(amnesia, mudBomb, slam, waterGun);
 
-  //Level 44 Sirfetch'd
+  //Level 41 Sirfetch'd
   Pokemon sirfetchd = new Pokemon("Sirfetch'd", "Fighting", 44, 62, 135, 95, 68, 82, 65);
   sirfetchd.moveSet(firstImpression, rockSmash, knockOff, ironDefense);
 
-  //Level 38 Stonjourner
+  //Level 36 Stonjourner
   Pokemon stonjourner = new Pokemon("Stonjourner", "Rock", 38, 100, 125, 135, 20, 20, 70);
   stonjourner.moveSet(rockSlide, stealthRock, stomp, block);
-
+  
+  //Level 50 Marshadow
+  Pokemon marshadow = new Pokemon("Marshadow", "Ghost/Fighting", 50, 90, 125, 80, 90, 90, 125);
+  marshadow.moveSet(closeCombat, spectralThief, icePunch, thunderPunch);
+  
   //BARNABUS
   //Level 9 Diglett
   Pokemon diglett = new Pokemon("Diglett", "Ground", 9, 10, 55, 25, 35, 45, 95);
@@ -825,8 +829,8 @@ void setup() {
   //Level 44 Stonjourner
   Pokemon raidStonjourner = new Pokemon("Raid Stonjourner", "Rock", 44, 100, 125, 135, 20, 20, 70);
   raidStonjourner.moveSet(rockSlide, stealthRock, stomp, block);
-  raidStonjourner.raidStats();
-  raidStonjourner.dynamax();
+  //raidStonjourner.raidStats();
+  //raidStonjourner.dynamax();
 
   //Level 45 Runerigus
   Pokemon runerigus = new Pokemon("Runerigus", "Ground/Ghost", 45, 58, 95, 145, 50, 105, 30);
@@ -839,15 +843,6 @@ void setup() {
   //Level 48 Grimmsnarl
   Pokemon grimmsnarl = new Pokemon("Grimmsnarl", "Dark/Dark", 48, 95, 120, 65, 95, 75, 60);
   grimmsnarl.moveSet(spiritBreak, darkPulse, powerUpPunch, bulkUp);
-  
-  //Level 56 Marshadow
-  Pokemon marshadow = new Pokemon("Marshadow", "Ghost/Fighting", 56, 90, 125, 80, 90, 90, 125);
-  marshadow.moveSet(closeCombat, spectralThief, icePunch, thunderPunch);
-
-  marshadow.raidStats();
-  marshadow.dynamax();
-
-  marshadow.currHealth *= 1.5;
   
   //Level 53 Cursola
   Pokemon cursola = new Pokemon("Cursola", "Ghost", 53, 60, 95, 50, 145, 130, 30);
@@ -863,10 +858,13 @@ void setup() {
   morpekoR.raidStats();
   morpekoR.dynamax();
   
-  //Level 57 Eternamax Eternatus
-  Pokemon eternamaxEternatus = new Pokemon("Eternamax Eternatus", "Poison/Dragon", 57, 255, 115, 250, 125, 250, 130);
-  eternamaxEternatus.moveSet(dynamaxCannon, cosmicPower, recover, venoshock);
-  eternamaxEternatus.raidStats();
+  //Level 57 Eternatus
+  Pokemon eternatus = new Pokemon("Eternatus", "Poison/Dragon", 57, 140, 85, 95, 145, 95, 130);
+  eternatus.moveSet(dynamaxCannon, flamethrower, recover, venoshock);
+  
+  eternatus.mega();
+  eternatus.raidStats();
+  eternatus.dynamax();
   
   // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // 
 
@@ -893,7 +891,7 @@ void setup() {
   zofia.addPokemon(xerneas, scyther, lapras, magneton, milotic, mimikyu);
   jasmine.addPokemon(pidgeot, arcanine, falinks, latias, abomasnow, alcremie);
   barnabas.addPokemon(diglett, spearow, weepinbell, mankey, magikarp, rhydon);
-  nicholas.addPokemon(stonjourner, vileplume, drakloak, swampert, snorlax, sirfetchd);
+  nicholas.addPokemon(stonjourner, vileplume, drakloak, swampert, snorlax, marshadow);
   joanna.addPokemon(litten, gengar, raichu, vulpix, polteageist);
   stella.addPokemon(flapple);
   nina.addPokemon(popplio);
@@ -905,7 +903,7 @@ void setup() {
 
   ltSurge.addPokemon(voltorb, ltPikachu, ltRaichu);
   leo.addPokemon(hitmontop, mantine, megaSteelix, meganium, shuckle, slugma);
-  wild.addPokemon(eternamaxEternatus, morpekoR, obstagoon, cursola, raidStonjourner, haunter, morpeko, grimmsnarl, marshadow, charizardGmax, charizard, polteageistPhony);
+  wild.addPokemon(eternatus, morpekoR, obstagoon, cursola, raidStonjourner, haunter, morpeko, grimmsnarl, charizardGmax, charizard, polteageistPhony);
 
   printPokemon();
   printCharizard();
@@ -922,7 +920,7 @@ void setup() {
   jasmine.giveItem("Pidgeotite", pidgeot);
 
   nicholas.giveItem("Sitrus Berry", vileplume, stonjourner);
-  nicholas.giveItem("Leftovers", sirfetchd, drakloak);
+  nicholas.giveItem("Leftovers", marshadow, drakloak);
   nicholas.giveItem("Snorium-Z", snorlax);
   nicholas.giveItem("Swampertite", swampert);
 
@@ -938,17 +936,19 @@ void setup() {
   Battle b = new Battle(wild, randomTrainer); 
 
   stonjourner.currHealth = 0;
-  drakloak.currHealth = 27;
-  snorlax.currHealth = 0;
   sirfetchd.currHealth = 0;
+  drakloak.currHealth = 0;
+  swampert.currHealth = 49;
   
   falinks.currHealth = 0;
-  latias.currHealth = 46;
+  latias.currHealth = 0;
   alcremie.currHealth = 0;
   
   zofia.showTeam();
   nicholas.showTeam();
   jasmine.showTeam();
+  
+  
   
   //duraludon.moveSet(dracoMeteor, flashCannon, thunderbolt, darkPulse);   
   
@@ -958,18 +958,17 @@ void setup() {
   
   //xerneas.moveSet(moonblast, auroraBeam, megahorn, hornLeech);
   
-  xerneas.level += 9;
   xerneas.calculateStats();
   xerneas.raidStats();
   xerneas.dynamax();
   
-  b.move(eternamaxEternatus, dynamaxCannon, charizardGmax, flamethrower);
-  b.move(eternamaxEternatus, dynamaxCannon, duraludon, flashCannon);
-  b.move(eternamaxEternatus, cosmicPower, xerneas, moonblast);
+  //b.move(eternatus, dynamaxCannon, charizardGmax, flamethrower);
+  //b.move(eternatus, dynamaxCannon, duraludon, dracoMeteor);
+  //b.move(eternatus, cosmicPower, xerneas, moonblast);
   
-  b.move(eternamaxEternatus, dynamaxCannon, charizardGmax, dragonClaw);
-  b.move(eternamaxEternatus, dynamaxCannon, duraludon, dracoMeteor);
-  b.move(eternamaxEternatus, venoshock, xerneas, auroraBeam);
+  //b.move(eternatus, dynamaxCannon, charizardGmax, dragonClaw);
+  //b.move(eternatus, dynamaxCannon, duraludon, dracoMeteor);
+  //b.move(eternatus, venoshock, xerneas, auroraBeam);
   
 }
 
@@ -999,10 +998,11 @@ void catchPokemon(Pokemon p, String pokeball, int catchRate) {
 
   int a = int(((((3*p.health)-(2*p.currHealth))*catchRate*bonusBall)/float(3*p.health)) * bonusStatus);
   int b = int(65536 / pow((255/a), 0.1875));
+  
 
   int rand = int(random(0, 65535));
   int counter = 0;
-
+  
   while (rand <= b) {
     if (counter == 3) {
       println("* * * Gotcha!", p.name, "was caught! * * *");

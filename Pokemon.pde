@@ -295,7 +295,20 @@ class Pokemon {
       this.stats[5] = 150;
     }
     
+    if (this.name.equals("Eternatus")) {
+      this.name = "Eternamax Eternatus";
+      this.ability = "Pressure";
+
+      this.stats[0] = 255;
+      this.stats[1] = 115;
+      this.stats[2] = 250;
+      this.stats[3] = 125;
+      this.stats[4] = 250;
+      this.stats[5] = 130;
+    }
+    
     this.calculateStats();
+    this.calculateHealth();
   }
   
   void useZMove() {
