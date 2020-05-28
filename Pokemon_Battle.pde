@@ -133,6 +133,7 @@ void setup() {
   Move signalBeam = new Move("Signal Beam", 24, 75, 1, "Bug", "Special", 0, "Confusion", 0.1);
   Move firstImpression = new Move("First Impression", 10, 90, 1, "Bug", "Physical", 2, "none", 0);
   Move megahorn = new Move("Megahorn", 10, 120, 0.85, "Bug", "Physical", 0, "none", 0);
+  Move pinMissile = new Move("Pin Missile", 20, 25, 0.95, "Bug", "Physical", 0, "Repeat", 1);
 
   //POISON
   Move acid = new Move("Acid", 30, 40, 1, "Poison", "Special", 0, "none", 0);  
@@ -145,7 +146,7 @@ void setup() {
   Move poisonJab = new Move("Poison Jab", 20, 80, 1, "Poison", "Physical", 0, "Poison", 0.3);
   Move acidArmor = new Move("Acid Armor", 20, 0, 0, "Poison", "Status", 0, "Defense++", 1);  
   Move coil = new Move("Coil", 32, 0, 0, "Poison", "Status", 0, "Attack+/Defense+", 1);  
-  Move pinMissile = new Move("Pin Missile", 20, 25, 0.95, "Bug", "Physical", 0, "Repeat", 1);
+  Move venoshock = new Move("Venoshock", 16, 65, 1, "Poison", "Special", 0, "none", 0);
 
   //DRAGON
   Move dragonRage = new Move("Dragon Rage", 10, 40, 1, "Dragon", "Special", 0, "none", 0);
@@ -158,6 +159,7 @@ void setup() {
   Move dualChop = new Move("Dual Chop", 15, 80, 0.9, "Dragon", "Physical", 0, "none", 0);
   Move dracoMeteor = new Move("Draco Meteor", 8, 130, 0.9, "Dragon", "Special", 0, "U.Sp.Attack--", 1);
   Move dragonTail = new Move("Dragon Tail", 10, 60, 0.9, "Dragon", "Physical", 0, "none", 0);
+  Move dynamaxCannon = new Move("Dynamax Cannon", 8, 100, 1, "Dragon", "Special", 0, "none", 0);
 
   //FIGHTING
   Move vacuumWave = new Move("Vacuum Wave", 30, 40, 1, "Fighting", "Special", 1, "none", 0);
@@ -224,6 +226,7 @@ void setup() {
   Move thunder = new Move("Thunder", 10, 110, 0.7, "Electric", "Special", 0, "Paralysis", 0.3);
   Move thunderPunch = new Move("Thunder Punch", 15, 75, 1, "Electric", "Physical", 0, "Paralysis", 0.1);
   Move zapCannon = new Move("Zap Cannon", 5, 120, 0.5, "Electric", "Special", 0, "Paralysis", 1);
+  Move auraWheel = new Move("Aura Wheel", 10, 110, 1, "Electric", "Special", 0, "none", 0);
 
   //STEEL
   Move magnetBomb = new Move("Magnet Bomb", 20, 60, 0, "Steel", "Physical", 0, "none", 0);
@@ -269,7 +272,8 @@ void setup() {
   Move spiritBreak = new Move("Spirit Break", 15, 75, 1, "Fairy", "Physical", 0, "Sp.Attack-", 1);
 
   //PSYCHIC
-  Move teleport = new Move("Teleport", 20, 0, 0, "Psychic", "Status", 0, "run", 0);
+  Move teleport = new Move("Teleport", 20, 0, 0, "Psychic", "Status", 0, "Teleport", 0);
+  Move cosmicPower = new Move("Cosmic Power", 32, 0, 0, "Psychic", "Status", 0, "Sp.Defense+/Defense+", 1);
   Move confusion = new Move("Confusion", 25, 50, 1, "Psychic", "Special", 0, "Confusion", 0.1);
   Move zenHeadbutt = new Move("Zen Headbutt", 15, 80, 0.9, "Psychic", "Physical", 0, "Flinch", 0.2);
   Move amnesia = new Move("Amnesia", 20, 0, 0, "Psychic", "Status", 0, "Sp.Defense++", 1);
@@ -295,11 +299,11 @@ void setup() {
   //TRAINER POKEMON
 
   //ZOFIA
-  //Level 56 Crazy Charizard
-  Pokemon charizardGmax = new Pokemon("Gmax Charizard", "Fire/Flying", 56, 78, 84, 78, 109, 85, 100); 
+  //Level 59 Crazy Charizard
+  Pokemon charizardGmax = new Pokemon("Gmax Charizard", "Fire/Flying", 59, 78, 84, 78, 109, 85, 100); 
   charizardGmax.moveSet(flamethrower, dragonClaw, roost, fly);
   charizardGmax.raidStats();
-  //charizardGmax.dynamax();
+  charizardGmax.dynamax();
 
   //Level 52 Charizard
   Pokemon charizard = new Pokemon("Charizard", "Fire/Flying", 52, 78, 84, 78, 109, 85, 100); 
@@ -336,9 +340,14 @@ void setup() {
   milotic.maxLevel = 5;
 
   //Level 45 Xerneas
-  Pokemon xerneas = new Pokemon("Xerneas", "Fairy", 45, 126, 131, 95, 131, 98, 99);
+  Pokemon xerneas = new Pokemon("Xerneas", "Fairy", 54, 126, 131, 95, 131, 98, 99);
   xerneas.moveSet(moonblast, auroraBeam, megahorn, hornLeech);
-  xerneas.maxLevel = 5;
+  xerneas.raidStats();
+  xerneas.dynamax();
+  
+  //Level 42 Morpeko
+  Pokemon morpeko = new Pokemon("Morpeko", "Electric/Dark", 42, 58, 95, 58, 70, 58, 97);
+  morpeko.moveSet(bulletSeed, auraWheel, crunch, protect);
 
   //JASMINE
   //Level 52 Pidgeot
@@ -664,9 +673,11 @@ void setup() {
   //IMPORTANT NPC POKEMON
 
   //CYNTHIA
-  //Level 47 Duraludon
-  Pokemon duraludon = new Pokemon("Duraludon", "Steel/Dragon", 47, 70, 95, 115, 120, 50, 85);
+  //Level 53 Duraludon
+  Pokemon duraludon = new Pokemon("Duraludon", "Steel/Dragon", 53, 70, 95, 115, 120, 50, 85);
   duraludon.moveSet(dracoMeteor, flashCannon, thunderbolt, darkPulse);
+  duraludon.raidStats();
+  duraludon.dynamax();
 
   //Level 42 Inteleon
   Pokemon inteleon = new Pokemon("Inteleon", "Water", 42, 70, 85, 65, 125, 65, 120);
@@ -831,10 +842,6 @@ void setup() {
   Pokemon polteageistPhony = new Pokemon("Polteageist-Phony", "Ghost", 45, 60, 65, 65, 134, 114, 70);
   polteageistPhony.moveSet(shadowBall, gigaDrain, suckerPunch, protect);
 
-  //Level 47 Morpeko
-  Pokemon morpeko = new Pokemon("Morpeko", "Electric/Dark", 47, 58, 95, 58, 70, 58, 97);
-  morpeko.moveSet(bulletSeed, spark, bite, quickAttack);
-
   //Level 48 Grimmsnarl
   Pokemon grimmsnarl = new Pokemon("Grimmsnarl", "Dark/Dark", 48, 95, 120, 65, 95, 75, 60);
   grimmsnarl.moveSet(spiritBreak, darkPulse, powerUpPunch, bulkUp);
@@ -848,13 +855,24 @@ void setup() {
 
   marshadow.currHealth *= 1.5;
   
-  //Level 46 Cursola
-  Pokemon cursola = new Pokemon("Cursola", "Ghost", 46, 60, 95, 50, 145, 130, 30);
+  //Level 53 Cursola
+  Pokemon cursola = new Pokemon("Cursola", "Ghost", 53, 60, 95, 50, 145, 130, 30);
   cursola.moveSet(hex, strengthSap, powerGem, ancientPower);
   
   //Level 46 Obstagoon
   Pokemon obstagoon = new Pokemon("Obstagoon", "Dark/Normal", 46, 93, 90, 101, 60, 81, 95);
   obstagoon.moveSet(crossChop, pinMissile, nightSlash, honeClaws);
+  
+  //Level 56 MorpekoR
+  Pokemon morpekoR = new Pokemon("MorpekoR", "Electric/Dark", 56, 58, 95, 58, 70, 58, 97);
+  morpekoR.moveSet(bulletSeed, auraWheel, crunch, protect);
+  morpekoR.raidStats();
+  morpekoR.dynamax();
+  
+  //Level 57 Eternamax Eternatus
+  Pokemon eternamaxEternatus = new Pokemon("Eternamax Eternatus", "Poison/Dragon", 57, 255, 115, 250, 125, 250, 130);
+  eternamaxEternatus.moveSet(dynamaxCannon, cosmicPower, recover, venoshock);
+  eternamaxEternatus.raidStats();
   
   // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // 
 
@@ -893,7 +911,7 @@ void setup() {
 
   ltSurge.addPokemon(voltorb, ltPikachu, ltRaichu);
   leo.addPokemon(hitmontop, mantine, megaSteelix, meganium, shuckle, slugma);
-  wild.addPokemon(obstagoon, cursola, raidStonjourner, haunter, morpeko, grimmsnarl, marshadow, charizardGmax, charizard, polteageistPhony);
+  wild.addPokemon(eternamaxEternatus, morpekoR, obstagoon, cursola, raidStonjourner, haunter, morpeko, grimmsnarl, marshadow, charizardGmax, charizard, polteageistPhony);
 
   printPokemon();
   printCharizard();
@@ -918,14 +936,14 @@ void setup() {
   cassie.giveItem("Leftovers", porygonZ);
   ashley.giveItem("Sitrus Berry", gyarados, lucario, ampharos, pupitar, altaria, metang);
   joanna.giveItem("Sitrus Berry", vulpix);
+  
+  wild.giveItem("Leftovers", morpeko);
 
   // // // // // // BATTLE DETAILS // // // // // // 
 
   randomSeed(44);
 
   Battle b = new Battle(wild, randomTrainer);
-  
-  sirfetchd.describe();
   
   //b.move(raidStonjourner, rockSlide, sirfetchd, firstImpression);
   //xerneas.dynamax();
@@ -1044,6 +1062,34 @@ void setup() {
   //drakloak.useMove(hex, polteageistPhony);
   
   //b.move(polteageistPhony, shadowBall, drakloak, hex);
+  
+  ////morpeko.moveSet(bulletSeed, auraWheel, crunch, protect);
+  
+  //b.move(morpekoR, auraWheel, falinks, megahorn);
+  //xerneas.dynamax();
+  //b.move(morpekoR, auraWheel, xerneas, moonblast);
+  
+  //catchPokemon(morpekoR, "Ultra Ball", 60);
+  
+  //catchPokemon(morpekoR, "Ultra Ball", 180);
+  
+  
+  
+  //duraludon.moveSet(dracoMeteor, flashCannon, thunderbolt, darkPulse);   
+  
+  //eternamaxEternatus.moveSet(dynamaxCannon, cosmicPower, recover, venoshock);
+  
+  //charizardGmax.moveSet(flamethrower, dragonClaw, roost, fly);
+  
+  //xerneas.moveSet(moonblast, auroraBeam, megahorn, hornLeech);
+
+  b.move(eternamaxEternatus, dynamaxCannon, charizardGmax, flamethrower);
+  b.move(eternamaxEternatus, dynamaxCannon, duraludon, flashCannon);
+  b.move(eternamaxEternatus, cosmicPower, xerneas, moonblast);
+  
+  b.move(eternamaxEternatus, dynamaxCannon, charizardGmax, dragonClaw);
+  b.move(eternamaxEternatus, dynamaxCannon, duraludon, dracoMeteor);
+  b.move(eternamaxEternatus, venoshock, xerneas, auroraBeam);
   
 }
 

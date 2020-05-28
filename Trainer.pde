@@ -133,8 +133,8 @@ class Trainer {
     println("Name:\t\tType:\t\tLevel:");
     
     for (int i = 0; i < team.size(); i++) {
-      if (this.team.get(i).name.length() > 10) {
-        if (this.team.get(i).type.length() > 10) {
+      if (this.team.get(i).name.length() > 7) {
+        if (this.team.get(i).type.length() > 7) {
           println(this.team.get(i).name + "\t" + this.team.get(i).type + "\t" + this.team.get(i).level);
         }
         else  {
@@ -142,7 +142,7 @@ class Trainer {
         }
       }
       else {
-        if (this.team.get(i).type.length() > 10) {
+        if (this.team.get(i).type.length() > 7) {
           println(this.team.get(i).name + "\t\t" + this.team.get(i).type + "\t" + this.team.get(i).level);
         }
         else  {

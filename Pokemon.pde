@@ -36,6 +36,7 @@ class Pokemon {
   Battle battle;
   Boolean zMove;
   Boolean mega;
+  Boolean hangry;
 
   Pokemon (String n, String t, int l, int hp, 
     int att, int def, int satt, int sdef, int spd) {
@@ -105,6 +106,8 @@ class Pokemon {
     this.zMove = false;
     
     this.mega = false;
+    
+    this.hangry = false;
   }
 
   void raidStats() {
@@ -251,6 +254,7 @@ class Pokemon {
       } else {
         this.name = "Mega Charizard X";
         this.ability = "Tough Claws";
+        this.type2 = "Dragon";
         
         this.stats[0] = 78;
         this.stats[1] = 130;
@@ -495,6 +499,9 @@ class Pokemon {
     else if (this.name.equals("Sirfetch'd") || this.name.equals("Lucario") || this.name.equals("Machamp"))
       a = "Steadfast";
       
+    else if (this.name.equals("Morpeko"))
+      a = "Hunger Switch";
+      
     return a;
   }
 
@@ -605,15 +612,15 @@ class Pokemon {
       mv.accuracy = 0;
     }
     
-    if (target.raidPokemon && !target.raidShield && !target.facedRaidShield) {
-      if ((target.currHealth < int((float(target.health)*2)/3)) && !target.raidShield) {
-        println(target.name, "has set up a barrier!");
-        println();
-        target.raidShield = true;
-        target.shieldHealth = 2;
-        target.facedRaidShield = true;
-      }
-    }
+    //if (target.raidPokemon && !target.raidShield && !target.facedRaidShield) {
+    //  if ((target.currHealth < int((float(target.health)*2)/3)) && !target.raidShield) {
+    //    println(target.name, "has set up a barrier!");
+    //    println();
+    //    target.raidShield = true;
+    //    target.shieldHealth = 2;
+    //    target.facedRaidShield = true;
+    //  }
+    //}
 
     if (this.max) {
       if (this.maxTurns == 0) {

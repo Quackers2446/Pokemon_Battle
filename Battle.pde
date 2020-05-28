@@ -78,6 +78,9 @@ class Battle {
     
     checkWeather(oneP, mv1, twoP);
     checkWeather(twoP, mv2, oneP);
+    
+    endTurn(oneP, mv1, twoP);
+    endTurn(twoP, mv2, oneP);
 
     if (oneP.raidPokemon) {
       recover(oneP);
@@ -381,6 +384,29 @@ class Battle {
       
       oneP.battleStats[5] = oneP.stats[5];
       twoP.battleStats[5] = twoP.stats[5];
+    }
+  }
+  
+  void endTurn(Pokemon oneP, Move mv1, Pokemon twoP) {
+    if (oneP.name.equals("Morpeko")) {
+      if (!oneP.hangry) {
+        oneP.hangry = true;
+        
+        if (mv1.name.equals("Aura Wheel")) {
+          mv1.type = "Electric";
+        }
+        
+        println("Morpeko entered Full-Belly mode!");
+      }
+      else {
+        oneP.hangry = false;
+        
+        if (mv1.name.equals("Aura Wheel")) {
+          mv1.type = "Dark";
+        }
+        
+        println("Morpeko entered Hangry mode!");
+      }
     }
   }
 
