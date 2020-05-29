@@ -185,6 +185,7 @@ void setup() {
   Move feintAttack = new Move("Feint Attack", 20, 60, 0, "Dark", "Physical", 0, "none", 0);
   Move nightSlash = new Move("Night Slash", 15, 70, 1, "Dark", "Physical", 0, "none", 0);
   Move assurance = new Move("Assurance", 10, 60, 1, "Dark", "Physical", 0, "none", 0);
+  Move thief = new Move("Thief", 40, 60, 1, "Dark", "Physical", 0, "Thief", 1);
   Move honeClaws = new Move("Hone Claws", 15, 0, 0, "Dark", "Status", 0, "Attack+/Accuracy+", 1);
   Move snarl = new Move("Snarl", 15, 55, 0.95, "Dark", "Special", 0, "Sp.Attack-", 1);
   Move nastyPlot = new Move("Nasty Plot", 20, 0, 0, "Dark", "Status", 0, "Sp.Attack++", 1);
@@ -345,11 +346,11 @@ void setup() {
   
   //Level 42 Morpeko
   Pokemon morpeko = new Pokemon("Morpeko", "Electric/Dark", 42, 58, 95, 58, 70, 58, 97);
-  morpeko.moveSet(bulletSeed, auraWheel, crunch, protect);
+  morpeko.moveSet(bulletSeed, auraWheel, thief, protect);
 
   //JASMINE
-  //Level 52 Pidgeot
-  Pokemon pidgeot = new Pokemon("Pidgeot", "Normal/Flying", 52, 83, 80, 75, 70, 70, 101);
+  //Level 54 Pidgeot
+  Pokemon pidgeot = new Pokemon("Pidgeot", "Normal/Flying", 54, 83, 80, 75, 70, 70, 101);
   pidgeot.moveSet(hurricane, wingAttack, featherDance, twister);
 
   //Level 37 Arcanine
@@ -386,8 +387,8 @@ void setup() {
   falinks.moveSet(megahorn, rockSmash, headbutt, protect);
   falinks.maxLevel = 0;
 
-  //Level 42 Latias
-  Pokemon latias = new Pokemon("Latias", "Dragon/Psychic", 42, 80, 80, 90, 110, 130, 110);
+  //Level 43 Latias
+  Pokemon latias = new Pokemon("Latias", "Dragon/Psychic", 43, 80, 80, 90, 110, 130, 110);
   latias.moveSet(dragonBreath, mistBall, calmMind, recover);
   latias.maxLevel = 0;
 
@@ -648,10 +649,6 @@ void setup() {
   Pokemon steelix = new Pokemon("Steelix", "Steel/Ground", 42, 75, 85, 200, 55, 65, 30);
   steelix.moveSet(thunderFang, iceFang, fireFang, dragonBreath);
 
-  //Level 42 Mega Steelix
-  Pokemon megaSteelix = new Pokemon("Mega Steelix", "Steel/Ground", 42, 75, 125, 230, 55, 95, 30);
-  megaSteelix.moveSet(thunderFang, iceFang, fireFang, dragonBreath);
-
   //Level 36 Meganium
   Pokemon meganium = new Pokemon("Meganium", "Grass", 36, 80, 82, 100, 83, 100, 80);
   meganium.moveSet(petalBlizzard, poisonPowder, synthesis, magicalLeaf);
@@ -697,8 +694,8 @@ void setup() {
   Pokemon toxtricity = new Pokemon("Toxtricity", "Electric/Poison", 37, 75, 98, 70, 114, 70, 75);
   toxtricity.moveSet(toxic, nobleRoar, screech, spark);
 
-  //Level 43 Frosmoth
-  Pokemon frosmoth = new Pokemon("Frosmoth", "Ice/Bug", 43, 70, 65, 60, 125, 90, 65);
+  //Level 47 Frosmoth
+  Pokemon frosmoth = new Pokemon("Frosmoth", "Ice/Bug", 47, 70, 65, 60, 125, 90, 65);
   frosmoth.moveSet(bugBuzz, featherDance, auroraBeam, attract);
 
   //Level 25 Dratini
@@ -902,7 +899,7 @@ void setup() {
   ashley.addPokemon(gyarados, lucario, ampharos, pupitar, altaria, metang);
 
   ltSurge.addPokemon(voltorb, ltPikachu, ltRaichu);
-  leo.addPokemon(hitmontop, mantine, megaSteelix, meganium, shuckle, slugma);
+  leo.addPokemon(hitmontop, mantine, steelix, meganium, shuckle, slugma);
   wild.addPokemon(eternatus, morpekoR, obstagoon, cursola, raidStonjourner, haunter, morpeko, grimmsnarl, charizardGmax, charizard, polteageistPhony);
 
   printPokemon();
@@ -948,28 +945,25 @@ void setup() {
   nicholas.showTeam();
   jasmine.showTeam();
   
-  
-  
   //duraludon.moveSet(dracoMeteor, flashCannon, thunderbolt, darkPulse);   
   
   //eternamaxEternatus.moveSet(dynamaxCannon, cosmicPower, recover, venoshock);
   
   //charizardGmax.moveSet(flamethrower, dragonClaw, roost, fly);
   
-  //xerneas.moveSet(moonblast, auroraBeam, megahorn, hornLeech);
+  //xerneas.moveSet(moonblast, auroraBeam, megahorn, hornLeech); 
   
   xerneas.calculateStats();
   xerneas.raidStats();
   xerneas.dynamax();
   
-  //b.move(eternatus, dynamaxCannon, charizardGmax, flamethrower);
-  //b.move(eternatus, dynamaxCannon, duraludon, dracoMeteor);
-  //b.move(eternatus, cosmicPower, xerneas, moonblast);
+  b.move(eternatus, dynamaxCannon, charizardGmax, flamethrower);
+  b.move(eternatus, dynamaxCannon, duraludon, dracoMeteor);
+  b.move(eternatus, cosmicPower, xerneas, moonblast);
   
-  //b.move(eternatus, dynamaxCannon, charizardGmax, dragonClaw);
-  //b.move(eternatus, dynamaxCannon, duraludon, dracoMeteor);
-  //b.move(eternatus, venoshock, xerneas, auroraBeam);
-  
+  b.move(eternatus, dynamaxCannon, charizardGmax, dragonClaw);
+  b.move(eternatus, dynamaxCannon, duraludon, dracoMeteor);
+  b.move(eternatus, venoshock, xerneas, auroraBeam);  
 }
 
 void catchPokemon(Pokemon p, String pokeball, int catchRate) {
@@ -999,6 +993,7 @@ void catchPokemon(Pokemon p, String pokeball, int catchRate) {
   int a = int(((((3*p.health)-(2*p.currHealth))*catchRate*bonusBall)/float(3*p.health)) * bonusStatus);
   int b = int(65536 / pow((255/a), 0.1875));
   
+  println("Trying to get below", b);
 
   int rand = int(random(0, 65535));
   int counter = 0;
@@ -1010,11 +1005,13 @@ void catchPokemon(Pokemon p, String pokeball, int catchRate) {
       return;
     }
 
-    println("Wobble");
+    println("Wobble :", rand);
     println();
     rand = int(random(0, 65535));
     counter += 1;
   }
+  
+  println(rand);
 
   if (counter == 0)
     println("* * * Oh no! The Pokémon broke free! * * *");

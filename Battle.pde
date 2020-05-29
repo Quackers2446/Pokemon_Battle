@@ -5,6 +5,8 @@ class Battle {
   Pokemon[] turnOrder;
   String weather;
   int weatherCounter;
+  String terrain;
+  int terrainCounter;
   Boolean sR;
   Move stealthRock;
 
@@ -17,6 +19,9 @@ class Battle {
 
     this.weather = "Normal";
     this.weatherCounter = 0;
+    
+    this.terrain = "Normal";
+    this.terrainCounter = 0;
     
     this.sR = false;
     this.stealthRock = new Move("Stealth Rock", 20, 0, 0, "Rock", "Status", 0, "StealthRock", 1);
@@ -78,6 +83,11 @@ class Battle {
     
     checkWeather(oneP, mv1, twoP);
     checkWeather(twoP, mv2, oneP); 
+    
+    updateTerrain(oneP, twoP);
+    
+    checkTerrain(oneP, mv1, twoP);
+    checkTerrain(twoP, mv2, oneP);
     
     endTurn(oneP, mv1, twoP);
     endTurn(twoP, mv2, oneP);
@@ -154,6 +164,12 @@ class Battle {
       
       checkWeather(oneP, mv1, twoP);
       checkWeather(twoP, mv2, oneP);
+      
+      updateTerrain(oneP, twoP);
+      
+      checkTerrain(oneP, mv1, twoP);
+      checkTerrain(twoP, mv2, oneP);
+
       
       if (oneP.raidPokemon && (int(random(0,3)) == 0)) {
         recover(oneP);
@@ -271,6 +287,34 @@ class Battle {
       oneP.currHealth = 0;
     }
   }
+  
+  void checkTerrain(Pokemon oneP, Move mv1, Pokemon twoP) {
+    if (mv1.status.equals("Misty Terrain") && !this.weather.equals("Misty Terrain")) {
+      this.terrain = "Misty Terrain";
+      
+      println(oneP.name, "made mist envelope the field!");
+      println();
+      this.terrainCounter = 5;
+    }
+  }
+  
+  void updateTerrain(Pokemon oneP, Pokemon twoP) {
+    if (this.terrain.equals("Misty Terrain")) {
+      this.terrainCounter -= 1;
+      
+      println("The mist swirls mysteriously.");
+      println();
+      
+      oneP.sleep = false;
+      twoP.sleep = false;
+            
+    } else if (this.terrainCounter == 0 && this.terrain.equals("Misty Terrain")) {
+      this.terrain = "none";
+      
+      println("The mist faded!");
+      println();
+    }
+  }
 
   void checkWeather(Pokemon oneP, Move mv1, Pokemon twoP) {
     String firstType1 = oneP.type;
@@ -376,7 +420,7 @@ class Battle {
       println("The sunlight is strong.");
       println();
       
-    } else if (this.weatherCounter == 0 && this.weather.equals("Harsh Sunlight")) {
+    } else if (this.weatherCounter < 1 && this.weather.equals("Harsh Sunlight")) {
       this.weather = "none";
       
       println("The sunlight faded!");

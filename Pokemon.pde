@@ -295,6 +295,18 @@ class Pokemon {
       this.stats[5] = 150;
     }
     
+    if (this.name.equals("Steelix")) {
+      this.name = "Mega Steelix";
+      this.ability = "Sand Force";
+      
+      this.stats[0] = 75;
+      this.stats[1] = 125;
+      this.stats[2] = 230;
+      this.stats[3] = 55;
+      this.stats[4] = 95;
+      this.stats[5] = 30;
+    }
+    
     if (this.name.equals("Eternatus")) {
       this.name = "Eternamax Eternatus";
       this.ability = "Pressure";
@@ -501,6 +513,10 @@ class Pokemon {
       this.name.equals("Litten") || this.name.equals("Torracat") || this.name.equals("Incineroar"))
       a = "Intimidate";
 
+      || this.name.equals("Minccino") || this.name.equals("Toxtricity") || this.name.equals("Meowth") || 
+      this.name.equals("Alolan Meowth") || this.name.equals("Persian") || this.name.equals("Alolan Persian"))
+      a = "Technician";
+      
     else if (this.name.equals("Lapras") || this.name.equals("Krabby") || this.name.equals("Kingler")
       || this.name.equals("Drednaw") || this.name.equals("Falinks"))
       a = "Shell Armor";
@@ -533,6 +549,10 @@ class Pokemon {
       
     else if (this.name.equals("Morpeko"))
       a = "Hunger Switch";
+      
+    else if (this.name.equals("Eternatus") || this.name.equals("Absol") || this.name.equals("Corviknight")
+     || this.name.equals("Aerodactyl") || this.name.equals("Mewtwo"))
+      a = "Pressure";
       
     return a;
   }
@@ -692,6 +712,13 @@ class Pokemon {
             mv.power *= 1.5;
           }
           
+          //Misty Terrain
+          if (this.battle != null) {
+          if (mv.type.equals("Dragon") && battle.terrain.equals("Misty Terrain")) {
+            mv.power *= 0.5;
+          }
+          }
+          
           //Fairy Aura
           if (mv.type.equals("Fairy") && (this.ability.equals("Fairy Aura") || target.ability.equals("Fairy Aura"))) {
             mv.power *= 1.33;
@@ -701,6 +728,9 @@ class Pokemon {
           if (this.ability.equals("Tough Claws")) {
             mv.power *= 1.33;
           }
+          
+          if (this.ability.equals("Technician") && mv.power <= 60)
+            mv.power *= 1.5;
 
           if (mv.damageCatagory.equals("Physical")) {
             if (this.burn && (!this.type.equals("Fire") || !this.type2.equals("Fire"))) {
@@ -770,6 +800,8 @@ class Pokemon {
 
             println(target.name, "is protected!");
             println();
+            
+            condition = false;
 
             target.protect = false;
           }
@@ -786,6 +818,12 @@ class Pokemon {
             damage /= 2;
           }
           
+          if (this.battle != null) {
+          if ((mv.name.equals("Rest") && this.battle.terrain.equals("Misty Terrain")) || mv.status.equals("Sleep")) {
+            condition = false;
+            println("Pokemon can't fall asleep.");
+          }
+          }
 
           if (target.raidShield && target.raidPokemon) {
             if (target.shieldHealth > 0) {
@@ -818,7 +856,9 @@ class Pokemon {
 
           if (condition)
             mv.condition(this, target);
+            
           condition = true;
+          
           if (this.repeat) {
             for (int i = 0; i < randomRepeat; i++) {
               target.currHealth -= damage;
@@ -837,13 +877,20 @@ class Pokemon {
           }
 
           float r = random(0, 1);
+          
+          //Shed Skin + Misty Terrain
           if (this.ability.equals("Shed Skin") && (r <= 0.33)) {
-            if ((this.burn || this.freeze || this.paralysis || this.poison || this.sleep || this.badlyPoisoned || this.confusion || this.drain || this.leech)) {
-              this.burn = this.freeze = this.paralysis = this.poison = this.sleep = this.badlyPoisoned
-                = this.confusion = this.drain = this.leech = false;
+            this.burn = this.freeze = this.paralysis = this.poison = this.sleep = this.badlyPoisoned
+              = this.confusion = this.drain = this.leech = false;
 
-              println();
-              println(this.name, "shed it's skin and was cured of all non-volatile conditions!");
+            println();
+            println(this.name, "shed it's skin and was cured of all non-volatile conditions!");
+          }
+          
+          if (this.battle != null) {
+            if (this.battle.terrain.equals("Misty Terrain")) {
+              this.burn = this.freeze = this.paralysis = this.poison = this.sleep = this.badlyPoisoned
+              = this.confusion = this.drain = this.leech = false;
             }
           }
 

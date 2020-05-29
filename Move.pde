@@ -653,6 +653,16 @@ class Move {
             target.battleStats[1] = int(float(2*target.stats[1])/(target.attackSMn));
           }
         }
+      } else if (firstStatus.equals("Thief")) {
+        chance = random(0, 1);
+
+        if (chance <= this.statusProb) {
+          if (user.item.equals("none") || user.item.equals("None")) {
+            user.item = (target.item);
+            println(user.name, "stole", target.name + "'s", target.item + "!");
+            target.item = ("none");
+          }
+        }
       } else if (firstStatus.equals("Wildfire") && !target.wildfire) {
         chance = random(0, 1);
 
