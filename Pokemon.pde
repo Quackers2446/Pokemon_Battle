@@ -513,6 +513,7 @@ class Pokemon {
       this.name.equals("Litten") || this.name.equals("Torracat") || this.name.equals("Incineroar"))
       a = "Intimidate";
 
+    else if (this.name.equals("Marshadow") || this.name.equals("Smeargle") || this.name.equals("Cinccino")
       || this.name.equals("Minccino") || this.name.equals("Toxtricity") || this.name.equals("Meowth") || 
       this.name.equals("Alolan Meowth") || this.name.equals("Persian") || this.name.equals("Alolan Persian"))
       a = "Technician";
