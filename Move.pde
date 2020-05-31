@@ -149,7 +149,7 @@ class Move {
       } else if (firstStatus.equals("Freeze")) {
         chance = random(0, 1);
 
-        if (chance <= this.statusProb && !target.freeze) {
+        if (chance <= this.statusProb && !target.freeze && !(target.type.equals("Ice") || target.type2.equals("Ice"))) {
           println(target.name, "was frozen!");
           
           target.freeze = true;

@@ -300,12 +300,6 @@ void setup() {
   //TRAINER POKEMON
 
   //ZOFIA
-  //Level 60 Crazy Charizard
-  Pokemon charizardGmax = new Pokemon("Gmax Charizard", "Fire/Flying", 60, 78, 84, 78, 109, 85, 100); 
-  charizardGmax.moveSet(flamethrower, dragonClaw, roost, fly);
-  charizardGmax.raidStats();
-  charizardGmax.dynamax();
-
   //Level 56 Charizard
   Pokemon charizard = new Pokemon("Charizard", "Fire/Flying", 56, 78, 84, 78, 109, 85, 100); 
   charizard.moveSet(flamethrower, dragonClaw, roost, fly);
@@ -380,7 +374,7 @@ void setup() {
   //Level 40 Alcremie
   Pokemon alcremie = new Pokemon("Alcremie", "Fairy", 40, 65, 60, 75, 110, 121, 64);
   alcremie.moveSet(dazzlingGleam, drainPunch, recover, acidArmor);
-  alcremie.maxLevel = 9;
+  alcremie.maxLevel = 10;
 
   //Level 43 Falinks
   Pokemon falinks = new Pokemon("Falinks", "Fighting", 43, 65, 100, 100, 70, 60, 75);
@@ -390,7 +384,7 @@ void setup() {
   //Level 43 Latias
   Pokemon latias = new Pokemon("Latias", "Dragon/Psychic", 43, 80, 80, 90, 110, 130, 110);
   latias.moveSet(dragonBreath, mistBall, calmMind, recover);
-  latias.maxLevel = 0;
+  latias.maxLevel = 2;
 
   //NICHOLAS
 
@@ -591,8 +585,8 @@ void setup() {
   Pokemon sandshrew = new Pokemon("Sandshrew", "Ground", 13, 50, 75, 85, 20, 30, 40);
   sandshrew.moveSet(rollout, poisonSting, scratch, sandAttack);
 
-  //Level 54 Articuno
-  Pokemon articuno = new Pokemon("Articuno", "Ice/Flying", 54, 90, 85, 100, 95, 125, 85);
+  //Level 60 Articuno
+  Pokemon articuno = new Pokemon("Articuno", "Ice/Flying", 60, 90, 85, 100, 95, 125, 85);
   articuno.moveSet(iceBeam, blizzard, agility, hurricane);
 
   //Level 24 Dugtrio
@@ -671,38 +665,40 @@ void setup() {
   Pokemon marshtomp = new Pokemon("Marshtomp", "Water/Ground", 36, 70, 85, 70, 60, 70, 50);
   marshtomp.moveSet(protect, mudBomb, rockSlide, surf);
 
-  //IMPORTANT NPC POKEMON
-
-  //CYNTHIA
-  //Level 53 Duraludon
-  Pokemon duraludon = new Pokemon("Duraludon", "Steel/Dragon", 53, 70, 95, 115, 120, 50, 85);
-  duraludon.moveSet(dracoMeteor, flashCannon, thunderbolt, darkPulse);
-  duraludon.raidStats();
-  duraludon.dynamax();
-
-  //Level 42 Inteleon
-  Pokemon inteleon = new Pokemon("Inteleon", "Water", 42, 70, 85, 65, 125, 65, 120);
-  inteleon.moveSet(uTurn, suckerPunch, snipeShot, tearfulLook);
-
-  //Level 39 Centiscorch
-  Pokemon centiscorch = new Pokemon("Centiscorch", "Fire/Bug", 39, 100, 115, 65, 90, 90, 65);
-  centiscorch.moveSet(coil, flameWheel, bite, bugBite);
-
-  //Level 36 Sandaconda
-  Pokemon sandaconda = new Pokemon("Sandaconda", "Ground", 36, 72, 107, 125, 65, 70, 71);
-  sandaconda.moveSet(dig, glare, brutalSwing, bulldoze);
-
-  //Level 37 Toxtricity
-  Pokemon toxtricity = new Pokemon("Toxtricity", "Electric/Poison", 37, 75, 98, 70, 114, 70, 75);
-  toxtricity.moveSet(toxic, nobleRoar, screech, spark);
-
-  //Level 47 Frosmoth
-  Pokemon frosmoth = new Pokemon("Frosmoth", "Ice/Bug", 47, 70, 65, 60, 125, 90, 65);
-  frosmoth.moveSet(bugBuzz, featherDance, auroraBeam, attract);
-
   //Level 25 Dratini
   Pokemon dratini = new Pokemon("Dratini", "Dragon", 25, 41, 64, 45, 50, 50, 50);
   dratini.moveSet(twister, slam, dragonRage, thunderWave);
+  
+  //IMPORTANT NPC POKEMON
+
+  //CYNTHIA
+  //Level 56 Duraludon
+  Pokemon duraludon = new Pokemon("Duraludon", "Steel/Dragon", 56, 70, 95, 115, 120, 50, 85);
+  duraludon.moveSet(dracoMeteor, flashCannon, thunderbolt, darkPulse);
+
+  //Level 46 Inteleon
+  Pokemon inteleon = new Pokemon("Inteleon", "Water", 46, 70, 85, 65, 125, 65, 120);
+  inteleon.moveSet(uTurn, suckerPunch, snipeShot, tearfulLook);
+
+  //Level 42 Centiscorch
+  Pokemon centiscorch = new Pokemon("Centiscorch", "Fire/Bug", 39, 100, 115, 65, 90, 90, 65);
+  centiscorch.moveSet(coil, flameWheel, bite, bugBite);
+
+  //Level 42 Sandaconda
+  Pokemon sandaconda = new Pokemon("Sandaconda", "Ground", 36, 72, 107, 125, 65, 70, 71);
+  sandaconda.moveSet(dig, glare, brutalSwing, bulldoze);
+
+  //Level 43 Toxtricity
+  Pokemon toxtricity = new Pokemon("Toxtricity", "Electric/Poison", 43, 75, 98, 70, 114, 70, 75);
+  toxtricity.moveSet(toxic, nobleRoar, screech, spark);
+
+  //Level 51 Frosmoth
+  Pokemon frosmoth = new Pokemon("Frosmoth", "Ice/Bug", 51, 70, 65, 60, 125, 90, 65);
+  frosmoth.moveSet(bugBuzz, featherDance, auroraBeam, attract);
+
+  //Level 25 Dragonair
+  Pokemon dragonair = new Pokemon("Dragonair", "Dragon", 25, 61, 84, 65, 70, 70, 70);
+  dragonair.moveSet(dragonTail, aquaTail, agility, thunderWave);
 
   //CASSIE
   //Level 36 Shelgon
@@ -891,7 +887,7 @@ void setup() {
   Trainer randomTrainer = new Trainer("Random");
   Trainer wild = new Trainer("Wild");
 
-  zofia.addPokemon(xerneas, scyther, lapras, morpeko, milotic, mimikyu);
+  zofia.addPokemon(xerneas, scyther, lapras, morpeko, milotic, mimikyu, charizard);
   jasmine.addPokemon(pidgeot, arcanine, falinks, latias, abomasnow, alcremie);
   barnabas.addPokemon(diglett, spearow, weepinbell, mankey, magikarp, rhydon);
   nicholas.addPokemon(stonjourner, vileplume, drakloak, swampert, snorlax, marshadow);
@@ -906,7 +902,7 @@ void setup() {
   ashley.addPokemon(gyarados, lucario, ampharos, pupitar, altaria, metang);
 
   ltSurge.addPokemon(voltorb, ltPikachu, ltRaichu);
-  wild.addPokemon(glalie, eternatus, morpekoR, obstagoon, cursola, raidStonjourner, haunter, morpeko, grimmsnarl, charizardGmax, charizard, polteageistPhony);
+  wild.addPokemon(glalie, eternatus, morpekoR, obstagoon, cursola, raidStonjourner, haunter, morpeko, grimmsnarl, polteageistPhony);
 
   printPokemon();
   printCharizard();
@@ -933,7 +929,7 @@ void setup() {
 
   // // // // // // BATTLE DETAILS // // // // // // 
 
-  randomSeed(45);
+  randomSeed(46);
 
   Battle b = new Battle(wild, randomTrainer); 
 
@@ -947,7 +943,7 @@ void setup() {
   latias.currHealth = 0;
   alcremie.currHealth = 0;
   
-  charizard.currHealth = 0;
+//  charizard.currHealth = 0;
   mimikyu.currHealth = 7;
   morpeko.currHealth = 7;
   lapras.currHealth = 241;
@@ -955,7 +951,9 @@ void setup() {
   zofia.showTeam();
   nicholas.showTeam();
   jasmine.showTeam();
-
+  
+  
+  
   //duraludon.moveSet(dracoMeteor, flashCannon, thunderbolt, darkPulse);   
 
   //eternamaxEternatus.moveSet(dynamaxCannon, cosmicPower, recover, venoshock);
