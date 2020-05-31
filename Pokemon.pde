@@ -681,11 +681,10 @@ class Pokemon {
         println();
       }
     }
-
     if (mv.currPowerPoints >= 0) {
       if ((chanceToHit <= ((mv.accuracy*100)*(this.adjustedStages))) || mv.accuracy == 0) {   
         if (!(this.flinch && !this.ability.equals("Inner Focus")) && !this.sleep && !(this.attract && (randomA <= 0.5)) && (!(this.paralysis && (randomP <= 0.25)) || (this.type.equals("Electric") || this.type2.equals("Electric"))) 
-          && !(this.confusion && (randomC <= 0.33)) && (!(this.freeze && (randomF <= 0.2)) || (this.type.equals("Ice") || this.type2.equals("Ice")))) {
+          && !(this.confusion && (randomC <= 0.33)) && (!this.freeze)) {
           int randomAttract = int(random(0,3));
                     
           if (target.ability.equals("Cute Charm") && randomAttract == 0 && !this.attract) {
@@ -819,12 +818,12 @@ class Pokemon {
             damage /= 2;
           }
           
-          if (this.battle != null) {
-          if ((mv.name.equals("Rest") && this.battle.terrain.equals("Misty Terrain")) || mv.status.equals("Sleep")) {
-            condition = false;
-            println("Pokemon can't fall asleep.");
-          }
-          }
+          //if (this.battle != null) {
+          //if ((mv.name.equals("Rest") && this.battle.terrain.equals("Misty Terrain")) || mv.status.equals("Sleep")) {
+          //  condition = false;
+          //  println("Pokemon can't fall asleep.");
+          //}
+          //}
 
           if (target.raidShield && target.raidPokemon) {
             if (target.shieldHealth > 0) {
@@ -911,6 +910,14 @@ class Pokemon {
           if (this.flinch) {
             this.flinch = false;
             println(this.name, "cannot move!");
+          }
+          if (this.freeze) {
+            float randFreeze = random(0,1);
+            println("BrrrrRrRRR, COLD!", this.name, "cannot move from the sheer frozen death that is freezing.");
+            if (randFreeze <= 0.2) {
+              this.freeze = false;
+              println(this.name, "warmed up and thawed!");
+            }
           }
           if (this.paralysis) {
             println(this.name, "was fully paralyzed!");

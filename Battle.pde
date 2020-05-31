@@ -308,7 +308,8 @@ class Battle {
       oneP.sleep = false;
       twoP.sleep = false;
             
-    } else if (this.terrainCounter == 0 && this.terrain.equals("Misty Terrain")) {
+    }
+    if (this.terrainCounter < 0 && this.terrain.equals("Misty Terrain")) {
       this.terrain = "none";
       
       println("The mist faded!");
