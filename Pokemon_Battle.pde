@@ -111,6 +111,7 @@ void setup() {
   Move snipeShot = new Move("Snipe Shot", 15, 80, 1, "Water", "Special", 0, "none", 0);
   Move razorShell = new Move("Razor Shell", 10, 75, 0.95, "Water", "Physical", 0, "Defense-", 0.5);
   Move liquidation = new Move("Liquidation", 10, 85, 1, "Water", "Physical", 0, "Defense-", 0.2);
+  Move brine = new Move("Brine", 10, 65, 1, "Water", "Special", 0, "none", 0);
 
   //ROCK
   Move rollout = new Move("Rollout", 20, 30, 0.9, "Rock", "Physical", 0, "none", 0);
@@ -813,10 +814,6 @@ void setup() {
   Pokemon galarianPonyta = new Pokemon("Galarian Ponyta", "Psychic", 22, 50, 85, 55, 65, 65, 90);
   galarianPonyta.moveSet(confusion, fairyWind, tailWhip, agility);
 
-  //Level 37 Galarian Weezing
-  Pokemon galarianWeezing = new Pokemon("Galarian Weezing", "Poison/Fairy", 37, 65, 90, 120, 85, 70, 60);
-  galarianWeezing.moveSet(heatWave, fairyWind, sludge, assurance);
-
   //Level 42 Dreepy
   Pokemon dreepy = new Pokemon("Dreepy", "Dragon/Ghost", 42, 28, 60, 30, 40, 20, 82);
   dreepy.moveSet(astonish, infestation, quickAttack, bite);
@@ -857,6 +854,18 @@ void setup() {
   Pokemon glalie = new Pokemon("Glalie", "Ice", 55, 80, 80, 80, 80, 80, 80);
   glalie.moveSet(crunch, blizzard, doubleTeam, astonish);
   
+  //Level 60 Beartic
+  Pokemon beartic = new Pokemon("Beartic", "Ice", 60, 95, 130, 80, 70, 80, 50);
+  beartic.moveSet(blizzard, superpower, rest, brine);
+  
+  //Level 55 Orbeetle
+  Pokemon orbeetle = new Pokemon("Orbeetle", "Bug/Psychic", 55, 60, 45, 110, 80, 120, 90);
+  orbeetle.moveSet(hypnosis, bugBuzz, psychic, calmMind);
+  
+  //Level 54 Galarian Weezing
+  Pokemon galarianWeezing = new Pokemon("Galarian Weezing", "Poison/Fairy", 54, 65, 90, 120, 85, 70, 60);
+  galarianWeezing.moveSet(heatWave, fairyWind, sludge, assurance);
+  
   //Level 57 Eternatus
   Pokemon eternatus = new Pokemon("Eternatus", "Poison/Dragon", 57, 140, 85, 95, 145, 95, 130);
   eternatus.moveSet(dynamaxCannon, flamethrower, recover, venoshock);
@@ -887,7 +896,7 @@ void setup() {
   Trainer randomTrainer = new Trainer("Random");
   Trainer wild = new Trainer("Wild");
 
-  zofia.addPokemon(xerneas, scyther, lapras, morpeko, milotic, mimikyu, charizard);
+  zofia.addPokemon(kingler, xerneas, scyther, lapras, morpeko, milotic, mimikyu, charizard);
   jasmine.addPokemon(pidgeot, arcanine, falinks, latias, abomasnow, alcremie);
   barnabas.addPokemon(diglett, spearow, weepinbell, mankey, magikarp, rhydon);
   nicholas.addPokemon(stonjourner, vileplume, drakloak, swampert, snorlax, marshadow);
@@ -902,7 +911,7 @@ void setup() {
   ashley.addPokemon(gyarados, lucario, ampharos, pupitar, altaria, metang);
 
   ltSurge.addPokemon(voltorb, ltPikachu, ltRaichu);
-  wild.addPokemon(glalie, eternatus, morpekoR, obstagoon, cursola, raidStonjourner, haunter, morpeko, grimmsnarl, polteageistPhony);
+  wild.addPokemon(galarianWeezing, orbeetle, beartic, glalie, eternatus, morpekoR, obstagoon, cursola, raidStonjourner, haunter, morpeko, grimmsnarl, polteageistPhony);
 
   printPokemon();
   printCharizard();
@@ -952,6 +961,30 @@ void setup() {
   nicholas.showTeam();
   jasmine.showTeam();
   
+    //  beartic.moveSet(blizzard, superpower, rest, brine);
+
+  b.move(beartic, blizzard, lapras, iceBeam); 
+  
+  b.move(beartic, superpower, lapras, hydroPump); 
+  
+  //orbeetle.moveSet(hypnosis, bugBuzz, psychic, calmMind);
+  
+  orbeetle.useMove(calmMind, kingler);
+  b.move(orbeetle, hypnosis, kingler, metalClaw);
+  
+  xerneas.dynamax();
+  b.move(orbeetle, hypnosis, xerneas, auroraBeam);
+  zofia.useItem("Chesto Berry", xerneas);
+  
+  orbeetle.useMove(calmMind, xerneas);
+  
+  b.move(orbeetle, psychic, xerneas, moonblast);
+  
+  b.move(orbeetle, psychic, xerneas, moonblast);
+  
+  //  galarianWeezing.moveSet(heatWave, fairyWind, sludge, assurance);
+
+  b.move(mimikyu, shadowSneak, galarianWeezing, sludge);
   
   
   //duraludon.moveSet(dracoMeteor, flashCannon, thunderbolt, darkPulse);   
