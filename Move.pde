@@ -238,6 +238,15 @@ class Move {
         if (chance <= this.statusProb) {
           target.recoil = true;
         }
+      } else if (firstStatus.equals("Hp+")) {
+        chance = random(0, 1);
+
+        if (chance <= this.statusProb) {
+          user.currHealth += user.stats[0]/8;
+          
+          println(user.name + "'s bulk rose to", user.currHealth + "!");
+            
+        }
       } else if (firstStatus.equals("Attack-")) {
         chance = random(0, 1);
 
@@ -532,7 +541,7 @@ class Move {
             println(target.name + "'s accuracy fell!");
             
             target.accuracySMn += 1;
-            target.adjustedStages = float(target.evasionSMp)/float(target.accuracySMn);
+            target.accuracy *= 3/float(target.accuracySMn);
           }
         }
       } else if (firstStatus.equals("Accuracy+")) {
@@ -543,7 +552,7 @@ class Move {
             println(user.name + "'s accuracy rose!");
             
             user.accuracySMp += 1;
-            user.adjustedStages = float(user.accuracySMp)/float(user.evasionSMn);
+            user.accuracy *= float(user.accuracySMp)/3;
           }
         }
       } else if (firstStatus.equals("Evasion+")) {
@@ -554,7 +563,29 @@ class Move {
             println(user.name + "'s evasion rose!");
             
             user.evasionSMp += 1;
-            user.adjustedStages = float(user.evasionSMp)/float(user.accuracySMn);
+            user.evasion *= 3/float(user.evasionSMp);
+          }
+        }
+      } else if (firstStatus.equals("Evasion++")) {
+        chance = random(0, 1);
+
+        if (chance <= this.statusProb) {
+          if (user.evasionSMp < 6) {
+            println(user.name + "'s evasion greatly rose!");
+            
+            user.evasionSMp += 2;
+            user.evasion *= 3/float(user.evasionSMp);
+          }
+        }
+      } else if (firstStatus.equals("Evasion+++")) {
+        chance = random(0, 1);
+
+        if (chance <= this.statusProb) {
+          if (user.evasionSMp < 6) {
+            println(user.name + "'s evasion went up by three stages!");
+            
+            user.evasionSMp += 3;
+            user.evasion *= 3/float(user.evasionSMp);
           }
         }
       } else if (firstStatus.equals("Evasion-")) {
@@ -565,7 +596,7 @@ class Move {
             println(target.name + "'s evasion fell!");
             
             target.evasionSMn += 1;
-            target.adjustedStages = float(target.evasionSMn)/float(target.accuracySMn);
+            target.evasion *= float(target.evasionSMn)/3;
           }
         }
       } else if (firstStatus.equals("Drain")) {
@@ -663,6 +694,13 @@ class Move {
             target.item = ("none");
           }
         }
+      } else if (firstStatus.equals("Charge") && !user.charge) {
+        chance = random(0, 1);
+
+        if (chance <= this.statusProb) {
+          user.charge = true;
+          user.chargeTurn = 1;
+        }
       } else if (firstStatus.equals("Wildfire") && !target.wildfire) {
         chance = random(0, 1);
 
@@ -721,7 +759,7 @@ class Move {
       } else if (status2.equals("Freeze")) {
         chance = random(0, 1);
 
-        if (chance <= this.statusProb && !target.freeze) {
+        if (chance <= this.statusProb && !target.freeze && !(target.type.equals("Ice") || target.type2.equals("Ice"))) {
           println(target.name, "was frozen!");
           
           target.freeze = true;
@@ -781,14 +819,15 @@ class Move {
         chance = random(0, 1);
 
         if (chance <= this.statusProb) {
+          
           println(target.name, "flinched!");
           
           if (target.ability.equals("Steadfast")) {
-            if (user.speedSMp < 6) {
-              println(user.name + "'s speed rose!");
+            if (target.speedSMp < 6) {
+              println(target.name, "is steadfast! Their speed rose!");
               
-              user.speedSMp += 1;
-              user.battleStats[5] = int(float((user.speedSMp)*user.stats[5])/2);
+              target.speedSMp += 1;
+              target.battleStats[5] = int(float((target.speedSMp)*target.stats[5])/2);
             }
           }
           
@@ -809,6 +848,15 @@ class Move {
         if (chance <= this.statusProb) {
           target.recoil = true;
         }
+      } else if (status2.equals("Hp+")) {
+        chance = random(0, 1);
+
+        if (chance <= this.statusProb) {
+          user.currHealth += user.stats[0]/8;
+          
+          println(user.name + "'s bulk rose to", user.currHealth + "!");
+            
+        }
       } else if (status2.equals("Attack-")) {
         chance = random(0, 1);
 
@@ -818,6 +866,17 @@ class Move {
             
             target.attackSMn += 1;
             target.battleStats[1] = int(float(2*target.stats[1])/(target.attackSMn));
+          }
+        }
+      } else if (status2.equals("U.Attack-")) {
+        chance = random(0, 1);
+
+        if (chance <= this.statusProb) {
+          if (user.attackSMn < 6) {
+            println(user.name + "'s attack fell!");
+            
+            user.attackSMn += 1;
+            user.battleStats[1] = int(float(2*user.stats[1])/(user.attackSMn));
           }
         }
       } else if (status2.equals("Attack--")) {
@@ -906,6 +965,17 @@ class Move {
             
             target.defenseSMn += 1;
             target.battleStats[2] = int((2*target.stats[2])/float(target.defenseSMn));
+          }
+        }
+      } else if (status2.equals("U.Defense-")) {
+        chance = random(0, 1);
+
+        if (chance <= this.statusProb) {
+          if (user.defenseSMn < 6) {
+            println(user.name + "'s defense fell!");
+            
+            user.defenseSMn += 1;
+            user.battleStats[2] = int((2*user.stats[2])/float(user.defenseSMn));
           }
         }
       } else if (status2.equals("Defense--")) {
@@ -1081,7 +1151,7 @@ class Move {
             println(target.name + "'s accuracy fell!");
             
             target.accuracySMn += 1;
-            target.adjustedStages = float(target.evasionSMp)/float(target.accuracySMn);
+            target.accuracy *= 3/float(target.accuracySMn);
           }
         }
       } else if (status2.equals("Accuracy+")) {
@@ -1092,7 +1162,7 @@ class Move {
             println(user.name + "'s accuracy rose!");
             
             user.accuracySMp += 1;
-            user.adjustedStages = float(user.accuracySMp)/float(user.evasionSMn);
+            user.accuracy *= float(user.accuracySMp)/3;
           }
         }
       } else if (status2.equals("Evasion+")) {
@@ -1103,7 +1173,29 @@ class Move {
             println(user.name + "'s evasion rose!");
             
             user.evasionSMp += 1;
-            user.adjustedStages = float(user.evasionSMp)/float(user.accuracySMn);
+            user.evasion *= 3/float(user.evasionSMp);
+          }
+        }
+      } else if (status2.equals("Evasion++")) {
+        chance = random(0, 1);
+
+        if (chance <= this.statusProb) {
+          if (user.evasionSMp < 6) {
+            println(user.name + "'s evasion greatly rose!");
+            
+            user.evasionSMp += 2;
+            user.evasion *= 3/float(user.evasionSMp);
+          }
+        }
+      } else if (status2.equals("Evasion+++")) {
+        chance = random(0, 1);
+
+        if (chance <= this.statusProb) {
+          if (user.evasionSMp < 6) {
+            println(user.name + "'s evasion rose by three stages!");
+            
+            user.evasionSMp += 3;
+            user.evasion *= 3/float(user.evasionSMp);
           }
         }
       } else if (status2.equals("Evasion-")) {
@@ -1114,20 +1206,20 @@ class Move {
             println(target.name + "'s evasion fell!");
             
             target.evasionSMn += 1;
-            target.adjustedStages = float(target.evasionSMn)/float(target.accuracySMn);
+            target.evasion *= float(target.evasionSMn)/3;
           }
         }
       } else if (status2.equals("Drain")) {
         chance = random(0, 1);
 
         if (chance <= this.statusProb) {
-          target.drain = true;
+          user.drain = true;
         }
       } else if (status2.equals("Heal")) {
         chance = random(0, 1);
 
         if (chance <= this.statusProb) {
-          target.heal = true;
+          user.heal = true;
         }
       } else if (status2.equals("Recover")) {
         chance = random(0, 1);
@@ -1185,6 +1277,81 @@ class Move {
           }
           
           println("The entire party has been cured of major status effects.");
+        }
+      } else if (status2.equals("StrengthSap")) {
+        chance = random(0, 1);
+
+        if (chance <= this.statusProb) {
+          user.currHealth += target.battleStats[1];
+          if (user.currHealth >= user.health)
+            user.currHealth = user.health;
+          
+          println(user.name, "healed to", user.currHealth, "health! (" +int((float(user.currHealth)/user.health)*100) + "%)");
+          
+          if (target.attackSMn < 6) {
+            println(target.name + "'s attack fell!");
+            target.attackSMn += 1;
+            target.battleStats[1] = int(float(2*target.stats[1])/(target.attackSMn));
+          }
+        }
+      } else if (status2.equals("Thief")) {
+        chance = random(0, 1);
+
+        if (chance <= this.statusProb) {
+          if (user.item.equals("none") || user.item.equals("None")) {
+            user.item = (target.item);
+            println(user.name, "stole", target.name + "'s", target.item + "!");
+            target.item = ("none");
+          }
+        }
+      } else if (status2.equals("Charge") && !user.charge) {
+        chance = random(0, 1);
+
+        if (chance <= this.statusProb) {
+          user.charge = true;
+          user.chargeTurn = 1;
+        }
+      } else if (status2.equals("Wildfire") && !target.wildfire) {
+        chance = random(0, 1);
+
+        if (chance <= this.statusProb) {
+          target.wildfire = true;
+          target.wildfireCounter = 4;
+          println(user.name, "creates a Wildfire that swirls around", target.name + "!");
+        }
+      } else if (status2.equals("StealthRock") && !target.trainer.sR) {
+        chance = random(0, 1);
+
+        if (chance <= this.statusProb) {
+          target.trainer.sR = true;
+          println(user.name, "threw floating pointy rocks on the other side of the field!");
+        }
+      } else if (status2.equals("Reflect") && !user.trainer.reflect) {
+        chance = random(0, 1);
+
+        if (chance <= this.statusProb) {
+          user.trainer.reflect = true;
+          user.trainer.reflectC = 5;
+          
+          println(user.name, "set up Reflect!");
+        }
+      } else if (status2.equals("LightScreen") && !user.trainer.lightScreen) {
+        chance = random(0, 1);
+
+        if (chance <= this.statusProb) {
+          user.trainer.lightScreen = true;
+          user.trainer.lightScreenC = 5;
+          
+          println(user.name, "set up a Light Screen!");
+        }
+      } else if (status2.equals("AuroraVeil") && !user.trainer.auroraVeil) {
+        chance = random(0, 1);
+
+        if (chance <= this.statusProb) {
+          user.trainer.auroraVeil = true;
+          user.trainer.auroraVeilC = 5;
+          
+          println(user.name, "set up an Aurora Veil!!");
         }
       }
     }

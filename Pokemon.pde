@@ -11,6 +11,7 @@ class Pokemon {
   Move[] moveSet;
   Boolean burn, freeze, paralysis, poison, sleep, attract, flinch, badlyPoisoned, bound, cantEscape, confusion, curse, drain, heal, recoil, leech, recover, repeat, protect, wildfire;
   int attackSMp, attackSMn, defenseSMp, defenseSMn, spAttackSMp, spAttackSMn, spDefenseSMp, spDefenseSMn, speedSMp, speedSMn, accuracySMp, accuracySMn, evasionSMp, evasionSMn;
+  float accuracy, evasion;
   String item;
   Trainer trainer;
   int sleepCounter;
@@ -38,6 +39,9 @@ class Pokemon {
   Boolean zMove;
   Boolean mega;
   Boolean hangry;
+  Boolean charge;
+  int chargeTurn;
+  Boolean fly, dig;
 
   Pokemon (String n, String t, int l, int hp, 
     int att, int def, int satt, int sdef, int spd) {
@@ -75,6 +79,8 @@ class Pokemon {
       = speedSMn = accuracySMp = accuracySMn = evasionSMp = evasionSMn = 2;
 
     this.accuracySMp = this.accuracySMn = this.evasionSMp = this.evasionSMn = 3;
+    
+    this.accuracy = this.evasion = 1;
 
     this.item = "none";
 
@@ -110,6 +116,10 @@ class Pokemon {
     this.mega = false;
     
     this.hangry = false;
+    
+    this.charge = false;
+    this.chargeTurn = 0;
+    this.fly = this.dig = false;
   }
 
   void raidStats() {
@@ -681,8 +691,9 @@ class Pokemon {
         println();
       }
     }
+    
     if (mv.currPowerPoints >= 0) {
-      if ((chanceToHit <= ((mv.accuracy*100)*(this.adjustedStages))) || mv.accuracy == 0) {   
+      if ((chanceToHit <= ((mv.accuracy*100)*(this.accuracy * target.evasion))) || mv.accuracy == 0) {   
         if (!(this.flinch && !this.ability.equals("Inner Focus")) && !this.sleep && !(this.attract && (randomA <= 0.5)) && (!(this.paralysis && (randomP <= 0.25)) || (this.type.equals("Electric") || this.type2.equals("Electric"))) 
           && !(this.confusion && (randomC <= 0.33)) && (!this.freeze)) {
           int randomAttract = int(random(0,3));
@@ -747,6 +758,27 @@ class Pokemon {
           }
           
           mv.power = orgPower;
+          
+          if (target.fly && !(mv.name.equals("Hurricane") || mv.name.equals("Gust") || mv.name.equals("Thunder") || 
+          mv.name.equals("Smack Down") || mv.name.equals("Sky Uppercut")) && !target.ability.equals("No Guard") &&
+          target.chargeTurn == 2) {
+            damage = 0;
+            
+            target.chargeTurn = 0;
+            target.fly = false;
+            
+            println(target.name, "flew above the attack!");
+          } 
+          
+          else if (target.dig && !(mv.name.equals("Earthquake")) && !target.ability.equals("No Guard") &&
+          target.chargeTurn == 2) {
+            damage = 0;
+            
+            target.chargeTurn = 0;
+            target.dig = false;
+            
+            println(target.name, "burrowed under the attack!");
+          }
           
           if (typeEf == 4) {
             println(mv.name, "is super duper effective!");
@@ -818,12 +850,12 @@ class Pokemon {
             damage /= 2;
           }
           
-          //if (this.battle != null) {
-          //if ((mv.name.equals("Rest") && this.battle.terrain.equals("Misty Terrain")) || mv.status.equals("Sleep")) {
-          //  condition = false;
-          //  println("Pokemon can't fall asleep.");
-          //}
-          //}
+          if (this.battle != null) {
+          if ((mv.name.equals("Rest") || mv.status.equals("Sleep")) && this.battle.terrain.equals("Misty Terrain")) {
+            condition = false;
+            println("The mist kept the pokemon awake.");
+          }
+          }
 
           if (target.raidShield && target.raidPokemon) {
             if (target.shieldHealth > 0) {
@@ -858,7 +890,7 @@ class Pokemon {
             mv.condition(this, target);
             
           condition = true;
-          
+                    
           if (this.repeat) {
             for (int i = 0; i < randomRepeat; i++) {
               target.currHealth -= damage;
@@ -869,7 +901,24 @@ class Pokemon {
             println();
             println(mv.name, "was used", randomRepeat, "times!");
             this.repeat = false;
-          } else {
+            
+          } else if (this.charge && this.chargeTurn == 1 && !(this.fly || this.dig)) {
+            if (mv.name.equals("Fly")) {
+              this.fly = true;
+              println(this.name, "flew into the sky!");
+            } else if (mv.name.equals("Dig")) {
+              this.dig = true;
+              println(this.name, "dug into the ground!");
+            }
+            
+            this.chargeTurn = 2;
+            
+            println(this.name, "charged", mv.name + "!");
+          }
+          else {
+            if (this.charge)
+              this.charge = false;
+              
             target.currHealth -= damage;
 
             println(this.name, "uses", mv.name, "and hits", target.name, "for", str(damage), "damage! (" + int((float((target.currHealth + damage) - target.currHealth)/target.health)*100) + "%)", target.name, "now has", target.currHealth, "health! ("

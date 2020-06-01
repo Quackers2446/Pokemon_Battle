@@ -35,7 +35,7 @@ class Battle {
 
     if (turn == 1) {
       println("*   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *");
-      println("A BATTLE BETWEEN", this.one.name.toUpperCase(), "AND", this.two.name.toUpperCase(), "HAS BEGUN! Lv.", str(oneP.level), oneP.name, "| Lv.", str(twoP.level), twoP.name);   
+      println("A BATTLE BETWEEN", oneP.trainer.name.toUpperCase(), "AND", twoP.trainer.name.toUpperCase(), "HAS BEGUN! Lv.", str(oneP.level), oneP.name, "| Lv.", str(twoP.level), twoP.name);   
       println("*   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *");
     }
 
@@ -121,83 +121,6 @@ class Battle {
     }
   }
 
-  void start1v1(Pokemon oneP, Move mv1, Pokemon twoP, Move mv2) {
-    int turn = 1;
-
-    println("*   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *");
-    println("A BATTLE BETWEEN", this.one.name.toUpperCase(), "AND", this.two.name.toUpperCase(), "HAS BEGUN! Lv.", str(oneP.level), oneP.name, "| Lv.", str(twoP.level), twoP.name);   
-    println("*   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *");
-
-    oneP.battle = this;
-    twoP.battle = this;
-    
-    while (oneP.currHealth > 0 && twoP.currHealth > 0) {
-      println();
-      println("Turn #" + str(turn));
-      println();
-  
-      enterBattleEffects(oneP, twoP);
-      enterBattleEffects(twoP, oneP);
-      
-      if (mv1.currPowerPoints < 1) {
-        println(mv1.name, "has run out of PP.");
-        println();
-      }
-  
-      if (mv2.currPowerPoints < 1) {
-        println(mv1.name, "has run out of PP.");
-        println();
-      }
-      
-      //Setting up who goes first
-
-      setTurns(oneP, mv1, twoP, mv2);
-
-      //Actually using the moves   
-
-      useMoves(oneP, mv1, twoP, mv2);
-
-      checkBerry(oneP, twoP);
-      checkBerry(twoP, oneP);
-      
-      updateWeather(oneP, twoP);
-      
-      checkWeather(oneP, mv1, twoP);
-      checkWeather(twoP, mv2, oneP);
-      
-      updateTerrain(oneP, twoP);
-      
-      checkTerrain(oneP, mv1, twoP);
-      checkTerrain(twoP, mv2, oneP);
-
-      
-      if (oneP.raidPokemon && (int(random(0,3)) == 0)) {
-        recover(oneP);
-      }
-      if (twoP.raidPokemon && (int(random(0,3)) == 0)) {
-        recover(twoP);
-      }
-
-      oneP.turnsOut += 1;
-      twoP.turnsOut += 1;
-      
-      turn += 1;
-      println("*   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *");
-    }
-
-    println();
-
-    if (oneP.currHealth > 0)
-      one.battlesWon += 1;
-    else
-      two.battlesWon += 1;
-
-    for (int i = 0; i < 6; i++) {
-      oneP.battleStats[i] = oneP.stats[i];
-      twoP.battleStats[i] = twoP.stats[i];
-    }
-  }
-
   void enterBattleEffects(Pokemon oneP, Pokemon twoP) {      
     if (oneP.turnsOut == 0) {
       if (oneP.trainer.sR) {
@@ -244,7 +167,7 @@ class Battle {
         println();
   
         this.weather = "Hail";
-        this.weatherCounter = 1000; //or some arbitrary big number
+        this.weatherCounter = 5; //or some arbitrary big number
       }
       
       if (oneP.ability.equals("Drought") && !this.weather.equals("Harsh Sunlight")) {
@@ -362,7 +285,7 @@ class Battle {
       println();
 
       this.weather = "Hail";
-      this.weatherCounter = 1000; //or some arbitrary big number
+      this.weatherCounter = 5;
     }
     
     if (oneP.turnsOut == 0 && this.weather.equals("Harsh Sunlight")) {

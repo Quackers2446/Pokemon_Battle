@@ -5,6 +5,12 @@ void setup() {
 
   //Set up moves
   Move none = new Move("None", 0, 0, 0, "Normal", "Status", 0, "none", 0);
+  
+  //FAKE moves
+  Move quack = new Move("Quack", 1, 0, 1, "Normal", "Status", 1, "Attack++/Defense-", 1);
+  Move fatten = new Move("Fatten", 1, 0, 0, "Normal", "Status", 1, "Hp+/Defense++", 1);
+  Move weightLoss = new Move("Weight Loss", 1, 0, 0, "Normal", "Status", 1, "Evasion+/Speed++", 1);
+  Move oneWithTheWall = new Move("One with the Wall", 1, 0, 0, "Normal", "Status", 1, "Evasion+++", 1);
 
   //NORMAL type moves
   Move tackle = new Move("Tackle", 35, 40, 1, "Normal", "Physical", 0, "none", 0);
@@ -249,7 +255,7 @@ void setup() {
   Move airSlash = new Move("Air Slash", 15, 75, 0.95, "Flying", "Special", 0, "Flinch", 0.3);
   Move acrobatics = new Move("Acrobatics", 15, 55, 1, "Flying", "Physical", 0, "none", 0);
   Move roost = new Move("Roost", 10, 0, 0, "Normal", "Status", 0, "Recover", 1);
-  Move fly = new Move("Fly", 15, 90, 0.95, "Flying", "Physical", 0, "none", 0);
+  Move fly = new Move("Fly", 15, 90, 0.95, "Flying", "Physical", 0, "Charge", 1);
 
   //GROUND
   Move boneClub = new Move("Bone Club", 20, 65, 0.85, "Ground", "Physical", 0, "none", 0);
@@ -260,7 +266,7 @@ void setup() {
   Move earthPower = new Move("Earth Power", 10, 90, 1, "Ground", "Special", 0, "Sp.Defense-", 0.1);
   Move earthquake = new Move("Earthquake", 10, 100, 1, "Ground", "Physical", 0, "none", 0);
   Move mudBomb = new Move("Mud Bomb", 10, 65, 0.85, "Ground", "Special", 0, "Accuracy-", 0.3);
-  Move dig = new Move("Dig", 10, 80, 1, "Ground", "Physical", 0, "none", 0);
+  Move dig = new Move("Dig", 10, 80, 1, "Ground", "Physical", 0, "Charge", 1);
 
   //FAIRY
   Move charm = new Move("Charm", 20, 0, 1, "Fairy", "Status", 0, "Attack--", 1);
@@ -847,8 +853,6 @@ void setup() {
   //Level 56 MorpekoR
   Pokemon morpekoR = new Pokemon("MorpekoR", "Electric/Dark", 56, 58, 95, 58, 70, 58, 97);
   morpekoR.moveSet(bulletSeed, auraWheel, crunch, protect);
-  //morpekoR.raidStats();
-  //morpekoR.dynamax();
 
   //Level 55 Glalie
   Pokemon glalie = new Pokemon("Glalie", "Ice", 55, 80, 80, 80, 80, 80, 80);
@@ -887,13 +891,12 @@ void setup() {
   Trainer nina = new Trainer("Nina");
   Trainer sherry = new Trainer("Sherry");
 
-  Trainer theGuy = new Trainer("The Guy");
   Trainer cynthia = new Trainer("Cynthia");
   Trainer cassie = new Trainer("Cassie");
   Trainer ashley = new Trainer("Ashley");
 
-  Trainer ltSurge = new Trainer("Lt. Surge");
   Trainer randomTrainer = new Trainer("Random");
+  Trainer police = new Trainer("Police");
   Trainer wild = new Trainer("Wild");
 
   zofia.addPokemon(kingler, xerneas, scyther, lapras, morpeko, milotic, mimikyu, charizard);
@@ -905,13 +908,12 @@ void setup() {
   nina.addPokemon(popplio);
   sherry.addPokemon(hitmontop, mantine, steelix, meganium, shuckle, slugma);
 
-  theGuy.addPokemon(golduck);
   cynthia.addPokemon(duraludon, inteleon, centiscorch, sandaconda, toxtricity, frosmoth);
   cassie.addPokemon(shelgon, alolanSandslash, aerodactyl, vaporeon, machamp, porygonZ);
   ashley.addPokemon(gyarados, lucario, ampharos, pupitar, altaria, metang);
 
-  ltSurge.addPokemon(voltorb, ltPikachu, ltRaichu);
-  wild.addPokemon(galarianWeezing, orbeetle, beartic, glalie, eternatus, morpekoR, obstagoon, cursola, raidStonjourner, haunter, morpeko, grimmsnarl, polteageistPhony);
+  police.addPokemon(galarianWeezing, orbeetle);
+  wild.addPokemon(beartic, glalie, eternatus, morpekoR, obstagoon, cursola, raidStonjourner, haunter, grimmsnarl, polteageistPhony);
 
   printPokemon();
   printCharizard();
@@ -940,7 +942,7 @@ void setup() {
 
   randomSeed(46);
 
-  Battle b = new Battle(wild, randomTrainer); 
+  Battle b = new Battle(zofia, nicholas); 
 
   stonjourner.currHealth = 0;
   sirfetchd.currHealth = 0;
@@ -961,43 +963,30 @@ void setup() {
   nicholas.showTeam();
   jasmine.showTeam();
   
-    //  beartic.moveSet(blizzard, superpower, rest, brine);
+  //    //beartic.moveSet(blizzard, superpower, rest, brine);
 
-  b.move(beartic, blizzard, lapras, iceBeam); 
+  //b.move(beartic, blizzard, lapras, iceBeam); 
   
-  b.move(beartic, superpower, lapras, hydroPump); 
+  //b.move(beartic, superpower, lapras, hydroPump); 
   
-  //orbeetle.moveSet(hypnosis, bugBuzz, psychic, calmMind);
+  ////orbeetle.moveSet(hypnosis, bugBuzz, psychic, calmMind);
   
-  orbeetle.useMove(calmMind, kingler);
-  b.move(orbeetle, hypnosis, kingler, metalClaw);
+  //orbeetle.useMove(calmMind, kingler);
+  //b.move(orbeetle, hypnosis, kingler, metalClaw);
   
-  xerneas.dynamax();
-  b.move(orbeetle, hypnosis, xerneas, auroraBeam);
-  zofia.useItem("Chesto Berry", xerneas);
+  //xerneas.dynamax();
+  //b.move(orbeetle, hypnosis, xerneas, auroraBeam);
+  //zofia.useItem("Chesto Berry", xerneas);
   
-  orbeetle.useMove(calmMind, xerneas);
+  //orbeetle.useMove(calmMind, xerneas);
   
-  b.move(orbeetle, psychic, xerneas, moonblast);
+  //b.move(orbeetle, psychic, xerneas, moonblast);
   
-  b.move(orbeetle, psychic, xerneas, moonblast);
+  //b.move(orbeetle, psychic, xerneas, moonblast);
   
-  //  galarianWeezing.moveSet(heatWave, fairyWind, sludge, assurance);
+  ////  galarianWeezing.moveSet(heatWave, fairyWind, sludge, assurance);
 
-  b.move(mimikyu, shadowSneak, galarianWeezing, sludge);
-  
-  
-  //duraludon.moveSet(dracoMeteor, flashCannon, thunderbolt, darkPulse);   
-
-  //eternamaxEternatus.moveSet(dynamaxCannon, cosmicPower, recover, venoshock);
-
-  //charizardGmax.moveSet(flamethrower, dragonClaw, roost, fly);
-
-  //xerneas.moveSet(moonblast, auroraBeam, megahorn, hornLeech); 
-  
-  //glalie.moveSet(crunch, blizzard, doubleTeam, astonish);
-
-  
+  //b.move(mimikyu, shadowSneak, galarianWeezing, sludge);
 }
 
 void catchPokemon(Pokemon p, String pokeball, int catchRate) {
