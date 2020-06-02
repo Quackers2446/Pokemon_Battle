@@ -42,6 +42,8 @@ class Pokemon {
   Boolean charge;
   int chargeTurn;
   Boolean fly, dig;
+  Boolean substitute;
+  int subHealth;
 
   Pokemon (String n, String t, int l, int hp, 
     int att, int def, int satt, int sdef, int spd) {
@@ -120,6 +122,9 @@ class Pokemon {
     this.charge = false;
     this.chargeTurn = 0;
     this.fly = this.dig = false;
+    
+    this.substitute = false;
+    this.subHealth = 0;
   }
 
   void raidStats() {
@@ -696,8 +701,9 @@ class Pokemon {
       if ((chanceToHit <= ((mv.accuracy*100)*(this.accuracy * target.evasion))) || mv.accuracy == 0) {   
         if (!(this.flinch && !this.ability.equals("Inner Focus")) && !this.sleep && !(this.attract && (randomA <= 0.5)) && (!(this.paralysis && (randomP <= 0.25)) || (this.type.equals("Electric") || this.type2.equals("Electric"))) 
           && !(this.confusion && (randomC <= 0.33)) && (!this.freeze)) {
+          
           int randomAttract = int(random(0,3));
-                    
+                   
           if (target.ability.equals("Cute Charm") && randomAttract == 0 && !this.attract) {
             this.attract = true;
             println(this.name, "was infatuated by", target.name + "!");
@@ -811,6 +817,11 @@ class Pokemon {
             println(target.name + "'s disguise was busted! Mimikyu took", target.health/8, "damage!");
           }
           
+          if (mv.name.equals("Hex") && (target.burn || target.freeze || target.paralysis || target.poison || target.sleep || target.badlyPoisoned
+          || target.confusion)) {
+            damage *= 2;
+          }
+          
           if (mv.name.equals("Dynamax Cannon") && target.max) {
             damage *= 2;
           }
@@ -826,7 +837,23 @@ class Pokemon {
             
             println(target.name, "is sturdy!");
           }
-
+          
+          if (target.substitute) {
+            if (damage > this.subHealth) {
+              damage = this.subHealth;
+              target.substitute = false;
+              target.subHealth = 0;
+              
+              println(mv.name, "broke", target.name + "'s substitute!");
+            }
+            else if (damage > 0) {
+              target.subHealth -= damage;
+              damage = 0;
+              
+              println(target.name + "'s substitute took damage!");
+            }
+          }
+          
           if (target.protect) {
             damage = 0;
 

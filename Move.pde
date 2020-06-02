@@ -701,6 +701,23 @@ class Move {
           user.charge = true;
           user.chargeTurn = 1;
         }
+      } else if (firstStatus.equals("Substitute") && !user.substitute) {
+        chance = random(0, 1);
+        
+        if (chance <= this.statusProb) {
+          if (user.currHealth <= user.stats[0]/4) {
+            println(user.name, "doesn't have enough health to make a substitute.");
+          }
+          else {
+            user.substitute = true;
+            
+            user.currHealth -= user.stats[0]/4;
+            user.subHealth = user.stats[0]/4;
+            
+            println(user.name, "made a Substitute and lost 25% of their health! HP:", user.currHealth + "/" + user.health);
+            
+          }
+        }
       } else if (firstStatus.equals("Wildfire") && !target.wildfire) {
         chance = random(0, 1);
 

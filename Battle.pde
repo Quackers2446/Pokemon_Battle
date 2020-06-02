@@ -254,13 +254,13 @@ class Battle {
     if (this.weather.equals("Sandstorm") && !oneP.raidPokemon && !(firstType1.equals("Rock") || oneP.type2.equals("Rock")
       || firstType1.equals("Steel") || oneP.type2.equals("Steel") || firstType1.equals("Ground") || oneP.type2.equals("Ground"))) {
       oneP.currHealth -= (oneP.stats[0]/16);
-      println(oneP.name, "was buffeted by the sandstorm! (" + int((float(oneP.currHealth)/oneP.health)*100) + "%)");
+      println(oneP.name, "was buffeted by the sandstorm!", oneP.currHealth, "(" + int((float(oneP.currHealth)/oneP.health)*100) + "%)");
       println();
     }
     
     if (this.weather.equals("Hail") && !oneP.raidPokemon && !(firstType1.equals("Ice") || oneP.type2.equals("Ice"))) {
       oneP.currHealth -= (oneP.stats[0]/16);
-      println(oneP.name, "was buffeted by the hail! (" + int((float(oneP.currHealth)/oneP.health)*100) + "%)");
+      println(oneP.name, "was buffeted by the hail!", oneP.currHealth, "(" + int((float(oneP.currHealth)/oneP.health)*100) + "%)");
       println();
     }
     
