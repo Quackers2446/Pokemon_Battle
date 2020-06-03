@@ -293,6 +293,7 @@ void setup() {
   Move moonblast = new Move("Moonblast", 15, 95, 1, "Fairy", "Special", 0, "Sp.Attack-", 0.3);
   Move playRough = new Move("Play Rough", 15, 95, 1, "Fairy", "Special", 0, "Sp.Attack-", 0.3);
   Move spiritBreak = new Move("Spirit Break", 15, 75, 1, "Fairy", "Physical", 0, "Sp.Attack-", 1);
+  Move geomancy = new Move("Geomancy", 16, 0, 0, "Fairy", "Status", 0, "Geomancy", 1);
 
   //PSYCHIC
   Move teleport = new Move("Teleport", 20, 0, 0, "Psychic", "Status", 0, "Teleport", 0);
@@ -358,7 +359,7 @@ void setup() {
 
   //Level 54 Xerneas
   Pokemon xerneas = new Pokemon("Xerneas", "Fairy", 54, 126, 131, 95, 131, 98, 99);
-  xerneas.moveSet(moonblast, auroraBeam, megahorn, hornLeech);
+  xerneas.moveSet(moonblast, auroraBeam, geomancy, hornLeech);
 
   //Level 43 Morpeko
   Pokemon morpeko = new Pokemon("Morpeko", "Electric/Dark", 43, 58, 95, 58, 70, 58, 97);
@@ -919,13 +920,13 @@ void setup() {
   Pokemon dhelmise = new Pokemon("Dhelmise", "Ghost/Grass", 54, 70, 131, 100, 86, 90, 40);
   dhelmise.moveSet(powerWhip, shadowBall, whirlpool, anchorShot);
   
-  //Level 57 Eternatus
-  Pokemon eternatus = new Pokemon("Eternatus", "Poison/Dragon", 57, 140, 85, 95, 145, 95, 130);
+  //Level 60 Eternatus
+  Pokemon eternatus = new Pokemon("Eternatus", "Poison/Dragon", 60, 140, 85, 95, 145, 95, 130);
   eternatus.moveSet(dynamaxCannon, flamethrower, recover, venoshock);
 
-  //eternatus.mega();
-  //eternatus.raidStats();
-  //eternatus.dynamax();
+  eternatus.mega();
+  eternatus.raidStats();
+  eternatus.dynamax();
 
   // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // 
 
@@ -967,9 +968,10 @@ void setup() {
   printPokemon();
   printCharizard();
 
-  zofia.giveItem("Sitrus Berry", magneton, milotic, xerneas);
+  zofia.giveItem("Sitrus Berry", magneton, milotic);
   zofia.giveItem("Leftovers", lapras, kingler, drednaw, morpeko);
   zofia.giveItem("Mimikium-Z", mimikyu);
+ // zofia.giveItem("Power Herb", xerneas);
   zofia.giveItem("Charizardite X", charizard);
   zofia.giveItem("Berry Juice", scyther);
 
@@ -999,8 +1001,6 @@ void setup() {
   zofia.showTeam();
   nicholas.showTeam();
   jasmine.showTeam();
-  
-  
 }
 
 void catchPokemon(Pokemon p, String pokeball, int catchRate) {

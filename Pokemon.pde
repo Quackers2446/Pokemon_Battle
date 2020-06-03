@@ -338,6 +338,23 @@ class Pokemon {
     this.calculateHealth();
   }
   
+  void unMega() {
+    if (this.name.equals("Eternamax Eternatus")) {
+      this.name = "Eternatus";
+      this.ability = "Pressure";
+
+      this.stats[0] = 140;
+      this.stats[1] = 85;
+      this.stats[2] = 95;
+      this.stats[3] = 145;
+      this.stats[4] = 95;
+      this.stats[5] = 130;
+    }
+    
+    this.calculateStats();
+    this.calculateHealth();
+  }
+  
   void useZMove() {
     zMove = true;
     
@@ -939,7 +956,6 @@ class Pokemon {
             }
             
             this.chargeTurn = 2;
-            
             println(this.name, "charged", mv.name + "!");
           }
           else {

@@ -718,6 +718,64 @@ class Move {
             
           }
         }
+      } else if (firstStatus.equals("Geomancy")) {
+        chance = random(0, 1);
+
+        if (chance <= this.statusProb) {
+          if (user.item.equals("Power Herb")) {
+            user.item = "none";
+            
+            println(user.item + "'s Power Herb charged it in one turn!");
+            println();
+            if (user.spAttackSMp < 6) {
+              println(user.name + "'s special attack greatly rose!");
+  
+              user.spAttackSMp += 2;
+              user.battleStats[3] = int(float((user.spAttackSMp)*user.stats[3])/2);
+            }
+            if (user.spDefenseSMp < 6) {
+              println(user.name + "'s special defense greatly rose!");
+              
+              user.spDefenseSMp += 2;
+              user.battleStats[4] = int(float((user.spDefenseSMp)*user.stats[4])/2);
+            }
+            if (user.speedSMp < 6) {
+              println(user.name + "'s speed greatly rose!");
+  
+              user.speedSMp += 2;
+              user.battleStats[5] = int(float((user.speedSMp+2)*user.stats[5])/2);
+            }
+            println();
+          } else {
+            if (user.chargeTurn == 0) {
+              user.charge = true;
+              user.chargeTurn = 1;
+            }
+            if (user.chargeTurn == 2) {
+              if (user.spAttackSMp < 6) {
+                println(user.name + "'s special attack greatly rose!");
+    
+                user.spAttackSMp += 2;
+                user.battleStats[3] = int(float((user.spAttackSMp)*user.stats[3])/2);
+              }
+              if (user.spDefenseSMp < 6) {
+                println(user.name + "'s special defense greatly rose!");
+                
+                user.spDefenseSMp += 2;
+                user.battleStats[4] = int(float((user.spDefenseSMp)*user.stats[4])/2);
+              }
+              if (user.speedSMp < 6) {
+                println(user.name + "'s speed greatly rose!");
+    
+                user.speedSMp += 2;
+                user.battleStats[5] = int(float((user.speedSMp+2)*user.stats[5])/2);
+              }
+              println();
+              user.charge = false;
+              user.chargeTurn = 0;
+            }
+          }
+        }
       } else if (firstStatus.equals("Wildfire") && !target.wildfire) {
         chance = random(0, 1);
 
