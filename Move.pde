@@ -725,7 +725,7 @@ class Move {
           if (user.item.equals("Power Herb")) {
             user.item = "none";
             
-            println(user.item + "'s Power Herb charged it in one turn!");
+            println(user.name + "'s Power Herb charged Geomancy in one turn!");
             println();
             if (user.spAttackSMp < 6) {
               println(user.name + "'s special attack greatly rose!");
@@ -745,7 +745,6 @@ class Move {
               user.speedSMp += 2;
               user.battleStats[5] = int(float((user.speedSMp+2)*user.stats[5])/2);
             }
-            println();
           } else {
             if (user.chargeTurn == 0) {
               user.charge = true;
@@ -770,7 +769,7 @@ class Move {
                 user.speedSMp += 2;
                 user.battleStats[5] = int(float((user.speedSMp+2)*user.stats[5])/2);
               }
-              println();
+
               user.charge = false;
               user.chargeTurn = 0;
             }

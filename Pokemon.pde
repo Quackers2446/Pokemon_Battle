@@ -338,7 +338,7 @@ class Pokemon {
     this.calculateHealth();
   }
   
-  void unMega() {
+  void unmega() {
     if (this.name.equals("Eternamax Eternatus")) {
       this.name = "Eternatus";
       this.ability = "Pressure";
@@ -812,6 +812,7 @@ class Pokemon {
             println(mv.name, "is not very effective.");
           } else {
             println(mv.name, "is ineffective.");
+            condition = false;
           }
 
           if ((criticalRandom <= 4.17) && !target.ability.equals("Shell Armor")) {
@@ -961,11 +962,13 @@ class Pokemon {
           else {
             if (this.charge)
               this.charge = false;
-              
-            target.currHealth -= damage;
-
-            println(this.name, "uses", mv.name, "and hits", target.name, "for", str(damage), "damage! (" + int((float((target.currHealth + damage) - target.currHealth)/target.health)*100) + "%)", target.name, "now has", target.currHealth, "health! ("
-              + int((float(target.currHealth)/target.health)*100) + "%)");
+            
+            if (damage > 0) {
+              target.currHealth -= damage;
+  
+              println(this.name, "uses", mv.name, "and hits", target.name, "for", str(damage), "damage! (" + int((float((target.currHealth + damage) - target.currHealth)/target.health)*100) + "%)", target.name, "now has", target.currHealth, "health! ("
+                + int((float(target.currHealth)/target.health)*100) + "%)");
+            }
           }
 
           float r = random(0, 1);

@@ -924,10 +924,6 @@ void setup() {
   Pokemon eternatus = new Pokemon("Eternatus", "Poison/Dragon", 60, 140, 85, 95, 145, 95, 130);
   eternatus.moveSet(dynamaxCannon, flamethrower, recover, venoshock);
 
-  eternatus.mega();
-  eternatus.raidStats();
-  eternatus.dynamax();
-
   // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // 
 
   //Initiate trainers
@@ -971,7 +967,7 @@ void setup() {
   zofia.giveItem("Sitrus Berry", magneton, milotic);
   zofia.giveItem("Leftovers", lapras, kingler, drednaw, morpeko);
   zofia.giveItem("Mimikium-Z", mimikyu);
- // zofia.giveItem("Power Herb", xerneas);
+  zofia.giveItem("Power Herb", xerneas);
   zofia.giveItem("Charizardite X", charizard);
   zofia.giveItem("Berry Juice", scyther);
 
@@ -996,11 +992,20 @@ void setup() {
 
   Battle b = new Battle(zofia, nicholas); 
 
-  //charizard.currHealth = 0;
+  charizard.currHealth = 0;
 
+  eternatus.mega();
+  eternatus.raidStats();
+  eternatus.dynamax();
+  
   zofia.showTeam();
   nicholas.showTeam();
   jasmine.showTeam();
+  
+  eternatus.describe();
+  
+  b.move(eternatus, venoshock, xerneas, geomancy);
+  b.move(eternatus, venoshock, xerneas, moonblast);
 }
 
 void catchPokemon(Pokemon p, String pokeball, int catchRate) {
