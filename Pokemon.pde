@@ -322,6 +322,18 @@ class Pokemon {
       this.stats[5] = 30;
     }
     
+    if (this.name.equals("Abomasnow")) {
+      this.name = "Mega Abomasnow";
+      this.ability = "Snow Warning";
+      
+      this.stats[0] = 90;
+      this.stats[1] = 132;
+      this.stats[2] = 105;
+      this.stats[3] = 132;
+      this.stats[4] = 105;
+      this.stats[5] = 30;
+    }
+    
     if (this.name.equals("Eternatus")) {
       this.name = "Eternamax Eternatus";
       this.ability = "Pressure";
@@ -371,7 +383,7 @@ class Pokemon {
           this.moveSet[i].statusProb = 0;
         }
       }
-    } if (this.item.equals("Snorium-Z")) {
+    } else if (this.item.equals("Snorium-Z")) {
       for (int i = 0; i < 4; i++) {
         if (this.moveSet[i].name.equals("Giga Impact")) {
           this.moveSet[i].status = "";
@@ -379,6 +391,19 @@ class Pokemon {
           this.moveSet[i].name = "Pulverizing Pancake";
           this.moveSet[i].status2 = "Z-Move";
           this.moveSet[i].power = 210;
+          this.moveSet[i].accuracy = 0;
+          
+          this.moveSet[i].statusProb = 0;
+        }
+      }
+    } else if (this.item.equals("Marshadium-Z")) {
+      for (int i = 0; i < 4; i++) {
+        if (this.moveSet[i].name.equals("Spectral Thief")) {
+          this.moveSet[i].status = "";
+          
+          this.moveSet[i].name = "Soul-Stealing 7-Star Strike";
+          this.moveSet[i].status2 = "Z-Move";
+          this.moveSet[i].power = 195;
           this.moveSet[i].accuracy = 0;
           
           this.moveSet[i].statusProb = 0;
@@ -963,12 +988,12 @@ class Pokemon {
             if (this.charge)
               this.charge = false;
             
-            if (damage > 0) {
+          //  if (damage > 0) {
               target.currHealth -= damage;
   
               println(this.name, "uses", mv.name, "and hits", target.name, "for", str(damage), "damage! (" + int((float((target.currHealth + damage) - target.currHealth)/target.health)*100) + "%)", target.name, "now has", target.currHealth, "health! ("
                 + int((float(target.currHealth)/target.health)*100) + "%)");
-            }
+          //  }
           }
 
           float r = random(0, 1);

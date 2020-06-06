@@ -401,6 +401,16 @@ class Move {
             user.battleStats[2] = int(float((user.defenseSMp)*user.stats[2])/2);
           }
         }
+      } else if (firstStatus.equals("Defense+++")) {
+        chance = random(0, 1);
+
+        if (chance <= this.statusProb) {
+          if (user.defenseSMp < 6) {
+            println(user.name + "'s defense greatly rose!");
+            
+            user.defenseSMp += 3;
+            user.battleStats[2] = int(float((user.defenseSMp)*user.stats[2])/2);
+        }
       } else if (firstStatus.equals("Sp.Defense-")) {
         chance = random(0, 1);
 
@@ -774,6 +784,35 @@ class Move {
               user.chargeTurn = 0;
             }
           }
+        }
+      } else if (firstStatus.equals("SpectralThief")) {
+        chance = random(0, 1);
+
+        if (chance <= this.statusProb) {
+          if (target.attackSMp > user.attackSMp) {
+            user.battleStats[1] = int(float((target.attackSMp)*user.stats[1])/2);
+            target.battleStats[1] = target.stats[1];
+            println("Attack+");
+          }
+          if (target.defenseSMp > user.defenseSMp) {
+            user.battleStats[2] = int(float((target.defenseSMp)*user.stats[2])/2);
+            target.battleStats[2] = target.stats[2];
+          if (target.spAttackSMp > user.spAttackSMp) {
+            user.battleStats[3] = int(float((target.spAttackSMp)*user.stats[3])/2);
+            target.battleStats[3] = target.stats[3];
+            println("Special Attack+");
+          }
+          if (target.spDefenseSMp > user.spDefenseSMp) {
+            user.battleStats[4] = int(float((target.spDefenseSMp)*user.stats[4])/2);
+            target.battleStats[4] = target.stats[4];
+            println("Special Defense+");
+          }
+          if (target.speedSMp > user.speedSMp) {
+            user.battleStats[5] = int(float((target.speedSMp)*user.stats[5])/2);
+            target.battleStats[5] = target.stats[5];
+            println("Speed+");
+          }
+          println(user.name, "stole", target.name + "'s stat bonuses!");
         }
       } else if (firstStatus.equals("Wildfire") && !target.wildfire) {
         chance = random(0, 1);
