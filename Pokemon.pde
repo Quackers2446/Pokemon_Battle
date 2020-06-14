@@ -2,6 +2,7 @@ class Pokemon {
   String name;
   String type;
   String type2;
+  String fullType;
   int level;
   int health;
   int currHealth;
@@ -9,7 +10,7 @@ class Pokemon {
   int[] battleStats;
   String ability;
   Move[] moveSet;
-  Boolean burn, freeze, paralysis, poison, sleep, attract, flinch, badlyPoisoned, bound, cantEscape, confusion, curse, drain, heal, recoil, leech, recover, repeat, protect, wildfire;
+  Boolean burn, freeze, paralysis, poison, sleep, attract, flinch, badlyPoisoned, bound, cantEscape, confusion, curse, drain, heal, recoil, leech, recover, repeat, protect, eCharge, wildfire;
   int attackSMp, attackSMn, defenseSMp, defenseSMn, spAttackSMp, spAttackSMn, spDefenseSMp, spDefenseSMn, speedSMp, speedSMn, accuracySMp, accuracySMn, evasionSMp, evasionSMn;
   float accuracy, evasion;
   String item;
@@ -68,14 +69,18 @@ class Pokemon {
 
     this.ability = calculateAbility();
 
+    this.fullType = this.type;
+    
     if (this.type.indexOf("/") != -1) {
       this.type2 = this.type.substring(this.type.indexOf("/")+1, this.type.length());
       this.type = this.type.substring(0, this.type.indexOf("/"));
     } else 
-    this.type2 = "";
+    this.type2 = "";      
+    
+    this.moveSet = new Move[4];
 
     this.burn = this.freeze = this.paralysis = this.poison = this.sleep = this.attract = this.flinch = this.badlyPoisoned = this.recover = this.protect
-      = this.bound = this.cantEscape = this.confusion = this.curse = this.heal = this.drain = this.recoil = this.leech = this.repeat = this.wildfire = false;
+      = this.bound = this.cantEscape = this.confusion = this.curse = this.heal = this.drain = this.recoil = this.leech = this.repeat = this.eCharge = this.wildfire = false;
 
     attackSMp = attackSMn = defenseSMp = defenseSMn = spAttackSMp = spAttackSMn = spDefenseSMp = spDefenseSMn = speedSMp
       = speedSMn = accuracySMp = accuracySMn = evasionSMp = evasionSMn = 2;
@@ -334,6 +339,30 @@ class Pokemon {
       this.stats[5] = 30;
     }
     
+    if (this.name.equals("Salamence")) {
+      this.name = "Mega Salamence";
+      this.ability = "Aerilate";
+      
+      this.stats[0] = 95;
+      this.stats[1] = 145;
+      this.stats[2] = 130;
+      this.stats[3] = 120;
+      this.stats[4] = 90;
+      this.stats[5] = 120;
+    }
+    
+    if (this.name.equals("Wishiwashi-Solo")) {
+      this.name = "Wishiwashi-School";
+      this.ability = "Schooling";
+      
+      this.stats[0] = 45;
+      this.stats[1] = 145;
+      this.stats[2] = 130;
+      this.stats[3] = 140;
+      this.stats[4] = 135;
+      this.stats[5] = 30;
+    }
+    
     if (this.name.equals("Eternatus")) {
       this.name = "Eternamax Eternatus";
       this.ability = "Pressure";
@@ -351,6 +380,18 @@ class Pokemon {
   }
   
   void unmega() {
+    if (this.name.equals("Wishiwashi-School")) {
+      this.name = "Wishiwashi-Solo";
+      this.ability = "Schooling";
+      
+      this.stats[0] = 45;
+      this.stats[1] = 20;
+      this.stats[2] = 20;
+      this.stats[3] = 25;
+      this.stats[4] = 25;
+      this.stats[5] = 40;
+    }
+    
     if (this.name.equals("Eternamax Eternatus")) {
       this.name = "Eternatus";
       this.ability = "Pressure";
@@ -461,6 +502,15 @@ class Pokemon {
     }
   }
 
+  
+  Pokemon copyOnto(Pokemon user) {
+    Pokemon p = new Pokemon(this.name, this.fullType, this.level, this.battleStats[0], this.battleStats[1], this.battleStats[2], this.battleStats[3], this.battleStats[4], this.battleStats[5]);
+    
+    user.moveSet(this.moveSet[0], this.moveSet[1], this.moveSet[2], this.moveSet[3]);
+    
+    return p;
+  }
+  
   void switchOut() {
     this.turnsOut = 0;
     this.unmax();
@@ -557,7 +607,8 @@ class Pokemon {
     else if (this.name.equals("Abra") || this.name.equals("Kadabra") || this.name.equals("Alakazam")
       || this.name.equals("Farfetch'd") || this.name.equals("Drowzee") || this.name.equals("Hypno") || 
       this.name.equals("Hitmonchan") || this.name.equals("Kangaskhan") || this.name.equals("Dragonite")
-      || this.name.equals("Zubat") || this.name.equals("Golbat") || this.name.equals("Crobat"))
+      || this.name.equals("Zubat") || this.name.equals("Golbat") || this.name.equals("Crobat")
+       || this.name.equals("Riolu") || this.name.equals("Lucario"))
       a = "Inner Focus";
 
     else if (this.name.equals("Pidgey") || this.name.equals("Pidgeotto") || this.name.equals("Pidgeot")
@@ -567,7 +618,8 @@ class Pokemon {
 
     else if (this.name.equals("Ekans") || this.name.equals("Arbok") || this.name.equals("Growlithe")
       || this.name.equals("Arcanine") || this.name.equals("Tauros") || this.name.equals("Gyarados") || 
-      this.name.equals("Litten") || this.name.equals("Torracat") || this.name.equals("Incineroar"))
+      this.name.equals("Litten") || this.name.equals("Torracat") || this.name.equals("Incineroar")
+      || this.name.equals("Shinx"))
       a = "Intimidate";
 
     else if (this.name.equals("Marshadow") || this.name.equals("Smeargle") || this.name.equals("Cinccino")
@@ -608,9 +660,25 @@ class Pokemon {
     else if (this.name.equals("Morpeko"))
       a = "Hunger Switch";
       
+    else if (this.name.equals("Ditto"))
+      a = "Imposter";
+      
+    else if (this.name.equals("Wishiwashi-Solo"))
+      a = "Schooling";
+      
     else if (this.name.equals("Eternatus") || this.name.equals("Absol") || this.name.equals("Corviknight")
      || this.name.equals("Aerodactyl") || this.name.equals("Mewtwo"))
       a = "Pressure";
+      
+    else if (this.name.equals("Krookodile") || this.name.equals("Krokorok") || this.name.equals("Camerupt")
+     || this.name.equals("Primeape") || this.name.equals("Tauros") || this.name.equals("Crabominable"))
+      a = "Anger Point";
+      
+    else if (this.name.equals("Nihilego") || this.name.equals("Celesteela") || this.name.equals("Buzzwole")
+     || this.name.equals("Pheromosa") || this.name.equals("Xurkitree") || this.name.equals("Kartana")
+     || this.name.equals("Guzzlord") || this.name.equals("Poipole") || this.name.equals("Naganadel")
+     || this.name.equals("Stakataka") || this.name.equals("Blacephalon"))
+      a = "Beast Boost";
       
     return a;
   }
@@ -663,8 +731,6 @@ class Pokemon {
   }
 
   void moveSet(Move mv1, Move mv2, Move mv3, Move mv4) {
-    moveSet = new Move[4];
-
     moveSet[0] = mv1;
     moveSet[1] = mv2;
     moveSet[2] = mv3;
@@ -757,6 +823,13 @@ class Pokemon {
             mv.power *= 1.5;
           }
           
+          //Charge
+          if (mv.type.equals("Electric") && this.eCharge) {
+            println(mv.name, "was electrically charged!");
+            mv.power *= 2;
+            this.eCharge = false;
+          }
+          
           //Rain
           if (mv.type.equals("Water") && battle.weather.equals("Rain")) {
             mv.power *= 1.5;
@@ -784,7 +857,7 @@ class Pokemon {
           }
           
           //Does not check for contact -> OP
-          if (this.ability.equals("Tough Claws")) {
+          if (this.ability.equals("Tough Claws") && mv.damageCatagory.equals("Physical")) {
             mv.power *= 1.33;
           }
           
@@ -837,13 +910,21 @@ class Pokemon {
             println(mv.name, "is not very effective.");
           } else {
             println(mv.name, "is ineffective.");
-            condition = false;
+            if (mv.accuracy != 0)
+              condition = false;
           }
 
           if ((criticalRandom <= 4.17) && !target.ability.equals("Shell Armor")) {
             println("Critical Hit!");
             println();
             damage *= 1.5;
+            
+            if (target.ability.equals("Anger Point") && target.attackSMp != 6) {
+              target.attackSMp = 6;
+              target.battleStats[1] = int(float((target.attackSMp)*target.stats[1])/2);
+              
+              println(target.name + "'s attack rose to it's max!", target.battleStats[1]);
+            }
           }
 
           if (((this.ability.equals("Blaze") && mv.type.equals("Fire")) || (this.ability.equals("Torrent") && mv.type.equals("Water")) 
@@ -1045,10 +1126,11 @@ class Pokemon {
           if (this.sleep) {
             if (this.sleepCounter > 1) {
               this.sleepCounter -= 1;
+              println(this.name, "is sleeping...");
             } else {
               this.sleep = false;
+              println(this.name, "is about to wake up!");
             }
-            println(this.name, "is sleeping...");
 
             if (mv.name.equals("Snore")) {
               damage = int(((((((2*this.level)/5)+2)* mv.power * (float(this.battleStats[3]) /target.battleStats[4]))/50)+2) * modifier);
@@ -1159,6 +1241,60 @@ class Pokemon {
       println();
       println(target.name, "has fainted!", this.name, "wins the battle!");
       target.currHealth = 0;
+      
+      if (this.ability.equals("Beast Boost")) {
+        int highest = 0;
+        int highestStat = 0;
+        
+        for (int i = 1; i < 6; i++) {
+          if (this.battleStats[i] > highest) {
+            highest = this.battleStats[i];
+            highestStat = i;
+          }
+        }
+        
+        println();
+        String[] stringStats = {"Health", "Attack", "Defense", "Sp.Attack", "Sp.Defense", "Speed"};
+        
+        println("Beast boost raised", this.name + "'s", stringStats[highestStat] + "!");
+        
+        if (stringStats[highestStat].equals("Attack")) {
+          if (this.attackSMp < 6) {
+            println(this.name + "'s attack rose!");
+
+            this.attackSMp += 1;
+            this.battleStats[1] = int(float((this.attackSMp)*this.stats[1])/2);
+          }
+        } else if (stringStats[highestStat].equals("Defense")) {
+          if (this.defenseSMp < 6) {
+            println(this.name + "'s defense rose!");
+            
+            this.defenseSMp += 1;
+            this.battleStats[2] = int(float((this.defenseSMp)*this.stats[2])/2);
+          }
+        } else if (stringStats[highestStat].equals("Sp.Attack")) {
+          if (this.spAttackSMp < 6) {
+            println(this.name + "'s special attack rose!");
+
+            this.spAttackSMp += 1;
+            this.battleStats[3] = int(float((this.spAttackSMp)*this.stats[3])/2);
+          }
+        } else if (stringStats[highestStat].equals("Sp.Defense")) {
+          if (this.spDefenseSMp < 6) {
+            println(this.name + "'s special defense rose!");
+
+            this.spDefenseSMp += 1;
+            this.battleStats[4] = int(float((this.spDefenseSMp+1)*this.stats[4])/2);
+          }
+        } else if (stringStats[highestStat].equals("Speed")) {
+          if (this.speedSMp < 6) {
+            println(this.name + "'s speed rose!");
+            
+            this.speedSMp += 1;
+            this.battleStats[5] = int(float((this.speedSMp)*this.stats[5])/2);
+          }
+        }
+      }
     }
 
     if (this.max) {
@@ -1174,6 +1310,12 @@ class Pokemon {
           println("* * *", this.name, "returned back to their original size!", this.name, "now has", this.currHealth, "health! ("+ int((float(this.currHealth)/this.health)*100) + "%) * * *");
         }
       }
+    }
+    
+    if (this.name.equals("Wishiwashi-School") && this.currHealth < this.health/4) {
+      this.unmega();
+      
+      println("* * *", this.name, "returned back to it's solo form!", "* * *");
     }
     
     if (zMove)

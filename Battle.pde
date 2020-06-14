@@ -504,6 +504,10 @@ class Battle {
       oneP.item = "none";
     }
 
+    if (oneP.item.equals("Choice Scarf") && oneP.turnsOut == 0) {
+      oneP.battleStats[5] *= 1.5;
+    }
+    
     if (oneP.item.equals("Berry Juice") && oneP.currHealth <= (oneP.health/2) && oneP.currHealth > 0) {
       if (oneP.ability.equals("Ripen")) {
         oneP.currHealth += 20;
@@ -520,12 +524,26 @@ class Battle {
     }
     
     if (oneP.item.equals("Leftovers") && oneP.currHealth > 0) {
-      oneP.currHealth += (oneP.health/16);
+      oneP.currHealth += (oneP.stats[0]/16);
       if (oneP.currHealth > oneP.health)
         oneP.currHealth = oneP.health;
       
-      println(oneP.name, "ate some leftovers and gained", (oneP.health/16), "health!");
+      println(oneP.name, "ate some leftovers and gained", (oneP.stats[0]/16), "health!");
       println();
+    }
+    
+    if (oneP.item.equals("Black Sludge") && oneP.currHealth > 0 && !oneP.poison) {
+      if (!(oneP.type.equals("Poison") || oneP.type2.equals("Poison"))) {
+        oneP.poison = true;
+        println(oneP.name, "was poisoned from the Black Sludge!");
+      } else {
+        oneP.currHealth += (oneP.stats[0]/16);
+        if (oneP.currHealth > oneP.health)
+          oneP.currHealth = oneP.health;
+        
+        println(oneP.name, "healed by Black Sludge and gained", (oneP.stats[0]/16), "health!");
+        println();
+      }
     }
   }
   

@@ -410,6 +410,7 @@ class Move {
             
             user.defenseSMp += 3;
             user.battleStats[2] = int(float((user.defenseSMp)*user.stats[2])/2);
+          }
         }
       } else if (firstStatus.equals("Sp.Defense-")) {
         chance = random(0, 1);
@@ -711,6 +712,20 @@ class Move {
           user.charge = true;
           user.chargeTurn = 1;
         }
+      } else if (firstStatus.equals("E.Charge") && !user.eCharge) {
+        chance = random(0, 1);
+
+        if (chance <= this.statusProb) {
+          user.eCharge = true;
+          println(user.name, "was electrically charged!");
+        }
+      } else if (firstStatus.equals("Switch")) {
+        chance = random(0, 1);
+
+        if (chance <= this.statusProb) {
+          println(user.name, "forced", target.name, "to switch!");
+          target.switchOut();
+        }
       } else if (firstStatus.equals("Substitute") && !user.substitute) {
         chance = random(0, 1);
         
@@ -728,7 +743,24 @@ class Move {
             
           }
         }
-      } else if (firstStatus.equals("Geomancy")) {
+      }
+      // else if (firstStatus.equals("Transform")) {
+      //  chance = random(0, 1);
+        
+      //  if (chance <= this.statusProb) {
+      //    println(user.name, "became", target.name + "!");
+          
+      //    float perHealth = float(user.currHealth)/user.health;
+                    
+      //    user = target.transform();  
+      //    user.moveSet(target.moveSet[0], target.moveSet], target.moveSet[2], target.moveSet[3]);
+      //    user.calculateStats();
+          
+      //    user.currHealth = int(user.health*perHealth);
+      //    user.name = user.name + "-Ditto";
+      //  }
+      //}
+      else if (firstStatus.equals("Geomancy")) {
         chance = random(0, 1);
 
         if (chance <= this.statusProb) {
@@ -797,6 +829,8 @@ class Move {
           if (target.defenseSMp > user.defenseSMp) {
             user.battleStats[2] = int(float((target.defenseSMp)*user.stats[2])/2);
             target.battleStats[2] = target.stats[2];
+            println("Defense+");
+          }
           if (target.spAttackSMp > user.spAttackSMp) {
             user.battleStats[3] = int(float((target.spAttackSMp)*user.stats[3])/2);
             target.battleStats[3] = target.stats[3];
