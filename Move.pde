@@ -245,7 +245,6 @@ class Move {
           user.currHealth += user.stats[0]/8;
           
           println(user.name + "'s bulk rose to", user.currHealth + "!");
-            
         }
       } else if (firstStatus.equals("Attack-")) {
         chance = random(0, 1);

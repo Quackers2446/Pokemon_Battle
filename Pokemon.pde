@@ -10,6 +10,10 @@ class Pokemon {
   int[] battleStats;
   String ability;
   Move[] moveSet;
+  String nature;
+  int[] pp;
+  int[] currPP;
+  int currMvPP;
   Boolean burn, freeze, paralysis, poison, sleep, attract, flinch, badlyPoisoned, bound, cantEscape, confusion, curse, drain, heal, recoil, leech, recover, repeat, protect, eCharge, wildfire;
   int attackSMp, attackSMn, defenseSMp, defenseSMn, spAttackSMp, spAttackSMn, spDefenseSMp, spDefenseSMn, speedSMp, speedSMn, accuracySMp, accuracySMn, evasionSMp, evasionSMn;
   float accuracy, evasion;
@@ -78,7 +82,13 @@ class Pokemon {
     this.type2 = "";      
     
     this.moveSet = new Move[4];
-
+    
+    this.nature = "none";
+    
+    this.pp = new int[4];
+    this.currPP = new int[4];
+    this.currMvPP = 0;
+    
     this.burn = this.freeze = this.paralysis = this.poison = this.sleep = this.attract = this.flinch = this.badlyPoisoned = this.recover = this.protect
       = this.bound = this.cantEscape = this.confusion = this.curse = this.heal = this.drain = this.recoil = this.leech = this.repeat = this.eCharge = this.wildfire = false;
 
@@ -118,6 +128,10 @@ class Pokemon {
 
     this.sR = false;
     
+    Trainer a = new Trainer("A");
+    Trainer b = new Trainer("B");
+    this.battle = new Battle(a, b);
+    
     this.zMove = false;
     
     this.mega = false;
@@ -139,6 +153,80 @@ class Pokemon {
     this.health = stats[0];
     this.currHealth = stats[0];
     this.battleStats[0] = stats[0];
+  }
+  
+  void nature(String n) {
+    if (n.equals("Lonely")) {
+      this.battleStats[1] *= 1.1;
+      this.battleStats[2] *= 0.9;
+    } else if (n.equals("Brave")) {
+      this.battleStats[1] *= 1.1;
+      this.battleStats[5] *= 0.9;
+    } else if (n.equals("Adamant")) {
+      this.battleStats[1] *= 1.1;
+      this.battleStats[3] *= 0.9;
+    } else if (n.equals("Naughty")) {
+      this.battleStats[1] *= 1.1;
+      this.battleStats[4] *= 0.9;
+    }
+    
+    else if (n.equals("Bold")) {
+      this.battleStats[2] *= 1.1;
+      this.battleStats[1] *= 0.9;
+    } else if (n.equals("Relaxed")) {
+      this.battleStats[2] *= 1.1;
+      this.battleStats[4] *= 0.9;
+    } else if (n.equals("Impish")) {
+      this.battleStats[2] *= 1.1;
+      this.battleStats[3] *= 0.9;
+    } else if (n.equals("Lax")) {
+      this.battleStats[2] *= 1.1;
+      this.battleStats[4] *= 0.9;
+    }
+    
+    else if (n.equals("Timid")) {
+      this.battleStats[5] *= 1.1;
+      this.battleStats[1] *= 0.9;
+    } else if (n.equals("Hasty")) {
+      this.battleStats[5] *= 1.1;
+      this.battleStats[2] *= 0.9;
+    } else if (n.equals("Jolly")) {
+      this.battleStats[5] *= 1.1;
+      this.battleStats[3] *= 0.9;
+    } else if (n.equals("Naive")) {
+      this.battleStats[5] *= 1.1;
+      this.battleStats[4] *= 0.9;
+    }
+    
+    else if (n.equals("Modest")) {
+      this.battleStats[3] *= 1.1;
+      this.battleStats[1] *= 0.9;
+    } else if (n.equals("Mild")) {
+      this.battleStats[3] *= 1.1;
+      this.battleStats[2] *= 0.9;
+    } else if (n.equals("Quiet")) {
+      this.battleStats[3] *= 1.1;
+      this.battleStats[5] *= 0.9;
+    } else if (n.equals("Rash")) {
+      this.battleStats[3] *= 1.1;
+      this.battleStats[4] *= 0.9;
+    }
+    
+    else if (n.equals("Calm")) {
+      this.battleStats[4] *= 1.1;
+      this.battleStats[1] *= 0.9;
+    } else if (n.equals("Genle")) {
+      this.battleStats[4] *= 1.1;
+      this.battleStats[2] *= 0.9;
+    } else if (n.equals("Sassy")) {
+      this.battleStats[4] *= 1.1;
+      this.battleStats[5] *= 0.9;
+    } else if (n.equals("Careful")) {
+      this.battleStats[4] *= 1.1;
+      this.battleStats[3] *= 0.9;
+    }
+    
+    this.nature = n;
   }
 
   void dynamax() {
@@ -523,7 +611,7 @@ class Pokemon {
   void rest() {
     this.currHealth = this.health;
     for (int i = 0; i < this.moveSet.length; i++) {
-      this.moveSet[i].currPowerPoints = this.moveSet[i].powerPoints;
+      this.currPP[i] = this.pp[i];
     }
     for (int i = 0; i < 6; i++) {
       this.battleStats[i] = this.stats[i];
@@ -666,6 +754,9 @@ class Pokemon {
     else if (this.name.equals("Wishiwashi-Solo"))
       a = "Schooling";
       
+    else if (this.name.equals("Kyogre") || this.name.equals("Primal Kyogre"))
+      a = "Primordial Sea";
+      
     else if (this.name.equals("Eternatus") || this.name.equals("Absol") || this.name.equals("Corviknight")
      || this.name.equals("Aerodactyl") || this.name.equals("Mewtwo"))
       a = "Pressure";
@@ -694,6 +785,7 @@ class Pokemon {
     println();
     println("Ability:\t", this.ability);
     println("Item:\t\t", this.item);
+    println("Nature:\t\t", this.nature);
 
     println();
 
@@ -715,14 +807,14 @@ class Pokemon {
     println("Name:\t\tPP:\tPower:\tAccuracy: \tDamage Catagory:");
 
     for (int i = 0; i < 4; i++) {
-      if (moveSet[i].name.length() > 9) {
-        println(moveSet[i].name + " \t" + str(moveSet[i].currPowerPoints) + "/" + str(moveSet[i].powerPoints) + " \t" + 
+      if (moveSet[i].name.length() > 6) {
+        println(moveSet[i].name + " \t" + str(this.currPP[i]) + "/" + str(moveSet[i].powerPoints) + " \t" + 
           str(moveSet[i].power) + " \t" + str(round(moveSet[i].accuracy*100)) + 
-          "% \t" + moveSet[i].damageCatagory);
+          "% \t\t" + moveSet[i].damageCatagory);
       } else {
-        println(moveSet[i].name + " \t\t" + str(moveSet[i].currPowerPoints) + "/" + str(moveSet[i].powerPoints) + " \t" + 
+        println(moveSet[i].name + " \t\t" + str(this.currPP[i]) + "/" + str(moveSet[i].powerPoints) + " \t" + 
           str(moveSet[i].power) + " \t" + str(round(moveSet[i].accuracy*100)) + 
-          "% \t" + moveSet[i].damageCatagory);
+          "% \t\t" + moveSet[i].damageCatagory);
       }
     }
 
@@ -731,42 +823,60 @@ class Pokemon {
   }
 
   void moveSet(Move mv1, Move mv2, Move mv3, Move mv4) {
-    moveSet[0] = mv1;
-    moveSet[1] = mv2;
-    moveSet[2] = mv3;
-    moveSet[3] = mv4;
+    this.moveSet[0] = mv1;
+    this.moveSet[1] = mv2;
+    this.moveSet[2] = mv3;
+    this.moveSet[3] = mv4;
 
-    formerMove[0] = mv1.name;
-    formerMove[1] = mv2.name;
-    formerMove[2] = mv3.name;
-    formerMove[3] = mv4.name;
+    this.formerMove[0] = mv1.name;
+    this.formerMove[1] = mv2.name;
+    this.formerMove[2] = mv3.name;
+    this.formerMove[3] = mv4.name;
     
-    formerAcc[0] = mv1.accuracy;
-    formerAcc[1] = mv2.accuracy;
-    formerAcc[2] = mv3.accuracy;
-    formerAcc[3] = mv4.accuracy;
+    this.formerAcc[0] = mv1.accuracy;
+    this.formerAcc[1] = mv2.accuracy;
+    this.formerAcc[2] = mv3.accuracy;
+    this.formerAcc[3] = mv4.accuracy;
 
-    formerStatus[0] = mv1.status;
-    formerStatus[1] = mv2.status;
-    formerStatus[2] = mv3.status;
-    formerStatus[3] = mv4.status;
+    this.formerStatus[0] = mv1.status;
+    this.formerStatus[1] = mv2.status;
+    this.formerStatus[2] = mv3.status;
+    this.formerStatus[3] = mv4.status;
 
-    formerStatus2[0] = mv1.status2;
-    formerStatus2[1] = mv2.status2;
-    formerStatus2[2] = mv3.status2;
-    formerStatus2[3] = mv4.status2;
+    this.formerStatus2[0] = mv1.status2;
+    this.formerStatus2[1] = mv2.status2;
+    this.formerStatus2[2] = mv3.status2;
+    this.formerStatus2[3] = mv4.status2;
 
-    formerStatusProb[0] = mv1.statusProb;
-    formerStatusProb[1] = mv2.statusProb;
-    formerStatusProb[2] = mv3.statusProb;
-    formerStatusProb[3] = mv4.statusProb;
+    this.formerStatusProb[0] = mv1.statusProb;
+    this.formerStatusProb[1] = mv2.statusProb;
+    this.formerStatusProb[2] = mv3.statusProb;
+    this.formerStatusProb[3] = mv4.statusProb;
 
-    formerPower[0] = mv1.power;
-    formerPower[1] = mv2.power;
-    formerPower[2] = mv3.power;
-    formerPower[3] = mv4.power;
+    this.formerPower[0] = mv1.power;
+    this.formerPower[1] = mv2.power;
+    this.formerPower[2] = mv3.power;
+    this.formerPower[3] = mv4.power;
+    
+    this.pp[0] = mv1.powerPoints;
+    this.pp[1] = mv2.powerPoints;
+    this.pp[2] = mv3.powerPoints;
+    this.pp[3] = mv4.powerPoints;
+    
+    this.currPP[0] = mv1.powerPoints;
+    this.currPP[1] = mv2.powerPoints;
+    this.currPP[2] = mv3.powerPoints;
+    this.currPP[3] = mv4.powerPoints;
   }
-
+  
+  void attackTrainer(Move mv) {
+    if (mv.damageCatagory.equals("Special"))
+      println(this.name, "dealt", int(random(0,mv.power/10)*this.stats[3]/100), "damage.");
+    
+    else
+      println(this.name, "dealt", int(random(0,mv.power/10)*this.stats[1]/100), "damage.");
+  }
+  
   void useMove(Move mv, Pokemon target) {
     float random = random(0.85, 1.0);
     float typeEf = mv.typeEffectiveness(target);
@@ -782,7 +892,15 @@ class Pokemon {
     boolean condition = true;
     int orgPower = mv.power;
     float formerMvA = mv.accuracy;
-    mv.currPowerPoints -= 1;
+    int indexMv = 0;
+    
+    for (int i = 0; i < 3; i++) {
+      if (this.moveSet[i] == mv) {
+        indexMv = i;
+      }
+    }
+    
+    this.currPP[indexMv] -= 1;
     
     if (this.ability.equals("No Guard") || target.ability.equals("No Guard")) {
       mv.accuracy = 0;
@@ -805,7 +923,7 @@ class Pokemon {
       }
     }
     
-    if (mv.currPowerPoints >= 0) {
+    if (this.currPP[indexMv] >= 0) {
       if ((chanceToHit <= ((mv.accuracy*100)*(this.accuracy * target.evasion))) || mv.accuracy == 0) {   
         if (!(this.flinch && !this.ability.equals("Inner Focus")) && !this.sleep && !(this.attract && (randomA <= 0.5)) && (!(this.paralysis && (randomP <= 0.25)) || (this.type.equals("Electric") || this.type2.equals("Electric"))) 
           && !(this.confusion && (randomC <= 0.33)) && (!this.freeze)) {
@@ -831,11 +949,14 @@ class Pokemon {
           }
           
           //Rain
-          if (mv.type.equals("Water") && battle.weather.equals("Rain")) {
+          if (mv.type.equals("Water") && (battle.weather.equals("Rain") || battle.weather.equals("Primordial Sea"))) {
             mv.power *= 1.5;
           } else if (mv.type.equals("Fire") && battle.weather.equals("Rain")) {
             mv.power *= 0.5;
-          }
+          } else if (mv.type.equals("Fire") && battle.weather.equals("Primordial Sea")) {
+            mv.power = 0;
+            println("The flame drizzled out in the raging sea!");
+          } 
           
           //Harsh Sunlight
           if (mv.type.equals("Water") && battle.weather.equals("Harsh Sunlight")) {
@@ -1163,6 +1284,12 @@ class Pokemon {
     }
 
     if (target.currHealth > 0) {
+      //Rocky Helmet
+      if (mv.damageCatagory.equals("Physical") && target.item.equals("Rocky Helmet")) {
+        this.currHealth -= this.stats[0]/6;
+        println(this.name, "is hurt by the rocky helmet, and takes", str(int(float(this.stats[0])/6)), "damage! (" + int((float(this.currHealth)/this.health)*100) + "%)");
+      }
+      
       if (target.burn && (!target.type.equals("Fire") || !target.type2.equals("Fire"))) {
         target.currHealth -= int(float(target.stats[0])/16);
         println();

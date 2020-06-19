@@ -154,7 +154,7 @@ class Battle {
         twoP.battleStats[1] = int(float(2*twoP.stats[1])/twoP.attackSMn);
       }
   
-      if (oneP.ability.equals("Sand Stream") && !weather.equals("Sandstorm")) {
+      if (oneP.ability.equals("Sand Stream") && !(weather.equals("Sandstorm") || weather.equals("Primordial Sea"))) {
         println(oneP.name + "'s Sand Stream whipped up a sandstorm!");
         println();
   
@@ -162,7 +162,7 @@ class Battle {
         this.weatherCounter = 5;
       }
       
-      if (oneP.ability.equals("Snow Warning") && !weather.equals("Hail")) {
+      if (oneP.ability.equals("Snow Warning") && !(weather.equals("Hail") || weather.equals("Primordial Sea"))) {
         println(oneP.name + "'s Snow Warning whipped up a hailstorm!");
         println();
   
@@ -177,6 +177,13 @@ class Battle {
         println();
         this.weatherCounter = 5;
       } 
+      
+      if (oneP.ability.equals("Primordial Sea") && !this.weather.equals("Primordial Sea")) {
+        this.weather = "Primordial Sea";
+        
+        println(oneP.name, "made the sea go into it's primal state of pure chaos!");
+        println();
+      }
     }
     
     if (oneP.trainer.reflect) {      
@@ -264,15 +271,22 @@ class Battle {
       println();
     }
     
-    if (mv1.status.equals("Rain") && !this.weather.equals("Rain")) {
+    if (mv1.status.equals("Rain") && !(this.weather.equals("Rain") || this.weather.equals("Primordial Sea"))) {
       this.weather = "Rain";
       
       println(oneP.name, "made it rain!");
       println();
       this.weatherCounter = 5;
+    }
+    
+    if (mv1.status.equals("Primordial Sea") && !this.weather.equals("Primordial Sea")) {
+      this.weather = "Primordial Sea";
+      
+      println(oneP.name, "made the sea go into it's primal state of pure chaos!");
+      println();
     } 
     
-    if (mv1.status.equals("Harsh Sunlight") && !this.weather.equals("Harsh Sunlight")) {
+    if (mv1.status.equals("Harsh Sunlight") && !(this.weather.equals("Harsh Sunlight") || weather.equals("Primordial Sea"))) {
       this.weather = "Harsh Sunlight";
       
       println(oneP.name, "made the sunlight turn harsh!");
@@ -280,7 +294,7 @@ class Battle {
       this.weatherCounter = 5;
     } 
     
-    if (mv1.status.equals("Hail") && !weather.equals("Hail")) {
+    if (mv1.status.equals("Hail") && !weather.equals("Hail") && !this.weather.equals("Primordial Sea")) {
       println(oneP.name, "whipped up a hailstorm!");
       println();
 
@@ -294,7 +308,7 @@ class Battle {
       }
     }
     
-    if (oneP.turnsOut == 0 && this.weather.equals("Rain")) {
+    if (oneP.turnsOut == 0 && (this.weather.equals("Rain") || this.weather.equals("Primordial Sea"))) {
       if (oneP.ability.equals("Swift Swim")) {
         oneP.battleStats[5] *= 2;
       }
@@ -336,7 +350,15 @@ class Battle {
       
       println("The rain stopped!");
       println();
+      
+      oneP.battleStats[5] = oneP.stats[5];
+      twoP.battleStats[5] = twoP.stats[5];
     }
+    
+    if (this.weather.equals("Primordial Sea")) {      
+      println("The sea rages on.");
+      println();
+    } 
     
     if (this.weather.equals("Harsh Sunlight")) {
       this.weatherCounter -= 1;
@@ -508,6 +530,10 @@ class Battle {
       oneP.battleStats[5] *= 1.5;
     }
     
+    if (oneP.item.equals("Choice Band") && oneP.turnsOut == 0) {
+      oneP.battleStats[1] *= 1.5;
+    }
+    
     if (oneP.item.equals("Berry Juice") && oneP.currHealth <= (oneP.health/2) && oneP.currHealth > 0) {
       if (oneP.ability.equals("Ripen")) {
         oneP.currHealth += 20;
@@ -545,11 +571,18 @@ class Battle {
         println();
       }
     }
+    
+    if (oneP.item.equals("Flame Orb") && oneP.currHealth > 0 && !oneP.burn) {
+      if (!(oneP.type.equals("Fire") || oneP.type2.equals("Fire"))) {
+        oneP.burn = true;
+        println(oneP.name, "was burned from the Flame Orb!");
+      }
+    }
   }
   
   void recover(Pokemon p) {
     for (int i = 0; i < p.moveSet.length; i++) {
-      p.moveSet[i].currPowerPoints = p.moveSet[i].powerPoints;
+      p.currPP[i] = p.moveSet[i].powerPoints;
     }
     
     for (int i = 0; i < 6; i++) {
