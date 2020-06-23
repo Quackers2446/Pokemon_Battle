@@ -49,6 +49,7 @@ class Pokemon {
   Boolean fly, dig;
   Boolean substitute;
   int subHealth;
+  Boolean didHit;
 
   Pokemon (String n, String t, int l, int hp, 
     int att, int def, int satt, int sdef, int spd) {
@@ -144,6 +145,8 @@ class Pokemon {
     
     this.substitute = false;
     this.subHealth = 0;
+    
+    this.didHit = true;
   }
 
   void raidStats() {
@@ -451,6 +454,19 @@ class Pokemon {
       this.stats[5] = 30;
     }
     
+    if (this.name.equals("Groudon")) {
+      this.name = "Primal Groudon";
+      this.ability = "Desolate Land";
+      this.type2 = "Fire";
+      
+      this.stats[0] = 100;
+      this.stats[1] = 180;
+      this.stats[2] = 160;
+      this.stats[3] = 150;
+      this.stats[4] = 90;
+      this.stats[5] = 90;
+    }
+    
     if (this.name.equals("Eternatus")) {
       this.name = "Eternamax Eternatus";
       this.ability = "Pressure";
@@ -681,11 +697,13 @@ class Pokemon {
 
     else if (this.name.equals("Gastly") || this.name.equals("Haunter") || this.name.equals("Gengar") || 
       this.name.equals("Koffing") || this.name.equals("Weezing") || this.name.equals("Vibrava") || 
-      this.name.equals("Flygon") || this.name.equals("Galarian Weezing") || this.name.equals("Latias"))
+      this.name.equals("Flygon") || this.name.equals("Galarian Weezing") || this.name.equals("Latias") ||
+      this.name.equals("Latios"))
       a = "Levitate";
 
     else if (this.name.equals("Dratini") || this.name.equals("Ekans") || this.name.equals("Arbok") || 
-      this.name.equals("Dragonair") || this.name.equals("Silicobra") || this.name.equals("Sandaconda"))
+      this.name.equals("Dragonair") || this.name.equals("Silicobra") || this.name.equals("Sandaconda")
+       || this.name.equals("Pupitar"))
       a = "Shed Skin";
 
     else if (this.name.equals("Munchlax") || this.name.equals("Snorlax") || this.name.equals("Seel") || 
@@ -751,6 +769,9 @@ class Pokemon {
     else if (this.name.equals("Ditto"))
       a = "Imposter";
       
+    else if (this.name.equals("Groudon"))
+      a = "Drought";
+      
     else if (this.name.equals("Wishiwashi-Solo"))
       a = "Schooling";
       
@@ -758,7 +779,7 @@ class Pokemon {
       a = "Primordial Sea";
       
     else if (this.name.equals("Eternatus") || this.name.equals("Absol") || this.name.equals("Corviknight")
-     || this.name.equals("Aerodactyl") || this.name.equals("Mewtwo"))
+     || this.name.equals("Aerodactyl") || this.name.equals("Mewtwo") || this.name.equals("Articuno"))
       a = "Pressure";
       
     else if (this.name.equals("Krookodile") || this.name.equals("Krokorok") || this.name.equals("Camerupt")
@@ -961,7 +982,10 @@ class Pokemon {
           //Harsh Sunlight
           if (mv.type.equals("Water") && battle.weather.equals("Harsh Sunlight")) {
             mv.power *= 0.5;
-          } else if (mv.type.equals("Fire") && battle.weather.equals("Harsh Sunlight")) {
+          } else if (mv.type.equals("Water") && battle.weather.equals("Extremely Harsh Sunlight")) {
+            mv.power = 0;
+            println("The water evaporated into thin air!");
+          } else if (mv.type.equals("Fire") && (battle.weather.equals("Harsh Sunlight") || battle.weather.equals("Extremely Harsh Sunlight"))) {
             mv.power *= 1.5;
           }
           
@@ -1047,6 +1071,25 @@ class Pokemon {
               println(target.name + "'s attack rose to it's max!", target.battleStats[1]);
             }
           }
+          
+          if (typeEf >= 2 && target.item.equals("Weakness Policy")) {
+            println();
+            println(target.name + "'s Weakness Policy took in effect!");
+            
+            if (target.spAttackSMp < 6) {
+              println(target.name + "'s special attack greatly rose!");
+  
+              target.spAttackSMp += 2;
+              target.battleStats[3] = int(float((target.spAttackSMp)*target.stats[3])/2);
+            }
+            if (target.attackSMp < 6) {
+              println(target.name + "'s attack greatly rose!");
+  
+              target.attackSMp += 2;
+              target.battleStats[1] = int(float((target.attackSMp)*target.stats[1])/2);
+            }
+            println();
+          }
 
           if (((this.ability.equals("Blaze") && mv.type.equals("Fire")) || (this.ability.equals("Torrent") && mv.type.equals("Water")) 
             || (this.ability.equals("Overgrowth") && mv.type.equals("Grass"))  || (this.ability.equals("Swarm") && mv.type.equals("Bug"))) 
@@ -1075,6 +1118,11 @@ class Pokemon {
             damage = 0;
             condition = false;
             println(target.name, "is levitating!");
+          }
+          
+          if (!this.didHit && mv.name.equals("Stomping Tantrum")) {
+            println("Stomping Tantrum's power was doubled!");
+            damage *= 2;
           }
           
           if (((target.currHealth == target.health) && damage > target.health)&& this.ability.equals("Sturdy")) {
@@ -1197,7 +1245,9 @@ class Pokemon {
                 + int((float(target.currHealth)/target.health)*100) + "%)");
           //  }
           }
-
+          
+          this.didHit = true;
+          
           float r = random(0, 1);
           
           //Shed Skin + Misty Terrain
@@ -1278,6 +1328,7 @@ class Pokemon {
         }
       } else {
         println(this.name, "missed!", target.name, "has", target.currHealth, "health! (" + int((float(target.currHealth)/target.health)*100) + "%)");
+        this.didHit = false;
       }
     } else {
       println("This move has run out of PP.");
@@ -1363,7 +1414,11 @@ class Pokemon {
         target.recoil = false;
       }
     }
-
+    
+    if (mv.name.equals("Explosion")) {
+      this.currHealth = 0;
+    }
+    
     if (target.currHealth < 1) {
       println();
       println(target.name, "has fainted!", this.name, "wins the battle!");
@@ -1438,7 +1493,7 @@ class Pokemon {
         }
       }
     }
-    
+
     if (this.name.equals("Wishiwashi-School") && this.currHealth < this.health/4) {
       this.unmega();
       

@@ -121,6 +121,35 @@ class Battle {
     }
   }
 
+  void checkTerrain(Pokemon oneP, Move mv1, Pokemon twoP) {
+    if (mv1.status.equals("Misty Terrain") && !this.weather.equals("Misty Terrain")) {
+      this.terrain = "Misty Terrain";
+      
+      println(oneP.name, "made mist envelope the field!");
+      println();
+      this.terrainCounter = 5;
+    }
+  }
+  
+  void updateTerrain(Pokemon oneP, Pokemon twoP) {
+    if (this.terrain.equals("Misty Terrain")) {
+      this.terrainCounter -= 1;
+      
+      println("The mist swirls mysteriously.");
+      println();
+      
+      oneP.sleep = false;
+      twoP.sleep = false;
+            
+    }
+    if (this.terrainCounter < 0 && this.terrain.equals("Misty Terrain")) {
+      this.terrain = "none";
+      
+      println("The mist faded!");
+      println();
+    }
+  }
+
   void enterBattleEffects(Pokemon oneP, Pokemon twoP) {      
     if (oneP.turnsOut == 0) {
       if (oneP.trainer.sR) {
@@ -154,7 +183,7 @@ class Battle {
         twoP.battleStats[1] = int(float(2*twoP.stats[1])/twoP.attackSMn);
       }
   
-      if (oneP.ability.equals("Sand Stream") && !(weather.equals("Sandstorm") || weather.equals("Primordial Sea"))) {
+      if (oneP.ability.equals("Sand Stream") && !(weather.equals("Sandstorm") || weather.equals("Primordial Sea") || this.weather.equals("Extremely Harsh Sunlight"))) {
         println(oneP.name + "'s Sand Stream whipped up a sandstorm!");
         println();
   
@@ -162,7 +191,7 @@ class Battle {
         this.weatherCounter = 5;
       }
       
-      if (oneP.ability.equals("Snow Warning") && !(weather.equals("Hail") || weather.equals("Primordial Sea"))) {
+      if (oneP.ability.equals("Snow Warning") && !(weather.equals("Hail") || weather.equals("Primordial Sea") || this.weather.equals("Extremely Harsh Sunlight"))) {
         println(oneP.name + "'s Snow Warning whipped up a hailstorm!");
         println();
   
@@ -170,12 +199,19 @@ class Battle {
         this.weatherCounter = 5; //or some arbitrary big number
       }
       
-      if (oneP.ability.equals("Drought") && !this.weather.equals("Harsh Sunlight")) {
+      if (oneP.ability.equals("Drought") && !(this.weather.equals("Harsh Sunlight") || this.weather.equals("Primordial Sea") || this.weather.equals("Extremely Harsh Sunlight"))) {
         this.weather = "Harsh Sunlight";
         
         println(oneP.name, "made the sunlight turn harsh!");
         println();
         this.weatherCounter = 5;
+      } 
+      
+      if (oneP.ability.equals("Desolate Land") && !this.weather.equals("Extremely Harsh Sunlight")) {
+        this.weather = "Extremely Harsh Sunlight";
+        
+        println(oneP.name, "made the sunlight scorch the land, leaving nothing but a desolate plain!");
+        println();
       } 
       
       if (oneP.ability.equals("Primordial Sea") && !this.weather.equals("Primordial Sea")) {
@@ -218,35 +254,6 @@ class Battle {
     }
   }
   
-  void checkTerrain(Pokemon oneP, Move mv1, Pokemon twoP) {
-    if (mv1.status.equals("Misty Terrain") && !this.weather.equals("Misty Terrain")) {
-      this.terrain = "Misty Terrain";
-      
-      println(oneP.name, "made mist envelope the field!");
-      println();
-      this.terrainCounter = 5;
-    }
-  }
-  
-  void updateTerrain(Pokemon oneP, Pokemon twoP) {
-    if (this.terrain.equals("Misty Terrain")) {
-      this.terrainCounter -= 1;
-      
-      println("The mist swirls mysteriously.");
-      println();
-      
-      oneP.sleep = false;
-      twoP.sleep = false;
-            
-    }
-    if (this.terrainCounter < 0 && this.terrain.equals("Misty Terrain")) {
-      this.terrain = "none";
-      
-      println("The mist faded!");
-      println();
-    }
-  }
-
   void checkWeather(Pokemon oneP, Move mv1, Pokemon twoP) {
     String firstType1 = oneP.type;
     String firstType2 = twoP.type;
@@ -271,7 +278,7 @@ class Battle {
       println();
     }
     
-    if (mv1.status.equals("Rain") && !(this.weather.equals("Rain") || this.weather.equals("Primordial Sea"))) {
+    if (mv1.status.equals("Rain") && !(this.weather.equals("Rain") || this.weather.equals("Primordial Sea") || this.weather.equals("Extremely Harsh Sunlight"))) {
       this.weather = "Rain";
       
       println(oneP.name, "made it rain!");
@@ -286,7 +293,7 @@ class Battle {
       println();
     } 
     
-    if (mv1.status.equals("Harsh Sunlight") && !(this.weather.equals("Harsh Sunlight") || weather.equals("Primordial Sea"))) {
+    if (mv1.status.equals("Harsh Sunlight") && !(this.weather.equals("Harsh Sunlight") || weather.equals("Primordial Sea") || this.weather.equals("Extremely Harsh Sunlight"))) {
       this.weather = "Harsh Sunlight";
       
       println(oneP.name, "made the sunlight turn harsh!");
@@ -294,7 +301,14 @@ class Battle {
       this.weatherCounter = 5;
     } 
     
-    if (mv1.status.equals("Hail") && !weather.equals("Hail") && !this.weather.equals("Primordial Sea")) {
+    if (mv1.status.equals("Extremely Harsh Sunlight") && !(this.weather.equals("Extremely Harsh Sunlight"))) {
+      this.weather = "Extremely Harsh Sunlight";
+      
+      println(oneP.name, "made the sunlight scorch the land, leaving nothing but a desolate plain!");
+      println();
+    } 
+    
+    if (mv1.status.equals("Hail") && !weather.equals("Hail") && !(this.weather.equals("Primordial Sea") || this.weather.equals("Extremely Harsh Sunlight"))) {
       println(oneP.name, "whipped up a hailstorm!");
       println();
 
@@ -302,7 +316,7 @@ class Battle {
       this.weatherCounter = 5;
     }
     
-    if (oneP.turnsOut == 0 && this.weather.equals("Harsh Sunlight")) {
+    if (oneP.turnsOut == 0 && (this.weather.equals("Harsh Sunlight") || this.weather.equals("Extremely Harsh Sunlight"))) {
       if (oneP.ability.equals("Chlorophyll")) {
         oneP.battleStats[5] *= 2;
       }
@@ -365,7 +379,6 @@ class Battle {
       
       println("The sunlight is strong.");
       println();
-      
     } else if (this.weatherCounter < 1 && this.weather.equals("Harsh Sunlight")) {
       this.weather = "none";
       
@@ -375,6 +388,11 @@ class Battle {
       oneP.battleStats[5] = oneP.stats[5];
       twoP.battleStats[5] = twoP.stats[5];
     }
+    
+    if (this.weather.equals("Extremely Harsh Sunlight")) {      
+      println("The sun scorches on.");
+      println();
+    } 
   }
   
   void endTurn(Pokemon oneP, Move mv1, Pokemon twoP) {
@@ -497,6 +515,13 @@ class Battle {
       println(oneP.name, "ate a Chesto berry and woke up!");
       println();
       oneP.item = "none";
+    }
+    
+    if (oneP.item.equals("Lum Berry") && (oneP.burn || oneP.freeze || oneP.paralysis || oneP.poison || oneP.sleep || oneP.badlyPoisoned || oneP.confusion) && oneP.currHealth > 0) {
+      oneP.burn = oneP.freeze = oneP.paralysis = oneP.poison = oneP.sleep = oneP.badlyPoisoned = oneP.confusion = false;
+
+      println(oneP.name, "ate a Lum Berry and was cured of all non-volatile conditions!");
+      println();
     }
 
     if (oneP.item.equals("Cheri Berry") && oneP.paralysis && oneP.currHealth > 0) {
