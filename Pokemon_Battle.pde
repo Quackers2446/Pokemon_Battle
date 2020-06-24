@@ -35,7 +35,7 @@ void setup() {
   Move swift = new Move("Swift", 20, 60, 0, "Normal", "Special", 0, "none", 0);
   Move tailWhip = new Move("Tail Whip", 30, 0, 0, "Normal", "Status", 0, "Defense-", 1);
   Move harden = new Move("Harden", 30, 0, 0, "Normal", "Status", 0, "Defense+", 1);
-  Move leer = new Move("Leer", 30, 0, 0, "Normal", "Status", 0, "Defense-", 1);
+  Move leer = new Move("Leer", 30, 0, 0, "Normal", "Status", 0, "Defense-", 1);  
   Move supersonic = new Move("Supersonic", 20, 0, 0.55, "Normal", "Status", 0, "Confusion", 1);
   Move stomp = new Move("Stomp", 20, 65, 1, "Normal", "Physical", 0, "Flinch", 0.3);
   Move triAttack = new Move("Tri Attack", 10, 80, 1, "Normal", "Special", 0, "Burn/Freeze", 0.2);
@@ -1032,6 +1032,7 @@ void setup() {
   Trainer randomTrainer = new Trainer("Random");
   Trainer police = new Trainer("Police");
   Trainer wild = new Trainer("Wild");
+  Trainer grunt = new Trainer("Team Rocket Grunt");
 
   zofia.addPokemon(krookodile, xerneas, lapras, morpeko, ditto, mimikyu, kingler, groudon, larvitar);
   jasmine.addPokemon(pidgeot, shinx, falinks, latias, abomasnow, alcremie);
@@ -1046,6 +1047,7 @@ void setup() {
   police.addPokemon(galarianWeezing, orbeetle, galarianRapidash, rillaboom, cinderace, dubwool);
   wild.addPokemon(charizard, eternatus, wishiwashi4, wishiwashi3, wishiwashi2, wishiwashi, nihilego, mewtwo, mimikyu, dhelmise, runerigus, dusknoir, chandelure, obstagoon, cursola, grimmsnarl, polteageistPhony);
   randomTrainer.addPokemon(dhelmise, dusknoir, obstagoon);
+  grunt.addPokemon(boltund);
 
   printPokemon();
   printCharizard();
@@ -1109,6 +1111,10 @@ void setup() {
   gengar.currHealth = 0;
   polteageist.currHealth = 67;
   
+ // boltund.moveSet(spark, crunch, charm, playRough);
+ 
+  groudon.mega();
+  b.move(boltund, playRough, groudon, precipiceBlades);
 }
 
 void catchPokemon(Trainer t, Pokemon p, String pokeball, int catchRate) {
