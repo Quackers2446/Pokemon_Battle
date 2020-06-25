@@ -50,6 +50,7 @@ class Pokemon {
   Boolean substitute;
   int subHealth;
   Boolean didHit;
+  Boolean disguise;
 
   Pokemon (String n, String t, int l, int hp, 
     int att, int def, int satt, int sdef, int spd) {
@@ -382,6 +383,19 @@ class Pokemon {
         this.stats[5] = 100;
       }
     }
+    
+    if (this.name.equals("Blastoise")) {
+      this.name = "Mega Blastoise";
+      this.ability = "Mega Launcher";
+        
+      this.stats[0] = 79;
+      this.stats[1] = 103;
+      this.stats[2] = 120;
+      this.stats[3] = 135;
+      this.stats[4] = 115;
+      this.stats[5] = 78;
+    }
+    
     if (this.name.equals("Swampert")) {
       this.name = "Mega Swampert";
       this.ability = "Swift Swim";
@@ -686,8 +700,10 @@ class Pokemon {
       this.name.equals("Orbeetle") || this.name.equals("Grubbin") || this.name.equals("Volcarona"))
       a = "Swarm";
 
-    else if (this.name.equals("Mimikyu"))
+    else if (this.name.equals("Mimikyu")) {
       a = "Disguise";
+      this.disguise = true;
+    }
 
     else if (this.name.equals("Tyranitar") || this.name.equals("Mega Tyranitar") || this.name.equals("Gigalith"))
       a = "Sand Stream";
@@ -698,7 +714,8 @@ class Pokemon {
     else if (this.name.equals("Gastly") || this.name.equals("Haunter") || this.name.equals("Gengar") || 
       this.name.equals("Koffing") || this.name.equals("Weezing") || this.name.equals("Vibrava") || 
       this.name.equals("Flygon") || this.name.equals("Galarian Weezing") || this.name.equals("Latias") ||
-      this.name.equals("Latios"))
+      this.name.equals("Latios") || this.name.equals("Rotom-Frost") || this.name.equals("Rotom-Fan") || 
+      this.name.equals("Rotom-Mow") || this.name.equals("Rotom-Wash") || this.name.equals("Rotom-Heat"))
       a = "Levitate";
 
     else if (this.name.equals("Dratini") || this.name.equals("Ekans") || this.name.equals("Arbok") || 
@@ -712,9 +729,9 @@ class Pokemon {
 
     else if (this.name.equals("Abra") || this.name.equals("Kadabra") || this.name.equals("Alakazam")
       || this.name.equals("Farfetch'd") || this.name.equals("Drowzee") || this.name.equals("Hypno") || 
-      this.name.equals("Hitmonchan") || this.name.equals("Kangaskhan") || this.name.equals("Dragonite")
-      || this.name.equals("Zubat") || this.name.equals("Golbat") || this.name.equals("Crobat")
-       || this.name.equals("Riolu") || this.name.equals("Lucario"))
+      this.name.equals("Hitmonchan") || this.name.equals("Kangaskhan") || this.name.equals("Zubat") || 
+      this.name.equals("Golbat") || this.name.equals("Crobat") || this.name.equals("Riolu") || 
+      this.name.equals("Lucario"))
       a = "Inner Focus";
 
     else if (this.name.equals("Pidgey") || this.name.equals("Pidgeotto") || this.name.equals("Pidgeot")
@@ -725,7 +742,7 @@ class Pokemon {
     else if (this.name.equals("Ekans") || this.name.equals("Arbok") || this.name.equals("Growlithe")
       || this.name.equals("Arcanine") || this.name.equals("Tauros") || this.name.equals("Gyarados") || 
       this.name.equals("Litten") || this.name.equals("Torracat") || this.name.equals("Incineroar")
-      || this.name.equals("Shinx"))
+      || this.name.equals("Shinx") || this.name.equals("Mawile"))
       a = "Intimidate";
 
     else if (this.name.equals("Marshadow") || this.name.equals("Smeargle") || this.name.equals("Cinccino")
@@ -774,6 +791,13 @@ class Pokemon {
       
     else if (this.name.equals("Wishiwashi-Solo"))
       a = "Schooling";
+      
+    else if (this.name.equals("Dragonite") || this.name.equals("Lugia"))
+      a = "Multiscale";
+      
+    else if (this.name.equals("Dracozolt") || this.name.equals("Flapple") || this.name.equals("Durant")) {
+      a = "Hustle";
+    }
       
     else if (this.name.equals("Kyogre") || this.name.equals("Primal Kyogre"))
       a = "Primordial Sea";
@@ -927,6 +951,10 @@ class Pokemon {
       mv.accuracy = 0;
     }
     
+    if (this.ability.equals("Hustle")) {
+      mv.accuracy *= 0.8;
+    }
+    
     //if (target.raidPokemon && !target.raidShield && !target.facedRaidShield) {
     //  if ((target.currHealth < int((float(target.health)*2)/3)) && !target.raidShield) {
     //    println(target.name, "has set up a barrier!");
@@ -1005,6 +1033,22 @@ class Pokemon {
           if (this.ability.equals("Tough Claws") && mv.damageCatagory.equals("Physical")) {
             mv.power *= 1.33;
           }
+          
+          //Life Orb
+          if (this.item.equals("Life Orb")) {
+            mv.power *= 1.3;
+          }
+          
+          //Hustle
+          if (this.ability.equals("Hustle")) {
+            mv.power *= 1.5;
+          }
+          
+          //Bolt Beak
+          if (mv.name.equals("Bolt Beak") && (this.battleStats[5] > target.battleStats[5])) {
+            mv.power *= 2;
+          }
+          
           
           if (this.ability.equals("Technician") && mv.power <= 60)
             mv.power *= 1.5;
@@ -1099,10 +1143,16 @@ class Pokemon {
           if (target.ability.equals("Thick Fat") && (mv.type.equals("Ice")) || (mv.type.equals("Fire")))
             damage /= 2;
 
-          if (target.ability.equals("Disguise") && (target.currHealth == target.health) && (damage > 0)) {
+          if (target.ability.equals("Disguise") && target.disguise) {
             damage = 0;
             target.currHealth -= target.health/8;
             println(target.name + "'s disguise was busted! Mimikyu took", target.health/8, "damage!");
+            
+            target.disguise = false;
+          }
+          
+          if (this.ability.equals("Mega Launcher") && mv.damageCatagory.equals("Special")) {
+            damage *= 1.5;
           }
           
           if (mv.name.equals("Hex") && (target.burn || target.freeze || target.paralysis || target.poison || target.sleep || target.badlyPoisoned
@@ -1118,6 +1168,10 @@ class Pokemon {
             damage = 0;
             condition = false;
             println(target.name, "is levitating!");
+          }
+          
+          if (target.ability.equals("Multiscale") && (target.currHealth == target.health)) {
+            damage /= 2;
           }
           
           if (!this.didHit && mv.name.equals("Stomping Tantrum")) {
@@ -1217,6 +1271,10 @@ class Pokemon {
 
               println(this.name, "uses", mv.name, "and hits", target.name, "for", str(damage), "damage! (" + int((float((target.currHealth + damage) - target.currHealth)/target.health)*100) + "%)", target.name, "now has", target.currHealth, "health! ("
                 + int((float(target.currHealth)/target.health)*100) + "%)");
+                
+              if ((i == 0) && target.ability.equals("Multiscale")) {
+                damage *= 2;
+              }
             }
             println();
             println(mv.name, "was used", randomRepeat, "times!");
@@ -1238,12 +1296,15 @@ class Pokemon {
             if (this.charge)
               this.charge = false;
             
-          //  if (damage > 0) {
+            if (damage > 0) {
               target.currHealth -= damage;
   
               println(this.name, "uses", mv.name, "and hits", target.name, "for", str(damage), "damage! (" + int((float((target.currHealth + damage) - target.currHealth)/target.health)*100) + "%)", target.name, "now has", target.currHealth, "health! ("
                 + int((float(target.currHealth)/target.health)*100) + "%)");
-          //  }
+            }
+            else {
+              println(this.name, "uses", mv.name, "on", target.name + "!");
+            }
           }
           
           this.didHit = true;
@@ -1413,6 +1474,14 @@ class Pokemon {
 
         target.recoil = false;
       }
+      
+      if (this.item.equals("Life Orb")) {
+        this.currHealth -= this.stats[0]/10;
+        
+        println();
+        println(str(this.stats[0]/10), "health was sapped away from", this.name + "! (" + int((float(this.currHealth)/this.health)*100) + "%)");
+
+      }
     }
     
     if (mv.name.equals("Explosion")) {
@@ -1503,9 +1572,6 @@ class Pokemon {
     if (zMove)
       unZMove();
       
-    
-    if (this.ability.equals("No Guard") || target.ability.equals("No Guard")) {
-      mv.accuracy = formerMvA;
-    }
+    mv.accuracy = formerMvA;
   }
 }

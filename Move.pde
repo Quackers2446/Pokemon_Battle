@@ -847,6 +847,42 @@ class Move {
           }
           println(user.name, "stole", target.name + "'s stat bonuses!");
         }
+      } else if (firstStatus.equals("ShellSmash")) {
+        chance = random(0, 1);
+        if (chance <= this.statusProb) {
+          if (user.spAttackSMp < 6) {
+            println(user.name + "'s special attack greatly rose!");
+
+            user.spAttackSMp += 2;
+            user.battleStats[3] = int(float((user.spAttackSMp)*user.stats[3])/2);
+          }
+          if (user.attackSMp < 6) {
+            println(user.name + "'s attack greatly rose!");
+
+            user.attackSMp += 2;
+            user.battleStats[1] = int(float((user.attackSMp)*user.stats[1])/2);
+          }
+          if (user.speedSMp < 6) {
+            println(user.name + "'s speed greatly rose!");
+
+            user.speedSMp += 2;
+            user.battleStats[5] = int(float((user.speedSMp+2)*user.stats[5])/2);
+          }
+          if (user.spDefenseSMn < 6) {
+            println(user.name + "'s special defense fell!");
+
+            user.spDefenseSMp -= 1;
+            user.battleStats[4] = int((2*user.stats[4])/float(user.spDefenseSMn));
+          }
+          if (user.defenseSMn < 6) {
+            println(user.name + "'s defense fell!");
+            
+            user.defenseSMn += 1;
+            user.battleStats[2] = int((2*user.stats[2])/float(user.defenseSMn));
+          }
+          
+          
+        }
       } else if (firstStatus.equals("Wildfire") && !target.wildfire) {
         chance = random(0, 1);
 
