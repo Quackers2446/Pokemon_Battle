@@ -353,8 +353,8 @@ void setup() {
   charizard.moveSet(flamethrower, dragonClaw, roost, fly);
   charizard.nature("Adamant");
 
-  //Level 39 Scyther
-  Pokemon scyther = new Pokemon("Scyther", "Bug/Flying", 39, 70, 110, 80, 55, 80, 105);
+  //Level 40 Scyther
+  Pokemon scyther = new Pokemon("Scyther", "Bug/Flying", 40, 70, 110, 80, 55, 80, 105);
   scyther.moveSet(pursuit, furyCutter, wingAttack, doubleTeam);
   scyther.nature("Jolly");
 
